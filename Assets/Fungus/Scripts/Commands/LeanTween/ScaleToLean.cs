@@ -10,7 +10,7 @@ namespace Fungus
     /// Changes a game object's scale to a specified value over time.
     /// </summary>
     [CommandInfo("LeanTween",
-                 "Scale To",
+                 "Scale",
                  "Changes a game object's scale to a specified value over time.")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]
@@ -26,7 +26,14 @@ namespace Fungus
 
         public override LTDescr ExecuteTween()
         {
-            var sc = _toTransform.Value == null ? _toScale.Value : _toTransform.Value.lossyScale;
+            var sc = _toTransform.Value == null ? _toScale.Value : _toTransform.Value.localScale;
+
+            if (IsInFromMode)
+            {
+                var cur = _targetObject.Value.transform.localScale;
+                _targetObject.Value.transform.localScale = sc;
+                sc = cur;
+            }
 
             return LeanTween.scale(_targetObject.Value, sc, _duration);
         }

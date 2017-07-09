@@ -10,7 +10,7 @@ namespace Fungus
     /// Rotates a game object to the specified angles over time.
     /// </summary>
     [CommandInfo("LeanTween",
-                 "Rotate To",
+                 "Rotate",
                  "Rotates a game object to the specified angles over time.")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]
@@ -31,6 +31,13 @@ namespace Fungus
         public override LTDescr ExecuteTween()
         {
             var rot = _toTransform.Value == null ? _toRotation.Value : _toTransform.Value.rotation.eulerAngles;
+
+            if (IsInFromMode)
+            {
+                var cur = _targetObject.Value.transform.rotation.eulerAngles;
+                _targetObject.Value.transform.rotation = Quaternion.Euler(rot);
+                rot = cur;
+            }
 
             if (isLocal)
                 return LeanTween.rotateLocal(_targetObject.Value, rot, _duration);

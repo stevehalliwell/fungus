@@ -10,7 +10,7 @@ namespace Fungus
     /// Moves a game object to a specified position over time. The position can be defined by a transform in another object (using To Transform) or by setting an absolute position (using To Position, if To Transform is set to None).
     /// </summary>
     [CommandInfo("LeanTween",
-                 "Move To",
+                 "Move",
                  "Moves a game object to a specified position over time. The position can be defined by a transform in another object (using To Transform) or by setting an absolute position (using To Position, if To Transform is set to None).")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]
@@ -32,6 +32,13 @@ namespace Fungus
         public override LTDescr ExecuteTween()
         {
             var loc = _toTransform.Value == null ? _toPosition.Value : _toTransform.Value.position;
+
+            if(IsInFromMode)
+            {
+                var cur = _targetObject.Value.transform.position;
+                _targetObject.Value.transform.position = loc;
+                loc = cur;
+            }
 
             if (isLocal)
                 return LeanTween.moveLocal(_targetObject.Value, loc, _duration);

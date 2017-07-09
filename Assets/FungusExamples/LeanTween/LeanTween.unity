@@ -396,9 +396,6 @@ GameObject:
   - component: {fileID: 868138993}
   - component: {fileID: 868138992}
   - component: {fileID: 868138995}
-  - component: {fileID: 868139005}
-  - component: {fileID: 868139004}
-  - component: {fileID: 868139003}
   - component: {fileID: 868139007}
   - component: {fileID: 868139006}
   - component: {fileID: 868139008}
@@ -418,6 +415,9 @@ GameObject:
   - component: {fileID: 868139002}
   - component: {fileID: 868139001}
   - component: {fileID: 868138998}
+  - component: {fileID: 868139005}
+  - component: {fileID: 868139004}
+  - component: {fileID: 868139003}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -444,6 +444,7 @@ MonoBehaviour:
   _duration:
     floatRef: {fileID: 0}
     floatVal: 1
+  _toFrom: 0
   easeType: 4
   stopPreviousTweens: 0
   waitUntilFinished: 0
@@ -523,10 +524,8 @@ MonoBehaviour:
     y: -350
     width: 1213
     height: 1284
-  selectedBlocks:
-  - {fileID: 868138992}
-  selectedCommands:
-  - {fileID: 868139005}
+  selectedBlocks: []
+  selectedCommands: []
   variables: []
   description: 'This scene shows how to use the iTween commands
 
@@ -592,6 +591,7 @@ MonoBehaviour:
   _duration:
     floatRef: {fileID: 0}
     floatVal: 1
+  _toFrom: 0
   easeType: 4
   stopPreviousTweens: 0
   waitUntilFinished: 1
@@ -604,7 +604,7 @@ MonoBehaviour:
   isLocal: 0
 --- !u!114 &868138997
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 868138990}
@@ -621,6 +621,7 @@ MonoBehaviour:
   _duration:
     floatRef: {fileID: 0}
     floatVal: 0.5
+  _toFrom: 0
   easeType: 34
   stopPreviousTweens: 0
   waitUntilFinished: 0
@@ -632,7 +633,7 @@ MonoBehaviour:
     vector3Val: {x: 0.2, y: 0.2, z: 0}
 --- !u!114 &868138998
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 868138990}
@@ -649,6 +650,7 @@ MonoBehaviour:
   _duration:
     floatRef: {fileID: 0}
     floatVal: 1
+  _toFrom: 0
   easeType: 34
   stopPreviousTweens: 0
   waitUntilFinished: 1
@@ -677,6 +679,7 @@ MonoBehaviour:
   _duration:
     floatRef: {fileID: 0}
     floatVal: 1
+  _toFrom: 0
   easeType: 4
   stopPreviousTweens: 0
   waitUntilFinished: 1
@@ -706,6 +709,7 @@ MonoBehaviour:
   _duration:
     floatRef: {fileID: 0}
     floatVal: 1
+  _toFrom: 0
   easeType: 4
   stopPreviousTweens: 0
   waitUntilFinished: 1
@@ -718,7 +722,7 @@ MonoBehaviour:
   isLocal: 0
 --- !u!114 &868139001
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 868138990}
@@ -735,6 +739,7 @@ MonoBehaviour:
   _duration:
     floatRef: {fileID: 0}
     floatVal: 1
+  _toFrom: 0
   easeType: 4
   stopPreviousTweens: 0
   waitUntilFinished: 1
@@ -746,7 +751,7 @@ MonoBehaviour:
     vector3Val: {x: 0.5, y: 0.5, z: 1}
 --- !u!114 &868139002
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 868138990}
@@ -763,6 +768,7 @@ MonoBehaviour:
   _duration:
     floatRef: {fileID: 0}
     floatVal: 1
+  _toFrom: 0
   easeType: 4
   stopPreviousTweens: 0
   waitUntilFinished: 1
@@ -780,35 +786,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 868138990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d47cc719ae0d4d62a30b3cfa72b5785, type: 3}
+  m_Script: {fileID: 11500000, guid: 30cbb61ab588b1a4093d2ef0254045b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 11
+  itemId: 37
   indentLevel: 0
   _targetObject:
     gameObjectRef: {fileID: 0}
     gameObjectVal: {fileID: 1955612099}
-  _tweenName:
-    stringRef: {fileID: 0}
-    stringVal: 
   _duration:
     floatRef: {fileID: 0}
     floatVal: 1
-  easeType: 2
-  loopType: 0
+  _toFrom: 1
+  easeType: 4
   stopPreviousTweens: 0
   waitUntilFinished: 1
-  targetObjectOLD: {fileID: 0}
-  tweenNameOLD: 
-  durationOLD: 0
-  _fromTransform:
+  _toTransform:
     transformRef: {fileID: 0}
     transformVal: {fileID: 0}
-  _fromScale:
+  _toScale:
     vector3Ref: {fileID: 0}
-    vector3Val: {x: 2, y: 1, z: 0}
-  fromTransformOLD: {fileID: 0}
-  fromScaleOLD: {x: 0, y: 0, z: 0}
+    vector3Val: {x: 2, y: 1, z: 1}
 --- !u!114 &868139004
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -817,36 +815,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 868138990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cfc8560cbecd48adb3950b9dd7f2b82, type: 3}
+  m_Script: {fileID: 11500000, guid: b8feaa22bae049c43a1c6dfe095c498c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 10
+  itemId: 36
   indentLevel: 0
   _targetObject:
     gameObjectRef: {fileID: 0}
     gameObjectVal: {fileID: 1621124268}
-  _tweenName:
-    stringRef: {fileID: 0}
-    stringVal: 
   _duration:
     floatRef: {fileID: 0}
     floatVal: 1
-  easeType: 2
-  loopType: 0
+  _toFrom: 1
+  easeType: 4
   stopPreviousTweens: 0
   waitUntilFinished: 1
-  targetObjectOLD: {fileID: 0}
-  tweenNameOLD: 
-  durationOLD: 0
-  _fromTransform:
+  _toTransform:
     transformRef: {fileID: 0}
     transformVal: {fileID: 0}
-  _fromRotation:
+  _toRotation:
     vector3Ref: {fileID: 0}
     vector3Val: {x: 0, y: 0, z: 180}
   isLocal: 0
-  fromTransformOLD: {fileID: 0}
-  fromRotationOLD: {x: 0, y: 0, z: 0}
 --- !u!114 &868139005
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -855,36 +845,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 868138990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5ca001b90bd14834b7268b48a44c6de, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ca31fffe1be42a49b96bbb8b7ff5a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 9
+  itemId: 35
   indentLevel: 0
   _targetObject:
     gameObjectRef: {fileID: 0}
     gameObjectVal: {fileID: 1090256565}
-  _tweenName:
-    stringRef: {fileID: 0}
-    stringVal: 
   _duration:
     floatRef: {fileID: 0}
     floatVal: 1
-  easeType: 2
-  loopType: 0
+  _toFrom: 1
+  easeType: 4
   stopPreviousTweens: 0
   waitUntilFinished: 1
-  targetObjectOLD: {fileID: 0}
-  tweenNameOLD: 
-  durationOLD: 0
-  _fromTransform:
+  _toTransform:
     transformRef: {fileID: 0}
     transformVal: {fileID: 0}
-  _fromPosition:
+  _toPosition:
     vector3Ref: {fileID: 0}
     vector3Val: {x: 0, y: 1, z: 0}
   isLocal: 0
-  fromTransformOLD: {fileID: 0}
-  fromPositionOLD: {x: 0, y: 0, z: 0}
 --- !u!114 &868139006
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1082,6 +1064,7 @@ MonoBehaviour:
   _duration:
     floatRef: {fileID: 0}
     floatVal: 1
+  _toFrom: 0
   easeType: 34
   stopPreviousTweens: 0
   waitUntilFinished: 1
@@ -1111,6 +1094,7 @@ MonoBehaviour:
   _duration:
     floatRef: {fileID: 0}
     floatVal: 1
+  _toFrom: 0
   easeType: 34
   stopPreviousTweens: 0
   waitUntilFinished: 1
@@ -1178,6 +1162,7 @@ MonoBehaviour:
   _duration:
     floatRef: {fileID: 0}
     floatVal: 0.5
+  _toFrom: 0
   easeType: 34
   stopPreviousTweens: 0
   waitUntilFinished: 0

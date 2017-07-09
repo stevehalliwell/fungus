@@ -17,6 +17,14 @@ namespace Fungus
         [SerializeField]
         protected FloatData _duration = new FloatData(1f);
 
+        public enum ToFrom { To, From }
+
+        [Tooltip("Does the tween act from current TO destination or is it reversed and act FROM destination to its current")]
+        [SerializeField]
+        protected ToFrom _toFrom;
+
+        public bool IsInFromMode { get { return _toFrom == ToFrom.From; } }
+
         [Tooltip("The shape of the easing curve applied to the animation")]
         [SerializeField]
         protected LeanTweenType easeType = LeanTweenType.easeInOutQuad;
