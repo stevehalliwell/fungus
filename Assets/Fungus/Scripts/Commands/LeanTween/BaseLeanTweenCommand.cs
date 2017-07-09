@@ -28,11 +28,14 @@ namespace Fungus
         [Tooltip("The shape of the easing curve applied to the animation")]
         [SerializeField]
         protected LeanTweenType easeType = LeanTweenType.easeInOutQuad;
+        
+        [Tooltip("The type of loop to apply once the animation has completed")]
+        [SerializeField]
+        protected LeanTweenType loopType = LeanTweenType.once;
 
-        //TODO reincorp loop types
-        //[Tooltip("The type of loop to apply once the animation has completed")]
-        //[SerializeField]
-        //protected LeanTweenType loopType = LeanTweenType.once;
+        [Tooltip("Number of times to repeat the tween, -1 is infinite.")]
+        [SerializeField]
+        protected int repeats = 0;
 
         [Tooltip("Stop any previously LeanTweens on this object before adding this one. Warning; expensive.")]
         [SerializeField]
@@ -68,7 +71,9 @@ namespace Fungus
 
             ourTween = ExecuteTween();
 
-            ourTween.setEase(easeType);
+            ourTween.setEase(easeType)
+                    .setRepeat(repeats)
+                    .setLoopType(loopType);
 
             if (waitUntilFinished)
             {

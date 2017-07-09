@@ -208,8 +208,8 @@ GameObject:
   - component: {fileID: 470391091}
   - component: {fileID: 470391090}
   - component: {fileID: 470391089}
-  - component: {fileID: 470391087}
   - component: {fileID: 470391088}
+  - component: {fileID: 470391093}
   m_Layer: 0
   m_Name: Mushroom4
   m_TagString: Untagged
@@ -217,40 +217,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &470391087
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 470391086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 598f181ee459641a9b0a5849fbc3240c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 0
-  indentLevel: 0
-  _targetObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 470391086}
-  _tweenName:
-    stringRef: {fileID: 0}
-    stringVal: 
-  _duration:
-    floatRef: {fileID: 0}
-    floatVal: 3
-  easeType: 2
-  loopType: 2
-  stopPreviousTweens: 0
-  waitUntilFinished: 1
-  targetObjectOLD: {fileID: 0}
-  tweenNameOLD: 
-  durationOLD: 0
-  _offset:
-    vector3Ref: {fileID: 0}
-    vector3Val: {x: 7, y: 0, z: 0}
-  space: 1
-  offsetOLD: {x: 0, y: 0, z: 0}
 --- !u!114 &470391088
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -277,10 +243,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 343
-    y: 122
+    x: 344
+    y: 121
     width: 120
-    height: 30
+    height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 1
@@ -288,7 +254,7 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 470391088}
   commandList:
-  - {fileID: 470391087}
+  - {fileID: 470391093}
 --- !u!114 &470391090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,9 +278,10 @@ MonoBehaviour:
     y: -350
     width: 1213
     height: 902
-  selectedBlocks: []
+  selectedBlocks:
+  - {fileID: 470391089}
   selectedCommands:
-  - {fileID: 470391087}
+  - {fileID: 470391093}
   variables: []
   description: 
   stepPause: 0
@@ -373,12 +340,44 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 470391086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.6141, y: -1.9423, z: 0}
+  m_LocalPosition: {x: -3.6141, y: -2, z: 0}
   m_LocalScale: {x: 0.45645607, y: 0.45645607, z: 0.45645607}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &470391093
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 470391086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ca31fffe1be42a49b96bbb8b7ff5a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 2
+  indentLevel: 0
+  _targetObject:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 470391086}
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 3
+  _toFrom: 0
+  easeType: 4
+  loopType: 37
+  repeats: -1
+  stopPreviousTweens: 0
+  waitUntilFinished: 0
+  _toTransform:
+    transformRef: {fileID: 0}
+    transformVal: {fileID: 0}
+  _toPosition:
+    vector3Ref: {fileID: 0}
+    vector3Val: {x: 3.6141, y: -2, z: 0}
+  isLocal: 0
 --- !u!114 &497781872 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11400000, guid: e0d427add844a4d9faf970a3afa07583,
@@ -446,6 +445,8 @@ MonoBehaviour:
     floatVal: 1
   _toFrom: 0
   easeType: 4
+  loopType: 35
+  repeats: 0
   stopPreviousTweens: 0
   waitUntilFinished: 0
   _toTransform:
@@ -524,8 +525,10 @@ MonoBehaviour:
     y: -350
     width: 1213
     height: 1284
-  selectedBlocks: []
-  selectedCommands: []
+  selectedBlocks:
+  - {fileID: 868138992}
+  selectedCommands:
+  - {fileID: 868139007}
   variables: []
   description: 'This scene shows how to use the iTween commands
 
@@ -593,6 +596,8 @@ MonoBehaviour:
     floatVal: 1
   _toFrom: 0
   easeType: 4
+  loopType: 35
+  repeats: 0
   stopPreviousTweens: 0
   waitUntilFinished: 1
   _toTransform:
@@ -623,6 +628,8 @@ MonoBehaviour:
     floatVal: 0.5
   _toFrom: 0
   easeType: 34
+  loopType: 35
+  repeats: 0
   stopPreviousTweens: 0
   waitUntilFinished: 0
   _toTransform:
@@ -652,6 +659,8 @@ MonoBehaviour:
     floatVal: 1
   _toFrom: 0
   easeType: 34
+  loopType: 35
+  repeats: 0
   stopPreviousTweens: 0
   waitUntilFinished: 1
   _toTransform:
@@ -681,6 +690,8 @@ MonoBehaviour:
     floatVal: 1
   _toFrom: 0
   easeType: 4
+  loopType: 35
+  repeats: 0
   stopPreviousTweens: 0
   waitUntilFinished: 1
   _toTransform:
@@ -711,6 +722,8 @@ MonoBehaviour:
     floatVal: 1
   _toFrom: 0
   easeType: 4
+  loopType: 35
+  repeats: 0
   stopPreviousTweens: 0
   waitUntilFinished: 1
   _toTransform:
@@ -741,6 +754,8 @@ MonoBehaviour:
     floatVal: 1
   _toFrom: 0
   easeType: 4
+  loopType: 35
+  repeats: 0
   stopPreviousTweens: 0
   waitUntilFinished: 1
   _toTransform:
@@ -770,6 +785,8 @@ MonoBehaviour:
     floatVal: 1
   _toFrom: 0
   easeType: 4
+  loopType: 35
+  repeats: 0
   stopPreviousTweens: 0
   waitUntilFinished: 1
   _toTransform:
@@ -799,6 +816,8 @@ MonoBehaviour:
     floatVal: 1
   _toFrom: 1
   easeType: 4
+  loopType: 35
+  repeats: 0
   stopPreviousTweens: 0
   waitUntilFinished: 1
   _toTransform:
@@ -828,6 +847,8 @@ MonoBehaviour:
     floatVal: 1
   _toFrom: 1
   easeType: 4
+  loopType: 35
+  repeats: 0
   stopPreviousTweens: 0
   waitUntilFinished: 1
   _toTransform:
@@ -858,6 +879,8 @@ MonoBehaviour:
     floatVal: 1
   _toFrom: 1
   easeType: 4
+  loopType: 35
+  repeats: 0
   stopPreviousTweens: 0
   waitUntilFinished: 1
   _toTransform:
@@ -1066,6 +1089,8 @@ MonoBehaviour:
     floatVal: 1
   _toFrom: 0
   easeType: 34
+  loopType: 35
+  repeats: 0
   stopPreviousTweens: 0
   waitUntilFinished: 1
   _toTransform:
@@ -1096,6 +1121,8 @@ MonoBehaviour:
     floatVal: 1
   _toFrom: 0
   easeType: 34
+  loopType: 35
+  repeats: 0
   stopPreviousTweens: 0
   waitUntilFinished: 1
   _toTransform:
@@ -1164,6 +1191,8 @@ MonoBehaviour:
     floatVal: 0.5
   _toFrom: 0
   easeType: 34
+  loopType: 35
+  repeats: 0
   stopPreviousTweens: 0
   waitUntilFinished: 0
   _toTransform:
@@ -1559,7 +1588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 868138993}
+  selectedFlowchart: {fileID: 470391090}
 --- !u!4 &1971204865
 Transform:
   m_ObjectHideFlags: 1
