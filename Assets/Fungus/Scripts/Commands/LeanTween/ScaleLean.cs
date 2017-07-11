@@ -14,7 +14,7 @@ namespace Fungus
                  "Changes a game object's scale to a specified value over time.")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]
-    public class ScaleToLean : BaseLeanTweenCommand
+    public class ScaleLean : BaseLeanTweenCommand
     {
         [Tooltip("Target transform that the GameObject will scale to")]
         [SerializeField]
@@ -27,6 +27,11 @@ namespace Fungus
         public override LTDescr ExecuteTween()
         {
             var sc = _toTransform.Value == null ? _toScale.Value : _toTransform.Value.localScale;
+
+            if (IsInAddativeMode)
+            {
+                sc += _targetObject.Value.transform.localScale;
+            }
 
             if (IsInFromMode)
             {

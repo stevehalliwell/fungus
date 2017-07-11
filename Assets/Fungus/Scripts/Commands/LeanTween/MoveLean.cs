@@ -14,7 +14,7 @@ namespace Fungus
                  "Moves a game object to a specified position over time. The position can be defined by a transform in another object (using To Transform) or by setting an absolute position (using To Position, if To Transform is set to None).")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]
-    public class MoveToLean : BaseLeanTweenCommand
+    public class MoveLean : BaseLeanTweenCommand
     {
         [Tooltip("Target transform that the GameObject will move to")]
         [SerializeField]
@@ -32,6 +32,11 @@ namespace Fungus
         public override LTDescr ExecuteTween()
         {
             var loc = _toTransform.Value == null ? _toPosition.Value : _toTransform.Value.position;
+
+            if(IsInAddativeMode)
+            {
+                loc += _targetObject.Value.transform.position;
+            }
 
             if(IsInFromMode)
             {

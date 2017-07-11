@@ -18,12 +18,17 @@ namespace Fungus
         protected FloatData _duration = new FloatData(1f);
 
         public enum ToFrom { To, From }
-
         [Tooltip("Does the tween act from current TO destination or is it reversed and act FROM destination to its current")]
         [SerializeField]
         protected ToFrom _toFrom;
-
         public bool IsInFromMode { get { return _toFrom == ToFrom.From; } }
+
+        public enum AbsAdd { Absolute, Additive }
+        [Tooltip("Does the tween use the value as a target or as a delta to be added to current.")]
+        [SerializeField]
+        protected AbsAdd _absAdd;
+        public bool IsInAddativeMode { get { return _absAdd == AbsAdd.Additive; } }
+
 
         [Tooltip("The shape of the easing curve applied to the animation")]
         [SerializeField]
