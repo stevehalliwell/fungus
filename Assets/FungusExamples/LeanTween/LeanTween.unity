@@ -396,9 +396,6 @@ GameObject:
   - component: {fileID: 868138993}
   - component: {fileID: 868138992}
   - component: {fileID: 868138995}
-  - component: {fileID: 868139008}
-  - component: {fileID: 868139009}
-  - component: {fileID: 868139010}
   - component: {fileID: 868139016}
   - component: {fileID: 868139017}
   - component: {fileID: 868138991}
@@ -487,9 +484,6 @@ MonoBehaviour:
   - {fileID: 868139012}
   - {fileID: 868138998}
   - {fileID: 868139017}
-  - {fileID: 868139008}
-  - {fileID: 868139009}
-  - {fileID: 868139010}
   - {fileID: 868138991}
   - {fileID: 868138996}
   - {fileID: 868139015}
@@ -527,10 +521,8 @@ MonoBehaviour:
     y: -350
     width: 1213
     height: 1284
-  selectedBlocks:
-  - {fileID: 868138992}
-  selectedCommands:
-  - {fileID: 868139007}
+  selectedBlocks: []
+  selectedCommands: []
   variables: []
   description: 'This scene shows how to use the iTween commands
 
@@ -907,7 +899,7 @@ MonoBehaviour:
   isLocal: 0
 --- !u!114 &868139006
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 868138990}
@@ -973,108 +965,6 @@ MonoBehaviour:
     vector3Val: {x: 0, y: 0, z: 0}
   isLocal: 0
   rotateMode: 1
---- !u!114 &868139008
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 868138990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 358f65040c3ef4327b70b2813cc197c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 14
-  indentLevel: 0
-  _targetObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 1090256565}
-  _tweenName:
-    stringRef: {fileID: 0}
-    stringVal: 
-  _duration:
-    floatRef: {fileID: 0}
-    floatVal: 1
-  easeType: 2
-  loopType: 0
-  stopPreviousTweens: 0
-  waitUntilFinished: 1
-  targetObjectOLD: {fileID: 0}
-  tweenNameOLD: 
-  durationOLD: 0
-  _amount:
-    vector3Ref: {fileID: 0}
-    vector3Val: {x: 1, y: 1, z: 0}
-  isLocal: 0
-  axis: 0
-  amountOLD: {x: 0, y: 0, z: 0}
---- !u!114 &868139009
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 868138990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82c753a90aa184bd88472f4589167f0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 15
-  indentLevel: 0
-  _targetObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 1621124268}
-  _tweenName:
-    stringRef: {fileID: 0}
-    stringVal: 
-  _duration:
-    floatRef: {fileID: 0}
-    floatVal: 1
-  easeType: 2
-  loopType: 0
-  stopPreviousTweens: 0
-  waitUntilFinished: 1
-  targetObjectOLD: {fileID: 0}
-  tweenNameOLD: 
-  durationOLD: 0
-  _amount:
-    vector3Ref: {fileID: 0}
-    vector3Val: {x: 0, y: 0, z: 45}
-  space: 1
-  amountOLD: {x: 0, y: 0, z: 0}
---- !u!114 &868139010
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 868138990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e61780d2ea956492a8f59308dae6f12c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 16
-  indentLevel: 0
-  _targetObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 1955612099}
-  _tweenName:
-    stringRef: {fileID: 0}
-    stringVal: 
-  _duration:
-    floatRef: {fileID: 0}
-    floatVal: 1
-  easeType: 2
-  loopType: 0
-  stopPreviousTweens: 0
-  waitUntilFinished: 1
-  targetObjectOLD: {fileID: 0}
-  tweenNameOLD: 
-  durationOLD: 0
-  _amount:
-    vector3Ref: {fileID: 0}
-    vector3Val: {x: 0.5, y: 0.5, z: 0}
-  amountOLD: {x: 0, y: 0, z: 0}
 --- !u!114 &868139011
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1144,7 +1034,7 @@ MonoBehaviour:
   rotateMode: 0
 --- !u!114 &868139013
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 868138990}
