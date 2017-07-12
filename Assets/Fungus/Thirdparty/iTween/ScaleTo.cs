@@ -8,23 +8,20 @@ using System.Collections;
 namespace Fungus
 {
     /// <summary>
-    /// Moves a game object to a specified position over time. The position can be defined by a transform in another object (using To Transform) or by setting an absolute position (using To Position, if To Transform is set to None).
+    /// Changes a game object's scale to a specified value over time.
     /// </summary>
     [CommandInfo("iTween", 
-                 "Move To", 
-                 "Moves a game object to a specified position over time. The position can be defined by a transform in another object (using To Transform) or by setting an absolute position (using To Position, if To Transform is set to None).")]
+                 "[Dep]Scale To", 
+                 "Changes a game object's scale to a specified value over time.")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]
-    public class MoveTo : iTweenCommand
+    public class ScaleTo : iTweenCommand
     {
-        [Tooltip("Target transform that the GameObject will move to")]
+        [Tooltip("Target transform that the GameObject will scale to")]
         [SerializeField] protected TransformData _toTransform;
 
-        [Tooltip("Target world position that the GameObject will move to, if no From Transform is set")]
-        [SerializeField] protected Vector3Data _toPosition;
-
-        [Tooltip("Whether to animate in world space or relative to the parent. False by default.")]
-        [SerializeField] protected bool isLocal;
+        [Tooltip("Target scale that the GameObject will scale to, if no To Transform is set")]
+        [SerializeField] protected Vector3Data _toScale = new Vector3Data(Vector3.one);
 
         #region Public members
 
@@ -34,20 +31,19 @@ namespace Fungus
             tweenParams.Add("name", _tweenName.Value);
             if (_toTransform.Value == null)
             {
-                tweenParams.Add("position", _toPosition.Value);
+                tweenParams.Add("scale", _toScale.Value);
             }
             else
             {
-                tweenParams.Add("position", _toTransform.Value);
+                tweenParams.Add("scale", _toTransform.Value);
             }
             tweenParams.Add("time", _duration.Value);
             tweenParams.Add("easetype", easeType);
             tweenParams.Add("looptype", loopType);
-            tweenParams.Add("isLocal", isLocal);
             tweenParams.Add("oncomplete", "OniTweenComplete");
             tweenParams.Add("oncompletetarget", gameObject);
             tweenParams.Add("oncompleteparams", this);
-            iTween.MoveTo(_targetObject.Value, tweenParams);
+            iTween.ScaleTo(_targetObject.Value, tweenParams);
         }
 
         #endregion
@@ -55,7 +51,7 @@ namespace Fungus
         #region Backwards compatibility
 
         [HideInInspector] [FormerlySerializedAs("toTransform")] public Transform toTransformOLD;
-        [HideInInspector] [FormerlySerializedAs("toPosition")] public Vector3 toPositionOLD;
+        [HideInInspector] [FormerlySerializedAs("toScale")] public Vector3 toScaleOLD;
 
         protected override void OnEnable()
         {
@@ -67,10 +63,10 @@ namespace Fungus
                 toTransformOLD = null;
             }
 
-            if (toPositionOLD != default(Vector3))
+            if (toScaleOLD != default(Vector3))
             {
-                _toPosition.Value = toPositionOLD;
-                toPositionOLD = default(Vector3);
+                _toScale.Value = toScaleOLD;
+                toScaleOLD = default(Vector3);
             }
         }
 

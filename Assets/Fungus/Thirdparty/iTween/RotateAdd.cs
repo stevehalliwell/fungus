@@ -8,17 +8,20 @@ using System.Collections;
 namespace Fungus
 {
     /// <summary>
-    /// Changes a game object's scale by a specified offset over time.
+    /// Rotates a game object by the specified angles over time.
     /// </summary>
     [CommandInfo("iTween", 
-                 "Scale Add", 
-                 "Changes a game object's scale by a specified offset over time.")]
+                 "[Dep]Rotate Add", 
+                 "Rotates a game object by the specified angles over time.")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]
-    public class ScaleAdd : iTweenCommand
+    public class RotateAdd : iTweenCommand
     {
-        [Tooltip("A scale offset in space the GameObject will animate to")]
+        [Tooltip("A rotation offset in space the GameObject will animate to")]
         [SerializeField] protected Vector3Data _offset;
+
+        [Tooltip("Apply the transformation in either the world coordinate or local cordinate system")]
+        [SerializeField] protected Space space = Space.Self;
 
         #region Public members
 
@@ -27,13 +30,14 @@ namespace Fungus
             Hashtable tweenParams = new Hashtable();
             tweenParams.Add("name", _tweenName.Value);
             tweenParams.Add("amount", _offset.Value);
+            tweenParams.Add("space", space);
             tweenParams.Add("time", _duration.Value);
             tweenParams.Add("easetype", easeType);
             tweenParams.Add("looptype", loopType);
             tweenParams.Add("oncomplete", "OniTweenComplete");
             tweenParams.Add("oncompletetarget", gameObject);
             tweenParams.Add("oncompleteparams", this);
-            iTween.ScaleAdd(_targetObject.Value, tweenParams);
+            iTween.RotateAdd(_targetObject.Value, tweenParams);
         }
 
         #endregion

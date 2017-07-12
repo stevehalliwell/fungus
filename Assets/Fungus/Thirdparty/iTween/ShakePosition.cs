@@ -8,20 +8,23 @@ using System.Collections;
 namespace Fungus
 {
     /// <summary>
-    /// Applies a jolt of force to a GameObject's position and wobbles it back to its initial position.
+    /// Randomly shakes a GameObject's position by a diminishing amount over time.
     /// </summary>
     [CommandInfo("iTween", 
-                 "Punch Position", 
-                 "Applies a jolt of force to a GameObject's position and wobbles it back to its initial position.")]
+                 "[Dep]Shake Position", 
+                 "Randomly shakes a GameObject's position by a diminishing amount over time.")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]
-    public class PunchPosition : iTweenCommand
+    public class ShakePosition : iTweenCommand
     {
         [Tooltip("A translation offset in space the GameObject will animate to")]
         [SerializeField] protected Vector3Data _amount;
 
-        [Tooltip("Apply the transformation in either the world coordinate or local cordinate system")]
-        [SerializeField] protected Space space = Space.Self;
+        [Tooltip("Whether to animate in world space or relative to the parent. False by default.")]
+        [SerializeField] protected bool isLocal;
+
+        [Tooltip("Restricts rotation to the supplied axis only")]
+        [SerializeField] protected iTweenAxis axis;
 
         #region Public members
 
@@ -30,14 +33,26 @@ namespace Fungus
             Hashtable tweenParams = new Hashtable();
             tweenParams.Add("name", _tweenName.Value);
             tweenParams.Add("amount", _amount.Value);
-            tweenParams.Add("space", space);
+            switch (axis)
+            {
+            case iTweenAxis.X:
+                tweenParams.Add("axis", "x");
+                break;
+            case iTweenAxis.Y:
+                tweenParams.Add("axis", "y");
+                break;
+            case iTweenAxis.Z:
+                tweenParams.Add("axis", "z");
+                break;
+            }
             tweenParams.Add("time", _duration.Value);
             tweenParams.Add("easetype", easeType);
             tweenParams.Add("looptype", loopType);
+            tweenParams.Add("isLocal", isLocal);
             tweenParams.Add("oncomplete", "OniTweenComplete");
             tweenParams.Add("oncompletetarget", gameObject);
             tweenParams.Add("oncompleteparams", this);
-            iTween.PunchPosition(_targetObject.Value, tweenParams);
+            iTween.ShakePosition(_targetObject.Value, tweenParams);
         }
 
         #endregion
@@ -58,5 +73,5 @@ namespace Fungus
         }
 
         #endregion
-    }
+    }    
 }

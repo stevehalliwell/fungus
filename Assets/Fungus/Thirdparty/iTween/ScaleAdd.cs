@@ -8,20 +8,17 @@ using System.Collections;
 namespace Fungus
 {
     /// <summary>
-    /// Moves a game object by a specified offset over time.
+    /// Changes a game object's scale by a specified offset over time.
     /// </summary>
     [CommandInfo("iTween", 
-                 "Move Add", 
-                 "Moves a game object by a specified offset over time.")]
+                 "[Dep]Scale Add", 
+                 "Changes a game object's scale by a specified offset over time.")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]
-    public class MoveAdd : iTweenCommand
+    public class ScaleAdd : iTweenCommand
     {
-        [Tooltip("A translation offset in space the GameObject will animate to")]
+        [Tooltip("A scale offset in space the GameObject will animate to")]
         [SerializeField] protected Vector3Data _offset;
-
-        [Tooltip("Apply the transformation in either the world coordinate or local cordinate system")]
-        [SerializeField] protected Space space = Space.Self;
 
         #region Public members
 
@@ -30,14 +27,13 @@ namespace Fungus
             Hashtable tweenParams = new Hashtable();
             tweenParams.Add("name", _tweenName.Value);
             tweenParams.Add("amount", _offset.Value);
-            tweenParams.Add("space", space);
             tweenParams.Add("time", _duration.Value);
             tweenParams.Add("easetype", easeType);
             tweenParams.Add("looptype", loopType);
             tweenParams.Add("oncomplete", "OniTweenComplete");
             tweenParams.Add("oncompletetarget", gameObject);
             tweenParams.Add("oncompleteparams", this);
-            iTween.MoveAdd(_targetObject.Value, tweenParams);
+            iTween.ScaleAdd(_targetObject.Value, tweenParams);
         }
 
         #endregion

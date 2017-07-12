@@ -8,23 +8,23 @@ using System.Collections;
 namespace Fungus
 {
     /// <summary>
-    /// Instantly rotates a GameObject to look at the supplied Vector3 then returns it to it's starting rotation over time.
+    /// Rotates a game object from the specified angles back to its starting orientation over time.
     /// </summary>
     [CommandInfo("iTween", 
-                 "Look From", 
-                 "Instantly rotates a GameObject to look at the supplied Vector3 then returns it to it's starting rotation over time.")]
+                 "[Dep]Rotate From", 
+                 "Rotates a game object from the specified angles back to its starting orientation over time.")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]
-    public class LookFrom : iTweenCommand
+    public class RotateFrom : iTweenCommand
     {
-        [Tooltip("Target transform that the GameObject will look at")]
+        [Tooltip("Target transform that the GameObject will rotate from")]
         [SerializeField] protected TransformData _fromTransform;
 
-        [Tooltip("Target world position that the GameObject will look at, if no From Transform is set")]
-        [SerializeField] protected Vector3Data _fromPosition;
+        [Tooltip("Target rotation that the GameObject will rotate from, if no From Transform is set")]
+        [SerializeField] protected Vector3Data _fromRotation;
 
-        [Tooltip("Restricts rotation to the supplied axis only")]
-        [SerializeField] protected iTweenAxis axis;
+        [Tooltip("Whether to animate in world space or relative to the parent. False by default.")]
+        [SerializeField] protected bool isLocal;
 
         #region Public members
 
@@ -34,31 +34,20 @@ namespace Fungus
             tweenParams.Add("name", _tweenName.Value);
             if (_fromTransform.Value == null)
             {
-                tweenParams.Add("looktarget", _fromPosition.Value);
+                tweenParams.Add("rotation", _fromRotation.Value);
             }
             else
             {
-                tweenParams.Add("looktarget", _fromTransform.Value);
-            }
-            switch (axis)
-            {
-            case iTweenAxis.X:
-                tweenParams.Add("axis", "x");
-                break;
-            case iTweenAxis.Y:
-                tweenParams.Add("axis", "y");
-                break;
-            case iTweenAxis.Z:
-                tweenParams.Add("axis", "z");
-                break;
+                tweenParams.Add("rotation", _fromTransform.Value);
             }
             tweenParams.Add("time", _duration.Value);
             tweenParams.Add("easetype", easeType);
             tweenParams.Add("looptype", loopType);
+            tweenParams.Add("isLocal", isLocal);
             tweenParams.Add("oncomplete", "OniTweenComplete");
             tweenParams.Add("oncompletetarget", gameObject);
             tweenParams.Add("oncompleteparams", this);
-            iTween.LookFrom(_targetObject.Value, tweenParams);
+            iTween.RotateFrom(_targetObject.Value, tweenParams);
         }
 
         #endregion
@@ -66,7 +55,7 @@ namespace Fungus
         #region Backwards compatibility
 
         [HideInInspector] [FormerlySerializedAs("fromTransform")] public Transform fromTransformOLD;
-        [HideInInspector] [FormerlySerializedAs("fromPosition")] public Vector3 fromPositionOLD;
+        [HideInInspector] [FormerlySerializedAs("fromRotation")] public Vector3 fromRotationOLD;
 
         protected override void OnEnable()
         {
@@ -78,10 +67,10 @@ namespace Fungus
                 fromTransformOLD = null;
             }
 
-            if (fromPositionOLD != default(Vector3))
+            if (fromRotationOLD != default(Vector3))
             {
-                _fromPosition.Value = fromPositionOLD;
-                fromPositionOLD = default(Vector3);
+                _fromRotation.Value = fromRotationOLD;
+                fromRotationOLD = default(Vector3);
             }
         }
 

@@ -11,7 +11,7 @@ namespace Fungus
     /// Changes a game object's scale to the specified value and back to its original scale over time.
     /// </summary>
     [CommandInfo("iTween", 
-                 "Scale From", 
+                 "[Dep]Scale From", 
                  "Changes a game object's scale to the specified value and back to its original scale over time.")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]

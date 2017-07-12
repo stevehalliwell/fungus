@@ -8,14 +8,14 @@ using System.Collections;
 namespace Fungus
 {
     /// <summary>
-    /// Randomly shakes a GameObject's rotation by a diminishing amount over time.
+    /// Applies a jolt of force to a GameObject's rotation and wobbles it back to its initial rotation.
     /// </summary>
     [CommandInfo("iTween", 
-                 "Shake Rotation", 
-                 "Randomly shakes a GameObject's rotation by a diminishing amount over time.")]
+                 "[Dep]Punch Rotation", 
+                 "Applies a jolt of force to a GameObject's rotation and wobbles it back to its initial rotation.")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]
-    public class ShakeRotation : iTweenCommand
+    public class PunchRotation : iTweenCommand
     {
         [Tooltip("A rotation offset in space the GameObject will animate to")]
         [SerializeField] protected Vector3Data _amount;
@@ -37,7 +37,7 @@ namespace Fungus
             tweenParams.Add("oncomplete", "OniTweenComplete");
             tweenParams.Add("oncompletetarget", gameObject);
             tweenParams.Add("oncompleteparams", this);
-            iTween.ShakeRotation(_targetObject.Value, tweenParams);
+            iTween.PunchRotation(_targetObject.Value, tweenParams);
         }
 
         #endregion
@@ -58,5 +58,5 @@ namespace Fungus
         }
 
         #endregion
-    }    
+    }
 }

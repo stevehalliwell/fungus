@@ -8,20 +8,20 @@ using System.Collections;
 namespace Fungus
 {
     /// <summary>
-    /// Randomly shakes a GameObject's position by a diminishing amount over time.
+    /// Rotates a GameObject to look at a supplied Transform or Vector3 over time.
     /// </summary>
     [CommandInfo("iTween", 
-                 "Shake Position", 
-                 "Randomly shakes a GameObject's position by a diminishing amount over time.")]
+                 "[Dep]Look To", 
+                 "Rotates a GameObject to look at a supplied Transform or Vector3 over time.")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]
-    public class ShakePosition : iTweenCommand
+    public class LookTo : iTweenCommand
     {
-        [Tooltip("A translation offset in space the GameObject will animate to")]
-        [SerializeField] protected Vector3Data _amount;
+        [Tooltip("Target transform that the GameObject will look at")]
+        [SerializeField] protected TransformData _toTransform;
 
-        [Tooltip("Whether to animate in world space or relative to the parent. False by default.")]
-        [SerializeField] protected bool isLocal;
+        [Tooltip("Target world position that the GameObject will look at, if no From Transform is set")]
+        [SerializeField] protected Vector3Data _toPosition;
 
         [Tooltip("Restricts rotation to the supplied axis only")]
         [SerializeField] protected iTweenAxis axis;
@@ -32,7 +32,14 @@ namespace Fungus
         {
             Hashtable tweenParams = new Hashtable();
             tweenParams.Add("name", _tweenName.Value);
-            tweenParams.Add("amount", _amount.Value);
+            if (_toTransform.Value == null)
+            {
+                tweenParams.Add("looktarget", _toPosition.Value);
+            }
+            else
+            {
+                tweenParams.Add("looktarget", _toTransform.Value);
+            }
             switch (axis)
             {
             case iTweenAxis.X:
@@ -48,30 +55,36 @@ namespace Fungus
             tweenParams.Add("time", _duration.Value);
             tweenParams.Add("easetype", easeType);
             tweenParams.Add("looptype", loopType);
-            tweenParams.Add("isLocal", isLocal);
             tweenParams.Add("oncomplete", "OniTweenComplete");
             tweenParams.Add("oncompletetarget", gameObject);
             tweenParams.Add("oncompleteparams", this);
-            iTween.ShakePosition(_targetObject.Value, tweenParams);
+            iTween.LookTo(_targetObject.Value, tweenParams);
         }
 
         #endregion
 
         #region Backwards compatibility
 
-        [HideInInspector] [FormerlySerializedAs("amount")] public Vector3 amountOLD;
+        [HideInInspector] [FormerlySerializedAs("toTransform")] public Transform toTransformOLD;
+        [HideInInspector] [FormerlySerializedAs("toPosition")] public Vector3 toPositionOLD;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            if (amountOLD != default(Vector3))
+            if (toTransformOLD != null)
             {
-                _amount.Value = amountOLD;
-                amountOLD = default(Vector3);
+                _toTransform.Value = toTransformOLD;
+                toTransformOLD = null;
+            }
+
+            if (toPositionOLD != default(Vector3))
+            {
+                _toPosition.Value = toPositionOLD;
+                toPositionOLD = default(Vector3);
             }
         }
 
         #endregion
-    }    
+    }
 }

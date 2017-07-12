@@ -10,7 +10,7 @@ namespace Fungus
     /// Stops an active iTween by name.
     /// </summary>
     [CommandInfo("iTween", 
-                 "Stop Tween", 
+                 "[Dep]Stop Tween", 
                  "Stops an active iTween by name.")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]

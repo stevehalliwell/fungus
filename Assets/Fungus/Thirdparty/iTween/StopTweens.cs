@@ -9,7 +9,7 @@ namespace Fungus
     /// Stop all active iTweens in the current scene.
     /// </summary>
     [CommandInfo("iTween", 
-                 "Stop Tweens", 
+                 "[Dep]Stop Tweens", 
                  "Stop all active iTweens in the current scene.")]
     [AddComponentMenu("")]
     public class StopTweens : Command

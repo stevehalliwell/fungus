@@ -8,17 +8,20 @@ using System.Collections;
 namespace Fungus
 {
     /// <summary>
-    /// Applies a jolt of force to a GameObject's scale and wobbles it back to its initial scale.
+    /// Moves a game object by a specified offset over time.
     /// </summary>
     [CommandInfo("iTween", 
-                 "Punch Scale", 
-                 "Applies a jolt of force to a GameObject's scale and wobbles it back to its initial scale.")]
+                 "[Dep]Move Add", 
+                 "Moves a game object by a specified offset over time.")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]
-    public class PunchScale : iTweenCommand
+    public class MoveAdd : iTweenCommand
     {
-        [Tooltip("A scale offset in space the GameObject will animate to")]
-        [SerializeField] protected Vector3Data _amount;
+        [Tooltip("A translation offset in space the GameObject will animate to")]
+        [SerializeField] protected Vector3Data _offset;
+
+        [Tooltip("Apply the transformation in either the world coordinate or local cordinate system")]
+        [SerializeField] protected Space space = Space.Self;
 
         #region Public members
 
@@ -26,30 +29,31 @@ namespace Fungus
         {
             Hashtable tweenParams = new Hashtable();
             tweenParams.Add("name", _tweenName.Value);
-            tweenParams.Add("amount", _amount.Value);
+            tweenParams.Add("amount", _offset.Value);
+            tweenParams.Add("space", space);
             tweenParams.Add("time", _duration.Value);
             tweenParams.Add("easetype", easeType);
             tweenParams.Add("looptype", loopType);
             tweenParams.Add("oncomplete", "OniTweenComplete");
             tweenParams.Add("oncompletetarget", gameObject);
             tweenParams.Add("oncompleteparams", this);
-            iTween.PunchScale(_targetObject.Value, tweenParams);
+            iTween.MoveAdd(_targetObject.Value, tweenParams);
         }
 
         #endregion
 
         #region Backwards compatibility
 
-        [HideInInspector] [FormerlySerializedAs("amount")] public Vector3 amountOLD;
+        [HideInInspector] [FormerlySerializedAs("offset")] public Vector3 offsetOLD;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            if (amountOLD != default(Vector3))
+            if (offsetOLD != default(Vector3))
             {
-                _amount.Value = amountOLD;
-                amountOLD = default(Vector3);
+                _offset.Value = offsetOLD;
+                offsetOLD = default(Vector3);
             }
         }
 

@@ -11,7 +11,7 @@ namespace Fungus
     /// Moves a game object from a specified position back to its starting position over time. The position can be defined by a transform in another object (using To Transform) or by setting an absolute position (using To Position, if To Transform is set to None).
     /// </summary>
     [CommandInfo("iTween", 
-                 "Move From", 
+                 "[Dep]Move From", 
                  "Moves a game object from a specified position back to its starting position over time. The position can be defined by a transform in another object (using To Transform) or by setting an absolute position (using To Position, if To Transform is set to None).")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]

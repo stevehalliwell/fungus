@@ -8,20 +8,20 @@ using System.Collections;
 namespace Fungus
 {
     /// <summary>
-    /// Rotates a GameObject to look at a supplied Transform or Vector3 over time.
+    /// Instantly rotates a GameObject to look at the supplied Vector3 then returns it to it's starting rotation over time.
     /// </summary>
     [CommandInfo("iTween", 
-                 "Look To", 
-                 "Rotates a GameObject to look at a supplied Transform or Vector3 over time.")]
+                 "[Dep]Look From", 
+                 "Instantly rotates a GameObject to look at the supplied Vector3 then returns it to it's starting rotation over time.")]
     [AddComponentMenu("")]
     [ExecuteInEditMode]
-    public class LookTo : iTweenCommand
+    public class LookFrom : iTweenCommand
     {
         [Tooltip("Target transform that the GameObject will look at")]
-        [SerializeField] protected TransformData _toTransform;
+        [SerializeField] protected TransformData _fromTransform;
 
         [Tooltip("Target world position that the GameObject will look at, if no From Transform is set")]
-        [SerializeField] protected Vector3Data _toPosition;
+        [SerializeField] protected Vector3Data _fromPosition;
 
         [Tooltip("Restricts rotation to the supplied axis only")]
         [SerializeField] protected iTweenAxis axis;
@@ -32,13 +32,13 @@ namespace Fungus
         {
             Hashtable tweenParams = new Hashtable();
             tweenParams.Add("name", _tweenName.Value);
-            if (_toTransform.Value == null)
+            if (_fromTransform.Value == null)
             {
-                tweenParams.Add("looktarget", _toPosition.Value);
+                tweenParams.Add("looktarget", _fromPosition.Value);
             }
             else
             {
-                tweenParams.Add("looktarget", _toTransform.Value);
+                tweenParams.Add("looktarget", _fromTransform.Value);
             }
             switch (axis)
             {
@@ -58,30 +58,30 @@ namespace Fungus
             tweenParams.Add("oncomplete", "OniTweenComplete");
             tweenParams.Add("oncompletetarget", gameObject);
             tweenParams.Add("oncompleteparams", this);
-            iTween.LookTo(_targetObject.Value, tweenParams);
+            iTween.LookFrom(_targetObject.Value, tweenParams);
         }
 
         #endregion
 
         #region Backwards compatibility
 
-        [HideInInspector] [FormerlySerializedAs("toTransform")] public Transform toTransformOLD;
-        [HideInInspector] [FormerlySerializedAs("toPosition")] public Vector3 toPositionOLD;
+        [HideInInspector] [FormerlySerializedAs("fromTransform")] public Transform fromTransformOLD;
+        [HideInInspector] [FormerlySerializedAs("fromPosition")] public Vector3 fromPositionOLD;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            if (toTransformOLD != null)
+            if (fromTransformOLD != null)
             {
-                _toTransform.Value = toTransformOLD;
-                toTransformOLD = null;
+                _fromTransform.Value = fromTransformOLD;
+                fromTransformOLD = null;
             }
 
-            if (toPositionOLD != default(Vector3))
+            if (fromPositionOLD != default(Vector3))
             {
-                _toPosition.Value = toPositionOLD;
-                toPositionOLD = default(Vector3);
+                _fromPosition.Value = fromPositionOLD;
+                fromPositionOLD = default(Vector3);
             }
         }
 
