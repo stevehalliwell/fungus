@@ -184,9 +184,10 @@ namespace Fungus
                 timer += Time.deltaTime;
                 timer = Mathf.Min(timer, duration);
                 float percent = timer / duration;
-                
-                Vector3 point = iTween.PointOnPath(path, percent);
-                
+
+                //TODO this uses the same logic as iTween did, so it could be improved
+                Vector3 point = Interp(PathControlPointGenerator(path), percent);
+
                 camera.transform.position = new Vector3(point.x, point.y, 0);
                 camera.orthographicSize = point.z;
 
@@ -200,6 +201,61 @@ namespace Fungus
                 arriveAction();
             }
         }
+
+        #region extracted from iTween
+        //andeeee from the Unity forum's steller Catmull-Rom class ( http://forum.unity3d.com/viewtopic.php?p=218400#218400 ):
+        private static Vector3 Interp(Vector3[] pts, float t)
+        {
+            int numSections = pts.Length - 3;
+            int currPt = Mathf.Min(Mathf.FloorToInt(t * (float)numSections), numSections - 1);
+            float u = t * (float)numSections - (float)currPt;
+
+            Vector3 a = pts[currPt];
+            Vector3 b = pts[currPt + 1];
+            Vector3 c = pts[currPt + 2];
+            Vector3 d = pts[currPt + 3];
+
+            return .5f * (
+                (-a + 3f * b - 3f * c + d) * (u * u * u)
+                + (2f * a - 5f * b + 4f * c - d) * (u * u)
+                + (-a + c) * u
+                + 2f * b
+            );
+        }
+
+        private static Vector3[] PathControlPointGenerator(Vector3[] path)
+        {
+            Vector3[] suppliedPath;
+            Vector3[] vector3s;
+
+            //create and store path points:
+            suppliedPath = path;
+
+            //populate calculate path;
+            int offset = 2;
+            vector3s = new Vector3[suppliedPath.Length + offset];
+            Array.Copy(suppliedPath, 0, vector3s, 1, suppliedPath.Length);
+
+            //populate start and end control points:
+            //vector3s[0] = vector3s[1] - vector3s[2];
+            vector3s[0] = vector3s[1] + (vector3s[1] - vector3s[2]);
+            vector3s[vector3s.Length - 1] = vector3s[vector3s.Length - 2] + (vector3s[vector3s.Length - 2] - vector3s[vector3s.Length - 3]);
+
+            //is this a closed, continuous loop? yes? well then so let's make a continuous Catmull-Rom spline!
+            if (vector3s[1] == vector3s[vector3s.Length - 2])
+            {
+                Vector3[] tmpLoopSpline = new Vector3[vector3s.Length];
+                Array.Copy(vector3s, tmpLoopSpline, vector3s.Length);
+                tmpLoopSpline[0] = tmpLoopSpline[tmpLoopSpline.Length - 3];
+                tmpLoopSpline[tmpLoopSpline.Length - 1] = tmpLoopSpline[2];
+                vector3s = new Vector3[tmpLoopSpline.Length];
+                Array.Copy(tmpLoopSpline, vector3s, tmpLoopSpline.Length);
+            }
+
+            return (vector3s);
+        }
+        #endregion
+
 
         protected virtual void SetCameraZ(Camera camera)
         {

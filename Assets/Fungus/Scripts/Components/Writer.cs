@@ -717,7 +717,8 @@ namespace Fungus
 
             if (go != null)
             {
-                iTween.ShakePosition(go, axis, time);
+                //Previously iTween.Shake
+                LeanTween.move(go, axis, time).setEase(LeanTweenType.punch);
             }
         }
         
