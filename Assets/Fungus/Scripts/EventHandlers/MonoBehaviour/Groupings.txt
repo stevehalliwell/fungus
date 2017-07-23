@@ -35,24 +35,8 @@ OnParticleCollision
 OnParticleTrigger
 
 
-
-
-Start
-OnEnable
-OnDestroy
-OnDisable
-
-
 Level loaded etc.
 
-OnPostRender
-OnPreCull
-OnPreRender
-OnRenderImage - Params
-OnRenderObject
-OnWillRenderObject
-OnBecameInvisible
-OnBecameVisible
 
 
 --DONE--
@@ -88,3 +72,17 @@ OnTriggerStay2D
 Update
 FixedUpdate
 LateUpdate
+
+Start
+OnEnable
+OnDestroy
+OnDisable
+
+OnPostRender
+OnPreCull
+OnPreRender
+OnRenderImage - Params
+OnRenderObject
+OnWillRenderObject
+OnBecameInvisible
+OnBecameVisible
