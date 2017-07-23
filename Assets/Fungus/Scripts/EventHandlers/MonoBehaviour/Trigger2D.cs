@@ -6,8 +6,8 @@ namespace Fungus
     /// <summary>
     /// The block will execute when a 2d physics trigger matching some basic conditions is met. 
     /// </summary>
-    [EventHandlerInfo("Physics2D",
-                      "Trigger",
+    [EventHandlerInfo("MonoBehaviour",
+                      "Trigger2D",
                       "The block will execute when a 2d physics trigger matching some basic conditions is met.")]
     [AddComponentMenu("")]
     public class Trigger2D : BasePhysicsEventHandler
