@@ -6,7 +6,7 @@ namespace Fungus
     /// <summary>
     /// The block will execute when a 3d physics trigger matching some basic conditions is met. 
     /// </summary>
-    [EventHandlerInfo("Physics",
+    [EventHandlerInfo("MonoBehaviour",
                       "Trigger",
                       "The block will execute when a 3d physics trigger matching some basic conditions is met.")]
     [AddComponentMenu("")]

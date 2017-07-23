@@ -27,47 +27,20 @@ OnTransformChildrenChanged
 OnTransformParentChanged
 
 
-OnMouseDown
-OnMouseDrag
-OnMouseEnter
-OnMouseExit
-OnMouseOver
-OnMouseUp
-OnMouseUpAsButton
 
 
-OnCollisionEnter
-OnCollisionExit
-OnCollisionStay
-OnTriggerEnter
-OnTriggerExit
-OnTriggerStay
 OnJointBreak
-OnCollisionEnter2D
-OnCollisionExit2D
-OnCollisionStay2D
-OnTriggerEnter2D
-OnTriggerExit2D
-OnTriggerStay2D
 OnJointBreak2D
 OnParticleCollision
 OnParticleTrigger
 
 
-Update
-FixedUpdate
-LateUpdate
 
 
 Start
 OnEnable
 OnDestroy
 OnDisable
-
-
-OnApplicationFocus - bool has or not
-OnApplicationPause - bool has or not
-OnApplicationQuit
 
 
 Level loaded etc.
@@ -80,3 +53,38 @@ OnRenderObject
 OnWillRenderObject
 OnBecameInvisible
 OnBecameVisible
+
+
+--DONE--
+
+OnMouseDown
+OnMouseDrag
+OnMouseEnter
+OnMouseExit
+OnMouseOver
+OnMouseUp
+OnMouseUpAsButton
+
+OnApplicationFocus - bool has or not
+OnApplicationPause - bool has or not
+OnApplicationQuit
+
+OnCollisionEnter
+OnCollisionExit
+OnCollisionStay
+
+OnTriggerEnter
+OnTriggerExit
+OnTriggerStay
+
+OnCollisionEnter2D
+OnCollisionExit2D
+OnCollisionStay2D
+
+OnTriggerEnter2D
+OnTriggerExit2D
+OnTriggerStay2D
+
+Update
+FixedUpdate
+LateUpdate
