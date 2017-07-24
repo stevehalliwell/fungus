@@ -1,4 +1,2 @@
-basic animator interactions
-
 basic rigidbody interactions
 basic rigidbody2d interaations
