@@ -1,42 +1,60 @@
-Awake - a bad idea
-EDITOR ONLY
-OnGUI
-Reset
-OnValidate
-OnDrawGizmos
-OnDrawGizmosSelected
+//non-monobehaviour
+Level loaded etc.
 
 
-OnAnimatorIK
-OnAnimatorMove
-OnAudioFilterRead
+
+//takes float array not really fungus friendly
+OnAudioFilterRead - PARAMS
+
+//needs access to lots of networking enums and data objects
 OnConnectedToServer
-OnControllerColliderHit
 OnDisconnectedFromServer
 OnFailedToConnect
 OnFailedToConnectToMasterServer
-
-
 OnMasterServerEvent
 OnNetworkInstantiate
 OnPlayerConnected
 OnPlayerDisconnected
 OnSerializeNetworkView
 OnServerInitialized
-OnTransformChildrenChanged
-OnTransformParentChanged
-
 
 
 
 OnJointBreak
 OnJointBreak2D
-OnParticleCollision
+
+
+--Partial--
+
+//give collision info that we aren't storing
+OnCollisionEnter
+OnCollisionExit
+OnCollisionStay
+OnCollisionEnter2D
+OnCollisionExit2D
+OnCollisionStay2D
+
+//give colliders that we aren't storing
+OnTriggerEnter
+OnTriggerExit
+OnTriggerStay
+OnTriggerEnter2D
+OnTriggerExit2D
+OnTriggerStay2D
+
+
 OnParticleTrigger
+OnParticleCollision - gives a gameobject that we could be storing
 
 
-Level loaded etc.
+//gives a gameobject that we aren't storing
+OnControllerColliderHit
 
+
+
+//not saving the ik layer
+OnAnimatorIK - int layer
+OnAnimatorMove
 
 
 --DONE--
@@ -52,22 +70,6 @@ OnMouseUpAsButton
 OnApplicationFocus - bool has or not
 OnApplicationPause - bool has or not
 OnApplicationQuit
-
-OnCollisionEnter
-OnCollisionExit
-OnCollisionStay
-
-OnTriggerEnter
-OnTriggerExit
-OnTriggerStay
-
-OnCollisionEnter2D
-OnCollisionExit2D
-OnCollisionStay2D
-
-OnTriggerEnter2D
-OnTriggerExit2D
-OnTriggerStay2D
 
 Update
 FixedUpdate
@@ -86,3 +88,17 @@ OnRenderObject
 OnWillRenderObject
 OnBecameInvisible
 OnBecameVisible
+
+OnTransformChildrenChanged
+OnTransformParentChanged
+
+
+--Not Planned--
+
+Awake - a bad idea
+EDITOR ONLY
+OnGUI
+Reset
+OnValidate
+OnDrawGizmos
+OnDrawGizmosSelected
