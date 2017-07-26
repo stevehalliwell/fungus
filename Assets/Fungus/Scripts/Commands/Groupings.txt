@@ -1,2 +1,30 @@
 basic rigidbody interactions
 basic rigidbody2d interaations
+
+Screen object
+
+Take Screenshot
+
+Camera settings
+
+Debug ray & line
+
+Transform parent, find, lookAt, rotationTowards, 
+
+Input axis and positions
+-touches is going to be a problem
+
+Dont Destroy on load
+
+Light color, range, inten, type
+
+float remap, curve
+
+quaternion helpers
+
+SceneManager active scene idicies etc.
+
+Time levelLoad, 
+
+navmesh
+
