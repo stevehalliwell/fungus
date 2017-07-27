@@ -7,8 +7,6 @@ Take Screenshot
 
 Camera settings
 
-Debug ray & line
-
 Transform parent, find, lookAt, rotationTowards, 
 
 Input axis and positions
@@ -18,8 +16,6 @@ Dont Destroy on load
 
 Light color, range, inten, type
 
-float remap, curve
-
 quaternion helpers
 
 SceneManager active scene idicies etc.
@@ -28,3 +24,4 @@ Time levelLoad,
 
 navmesh
 
+mathf toint, remap, abs, pow, minmax, clamp pingpong repeat , sqrt, lerp inv lerp,

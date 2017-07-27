@@ -44,8 +44,6 @@ namespace Fungus
 
         public override void OnEnter()
         {
-            var flowchart = GetFlowchart();
-
             switch (mode)
             {
                 case Mode.Line:
@@ -60,8 +58,7 @@ namespace Fungus
                 default:
                     break;
             }
-
-
+            
             Continue();
         }
 
