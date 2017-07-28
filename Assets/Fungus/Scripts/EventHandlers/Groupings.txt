@@ -96,6 +96,7 @@ OnTransformParentChanged
 --Not Planned--
 
 Awake - a bad idea
+
 EDITOR ONLY
 OnGUI
 Reset
