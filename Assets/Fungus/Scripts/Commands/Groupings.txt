@@ -24,4 +24,5 @@ Time levelLoad,
 
 navmesh
 
-mathf toint, remap, abs, pow, minmax, clamp pingpong repeat , sqrt, lerp inv lerp,
+mathf
+	clamp pingpong repeat
