@@ -27,13 +27,13 @@ namespace Fungus
             switch (function)
             {
                 case Mode.Round:
-                    outValue.Value = Mathf.Round(inValue);
+                    outValue.Value = Mathf.Round(inValue.Value);
                     break;
                 case Mode.Floor:
-                    outValue.Value = Mathf.Floor(inValue);
+                    outValue.Value = Mathf.Floor(inValue.Value);
                     break;
                 case Mode.Ceil:
-                    outValue.Value = Mathf.Ceil(inValue);
+                    outValue.Value = Mathf.Ceil(inValue.Value);
                     break;
                 default:
                     break;

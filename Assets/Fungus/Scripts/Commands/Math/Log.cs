@@ -26,10 +26,10 @@ namespace Fungus
             switch (mode)
             {
                 case Mode.Base10:
-                    outValue.Value = Mathf.Log10(inValue);
+                    outValue.Value = Mathf.Log10(inValue.Value);
                     break;
                 case Mode.Natural:
-                    outValue.Value = Mathf.Log(inValue);
+                    outValue.Value = Mathf.Log(inValue.Value);
                     break;
                 default:
                     break;

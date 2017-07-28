@@ -13,7 +13,7 @@ namespace Fungus
     {
         public override void OnEnter()
         {
-            outValue.Value = Mathf.Exp(inValue);
+            outValue.Value = Mathf.Exp(inValue.Value);
 
             Continue();
         }

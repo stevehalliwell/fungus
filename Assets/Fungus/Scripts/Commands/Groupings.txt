@@ -25,4 +25,4 @@ Time levelLoad,
 navmesh
 
 mathf
-	clamp pingpong repeat
+	remap

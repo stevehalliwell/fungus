@@ -17,8 +17,7 @@ namespace Fungus
             LerpUnclamped,
             LerpAngle
         }
-
-        //[Tooltip("Min Or Max")]
+        
         [SerializeField]
         protected Mode mode = Mode.Lerp;
 
