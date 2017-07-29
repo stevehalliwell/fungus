@@ -553,8 +553,7 @@ MonoBehaviour:
     height: 0
   selectedBlocks:
   - {fileID: 269238039}
-  selectedCommands:
-  - {fileID: 269238042}
+  selectedCommands: []
   variables:
   - {fileID: 269238038}
   description: 
@@ -1421,7 +1420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 269238037}
+  selectedFlowchart: {fileID: 1289891683}
 --- !u!4 &1160757215
 Transform:
   m_ObjectHideFlags: 1
@@ -1471,7 +1470,7 @@ BoxCollider:
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1289891680
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1289891678}
@@ -1551,8 +1550,7 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
-  selectedBlocks:
-  - {fileID: 1289891682}
+  selectedBlocks: []
   selectedCommands: []
   variables: []
   description: 
