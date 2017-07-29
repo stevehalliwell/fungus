@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 namespace Fungus
 {
-
     /// <summary>
     /// Base class for all of our physics event handlers
     /// </summary>

@@ -31,12 +31,6 @@ namespace Fungus
         [EnumFlag]
         protected MouseMessageFlags FireOn = MouseMessageFlags.OnMouseUpAsButton;
 
-        public override string GetSummary()
-        {
-            //TODO
-            return "None";
-        }
-
         private void OnMouseDown()
         {
             HandleTriggering(MouseMessageFlags.OnMouseDown);

@@ -12,13 +12,6 @@ namespace Fungus
     [AddComponentMenu("")]
     public class Trigger : BasePhysicsEventHandler
     {
-
-        public override string GetSummary()
-        {
-            //TODO
-            return "None";
-        }
-
         private void OnTriggerEnter(Collider col)
         {
             ProcessCollider(PhysicsMessageType.Enter, col.tag);

@@ -26,12 +26,6 @@ namespace Fungus
         [EnumFlag]
         protected TransformMessageFlags FireOn = TransformMessageFlags.OnTransformChildrenChanged | TransformMessageFlags.OnTransformParentChanged;
 
-        public override string GetSummary()
-        {
-            //TODO
-            return "None";
-        }
-
         private void OnTransformChildrenChanged()
         {
             if ((FireOn & TransformMessageFlags.OnTransformChildrenChanged) != 0)

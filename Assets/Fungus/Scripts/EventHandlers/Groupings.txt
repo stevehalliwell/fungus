@@ -24,6 +24,12 @@ OnJointBreak
 OnJointBreak2D
 
 
+
+Start
+OnEnable
+OnDestroy
+OnDisable
+
 --Partial--
 
 //give collision info that we aren't storing
@@ -74,11 +80,6 @@ OnApplicationQuit
 Update
 FixedUpdate
 LateUpdate
-
-Start
-OnEnable
-OnDestroy
-OnDisable
 
 OnPostRender
 OnPreCull

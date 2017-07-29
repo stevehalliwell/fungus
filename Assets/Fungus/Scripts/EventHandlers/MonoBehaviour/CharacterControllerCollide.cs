@@ -13,11 +13,6 @@ namespace Fungus
     [AddComponentMenu("")]
     public class CharacterControllerCollide : TagFilteredEventHandler
     {
-        public override string GetSummary()
-        {
-            //TODO
-            return "None";
-        }
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {

@@ -32,12 +32,6 @@ namespace Fungus
         [EnumFlag]
         protected RenderMessageFlags FireOn = RenderMessageFlags.OnWillRenderObject;
 
-        public override string GetSummary()
-        {
-            //TODO
-            return "None";
-        }
-
         private void OnPostRender()
         {
             if((FireOn & RenderMessageFlags.OnPostRender) != 0)

@@ -13,13 +13,6 @@ namespace Fungus
     [AddComponentMenu("")]
     public class Collision : BasePhysicsEventHandler
     {
-       
-        public override string GetSummary()
-        { 
-            //TODO
-            return "None";
-        }
-
         private void OnCollisionEnter(UnityEngine.Collision collision)
         {
             ProcessCollider(PhysicsMessageType.Enter, collision.collider.tag);

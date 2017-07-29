@@ -27,12 +27,6 @@ namespace Fungus
         [EnumFlag]
         protected UpdateMessageFlags FireOn = UpdateMessageFlags.Update;
 
-        public override string GetSummary()
-        {
-            //TODO
-            return "None";
-        }
-
         private void Update()
         {
             if((FireOn & UpdateMessageFlags.Update) != 0)

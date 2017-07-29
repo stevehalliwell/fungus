@@ -29,13 +29,7 @@ namespace Fungus
         [Tooltip("IK layer to trigger on")]
         [SerializeField]
         protected int IKLayer = 0;
-
-        public override string GetSummary()
-        {
-            //TODO
-            return "None";
-        }
-
+        
         private void OnAnimatorIK(int layer)
         {
             if ((FireOn & AnimatorMessageFlags.OnAnimatorIK) != 0 && IKLayer == layer)

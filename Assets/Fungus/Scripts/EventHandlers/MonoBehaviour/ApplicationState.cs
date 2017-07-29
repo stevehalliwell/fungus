@@ -29,12 +29,6 @@ namespace Fungus
         [EnumFlag]
         protected ApplicationMessageFlags FireOn = ApplicationMessageFlags.OnApplicationQuit;
 
-        public override string GetSummary()
-        {
-            //TODO
-            return "None";
-        }
-
         private void OnApplicationFocus(bool focus)
         {
             if (
