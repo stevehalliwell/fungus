@@ -27,12 +27,6 @@ namespace Fungus
         [EnumFlag]
         protected ParticleMessageFlags FireOn = ParticleMessageFlags.OnParticleCollision;
 
-        public override string GetSummary()
-        {
-            //TODO
-            return "None";
-        }
-
         private void OnParticleCollision(GameObject other)
         {
             if ((FireOn & ParticleMessageFlags.OnParticleCollision) != 0)

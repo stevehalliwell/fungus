@@ -12,13 +12,6 @@ namespace Fungus
     [AddComponentMenu("")]
     public class Collision2D : BasePhysicsEventHandler
     {
-       
-        public override string GetSummary()
-        { 
-            //TODO
-            return "None";
-        }
-
         private void OnCollisionEnter2D(UnityEngine.Collision2D collision)
         {
             ProcessCollider(PhysicsMessageType.Enter, collision.collider.tag);
