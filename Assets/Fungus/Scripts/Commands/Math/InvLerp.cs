@@ -35,7 +35,7 @@ namespace Fungus
 
         public override string GetSummary()
         {
-            return "InvLerp";
+            return "InvLerp [" + a.Value.ToString() + "-" + b.Value.ToString() + "]";
         }
 
         public override Color GetButtonColor()

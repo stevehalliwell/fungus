@@ -13,10 +13,10 @@ namespace Fungus
     {
         //[Tooltip("LHS Value ")]
         [SerializeField]
-        protected FloatData initialRangeLower, initialRangeUpper, value;
+        protected FloatData initialRangeLower = new FloatData(0), initialRangeUpper = new FloatData(1), value;
         
         [SerializeField]
-        protected FloatData newRangeLower, newRangeUpper;
+        protected FloatData newRangeLower = new FloatData(0), newRangeUpper = new FloatData(1);
         
         [SerializeField]
         protected FloatData outValue;
@@ -36,7 +36,8 @@ namespace Fungus
 
         public override string GetSummary()
         {
-            return "Remap a number to a new range.";
+            return "Map [" + initialRangeLower.Value.ToString() + "-" + initialRangeUpper.Value.ToString() + "] to [" +
+                newRangeLower.Value.ToString() + "-" + newRangeUpper.Value.ToString() + "]";
         }
 
         public override Color GetButtonColor()

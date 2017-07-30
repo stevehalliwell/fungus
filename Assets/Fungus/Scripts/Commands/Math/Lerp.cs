@@ -23,7 +23,7 @@ namespace Fungus
 
         //[Tooltip("LHS Value ")]
         [SerializeField]
-        protected FloatData a, b, percentage;
+        protected FloatData a = new FloatData(0), b = new FloatData(1), percentage;
 
         //[Tooltip("Where the result of the function is stored.")]
         [SerializeField]
@@ -51,7 +51,7 @@ namespace Fungus
 
         public override string GetSummary()
         {
-            return mode.ToString();
+            return mode.ToString() + " [" + a.Value.ToString() + "-" + b.Value.ToString() + "]";
         }
 
         public override Color GetButtonColor()
