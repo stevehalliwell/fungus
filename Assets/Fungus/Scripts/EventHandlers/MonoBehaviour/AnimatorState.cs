@@ -26,13 +26,14 @@ namespace Fungus
         [EnumFlag]
         protected AnimatorMessageFlags FireOn = AnimatorMessageFlags.OnAnimatorMove;
 
-        [Tooltip("IK layer to trigger on")]
+        [Tooltip("IK layer to trigger on. Negative is all.")]
         [SerializeField]
-        protected int IKLayer = 0;
+        protected int IKLayer = 1;
         
         private void OnAnimatorIK(int layer)
         {
-            if ((FireOn & AnimatorMessageFlags.OnAnimatorIK) != 0 && IKLayer == layer)
+            if ((FireOn & AnimatorMessageFlags.OnAnimatorIK) != 0 && 
+                (IKLayer == layer || IKLayer < 0) )
             {
                 ExecuteBlock();
             }

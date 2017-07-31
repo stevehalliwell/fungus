@@ -15,7 +15,7 @@ OnMasterServerEvent
 OnNetworkInstantiate
 OnPlayerConnected
 OnPlayerDisconnected
-OnSerializeNetworkView
+OnSerializeNetworkViews
 OnServerInitialized
 
 
@@ -24,11 +24,6 @@ OnJointBreak
 OnJointBreak2D
 
 
-
-Start
-OnEnable
-OnDestroy
-OnDisable
 
 --Partial--
 
@@ -104,3 +99,8 @@ Reset
 OnValidate
 OnDrawGizmos
 OnDrawGizmosSelected
+
+Start - already covered
+OnEnable
+OnDestroy - not posible due to use of coroutine in execute block
+OnDisable - "
