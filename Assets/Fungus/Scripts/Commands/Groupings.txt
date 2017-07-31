@@ -1,9 +1,16 @@
+
+
+Dont Destroy on load
+
+Time gets and sets for all values
+
+Take Screenshot
+
 basic rigidbody interactions
+
 basic rigidbody2d interaations
 
 Screen object
-
-Take Screenshot
 
 Camera settings
 
@@ -12,7 +19,6 @@ Transform parent, find, lookAt, rotationTowards,
 Input axis and positions
 -touches is going to be a problem
 
-Dont Destroy on load
 
 Light color, range, inten, type
 
@@ -20,9 +26,4 @@ quaternion helpers
 
 SceneManager active scene idicies etc.
 
-Time levelLoad, 
-
 navmesh
-
-mathf
-	remap
