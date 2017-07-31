@@ -11,7 +11,7 @@ namespace Fungus
 	[AddComponentMenu("")]
 	public class TimeGet : Command
 	{
-		public enum TimeVariable
+		public enum TimeGetVariable
 		{
 			captureFramerate,
 			deltaTime,
@@ -33,9 +33,9 @@ namespace Fungus
 		}
 
 
-		[Tooltip("Which ")]
+		[Tooltip("Which part of Time do you want to fetch")]
 		[SerializeField]
-		protected TimeVariable variable = TimeVariable.deltaTime;
+		protected TimeGetVariable variable = TimeGetVariable.deltaTime;
 
 		[Tooltip("Varaible to store the value in.")]
 		[SerializeField]
@@ -52,97 +52,97 @@ namespace Fungus
 
 			switch (variable)
 			{
-				case TimeVariable.captureFramerate:
+				case TimeGetVariable.captureFramerate:
 					if(asIntVar != null)
 					{
 						asIntVar.Value = Time.captureFramerate;
 					}
 					break;
-				case TimeVariable.deltaTime:
+				case TimeGetVariable.deltaTime:
 					if(asFloatVar != null)
 					{
 						asFloatVar.Value = Time.deltaTime;
 					}
 					break;
-				case TimeVariable.fixedDeltaTime:
+				case TimeGetVariable.fixedDeltaTime:
 					if(asFloatVar != null)
 					{
 						asFloatVar.Value = Time.fixedDeltaTime;
 					}
 					break;
-				case TimeVariable.fixedUnscaledDeltaTime:
+				case TimeGetVariable.fixedUnscaledDeltaTime:
 					if(asFloatVar != null)
 					{
 						asFloatVar.Value = Time.fixedUnscaledDeltaTime;
 					}
 					break;
-				case TimeVariable.fixedUnscaledTime:
+				case TimeGetVariable.fixedUnscaledTime:
 					if(asFloatVar != null)
 					{
 						asFloatVar.Value = Time.fixedUnscaledTime;
 					}
 					break;
-				case TimeVariable.frameCount:
+				case TimeGetVariable.frameCount:
 					if(asIntVar != null)
 					{
 						asIntVar.Value = Time.frameCount;
 					}
 					break;
-				case TimeVariable.inFixedTimeStep:
+				case TimeGetVariable.inFixedTimeStep:
 					if(asBoolVar != null)
 					{
 						asBoolVar.Value = Time.inFixedTimeStep;
 					}
 					break;
-				case TimeVariable.maximumDeltaTime:
+				case TimeGetVariable.maximumDeltaTime:
 					if(asFloatVar != null)
 					{
 						asFloatVar.Value = Time.maximumDeltaTime;
 					}
 					break;
-				case TimeVariable.maximumParticleDeltaTime:
+				case TimeGetVariable.maximumParticleDeltaTime:
 					if(asFloatVar != null)
 					{
 						asFloatVar.Value = Time.maximumParticleDeltaTime;
 					}
 					break;
-				case TimeVariable.realtimeSinceStartup:
+				case TimeGetVariable.realtimeSinceStartup:
 					if(asFloatVar != null)
 					{
 						asFloatVar.Value = Time.realtimeSinceStartup;
 					}
 					break;
-				case TimeVariable.smoothDeltaTime:
+				case TimeGetVariable.smoothDeltaTime:
 					if(asFloatVar != null)
 					{
 						asFloatVar.Value = Time.smoothDeltaTime;
 					}
 					break;
-				case TimeVariable.time:
+				case TimeGetVariable.time:
 					if(asFloatVar != null)
 					{
 						asFloatVar.Value = Time.time;
 					}
 					break;
-				case TimeVariable.timeScale:
+				case TimeGetVariable.timeScale:
 					if(asFloatVar != null)
 					{
 						asFloatVar.Value = Time.timeScale;
 					}
 					break;
-				case TimeVariable.timeSinceLevelLoad:
+				case TimeGetVariable.timeSinceLevelLoad:
 					if(asFloatVar != null)
 					{
 						asFloatVar.Value = Time.timeSinceLevelLoad;
 					}
 					break;
-				case TimeVariable.unscaledDeltaTime:
+				case TimeGetVariable.unscaledDeltaTime:
 					if(asFloatVar != null)
 					{
 						asFloatVar.Value = Time.unscaledDeltaTime;
 					}
 					break;
-				case TimeVariable.unscaledTime:
+				case TimeGetVariable.unscaledTime:
 					if(asFloatVar != null)
 					{
 						asFloatVar.Value = Time.unscaledTime;
