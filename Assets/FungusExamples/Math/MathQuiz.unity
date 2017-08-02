@@ -919,7 +919,6 @@ GameObject:
   - component: {fileID: 1755499619}
   - component: {fileID: 1755499628}
   - component: {fileID: 1755499629}
-  - component: {fileID: 1755499627}
   - component: {fileID: 1755499626}
   - component: {fileID: 1755499625}
   - component: {fileID: 1755499618}
@@ -964,7 +963,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 1755499608}
   selectedCommands:
-  - {fileID: 1755499607}
+  - {fileID: 1755499625}
   variables:
   - {fileID: 1755499612}
   - {fileID: 1755499611}
@@ -1068,7 +1067,6 @@ MonoBehaviour:
   - {fileID: 1755499615}
   - {fileID: 1755499629}
   - {fileID: 1755499628}
-  - {fileID: 1755499627}
   - {fileID: 1755499633}
   - {fileID: 1755499632}
   - {fileID: 1755499631}
@@ -1377,28 +1375,6 @@ MonoBehaviour:
     floatRef: {fileID: 1755499620}
     floatVal: 0
   mode: 1
---- !u!114 &1755499627
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1755499605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23b09e2ab627fec4cb0200f7252dbc90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 8
-  indentLevel: 0
-  baseValue:
-    floatRef: {fileID: 1755499612}
-    floatVal: 0
-  exponentValue:
-    floatRef: {fileID: 1755499611}
-    floatVal: 0
-  outValue:
-    floatRef: {fileID: 1755499621}
-    floatVal: 0
 --- !u!114 &1755499628
 MonoBehaviour:
   m_ObjectHideFlags: 2
