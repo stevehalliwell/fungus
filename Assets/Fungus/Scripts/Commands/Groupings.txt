@@ -1,11 +1,3 @@
-
-
-Dont Destroy on load
-
-Time gets and sets for all values
-
-Take Screenshot
-
 basic rigidbody interactions
 
 basic rigidbody2d interaations
