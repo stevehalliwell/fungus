@@ -929,6 +929,10 @@ GameObject:
   - component: {fileID: 1755499633}
   - component: {fileID: 1755499632}
   - component: {fileID: 1755499631}
+  - component: {fileID: 1755499634}
+  - component: {fileID: 1755499627}
+  - component: {fileID: 1755499636}
+  - component: {fileID: 1755499635}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -963,7 +967,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 1755499608}
   selectedCommands:
-  - {fileID: 1755499625}
+  - {fileID: 1755499635}
   variables:
   - {fileID: 1755499612}
   - {fileID: 1755499611}
@@ -974,6 +978,8 @@ MonoBehaviour:
   - {fileID: 1755499618}
   - {fileID: 1755499617}
   - {fileID: 1755499630}
+  - {fileID: 1755499634}
+  - {fileID: 1755499627}
   description: 
   stepPause: 0
   colorCommands: 1
@@ -1025,6 +1031,8 @@ MonoBehaviour:
 
       The square root of the maximum value is {$SqrtMax}
 
+      AND... the square root of the maximum remapped between the two values is {$remapped}
+
       sherlock smirk: ...
 
       john annoyed: Really!
@@ -1069,11 +1077,13 @@ MonoBehaviour:
   - {fileID: 1755499628}
   - {fileID: 1755499633}
   - {fileID: 1755499632}
+  - {fileID: 1755499636}
   - {fileID: 1755499631}
   - {fileID: 1755499626}
   - {fileID: 1755499625}
   - {fileID: 1755499624}
   - {fileID: 1755499623}
+  - {fileID: 1755499635}
   - {fileID: 1755499607}
 --- !u!114 &1755499609
 MonoBehaviour:
@@ -1375,6 +1385,20 @@ MonoBehaviour:
     floatRef: {fileID: 1755499620}
     floatVal: 0
   mode: 1
+--- !u!114 &1755499627
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1755499605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705fa1ac97df74e3a84ff952ffd923f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scope: 0
+  key: min
+  value: 0
 --- !u!114 &1755499628
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1517,6 +1541,74 @@ MonoBehaviour:
   stringData:
     stringRef: {fileID: 0}
     stringVal: 
+--- !u!114 &1755499634
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1755499605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705fa1ac97df74e3a84ff952ffd923f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scope: 0
+  key: remapped
+  value: 0
+--- !u!114 &1755499635
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1755499605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d80bb5401d8044eb9eee0d4eb0b645, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 17
+  indentLevel: 0
+  initialRangeLower:
+    floatRef: {fileID: 1755499627}
+    floatVal: 0
+  initialRangeUpper:
+    floatRef: {fileID: 1755499617}
+    floatVal: 1
+  value:
+    floatRef: {fileID: 1755499618}
+    floatVal: 0
+  newRangeLower:
+    floatRef: {fileID: 0}
+    floatVal: 0
+  newRangeUpper:
+    floatRef: {fileID: 0}
+    floatVal: 100
+  outValue:
+    floatRef: {fileID: 1755499634}
+    floatVal: 0
+--- !u!114 &1755499636
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1755499605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 514ec18f5085cba48bbe6701e4697eb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 16
+  indentLevel: 0
+  function: 0
+  inLHSValue:
+    floatRef: {fileID: 1755499612}
+    floatVal: 0
+  inRHSValue:
+    floatRef: {fileID: 1755499611}
+    floatVal: 0
+  outValue:
+    floatRef: {fileID: 1755499627}
+    floatVal: 0
 --- !u!1 &2073331542
 GameObject:
   m_ObjectHideFlags: 0
