@@ -11,7 +11,6 @@ Transform parent, find, lookAt, rotationTowards,
 Input axis and positions
 -touches is going to be a problem
 
-
 Light color, range, inten, type
 
 quaternion helpers
@@ -19,3 +18,37 @@ quaternion helpers
 SceneManager active scene idicies etc.
 
 navmesh
+
+
+Playground project requirements
+-auto object spawner
+--prefab, interval, box to spawn in
+-rotate with arrows
+--key, speed, spin, update grabs, fixed applies torque
+-object shooter
+--prefab, key, spawn rate, bullet speed, 
+-health system attribute
+-UI script
+-Dialogue system
+-auto rotate
+--fixed rotate
+-collision conditional response
+--col enter tag compare fire action
+-mod health attribute
+--col/trigger ifhas health attr let them know
+-destroy action
+--destroy and instantiate effect
+-destroy for points
+--on col or trig tag compare get attr add 1 point
+-timed self destroy
+-bullet attr
+-condition area
+-health attr
+--really lame, it reaches into ui and gets a thing
+-Balloon system
+-Balloon script
+--non-blocking dialog... thing
+-move with arrows
+--cache input in the update, apply in fixed. Optionally face direction of heading
+-teleport reset
+--on trigger move object back to it's start pos and zero velocity
