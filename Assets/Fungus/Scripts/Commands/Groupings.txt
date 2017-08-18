@@ -1,6 +1,7 @@
 basic rigidbody interactions
 
 basic rigidbody2d interaations
+addforce
 
 Screen object
 
@@ -26,10 +27,10 @@ vector3
 
 
 Playground project requirements
--auto object spawner
---prefab, interval, box to spawn in
--rotate with arrows
---key, speed, spin, update grabs, fixed applies torque
+#blocked by monobeh events
+	-rotate with arrows
+	--key, speed, spin, update grabs, fixed applies torque
+
 -object shooter
 --prefab, key, spawn rate, bullet speed, 
 -health system attribute
