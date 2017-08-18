@@ -21,5 +21,4 @@ lerp
 static values
 enum for up down left right etc.
 
-to fields
-from fields
+set variable doesn't support vector3 right now, add to it or make vector3 specific one?

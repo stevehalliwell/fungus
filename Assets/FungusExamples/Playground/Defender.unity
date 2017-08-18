@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 1124881213}
   - component: {fileID: 1124881226}
   - component: {fileID: 1124881225}
+  - component: {fileID: 1124881227}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -446,6 +447,7 @@ MonoBehaviour:
   - {fileID: 1124881214}
   - {fileID: 1124881213}
   - {fileID: 1124881226}
+  - {fileID: 1124881227}
   description: 
   stepPause: 0
   colorCommands: 1
@@ -471,7 +473,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1124881225
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1124881212}
@@ -496,7 +498,7 @@ MonoBehaviour:
     vector3Val: {x: 0, y: 0, z: 0}
 --- !u!114 &1124881226
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1124881212}
@@ -507,6 +509,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scope: 0
   key: spawnPos
+  value: {x: 0, y: 0, z: 0}
+--- !u!114 &1124881227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1124881212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d769ea3513ad47aabf805db5252341d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scope: 0
+  key: SpawnOffset
   value: {x: 0, y: 0, z: 0}
 --- !u!1 &1569219819
 GameObject:
