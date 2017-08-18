@@ -1,0 +1,25 @@
+mathop
+binary op - vec3 lhs & rhs & ret
+-add
+-div
+-sub
+-mul
+-cross
+-min
+-max
+-project
+-reflect
+
+dot
+
+mag
+
+norm
+
+lerp
+
+static values
+enum for up down left right etc.
+
+to fields
+from fields
