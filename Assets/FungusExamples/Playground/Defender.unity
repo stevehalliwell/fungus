@@ -326,8 +326,7 @@ MonoBehaviour:
     height: 0
   selectedBlocks:
   - {fileID: 3731883}
-  selectedCommands:
-  - {fileID: 3731890}
+  selectedCommands: []
   variables:
   - {fileID: 3731881}
   - {fileID: 3731893}
@@ -954,7 +953,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 0}
+  selectedFlowchart: {fileID: 114526636883379746, guid: a63bb7c0f4cb0df429c8364816dc7b20,
+    type: 2}
 --- !u!4 &1569219821
 Transform:
   m_ObjectHideFlags: 1

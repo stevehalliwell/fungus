@@ -30,23 +30,20 @@ Playground project requirements
 #blocked by monobeh events
 	-rotate with arrows
 	--key, speed, spin, update grabs, fixed applies torque
-
--object shooter
---prefab, key, spawn rate, bullet speed, 
--health system attribute
--UI script
--Dialogue system
 -auto rotate
 --fixed rotate
 -collision conditional response
 --col enter tag compare fire action
+
+-health system attribute
+-UI script
+-Dialogue system
 -mod health attribute
 --col/trigger ifhas health attr let them know
 -destroy action
 --destroy and instantiate effect
 -destroy for points
 --on col or trig tag compare get attr add 1 point
--timed self destroy
 -bullet attr
 -condition area
 -health attr

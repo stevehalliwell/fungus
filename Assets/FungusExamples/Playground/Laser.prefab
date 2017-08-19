@@ -28,6 +28,8 @@ GameObject:
   - component: {fileID: 114487163524766562}
   - component: {fileID: 114979932131573080}
   - component: {fileID: 114216864803211772}
+  - component: {fileID: 114751314740007556}
+  - component: {fileID: 114455382144078078}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -148,7 +150,7 @@ PolygonCollider2D:
       - {x: 0.64, y: -1.3199999}
 --- !u!114 &114216864803211772
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1942691996823588}
@@ -160,9 +162,23 @@ MonoBehaviour:
   scope: 0
   key: rb
   value: {fileID: 50266752063846120}
---- !u!114 &114487163524766562
+--- !u!114 &114455382144078078
 MonoBehaviour:
   m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942691996823588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705fa1ac97df74e3a84ff952ffd923f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scope: 0
+  key: destroyDelay
+  value: 3
+--- !u!114 &114487163524766562
+MonoBehaviour:
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1942691996823588}
@@ -210,10 +226,11 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 114593477394275294}
   selectedCommands:
-  - {fileID: 114487163524766562}
+  - {fileID: 114751314740007556}
   variables:
   - {fileID: 114979932131573080}
   - {fileID: 114216864803211772}
+  - {fileID: 114455382144078078}
   description: 
   stepPause: 0
   colorCommands: 1
@@ -226,7 +243,7 @@ MonoBehaviour:
   luaBindingName: flowchart
 --- !u!114 &114593477394275294
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1942691996823588}
@@ -249,9 +266,10 @@ MonoBehaviour:
   eventHandler: {fileID: 114602407226986924}
   commandList:
   - {fileID: 114487163524766562}
+  - {fileID: 114751314740007556}
 --- !u!114 &114602407226986924
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1942691996823588}
@@ -262,9 +280,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentBlock: {fileID: 114593477394275294}
   waitForFrames: 1
+--- !u!114 &114751314740007556
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942691996823588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d81be3d7e84da460788dccea95a3313a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 2
+  indentLevel: 0
+  _targetGameObject:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 1942691996823588}
+  destroyInXSeconds:
+    floatRef: {fileID: 114455382144078078}
+    floatVal: 5
+  targetGameObjectOLD: {fileID: 0}
 --- !u!114 &114979932131573080
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1942691996823588}
