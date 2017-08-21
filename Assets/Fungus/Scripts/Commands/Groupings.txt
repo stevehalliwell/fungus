@@ -19,39 +19,3 @@ quaternion helpers
 SceneManager active scene idicies etc.
 
 navmesh
-
-vector3
--floats to field
--fields to float
--normalise
-
-
-Playground project requirements
-#blocked by monobeh events
-	-rotate with arrows
-	--key, speed, spin, update grabs, fixed applies torque
--auto rotate
---fixed rotate
--collision conditional response
---col enter tag compare fire action
-
--health system attribute
--UI script
--Dialogue system
--mod health attribute
---col/trigger ifhas health attr let them know
--destroy action
---destroy and instantiate effect
--destroy for points
---on col or trig tag compare get attr add 1 point
--bullet attr
--condition area
--health attr
---really lame, it reaches into ui and gets a thing
--Balloon system
--Balloon script
---non-blocking dialog... thing
--move with arrows
---cache input in the update, apply in fixed. Optionally face direction of heading
--teleport reset
---on trigger move object back to it's start pos and zero velocity

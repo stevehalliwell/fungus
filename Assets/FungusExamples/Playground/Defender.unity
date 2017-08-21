@@ -207,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 3731876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -3, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1585239583}
   m_Father: {fileID: 0}
@@ -710,6 +710,7 @@ GameObject:
   - component: {fileID: 1124881226}
   - component: {fileID: 1124881225}
   - component: {fileID: 1124881227}
+  - component: {fileID: 1124881228}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -781,10 +782,10 @@ MonoBehaviour:
   variable: {fileID: 1124881214}
   minValue:
     floatRef: {fileID: 0}
-    floatVal: -10
+    floatVal: -6
   maxValue:
     floatRef: {fileID: 0}
-    floatVal: 10
+    floatVal: 6
 --- !u!114 &1124881217
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -905,6 +906,7 @@ MonoBehaviour:
   - {fileID: 1124881216}
   - {fileID: 1124881215}
   - {fileID: 1124881225}
+  - {fileID: 1124881228}
   - {fileID: 1124881218}
   - {fileID: 1124881217}
 --- !u!114 &1124881223
@@ -933,7 +935,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 1124881222}
   selectedCommands:
-  - {fileID: 1124881217}
+  - {fileID: 1124881216}
   variables:
   - {fileID: 1124881214}
   - {fileID: 1124881213}
@@ -1014,7 +1016,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scope: 0
   key: SpawnOffset
-  value: {x: 0, y: 0, z: 0}
+  value: {x: 0, y: 6, z: 0}
+--- !u!114 &1124881228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1124881212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc8e8d5ce363ec43815496d321b4d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 8
+  indentLevel: 0
+  lhs:
+    vector3Ref: {fileID: 1124881226}
+    vector3Val: {x: 0, y: 0, z: 0}
+  rhs:
+    vector3Ref: {fileID: 1124881227}
+    vector3Val: {x: 0, y: 0, z: 0}
+  output:
+    vector3Ref: {fileID: 1124881226}
+    vector3Val: {x: 0, y: 0, z: 0}
+  operation: 0
 --- !u!1 &1234006340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,7 +1318,7 @@ MonoBehaviour:
     floatVal: 0
   stringData:
     stringRef: {fileID: 0}
-    stringVal: 'HP: {$hp}'
+    stringVal: '{$hp} : Health'
 --- !u!114 &1267026872
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1472,7 +1497,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 1267026878}
   selectedCommands:
-  - {fileID: 1267026868}
+  - {fileID: 1267026871}
   variables:
   - {fileID: 1267026874}
   - {fileID: 1267026872}
@@ -1515,7 +1540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 1267026880}
+  selectedFlowchart: {fileID: 114619489782507194, guid: cf9a0515785714a49b2d12090c78828f,
+    type: 2}
 --- !u!4 &1569219821
 Transform:
   m_ObjectHideFlags: 1

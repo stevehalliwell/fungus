@@ -164,7 +164,7 @@ MonoBehaviour:
   value: {fileID: 50266752063846120}
 --- !u!114 &114455382144078078
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1942691996823588}
