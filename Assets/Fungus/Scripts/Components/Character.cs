@@ -46,6 +46,10 @@ namespace Fungus
             {
                 activeCharacters.Add(this);
             }
+            else
+            {
+                Debug.LogError("Duplicate character found: " + this.NameText + ". Duplicate characters are not allowed and may result in undefined behaviour.");
+            }
         }
 
         protected virtual void OnDisable()
