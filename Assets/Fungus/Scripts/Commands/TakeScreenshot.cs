@@ -21,7 +21,7 @@ namespace Fungus
 
         public override void OnEnter()
         {
-            Application.CaptureScreenshot(screenShotFileName.Value, superSized);
+            ScreenCapture.CaptureScreenshot(screenShotFileName.Value, superSized);
 
             Continue();
         }
