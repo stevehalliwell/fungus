@@ -3,8 +3,6 @@ Playground project requirements
 #blocked by monobeh events
 	-rotate with arrows
 	--key, speed, spin, update grabs, fixed applies torque
--auto rotate
---fixed rotate
 -collision conditional response
 --col enter tag compare fire action
 
