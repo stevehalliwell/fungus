@@ -30,9 +30,12 @@ GameObject:
   - component: {fileID: 114624770175612764}
   - component: {fileID: 114192925280044800}
   - component: {fileID: 114321934423954670}
+  - component: {fileID: 114916073079591186}
+  - component: {fileID: 114051310505886648}
+  - component: {fileID: 114693234775530112}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +47,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1, y: 2.1, z: 0}
+  m_LocalPosition: {x: 0.60786897, y: -11.666044, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,9 +98,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114051310505886648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292638556747252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c1a9f24ac376a47838385391f83acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBlock: {fileID: 114916073079591186}
+  tagFilter:
+  - Ground
+  FireOn: 1
 --- !u!114 &114192925280044800
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -111,7 +129,7 @@ MonoBehaviour:
   value: 0
 --- !u!114 &114293439357397826
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -125,7 +143,7 @@ MonoBehaviour:
   key: start
 --- !u!114 &114321934423954670
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -145,7 +163,7 @@ MonoBehaviour:
     floatVal: 3
 --- !u!114 &114380220327066724
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -180,9 +198,9 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 114939264293512594}
+  - {fileID: 114916073079591186}
   selectedCommands:
-  - {fileID: 114624770175612764}
+  - {fileID: 114693234775530112}
   variables:
   - {fileID: 114192925280044800}
   description: 
@@ -197,7 +215,7 @@ MonoBehaviour:
   luaBindingName: flowchart
 --- !u!114 &114624770175612764
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -231,7 +249,7 @@ MonoBehaviour:
   offsetOLD: {x: 0, y: 0, z: 0}
 --- !u!114 &114643528736330088
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -246,9 +264,29 @@ MonoBehaviour:
     stringRef: {fileID: 0}
     stringVal: start
   targetLabelOLD: {fileID: 0}
---- !u!114 &114939264293512594
+--- !u!114 &114693234775530112
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292638556747252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d81be3d7e84da460788dccea95a3313a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 7
+  indentLevel: 0
+  _targetGameObject:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 1292638556747252}
+  destroyInXSeconds:
+    floatRef: {fileID: 0}
+    floatVal: 0.1
+  targetGameObjectOLD: {fileID: 0}
+--- !u!114 &114916073079591186
+MonoBehaviour:
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -259,8 +297,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 245
-    y: 122
+    x: 148
+    y: 209
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 6
+  blockName: New Block1
+  description: 
+  eventHandler: {fileID: 114051310505886648}
+  commandList:
+  - {fileID: 114693234775530112}
+--- !u!114 &114939264293512594
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292638556747252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 147
+    y: 108
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -314,3 +377,5 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

@@ -1,10 +1,7 @@
-
 Playground project requirements
-#blocked by monobeh events
-	-rotate with arrows
-	--key, speed, spin, update grabs, fixed applies torque
--collision conditional response
---col enter tag compare fire action
+
+spawn needs to be easier to use, should be allowed to take transforms as positions or we need transform fetches
+-lets do transforms
 
 -health system attribute
 -UI script
