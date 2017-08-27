@@ -32,7 +32,9 @@ GameObject:
   - component: {fileID: 114321934423954670}
   - component: {fileID: 114916073079591186}
   - component: {fileID: 114051310505886648}
-  - component: {fileID: 114693234775530112}
+  - component: {fileID: 114685860866778978}
+  - component: {fileID: 114434000303693764}
+  - component: {fileID: 114899146109398040}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -100,7 +102,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!114 &114051310505886648
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -112,10 +114,11 @@ MonoBehaviour:
   parentBlock: {fileID: 114916073079591186}
   tagFilter:
   - Ground
+  - Laser
   FireOn: 1
 --- !u!114 &114192925280044800
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -129,7 +132,7 @@ MonoBehaviour:
   value: 0
 --- !u!114 &114293439357397826
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -143,7 +146,7 @@ MonoBehaviour:
   key: start
 --- !u!114 &114321934423954670
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -163,7 +166,7 @@ MonoBehaviour:
     floatVal: 3
 --- !u!114 &114380220327066724
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -174,6 +177,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentBlock: {fileID: 114939264293512594}
   waitForFrames: 1
+--- !u!114 &114434000303693764
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292638556747252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d81be3d7e84da460788dccea95a3313a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 11
+  indentLevel: 0
+  _targetGameObject:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 1292638556747252}
+  destroyInXSeconds:
+    floatRef: {fileID: 0}
+    floatVal: 0.1
+  targetGameObjectOLD: {fileID: 0}
 --- !u!114 &114619489782507194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,8 +222,7 @@ MonoBehaviour:
     height: 0
   selectedBlocks:
   - {fileID: 114916073079591186}
-  selectedCommands:
-  - {fileID: 114693234775530112}
+  selectedCommands: []
   variables:
   - {fileID: 114192925280044800}
   description: 
@@ -215,7 +237,7 @@ MonoBehaviour:
   luaBindingName: flowchart
 --- !u!114 &114624770175612764
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -249,7 +271,7 @@ MonoBehaviour:
   offsetOLD: {x: 0, y: 0, z: 0}
 --- !u!114 &114643528736330088
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -264,29 +286,54 @@ MonoBehaviour:
     stringRef: {fileID: 0}
     stringVal: start
   targetLabelOLD: {fileID: 0}
---- !u!114 &114693234775530112
+--- !u!114 &114685860866778978
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d81be3d7e84da460788dccea95a3313a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 7
+  nodeRect:
+    serializedVersion: 2
+    x: 384
+    y: 166
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 6
+  blockName: DestroySelf
+  description: 
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 114434000303693764}
+--- !u!114 &114899146109398040
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292638556747252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050fb9e6e72f442b3b883da8a965bdeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 12
   indentLevel: 0
-  _targetGameObject:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 1292638556747252}
-  destroyInXSeconds:
-    floatRef: {fileID: 0}
-    floatVal: 0.1
-  targetGameObjectOLD: {fileID: 0}
+  targetFlowchart: {fileID: 0}
+  targetBlock: {fileID: 114685860866778978}
+  startLabel:
+    stringRef: {fileID: 0}
+    stringVal: 
+  startIndex: 0
+  callMode: 0
 --- !u!114 &114916073079591186
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}
@@ -298,20 +345,20 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 148
-    y: 209
+    y: 166
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 6
-  blockName: New Block1
+  blockName: HitGround
   description: 
   eventHandler: {fileID: 114051310505886648}
   commandList:
-  - {fileID: 114693234775530112}
+  - {fileID: 114899146109398040}
 --- !u!114 &114939264293512594
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292638556747252}

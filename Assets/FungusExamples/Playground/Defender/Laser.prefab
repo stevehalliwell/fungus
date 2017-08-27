@@ -30,9 +30,12 @@ GameObject:
   - component: {fileID: 114216864803211772}
   - component: {fileID: 114751314740007556}
   - component: {fileID: 114455382144078078}
+  - component: {fileID: 114182131449558960}
+  - component: {fileID: 114250531415154764}
+  - component: {fileID: 114299940920854140}
   m_Layer: 0
   m_Name: Laser
-  m_TagString: Untagged
+  m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,6 +151,31 @@ PolygonCollider2D:
       - {x: 0.44, y: -1.49}
       - {x: 0.53999996, y: -1.4399999}
       - {x: 0.64, y: -1.3199999}
+--- !u!114 &114182131449558960
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942691996823588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 181
+    y: 189
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 3
+  blockName: HitEnemy
+  description: 
+  eventHandler: {fileID: 114250531415154764}
+  commandList:
+  - {fileID: 114299940920854140}
 --- !u!114 &114216864803211772
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -162,6 +190,39 @@ MonoBehaviour:
   scope: 0
   key: rb
   value: {fileID: 50266752063846120}
+--- !u!114 &114250531415154764
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942691996823588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c1a9f24ac376a47838385391f83acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBlock: {fileID: 114182131449558960}
+  tagFilter:
+  - Enemy
+  FireOn: 1
+--- !u!114 &114299940920854140
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942691996823588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c43743931d28f43f89eced820d907351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 4
+  indentLevel: 0
+  messageTarget: 1
+  _message:
+    stringRef: {fileID: 0}
+    stringVal: EnemyShot
+  messageOLD: 
 --- !u!114 &114455382144078078
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -212,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 0, y: 0}
+  scrollPos: {x: 62, y: -35}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 400
@@ -223,10 +284,8 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
-  selectedBlocks:
-  - {fileID: 114593477394275294}
-  selectedCommands:
-  - {fileID: 114487163524766562}
+  selectedBlocks: []
+  selectedCommands: []
   variables:
   - {fileID: 114979932131573080}
   - {fileID: 114216864803211772}
