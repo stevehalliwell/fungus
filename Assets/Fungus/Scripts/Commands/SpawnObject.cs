@@ -28,6 +28,12 @@ namespace Fungus
         [Tooltip("Local rotation of newly spawned object.")]
         [SerializeField] protected Vector3Data _spawnRotation;
 
+
+
+        [Tooltip("Optional variable to store the GameObject that was just created.")]
+        [SerializeField]
+        protected GameObjectData _newlySpawnedObject;
+
         #region Public members
 
         public override void OnEnter()
@@ -46,6 +52,8 @@ namespace Fungus
 
             newObject.transform.localPosition = _spawnPosition.Value;
             newObject.transform.localRotation = Quaternion.Euler(_spawnRotation.Value);
+
+            _newlySpawnedObject.Value = newObject;
 
             Continue();
         }
