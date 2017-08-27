@@ -193,7 +193,7 @@ MonoBehaviour:
     rigidbody2DRef: {fileID: 114216864803211772}
     rigidbody2DVal: {fileID: 0}
   forceMode: 1
-  forceFunction: 0
+  forceFunction: 2
   force:
     vector2Ref: {fileID: 114979932131573080}
     vector2Val: {x: 0, y: 0}
@@ -226,7 +226,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 114593477394275294}
   selectedCommands:
-  - {fileID: 114751314740007556}
+  - {fileID: 114487163524766562}
   variables:
   - {fileID: 114979932131573080}
   - {fileID: 114216864803211772}
@@ -354,3 +354,5 @@ SpriteRenderer:
   m_Size: {x: 3, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

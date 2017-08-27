@@ -142,6 +142,8 @@ GameObject:
   - component: {fileID: 3731901}
   - component: {fileID: 3731900}
   - component: {fileID: 3731903}
+  - component: {fileID: 3731904}
+  - component: {fileID: 3731905}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -309,6 +311,8 @@ MonoBehaviour:
   commandList:
   - {fileID: 3731890}
   - {fileID: 3731885}
+  - {fileID: 3731904}
+  - {fileID: 3731905}
   - {fileID: 3731880}
   - {fileID: 3731888}
   - {fileID: 3731886}
@@ -339,7 +343,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 3731883}
   selectedCommands:
-  - {fileID: 3731880}
+  - {fileID: 3731905}
   variables:
   - {fileID: 3731881}
   - {fileID: 3731893}
@@ -590,7 +594,7 @@ MonoBehaviour:
   - {fileID: 3731894}
 --- !u!114 &3731897
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 3731876}
@@ -604,7 +608,7 @@ MonoBehaviour:
   value: 0
 --- !u!114 &3731898
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 3731876}
@@ -618,7 +622,7 @@ MonoBehaviour:
   value: 0
 --- !u!114 &3731899
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 3731876}
@@ -632,7 +636,7 @@ MonoBehaviour:
   value: 5
 --- !u!114 &3731900
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 3731876}
@@ -659,7 +663,7 @@ MonoBehaviour:
     stringVal: 
 --- !u!114 &3731901
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 3731876}
@@ -686,7 +690,7 @@ MonoBehaviour:
     stringVal: 
 --- !u!114 &3731902
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 3731876}
@@ -706,7 +710,7 @@ MonoBehaviour:
     floatVal: 0
 --- !u!114 &3731903
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 3731876}
@@ -731,6 +735,46 @@ MonoBehaviour:
   stringData:
     stringRef: {fileID: 0}
     stringVal: 
+--- !u!114 &3731904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 3731876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b521257e66940a4c835dce2e246e464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 13
+  indentLevel: 1
+  property: 0
+  transformData:
+    transformRef: {fileID: 0}
+    transformVal: {fileID: 3731879}
+  vec3:
+    vector3Ref: {fileID: 3731892}
+    vector3Val: {x: 0, y: 0, z: 0}
+--- !u!114 &3731905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 3731876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b521257e66940a4c835dce2e246e464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 14
+  indentLevel: 1
+  property: 11
+  transformData:
+    transformRef: {fileID: 0}
+    transformVal: {fileID: 1585239583}
+  vec3:
+    vector3Ref: {fileID: 3731893}
+    vector3Val: {x: 0, y: 0, z: 0}
 --- !u!1 &69847124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,7 +1295,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 1124881222}
   selectedCommands:
-  - {fileID: 1124881216}
+  - {fileID: 1124881218}
   variables:
   - {fileID: 1124881214}
   - {fileID: 1124881213}
@@ -1939,7 +1983,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 1617824584}
+  selectedFlowchart: {fileID: 114526636883379746, guid: a63bb7c0f4cb0df429c8364816dc7b20,
+    type: 2}
 --- !u!4 &1569219821
 Transform:
   m_ObjectHideFlags: 1
