@@ -1,0 +1,41 @@
+Playground project requirements
+
+Defender
+-win loss screens showing
+-art for more things
+
+Football
+-walls
+-controlled objects
+--axis to addforce
+--arrow for p2
+--wasd for p1
+-reset field
+--set position and zero velocity of target objects
+--p1,p2,ball
+-ui, first to 2 wins
+-bouncy material
+
+Lander
+-player has 2 collision components
+--one kills and resets level
+--one wins
+-rotate with arrows
+--torque
+-relative force for boost
+
+Maze
+-layout
+-pickups
+-win
+
+
+
+-Dialogue system
+
+-Balloon system
+-Balloon script
+--non-blocking dialog... thing
+
+-teleport reset
+--on trigger move object back to it's start pos and zero velocity

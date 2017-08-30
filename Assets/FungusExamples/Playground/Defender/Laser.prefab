@@ -372,7 +372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scope: 0
   key: spawnForce
-  value: {x: 0, y: 5}
+  value: {x: 0, y: 10}
 --- !u!212 &212200396344711462
 SpriteRenderer:
   m_ObjectHideFlags: 1
