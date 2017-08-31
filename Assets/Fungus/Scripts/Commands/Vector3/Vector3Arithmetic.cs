@@ -29,6 +29,7 @@ namespace Fungus
 
         public override void OnEnter()
         {
+            Vector3 tmp;
             switch (operation)
             {
                 case Operation.Add:
@@ -38,14 +39,16 @@ namespace Fungus
                     output.Value = lhs.Value - rhs.Value;
                     break;
                 case Operation.Mul:
-                    output.Value = lhs.Value;
-                    output.Value.Scale(rhs.Value);
+                    tmp = lhs.Value;
+                    tmp.Scale(rhs.Value);
+                    output.Value = tmp;
                     break;
                 case Operation.Div:
-                    output.Value = lhs.Value;
-                    output.Value.Scale(new Vector3(1.0f / rhs.Value.x,
+                    tmp = lhs.Value;
+                    tmp.Scale(new Vector3(1.0f / rhs.Value.x,
                         1.0f / rhs.Value.y,
                         1.0f / rhs.Value.z));
+                    output.Value = tmp;
                     break;
                 default:
                     break;
