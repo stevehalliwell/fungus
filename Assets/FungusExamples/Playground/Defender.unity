@@ -207,7 +207,7 @@ Prefab:
     - target: {fileID: 114094183539183980, guid: 5192b1b391d8cd54f84d39d06a4a3dc8,
         type: 2}
       propertyPath: selectedBlocks.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114094183539183980, guid: 5192b1b391d8cd54f84d39d06a4a3dc8,
         type: 2}
@@ -999,7 +999,7 @@ MonoBehaviour:
     stringRef: {fileID: 0}
     stringVal: 
   startIndex: 0
-  callMode: 0
+  callMode: 1
 --- !u!114 &1267026882
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1157,7 +1157,7 @@ MonoBehaviour:
     stringRef: {fileID: 0}
     stringVal: 
   startIndex: 0
-  callMode: 0
+  callMode: 1
 --- !u!114 &1267026889
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1240,7 +1240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 0}
+  selectedFlowchart: {fileID: 1617824584}
 --- !u!4 &1569219821
 Transform:
   m_ObjectHideFlags: 1
