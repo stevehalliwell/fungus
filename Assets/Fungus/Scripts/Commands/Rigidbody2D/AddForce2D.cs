@@ -33,6 +33,10 @@ namespace Fungus
         [SerializeField]
         protected Vector2Data force;
 
+        [Tooltip("Scale factor to be applied to force as it is used.")]
+        [SerializeField]
+        protected FloatData forceScaleFactor = new FloatData(1);
+
         [Tooltip("World position the force is being applied from. Used only in AddForceAtPosition")]
         [SerializeField]
         protected Vector2Data atPosition;
@@ -42,13 +46,13 @@ namespace Fungus
             switch (forceFunction)
             {
                 case ForceFunction.AddForce:
-                    rb.Value.AddForce(force.Value, forceMode);
+                    rb.Value.AddForce(force.Value * forceScaleFactor.Value, forceMode);
                     break;
                 case ForceFunction.AddForceAtPosition:
-                    rb.Value.AddForceAtPosition(force.Value, atPosition.Value, forceMode);
+                    rb.Value.AddForceAtPosition(force.Value * forceScaleFactor.Value, atPosition.Value, forceMode);
                     break;
                 case ForceFunction.AddRelativeForce:
-                    rb.Value.AddRelativeForce(force.Value, forceMode);
+                    rb.Value.AddRelativeForce(force.Value * forceScaleFactor.Value, forceMode);
                     break;
                 default:
                     break;
