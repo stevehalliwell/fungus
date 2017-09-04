@@ -5,24 +5,11 @@ Defender
 -art for more things
 
 Football
--walls
--controlled objects
---axis to addforce
---arrow for p2
---wasd for p1
--reset field
---set position and zero velocity of target objects
---p1,p2,ball
--ui, first to 2 wins
--bouncy material
+-win loss screens showing
+
 
 Lander
--player has 2 collision components
---one kills and resets level
---one wins
--rotate with arrows
---torque
--relative force for boost
+-win loss screens showing
 
 Maze
 -layout
@@ -31,11 +18,23 @@ Maze
 
 
 
--Dialogue system
-
 -Balloon system
 -Balloon script
 --non-blocking dialog... thing
 
--teleport reset
---on trigger move object back to it's start pos and zero velocity
+
+Then review all blocks and make them easier to work with
+
+Transform needs to be able to get and set ALL properties
+-should we split the transform into positon, rotation, scale, etc.?
+-Need a quaternion type
+--Quaternion helpers? prob not at this point
+-needs a custom inspector? or can we get by with VariableProperty(typeof( like LoadVariable does
+
+Rb2D
+-need to be able to access all properties
+
+
+
+Addforce2d
+-should be able to take vec2 or vec3
