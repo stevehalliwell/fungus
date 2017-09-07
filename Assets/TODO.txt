@@ -1,0 +1,11 @@
+Move GetButtonColor out of the Command, it is ALWAYS static data
+-move it to static data that is controlled by theme in the EditorSettings
+--means people can customise them if they want, that we can ship themes etc.
+
+Simplify the use of BaseVariable, currently the VariableProperty allows us to filter by types
+-but then at run time we need to baby it, this feels bad, do we add converters to baseclass that nulls or throws on errors?
+
+Event on Block
+-needs to have a text based search like command now does, prob needs more complicated drop down menu replacement
+
+GOOD LORD i want to be able to type instantiate and it find the 'spawn object' command
