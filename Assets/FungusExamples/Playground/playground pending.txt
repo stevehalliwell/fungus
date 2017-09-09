@@ -1,27 +1,5 @@
 Playground project requirements
 
-Defender
--win loss screens showing
--art for more things
-
-Football
--win loss screens showing
-
-
-Lander
--win loss screens showing
-
-Maze
--layout
--pickups
--win
-
-
-
--Balloon system
--Balloon script
---non-blocking dialog... thing
-
 
 Then review all blocks and make them easier to work with
 

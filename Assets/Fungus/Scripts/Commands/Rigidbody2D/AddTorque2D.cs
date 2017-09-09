@@ -32,7 +32,12 @@ namespace Fungus
 
         public override string GetSummary()
         {
-            return forceMode.ToString() + ": " + force.ToString();
+            if(rb.Value == null)
+            {
+                return "Error: rb not set";
+            }
+
+            return forceMode.ToString() + ": " + force.Value.ToString() + (force.floatRef != null ? " (" + force.floatRef.Key + ")" : "");
         }
 
         public override Color GetButtonColor()
