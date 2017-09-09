@@ -5,9 +5,6 @@ Then review all blocks and make them easier to work with
 
 Transform needs to be able to get and set ALL properties
 -should we split the transform into positon, rotation, scale, etc.?
--Need a quaternion type
---Quaternion helpers? prob not at this point
--needs a custom inspector? or can we get by with VariableProperty(typeof( like LoadVariable does
 
 Rb2D
 -need to be able to access all properties

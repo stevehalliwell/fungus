@@ -174,14 +174,29 @@ namespace Fungus
                 default:
                     break;
             }
-
-
-
+            
             Continue();
         }
 
         public override string GetSummary()
         {
+            if(transformData.Value == null)
+            {
+                return "Error: no transform set";
+            }
+
+            var iob = inOutVar as BooleanVariable;
+            var ioi = inOutVar as IntegerVariable;
+            var iov = inOutVar as Vector3Variable;
+            var iot = inOutVar as TransformVariable;
+
+            if(iob == null && ioi == null && iov == null && iot == null)
+            {
+                return "Error: no variable set to push or pull data to or from";
+            }
+
+            //We could do further checks here, eg, you have selected childcount but set a vec3variable
+
             return getOrSet.ToString() + " " + property.ToString();
         }
 

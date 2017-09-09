@@ -26,9 +26,9 @@ namespace Fungus
         public override string GetSummary()
         {
             if (vec3Out.vector3Ref == null)
-                return "Error: vec3Out not set";
-
-            return "";
+                return "";
+            else
+                return vec3Out.vector3Ref.Key;
         }
 
         public override Color GetButtonColor()
