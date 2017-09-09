@@ -108,6 +108,95 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &15251662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 15251663}
+  - component: {fileID: 15251666}
+  - component: {fileID: 15251665}
+  - component: {fileID: 15251664}
+  m_Layer: 5
+  m_Name: GameOver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &15251663
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 15251662}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 977378690}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &15251664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 15251662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &15251665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 15251662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 48
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 4
+    m_MaxSize: 48
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &15251666
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 15251662}
 --- !u!1 &53050519
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,6 +875,8 @@ GameObject:
   - component: {fileID: 510833773}
   - component: {fileID: 510833772}
   - component: {fileID: 510833780}
+  - component: {fileID: 510833781}
+  - component: {fileID: 510833782}
   m_Layer: 0
   m_Name: GameRules
   m_TagString: Untagged
@@ -871,6 +962,7 @@ MonoBehaviour:
   - {fileID: 510833769}
   - {fileID: 510833778}
   - {fileID: 510833780}
+  - {fileID: 510833782}
 --- !u!114 &510833765
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -912,6 +1004,7 @@ MonoBehaviour:
   - {fileID: 510833775}
   - {fileID: 510833779}
   - {fileID: 510833774}
+  - {fileID: 510833781}
   - {fileID: 510833773}
   - {fileID: 510833771}
   - {fileID: 510833772}
@@ -938,10 +1031,8 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
-  selectedBlocks:
-  - {fileID: 510833764}
-  selectedCommands:
-  - {fileID: 510833780}
+  selectedBlocks: []
+  selectedCommands: []
   variables:
   - {fileID: 510833776}
   description: 
@@ -1187,6 +1278,44 @@ MonoBehaviour:
   logMessage:
     stringRef: {fileID: 0}
     stringVal: Winnar
+--- !u!114 &510833781
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 510833760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c0367bf08d147bd80b5454de50e9d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 14
+  indentLevel: 1
+  targetTextObject: {fileID: 15251662}
+  text:
+    stringRef: {fileID: 0}
+    stringVal: Game Over
+  description: 
+  _textObjectObsolete: {fileID: 0}
+--- !u!114 &510833782
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 510833760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c0367bf08d147bd80b5454de50e9d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 15
+  indentLevel: 0
+  targetTextObject: {fileID: 15251662}
+  text:
+    stringRef: {fileID: 0}
+    stringVal: You Win!
+  description: 
+  _textObjectObsolete: {fileID: 0}
 --- !u!1 &566141928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,6 +1633,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 143672177}
+  - {fileID: 15251663}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1866,6 +1996,9 @@ GameObject:
   - component: {fileID: 1179951691}
   - component: {fileID: 1179951695}
   - component: {fileID: 1179951694}
+  - component: {fileID: 1179951696}
+  - component: {fileID: 1179951697}
+  - component: {fileID: 1179951698}
   m_Layer: 0
   m_Name: Lander
   m_TagString: Player
@@ -1885,7 +2018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 53, y: -54.5}
+  scrollPos: {x: 146, y: -26.5}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 324
@@ -1897,9 +2030,8 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 1179951671}
-  selectedCommands:
-  - {fileID: 1179951689}
+  - {fileID: 1179951659}
+  selectedCommands: []
   variables:
   - {fileID: 1179951657}
   - {fileID: 1179951656}
@@ -2567,14 +2699,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 339
-    y: 144
-    width: 120
+    x: 297
+    y: 142
+    width: 126
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 7
-  blockName: New Block
+  blockName: DeathChecks
   description: 
   eventHandler: {fileID: 1179951678}
   commandList:
@@ -2595,7 +2727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemId: 17
-  indentLevel: 0
+  indentLevel: 1
   messageTarget: 1
   _message:
     stringRef: {fileID: 0}
@@ -2616,16 +2748,19 @@ MonoBehaviour:
     serializedVersion: 2
     x: 119
     y: 140
-    width: 153
+    width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 18
-  blockName: New Block (Copy)
+  blockName: Win Checks
   description: 
   eventHandler: {fileID: 1179951677}
   commandList:
+  - {fileID: 1179951697}
   - {fileID: 1179951680}
+  - {fileID: 1179951696}
+  - {fileID: 1179951698}
 --- !u!114 &1179951682
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -2934,6 +3069,73 @@ MonoBehaviour:
   stringData:
     stringRef: {fileID: 0}
     stringVal: 
+--- !u!114 &1179951696
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1179951648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb77d0ce495044f6e9feb91b31798e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 34
+  indentLevel: 1
+  variable: {fileID: 1179951684}
+  setOperator: 0
+  booleanData:
+    booleanRef: {fileID: 0}
+    booleanVal: 0
+  integerData:
+    integerRef: {fileID: 0}
+    integerVal: 0
+  floatData:
+    floatRef: {fileID: 0}
+    floatVal: 0
+  stringData:
+    stringRef: {fileID: 0}
+    stringVal: 
+--- !u!114 &1179951697
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1179951648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70c5622b8a80845c980954170295f292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 35
+  indentLevel: 0
+  compareOperator: 0
+  variable: {fileID: 1179951684}
+  booleanData:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
+  integerData:
+    integerRef: {fileID: 0}
+    integerVal: 0
+  floatData:
+    floatRef: {fileID: 0}
+    floatVal: 0
+  stringData:
+    stringRef: {fileID: 0}
+    stringVal: 
+--- !u!114 &1179951698
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1179951648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93cb9773f2ca04e2bbf7a68ccfc23267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 36
+  indentLevel: 0
 --- !u!1 &1195112391
 GameObject:
   m_ObjectHideFlags: 0
