@@ -235,9 +235,6 @@ GameObject:
   - component: {fileID: 53095136}
   - component: {fileID: 53095162}
   - component: {fileID: 53095161}
-  - component: {fileID: 53095160}
-  - component: {fileID: 53095159}
-  - component: {fileID: 53095158}
   - component: {fileID: 53095167}
   - component: {fileID: 53095166}
   - component: {fileID: 53095165}
@@ -255,6 +252,12 @@ GameObject:
   - component: {fileID: 53095176}
   - component: {fileID: 53095179}
   - component: {fileID: 53095172}
+  - component: {fileID: 53095180}
+  - component: {fileID: 53095160}
+  - component: {fileID: 53095159}
+  - component: {fileID: 53095158}
+  - component: {fileID: 53095182}
+  - component: {fileID: 53095181}
   m_Layer: 0
   m_Name: GameRules
   m_TagString: Untagged
@@ -685,14 +688,17 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 53095171}
+  - {fileID: 53095162}
   selectedCommands:
-  - {fileID: 53095172}
+  - {fileID: 53095181}
   variables:
   - {fileID: 53095153}
   - {fileID: 53095152}
   - {fileID: 53095168}
   - {fileID: 53095176}
+  - {fileID: 53095160}
+  - {fileID: 53095159}
+  - {fileID: 53095158}
   description: 
   stepPause: 0
   colorCommands: 1
@@ -718,64 +724,46 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &53095158
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 53095135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b521257e66940a4c835dce2e246e464, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d769ea3513ad47aabf805db5252341d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 19
-  indentLevel: 0
-  property: 12
-  transformData:
-    transformRef: {fileID: 0}
-    transformVal: {fileID: 1233568385}
-  vec3:
-    vector3Ref: {fileID: 0}
-    vector3Val: {x: 0, y: 0, z: 0}
+  scope: 0
+  key: ballSpawn
+  value: {x: 0, y: 0, z: 0}
 --- !u!114 &53095159
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 53095135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b521257e66940a4c835dce2e246e464, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d769ea3513ad47aabf805db5252341d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 18
-  indentLevel: 0
-  property: 12
-  transformData:
-    transformRef: {fileID: 0}
-    transformVal: {fileID: 840661827}
-  vec3:
-    vector3Ref: {fileID: 0}
-    vector3Val: {x: -5, y: 0, z: 0}
+  scope: 0
+  key: p2Spawn
+  value: {x: -5, y: 0, z: 0}
 --- !u!114 &53095160
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 53095135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b521257e66940a4c835dce2e246e464, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d769ea3513ad47aabf805db5252341d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 17
-  indentLevel: 0
-  property: 12
-  transformData:
-    transformRef: {fileID: 0}
-    transformVal: {fileID: 1783404059}
-  vec3:
-    vector3Ref: {fileID: 0}
-    vector3Val: {x: 5, y: 0, z: 0}
+  scope: 0
+  key: p1Spawn
+  value: {x: 5, y: 0, z: 0}
 --- !u!114 &53095161
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -813,9 +801,9 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 53095161}
   commandList:
-  - {fileID: 53095160}
-  - {fileID: 53095159}
-  - {fileID: 53095158}
+  - {fileID: 53095180}
+  - {fileID: 53095182}
+  - {fileID: 53095181}
   - {fileID: 53095165}
   - {fileID: 53095164}
   - {fileID: 53095163}
@@ -1009,7 +997,7 @@ MonoBehaviour:
   - {fileID: 53095172}
 --- !u!114 &53095172
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 53095135}
@@ -1163,6 +1151,63 @@ MonoBehaviour:
   vec3:
     vector3Ref: {fileID: 0}
     vector3Val: {x: 1, y: 1, z: 1}
+--- !u!114 &53095180
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 53095135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb064de1b711a449845627f19b7f7b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 36
+  indentLevel: 0
+  getOrSet: 1
+  property: 11
+  transformData:
+    transformRef: {fileID: 0}
+    transformVal: {fileID: 1783404059}
+  inOutVar: {fileID: 53095160}
+--- !u!114 &53095181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 53095135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb064de1b711a449845627f19b7f7b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 38
+  indentLevel: 0
+  getOrSet: 1
+  property: 11
+  transformData:
+    transformRef: {fileID: 0}
+    transformVal: {fileID: 1233568385}
+  inOutVar: {fileID: 53095158}
+--- !u!114 &53095182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 53095135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb064de1b711a449845627f19b7f7b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 37
+  indentLevel: 0
+  getOrSet: 1
+  property: 11
+  transformData:
+    transformRef: {fileID: 0}
+    transformVal: {fileID: 840661827}
+  inOutVar: {fileID: 53095159}
 --- !u!1 &176932464
 GameObject:
   m_ObjectHideFlags: 0

@@ -1972,12 +1972,8 @@ GameObject:
   - component: {fileID: 1179951666}
   - component: {fileID: 1179951676}
   - component: {fileID: 1179951675}
-  - component: {fileID: 1179951674}
-  - component: {fileID: 1179951673}
   - component: {fileID: 1179951672}
   - component: {fileID: 1179951671}
-  - component: {fileID: 1179951669}
-  - component: {fileID: 1179951668}
   - component: {fileID: 1179951681}
   - component: {fileID: 1179951680}
   - component: {fileID: 1179951677}
@@ -1999,6 +1995,10 @@ GameObject:
   - component: {fileID: 1179951696}
   - component: {fileID: 1179951697}
   - component: {fileID: 1179951698}
+  - component: {fileID: 1179951674}
+  - component: {fileID: 1179951673}
+  - component: {fileID: 1179951669}
+  - component: {fileID: 1179951668}
   m_Layer: 0
   m_Name: Lander
   m_TagString: Player
@@ -2030,7 +2030,7 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 1179951659}
+  - {fileID: 1179951679}
   selectedCommands: []
   variables:
   - {fileID: 1179951657}
@@ -2475,44 +2475,42 @@ MonoBehaviour:
   value: {x: 0, y: 0, z: 0}
 --- !u!114 &1179951668
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1179951648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b521257e66940a4c835dce2e246e464, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fb064de1b711a449845627f19b7f7b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 15
+  itemId: 40
   indentLevel: 0
+  getOrSet: 1
   property: 1
   transformData:
     transformRef: {fileID: 0}
     transformVal: {fileID: 1179951652}
-  vec3:
-    vector3Ref: {fileID: 1179951666}
-    vector3Val: {x: 0, y: 0, z: 0}
+  inOutVar: {fileID: 1179951666}
 --- !u!114 &1179951669
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1179951648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b521257e66940a4c835dce2e246e464, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fb064de1b711a449845627f19b7f7b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 14
+  itemId: 39
   indentLevel: 0
-  property: 12
+  getOrSet: 1
+  property: 11
   transformData:
     transformRef: {fileID: 0}
     transformVal: {fileID: 1179951652}
-  vec3:
-    vector3Ref: {fileID: 1179951667}
-    vector3Val: {x: 0, y: 0, z: 0}
+  inOutVar: {fileID: 1179951667}
 --- !u!114 &1179951670
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -2578,44 +2576,42 @@ MonoBehaviour:
   messageOLD: 
 --- !u!114 &1179951673
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1179951648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b521257e66940a4c835dce2e246e464, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fb064de1b711a449845627f19b7f7b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 11
+  itemId: 38
   indentLevel: 0
-  property: 0
+  getOrSet: 0
+  property: 1
   transformData:
     transformRef: {fileID: 0}
     transformVal: {fileID: 1179951652}
-  vec3:
-    vector3Ref: {fileID: 1179951666}
-    vector3Val: {x: 0, y: 0, z: 0}
+  inOutVar: {fileID: 1179951666}
 --- !u!114 &1179951674
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1179951648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b521257e66940a4c835dce2e246e464, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fb064de1b711a449845627f19b7f7b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 10
+  itemId: 37
   indentLevel: 0
+  getOrSet: 0
   property: 11
   transformData:
     transformRef: {fileID: 0}
     transformVal: {fileID: 1179951652}
-  vec3:
-    vector3Ref: {fileID: 1179951667}
-    vector3Val: {x: 0, y: 0, z: 0}
+  inOutVar: {fileID: 1179951667}
 --- !u!114 &1179951675
 MonoBehaviour:
   m_ObjectHideFlags: 2

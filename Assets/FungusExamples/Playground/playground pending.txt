@@ -11,8 +11,3 @@ Transform needs to be able to get and set ALL properties
 
 Rb2D
 -need to be able to access all properties
-
-
-
-Addforce2d
--should be able to take vec2 or vec3
