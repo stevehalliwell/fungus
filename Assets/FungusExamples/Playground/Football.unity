@@ -1761,7 +1761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 53095156}
+  selectedFlowchart: {fileID: 2043373649}
 --- !u!4 &912903173
 Transform:
   m_ObjectHideFlags: 1
@@ -2435,6 +2435,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114126325013622294, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d,
+        type: 2}
+      propertyPath: selectedBlocks.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4164059856041556, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d, type: 2}
       propertyPath: m_LocalPosition.x
       value: -5
@@ -2621,6 +2626,12 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &2043373649 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114126325013622294, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1567240708}
+  m_Script: {fileID: 11500000, guid: 7a334fe2ffb574b3583ff3b18b4792d3, type: 3}
 --- !u!1 &2065971661
 GameObject:
   m_ObjectHideFlags: 0
@@ -2814,16 +2825,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114126325013622294, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d,
-        type: 2}
-      propertyPath: selectedBlocks.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114126325013622294, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d,
-        type: 2}
-      propertyPath: selectedCommands.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4164059856041556, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d, type: 2}
       propertyPath: m_LocalPosition.x
       value: 4.5
@@ -2856,42 +2857,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 212462972284088668, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212462972284088668, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 0.2941177
-      objectReference: {fileID: 0}
-    - target: {fileID: 58545323045532278, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d,
-        type: 2}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 5a05bfcb10e8c0e4da63ebcc23179ef4, type: 2}
-    - target: {fileID: 50485926042586766, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 50485926042586766, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d,
-        type: 2}
-      propertyPath: m_LinearDrag
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114126325013622294, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d,
-        type: 2}
-      propertyPath: selectedCommands.Array.data[0]
-      value: 
-      objectReference: {fileID: 2117275493}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &2117275493 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114409838832793244, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d,
-    type: 2}
-  m_PrefabInternal: {fileID: 2117275492}
-  m_Script: {fileID: 11500000, guid: b9c975313c082cd43a310bfd62ebb893, type: 3}

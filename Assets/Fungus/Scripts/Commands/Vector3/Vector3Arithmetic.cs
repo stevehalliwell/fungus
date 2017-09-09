@@ -58,7 +58,12 @@ namespace Fungus
 
         public override string GetSummary()
         {
-            return operation.ToString();
+            if(output.vector3Ref == null)
+            {
+                return "Error: no output set";
+            }
+
+            return operation.ToString() + ": stored in " + output.vector3Ref.Key;
         }
 
         public override Color GetButtonColor()
