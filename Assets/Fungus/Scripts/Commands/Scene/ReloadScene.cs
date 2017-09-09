@@ -6,7 +6,7 @@ namespace Fungus
     /// Reload the current scene
     /// </summary>
     [CommandInfo("Scene",
-                 "Clamp",
+                 "Reload",
                  "Reload the current scene")]
     [AddComponentMenu("")]
     public class ReloadScene : Command
@@ -24,7 +24,7 @@ namespace Fungus
 
         public override string GetSummary()
         {
-            return "Reload the current scene";
+            return "";
         }
 
         public override Color GetButtonColor()

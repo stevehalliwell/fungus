@@ -250,11 +250,11 @@ GameObject:
   - component: {fileID: 53095175}
   - component: {fileID: 53095174}
   - component: {fileID: 53095173}
-  - component: {fileID: 53095172}
   - component: {fileID: 53095177}
   - component: {fileID: 53095178}
   - component: {fileID: 53095176}
   - component: {fileID: 53095179}
+  - component: {fileID: 53095172}
   m_Layer: 0
   m_Name: GameRules
   m_TagString: Untagged
@@ -686,7 +686,8 @@ MonoBehaviour:
     height: 0
   selectedBlocks:
   - {fileID: 53095171}
-  selectedCommands: []
+  selectedCommands:
+  - {fileID: 53095172}
   variables:
   - {fileID: 53095153}
   - {fileID: 53095152}
@@ -1008,22 +1009,18 @@ MonoBehaviour:
   - {fileID: 53095172}
 --- !u!114 &53095172
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 53095135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00d03ae0919f04264b018681ed534177, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c784b19efbe8424fa879e0d6d883281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 31
+  itemId: 35
   indentLevel: 0
-  _sceneName:
-    stringRef: {fileID: 0}
-    stringVal: Football
   loadingImage: {fileID: 0}
-  sceneNameOLD: 
 --- !u!114 &53095173
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1148,7 +1145,7 @@ MonoBehaviour:
   callMode: 0
 --- !u!114 &53095179
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 53095135}
@@ -1761,7 +1758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 2043373649}
+  selectedFlowchart: {fileID: 53095156}
 --- !u!4 &912903173
 Transform:
   m_ObjectHideFlags: 1
@@ -2626,12 +2623,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!114 &2043373649 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114126325013622294, guid: 4ecd3eccefa01ca4da38d03c8e7c2a8d,
-    type: 2}
-  m_PrefabInternal: {fileID: 1567240708}
-  m_Script: {fileID: 11500000, guid: 7a334fe2ffb574b3583ff3b18b4792d3, type: 3}
 --- !u!1 &2065971661
 GameObject:
   m_ObjectHideFlags: 0

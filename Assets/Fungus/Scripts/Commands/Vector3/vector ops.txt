@@ -1,24 +1,17 @@
-mathop
-binary op - vec3 lhs & rhs & ret
--add
--div
--sub
--mul
--cross
--min
--max
--project
--reflect
+cross
+
+min
+max
+
+project
+
+reflect
 
 dot
 
 mag
 
-norm
-
 lerp
 
 static values
 enum for up down left right etc.
-
-set variable doesn't support vector3 right now, add to it or make vector3 specific one?
