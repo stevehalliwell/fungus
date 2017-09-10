@@ -1,13 +1,9 @@
-cross
-
 min
 max
 
 project
 
 reflect
-
-dot
 
 mag
 
