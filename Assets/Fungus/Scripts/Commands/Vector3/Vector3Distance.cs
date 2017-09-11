@@ -5,28 +5,24 @@ using UnityEngine;
 namespace Fungus
 {
     /// <summary>
-    /// Calculate the cross product of 2 vector3s.
+    /// Calculate the distance between 2 positions.
     /// </summary>
     [CommandInfo("Vector3",
-                 "Cross",
-                 "Calculate the cross product of 2 vector3s.")]
+                 "Angle",
+                 "Calculate the distance between 2 positions.")]
     [AddComponentMenu("")]
-    public class Vector3Cross : Vector3BinaryCommand
+    public class Vector3Distance : Vector3BinaryCommandFloatOut
     {
         public override void OnEnter()
         {
-            Vector3 tmp;
+            output.Value = Vector3.Distance(lhs, rhs);
 
-            tmp = Vector3.Cross(lhs, rhs);
-
-            output.Value = tmp;
-            
             Continue();
         }
 
         public override string GetInnerSummary()
         {
-            return "Cross";
+            return "Distance";
         }
     }
 }

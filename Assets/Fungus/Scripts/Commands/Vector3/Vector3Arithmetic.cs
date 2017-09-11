@@ -4,6 +4,29 @@ using UnityEngine;
 
 namespace Fungus
 {
+    public abstract class Vector3BinaryCommand : Command
+    {
+        [SerializeField]
+        protected Vector3Data lhs, rhs, output;
+
+        public override string GetSummary()
+        {
+            if (output.vector3Ref == null)
+            {
+                return "Error: no output set";
+            }
+
+            return GetInnerSummary() + " stored in " + output.vector3Ref.Key;;
+        }
+
+        public abstract string GetInnerSummary();
+
+        public override Color GetButtonColor()
+        {
+            return new Color32(235, 191, 217, 255);
+        }
+    }
+
     /// <summary>
     /// Command to store the min or max of 2 values
     /// </summary>
@@ -11,10 +34,8 @@ namespace Fungus
                  "Arithmetic",
                  "Vec3 add, sub, mul, div")]
     [AddComponentMenu("")]
-    public class Vector3Arithmetic : Command
+    public class Vector3Arithmetic : Vector3BinaryCommand
     {
-        [SerializeField]
-        protected Vector3Data lhs, rhs, output;
 
         public enum Operation
         {
@@ -56,19 +77,9 @@ namespace Fungus
             Continue();
         }
 
-        public override string GetSummary()
+        public override string GetInnerSummary()
         {
-            if(output.vector3Ref == null)
-            {
-                return "Error: no output set";
-            }
-
-            return operation.ToString() + ": stored in " + output.vector3Ref.Key;
-        }
-
-        public override Color GetButtonColor()
-        {
-            return new Color32(235, 191, 217, 255);
+            return operation.ToString();
         }
     }
 }
