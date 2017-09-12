@@ -7,5 +7,3 @@ Simplify the use of BaseVariable, currently the VariableProperty allows us to fi
 
 Event on Block
 -needs to have a text based search like command now does, prob needs more complicated drop down menu replacement
-
-GOOD LORD i want to be able to type instantiate and it find the 'spawn object' command
