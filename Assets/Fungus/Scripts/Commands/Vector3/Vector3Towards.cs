@@ -5,14 +5,23 @@ using UnityEngine;
 namespace Fungus
 {
     /// <summary>
-    /// Lerp from a start to end point based on percentage.
+    /// Move or rotate from a start to end point based on step size.
     /// </summary>
     [CommandInfo("Vector3",
-                 "Lerp",
-                 "Lerp from a start to end point based on percentage.")]
+                 "Towards",
+                 "Move or rotate from a start to end point based on step size.")]
     [AddComponentMenu("")]
-    public class Vector3MoveTowards : Command
+    public class Vector3Towards : Command
     {
+        public enum Mode
+        {
+            Move,
+            Rotate
+        }
+
+        [SerializeField]
+        protected Mode mode = Mode.Move;
+
         [SerializeField]
         protected Vector3Data a, b;
 
@@ -30,7 +39,11 @@ namespace Fungus
 
         public override void OnEnter()
         {
-            outValue.Value = Vector3.MoveTowards(a, b, (multiplyMaxDeltaByDeltaTime ? maxDelta * Time.deltaTime : maxDelta));
+            if(mode == Mode.Move)
+                outValue.Value = Vector3.MoveTowards(a, b, (multiplyMaxDeltaByDeltaTime ? maxDelta * Time.deltaTime : maxDelta));
+            else
+                outValue.Value = Vector3.RotateTowards(a, b, (multiplyMaxDeltaByDeltaTime ? maxDelta * Time.deltaTime : maxDelta),0);
+
 
             Continue();
         }
@@ -42,7 +55,7 @@ namespace Fungus
                 return "Error: no output set";
             }
             
-            return "Stored in " + outValue.vector3Ref.Key; ;
+            return mode.ToString() + " stored in " + outValue.vector3Ref.Key;
         }
 
         public override Color GetButtonColor()

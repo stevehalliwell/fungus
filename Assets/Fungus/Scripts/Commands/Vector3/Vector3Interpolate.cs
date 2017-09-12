@@ -8,15 +8,17 @@ namespace Fungus
     /// Lerp from a start to end point based on percentage.
     /// </summary>
     [CommandInfo("Vector3",
-                 "Lerp",
-                 "Lerp from a start to end point based on percentage.")]
+                 "Interpolate",
+                 "Lerp or Slerp from a start to end point based on percentage.")]
     [AddComponentMenu("")]
-    public class Vector3Lerp : Command
+    public class Vector3Interpolate : Command
     {
         public enum Mode
         {
             Lerp,
-            LerpUnclamped
+            LerpUnclamped,
+            Slerp,
+            SlerpUnclamped
         }
 
         [SerializeField]
@@ -36,13 +38,22 @@ namespace Fungus
 
         public override void OnEnter()
         {
-            if (mode == Mode.Lerp)
+            switch (mode)
             {
-                outValue.Value = Vector3.Lerp(a, b, percentage);
-            }
-            else
-            {
-                outValue.Value = Vector3.LerpUnclamped(a, b, percentage);
+                case Mode.Lerp:
+                    outValue.Value = Vector3.Lerp(a, b, percentage);
+                    break;
+                case Mode.LerpUnclamped:
+                    outValue.Value = Vector3.LerpUnclamped(a, b, percentage);
+                    break;
+                case Mode.Slerp:
+                    outValue.Value = Vector3.Slerp(a, b, percentage);
+                    break;
+                case Mode.SlerpUnclamped:
+                    outValue.Value = Vector3.SlerpUnclamped(a, b, percentage);
+                    break;
+                default:
+                    break;
             }
 
             Continue();
@@ -55,7 +66,7 @@ namespace Fungus
                 return "Error: no output set";
             }
 
-            return (mode == Mode.Lerp ? "Lerp" : "Lerp Unclamped") + " stored in " + outValue.vector3Ref.Key; ;
+            return mode.ToString() + " stored in " + outValue.vector3Ref.Key; ;
         }
 
         public override Color GetButtonColor()
