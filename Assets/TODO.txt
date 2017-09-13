@@ -7,3 +7,20 @@ Simplify the use of BaseVariable, currently the VariableProperty allows us to fi
 
 Event on Block
 -needs to have a text based search like command now does, prob needs more complicated drop down menu replacement
+
+Commands and potential flowchart/ui changes to suppor HFSM in Fungus
+-a command that overrides the getconnectedblocks and use that on an update event to run
+-do we 'define an enum' in the codebase?
+-we look up things like monster love does
+
+behaviour tree
+-blocks need return values
+
+fungus messages need a param set
+-doesn't need to send a message to the same flowchart, it's kinda just a call
+-want msg channels like falcon does, so we can easily replicate something like global events entirely within fungus
+
+Optimisation pass
+-need to get the tests working first so we can profile and automate test
+-theres a bunch of string shit
+-there's a bunch of iTween shit
