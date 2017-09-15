@@ -17,10 +17,20 @@ behaviour tree
 -blocks need return values
 
 fungus messages need a param set
--doesn't need to send a message to the same flowchart, it's kinda just a call
+-doesn't need to send a message to the same flowchart, it's kinda just a call. But legacy so leave it
 -want msg channels like falcon does, so we can easily replicate something like global events entirely within fungus
+-clearer distinction between fungus flowchart msg and unity SendMessage
 
 Optimisation pass
 -need to get the tests working first so we can profile and automate test
 -theres a bunch of string shit
 -there's a bunch of iTween shit
+-EDITOR- on scripts did load generate static list of all commands and events instead of as they are needed
+
+Converstaion should be able to do EVERYTHING that say and portrait can
+-after that it should be able to do menu too
+
+Menu should be able to shufle
+-once, remembers the seed used to shuffle throughout the playsession
+-eveytime, gets new random seed each time
+
