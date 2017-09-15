@@ -14,11 +14,13 @@ Commands and potential flowchart/ui changes to suppor HFSM in Fungus
 -we look up things like monster love does
 
 behaviour tree
--blocks need return values
+-blocks need
+--long running state
+--return values
 
 fungus messages need a param set
 -doesn't need to send a message to the same flowchart, it's kinda just a call
--want msg channels like falcon does, so we can easily replicate something like global events entirely within fungus
+-want msg channels (like falcon does), so we can easily replicate something like global events entirely within fungus
 
 Optimisation pass
 -need to get the tests working first so we can profile and automate test
