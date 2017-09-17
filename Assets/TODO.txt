@@ -8,7 +8,7 @@ Simplify the use of BaseVariable, currently the VariableProperty allows us to fi
 Event on Block
 -needs to have a text based search like command now does, prob needs more complicated drop down menu replacement
 
-Commands and potential flowchart/ui changes to suppor HFSM in Fungus
+Commands and potential flowchart/ui changes to support HFSM in Fungus
 -a command that overrides the getconnectedblocks and use that on an update event to run
 -do we 'define an enum' in the codebase?
 -we look up things like monster love does
@@ -29,10 +29,21 @@ Optimisation pass
 -there's a bunch of iTween shit
 -EDITOR- on scripts did load generate static list of all commands and events instead of as they are needed
 
-Converstaion should be able to do EVERYTHING that say and portrait can
+Conversation should be able to do EVERYTHING that say and portrait can
 -after that it should be able to do menu too
 
-Menu should be able to shufle
+Menu should be able to shuffle
 -once, remembers the seed used to shuffle throughout the playsession
--eveytime, gets new random seed each time
+-everytime, gets new random seed each time
 
+
+Global filter out commands
+-stored in editor settings
+-hide categories
+-hide commands
+
+Global command priority 
+-default search sorting is alphabetical, that is not the most useful
+-track command usage and sort by that?
+-allow custom weight
+-scan an existing project to determine weight?
