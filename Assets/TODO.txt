@@ -4,14 +4,17 @@ Move GetButtonColor out of the Command, it is ALWAYS static data
 
 Simplify the use of BaseVariable, currently the VariableProperty allows us to filter by types
 -but then at run time we need to baby it, this feels bad, do we add converters to baseclass that nulls or throws on errors?
+--Don't think that's a good solution, but not sure what a better one is atm
 
-Event on Block
+Event on Block text entry list
 -needs to have a text based search like command now does, prob needs more complicated drop down menu replacement
 
 Commands and potential flowchart/ui changes to support HFSM in Fungus
 -a command that overrides the getconnectedblocks and use that on an update event to run
 -do we 'define an enum' in the codebase?
 -we look up things like monster love does
+-do we have a way of notifying a block that they are no longer being run?
+--they have an on exit but that has no return or obvious means of delay
 
 behaviour tree
 -blocks need
@@ -35,6 +38,9 @@ Conversation should be able to do EVERYTHING that say and portrait can
 Menu should be able to shuffle
 -once, remembers the seed used to shuffle throughout the playsession
 -everytime, gets new random seed each time
+--we can shuffle the buttons in place in the heirarchy & the confirm buttons trigger a putting them back in the correct order as parts of the menu systems rely on ordering
+---keep the correct order around always make a getrange duplicate of the buttons 
+--is there a reason why clear doesn't used the cached buttons and instead does a getcomponent[]?
 
 
 Global filter out commands
@@ -47,3 +53,6 @@ Global command priority
 -track command usage and sort by that?
 -allow custom weight
 -scan an existing project to determine weight?
+
+mutliplecommandinfos should be able to choose which is the visible one so legacy tuts are not disrupted
+

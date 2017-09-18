@@ -66,8 +66,8 @@ namespace Fungus
         protected virtual IEnumerator WaitForTimeout(float timeoutDuration, Block targetBlock)
         {
             float elapsedTime = 0;
-            
-            Slider timeoutSlider = GetComponentInChildren<Slider>();
+
+            Slider timeoutSlider = CachedSlider;
             
             while (elapsedTime < timeoutDuration)
             {
@@ -173,7 +173,7 @@ namespace Fungus
         {
             StopAllCoroutines();
 
-            var optionButtons = GetComponentsInChildren<Button>();
+            var optionButtons = CachedButtons;
             for (int i = 0; i < optionButtons.Length; i++)
             {
                 var button = optionButtons[i];
@@ -185,11 +185,12 @@ namespace Fungus
                 var button = optionButtons[i];
                 if (button != null)
                 {
+                    button.transform.SetSiblingIndex(i);
                     button.gameObject.SetActive(false);
                 }
             }
 
-            Slider timeoutSlider = GetComponentInChildren<Slider>();
+            Slider timeoutSlider = CachedSlider;
             if (timeoutSlider != null)
             {
                 timeoutSlider.gameObject.SetActive(false);
@@ -342,7 +343,7 @@ namespace Fungus
             StopAllCoroutines();
 
             float elapsedTime = 0;
-            Slider timeoutSlider = GetComponentInChildren<Slider>();
+            Slider timeoutSlider = CachedSlider;
 
             while (elapsedTime < duration)
             {
