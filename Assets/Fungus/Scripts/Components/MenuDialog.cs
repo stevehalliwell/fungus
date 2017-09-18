@@ -395,6 +395,17 @@ namespace Fungus
             }
         }
 
+		/// <summary>
+		/// Shuffle the parent order of the cached buttons, allows for randomising button order, buttons are auto reordered when cleared
+		/// </summary>
+		public void Shuffle(System.Random r)
+		{
+			for (int i = 0; i < CachedButtons.Length; i++)
+			{
+				CachedButtons[i].transform.SetSiblingIndex(r.Next(CachedButtons.Length));
+			}
+		}
+
         #endregion
     }    
 }
