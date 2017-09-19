@@ -19,7 +19,7 @@ namespace Fungus
         [Tooltip("Reference to game object to destroy")]
         [SerializeField] protected GameObjectData _targetGameObject;
 
-        [Tooltip("Option delay given to destroy")]
+        [Tooltip("Optional delay given to destroy")]
         [SerializeField]
         protected FloatData destroyInXSeconds = new FloatData(0);
 

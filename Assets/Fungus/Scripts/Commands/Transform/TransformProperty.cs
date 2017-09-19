@@ -20,7 +20,7 @@ namespace Fungus
         }
         public GetSet getOrSet = GetSet.Get;
 
-        public enum Poperty
+        public enum Property
         {
             ChildCount,
             EulerAngles,
@@ -44,7 +44,7 @@ namespace Fungus
             //WorldToLocalMatrix
         }
         [SerializeField]
-        protected Poperty property = Poperty.Position;
+        protected Property property = Property.Position;
 
         [SerializeField]
         protected TransformData transformData;
@@ -70,49 +70,49 @@ namespace Fungus
                 case GetSet.Get:
                     switch (property)
                     {
-                        case Poperty.ChildCount:
+                        case Property.ChildCount:
                             ioi.Value = t.childCount;
                             break;
-                        case Poperty.EulerAngles:
+                        case Property.EulerAngles:
                             iov.Value = t.eulerAngles;
                             break;
-                        case Poperty.Forward:
+                        case Property.Forward:
                             iov.Value = t.forward;
                             break;
-                        case Poperty.HasChanged:
+                        case Property.HasChanged:
                             iob.Value = t.hasChanged;
                             break;
-                        case Poperty.HierarchyCapacity:
+                        case Property.HierarchyCapacity:
                             ioi.Value = t.hierarchyCapacity;
                             break;
-                        case Poperty.HierarchyCount:
+                        case Property.HierarchyCount:
                             ioi.Value = t.hierarchyCount;
                             break;
-                        case Poperty.LocalEulerAngles:
+                        case Property.LocalEulerAngles:
                             iov.Value = t.localEulerAngles;
                             break;
-                        case Poperty.LocalPosition:
+                        case Property.LocalPosition:
                             iov.Value = t.localPosition;
                             break;
-                        case Poperty.LocalScale:
+                        case Property.LocalScale:
                             iov.Value = t.localScale;
                             break;
-                        case Poperty.LossyScale:
+                        case Property.LossyScale:
                             iov.Value = t.lossyScale;
                             break;
-                        case Poperty.Parent:
+                        case Property.Parent:
                             iot.Value = t.parent;
                             break;
-                        case Poperty.Position:
+                        case Property.Position:
                             iov.Value = t.position;
                             break;
-                        case Poperty.Right:
+                        case Property.Right:
                             iov.Value = t.right;
                             break;
-                        case Poperty.Root:
+                        case Property.Root:
                             iot.Value = t.parent;
                             break;
-                        case Poperty.Up:
+                        case Property.Up:
                             iov.Value = t.up;
                             break;
                         default:
@@ -122,49 +122,49 @@ namespace Fungus
                 case GetSet.Set:
                     switch (property)
                     {
-                        case Poperty.ChildCount:
+                        case Property.ChildCount:
                             Debug.LogWarning("Cannot Set childCount, it is read only");
                             break;
-                        case Poperty.EulerAngles:
+                        case Property.EulerAngles:
                             t.eulerAngles = iov.Value;
                             break;
-                        case Poperty.Forward:
+                        case Property.Forward:
                             t.forward = iov.Value;
                             break;
-                        case Poperty.HasChanged:
+                        case Property.HasChanged:
                             t.hasChanged = iob.Value;
                             break;
-                        case Poperty.HierarchyCapacity:
+                        case Property.HierarchyCapacity:
                             t.hierarchyCapacity = ioi.Value;
                             break;
-                        case Poperty.HierarchyCount:
+                        case Property.HierarchyCount:
                             Debug.LogWarning("Cannot Set HierarchyCount, it is read only");
                             break;
-                        case Poperty.LocalEulerAngles:
+                        case Property.LocalEulerAngles:
                             t.localEulerAngles = iov.Value;
                             break;
-                        case Poperty.LocalPosition:
+                        case Property.LocalPosition:
                             t.localPosition = iov.Value;
                             break;
-                        case Poperty.LocalScale:
+                        case Property.LocalScale:
                             t.localScale = iov.Value;
                             break;
-                        case Poperty.LossyScale:
+                        case Property.LossyScale:
                             Debug.LogWarning("Cannot Set LossyScale, it is read only");
                             break;
-                        case Poperty.Parent:
+                        case Property.Parent:
                             t.parent = iot.Value;
                             break;
-                        case Poperty.Position:
+                        case Property.Position:
                             t.position = iov.Value;
                             break;
-                        case Poperty.Right:
+                        case Property.Right:
                             t.right = iov.Value;
                             break;
-                        case Poperty.Root:
+                        case Property.Root:
                             Debug.LogWarning("Cannot Set Root, it is read only");
                             break;
-                        case Poperty.Up:
+                        case Property.Up:
                             t.up = iov.Value;
                             break;
                         default:
