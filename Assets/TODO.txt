@@ -36,11 +36,13 @@ Conversation should be able to do EVERYTHING that say and portrait can
 -after that it should be able to do menu too
 
 Menu should be able to shuffle
--once, remembers the seed used to shuffle throughout the playsession
--everytime, gets new random seed each time
---we can shuffle the buttons in place in the heirarchy & the confirm buttons trigger a putting them back in the correct order as parts of the menu systems rely on ordering
----keep the correct order around always make a getrange duplicate of the buttons 
---is there a reason why clear doesn't used the cached buttons and instead does a getcomponent[]?
+-ok current problem is we need a way to know all the menu items that aren't being used
+--make the menu dialogue support a hiden item itself
+--make menu send them through with a hideen status
+-REQ menudialogue is using active to determine if it is used or not so would have to start using somthing else or track index
+--tracking index makes sense (or dup lists and remove etc.) 
+--or making it more of a builder but that would require more commands and would break existing functionality
+
 
 
 Global filter out commands
