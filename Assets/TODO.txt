@@ -15,13 +15,15 @@ Commands and potential flowchart/ui changes to support HFSM in Fungus
 -we look up things like monster love does
 -do we have a way of notifying a block that they are no longer being run?
 --they have an on exit but that has no return or obvious means of delay
+-http://fungusgames.com/forum#!/fungus-development:choosing-a-character-based/extending-conversation-seem
+
 
 behaviour tree
 -blocks need
 --long running state
 --return values
 
-fungus messages need a param set
+fungus messages need a param send
 -doesn't need to send a message to the same flowchart, it's kinda just a call. But legacy so leave it
 -want msg channels like falcon does, so we can easily replicate something like global events entirely within fungus
 -clearer distinction between fungus flowchart msg and unity SendMessage
@@ -42,7 +44,7 @@ Menu should be able to shuffle
 -REQ menudialogue is using active to determine if it is used or not so would have to start using somthing else or track index
 --tracking index makes sense (or dup lists and remove etc.) 
 --or making it more of a builder but that would require more commands and would break existing functionality
-
+DONE
 
 
 Global filter out commands
