@@ -49,9 +49,7 @@ namespace Fungus
 
             bool hideOption = (hideIfVisited && targetBlock != null && targetBlock.GetExecutionCount() > 0);
 
-            if (!hideOption)
-            {
-                var menuDialog = MenuDialog.GetMenuDialog();
+            var menuDialog = MenuDialog.GetMenuDialog();
                 if (menuDialog != null)
                 {
                     menuDialog.SetActive(true);
@@ -59,10 +57,9 @@ namespace Fungus
                     var flowchart = GetFlowchart();
                     string displayText = flowchart.SubstituteVariables(text);
 
-                    menuDialog.AddOption(displayText, interactable, targetBlock);
+                    menuDialog.AddOption(displayText, interactable, hideOption, targetBlock);
                 }
-            }
-
+            
             Continue();
         }
 

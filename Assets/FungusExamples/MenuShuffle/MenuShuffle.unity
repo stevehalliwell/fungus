@@ -961,21 +961,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 327.6825, y: 212.98303}
+  scrollPos: {x: 468.39844, y: 212.89409}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 400
-  zoom: 0.52000046
+  zoom: 0.6100004
   scrollViewRect:
     serializedVersion: 2
     x: -343
     y: -340
     width: 1114
     height: 859
-  selectedBlocks:
-  - {fileID: 1755499608}
-  selectedCommands:
-  - {fileID: 1755499607}
+  selectedBlocks: []
+  selectedCommands: []
   variables: []
   description: 
   stepPause: 0
@@ -1015,8 +1013,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -190.99979
-    y: -42.10524
+    x: -211.53827
+    y: 63.510056
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -1138,8 +1136,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -184.24222
-    y: 201.23624
+    x: -213.08838
+    y: 110.851654
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -1188,7 +1186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -10.544067
+    x: -26.9375
     y: 286.16745
     width: 120
     height: 40
@@ -1280,7 +1278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -15.475525
+    x: -31.868958
     y: 228.63354
     width: 120
     height: 40
@@ -1372,7 +1370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -14.927399
+    x: -31.320831
     y: 182.05807
     width: 120
     height: 40
@@ -1464,7 +1462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -13.00943
+    x: -29.402863
     y: 120.41409
     width: 120
     height: 40
@@ -1825,7 +1823,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &1755499644
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1755499605}

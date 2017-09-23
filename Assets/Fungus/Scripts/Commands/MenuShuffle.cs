@@ -45,5 +45,15 @@ namespace Fungus
 
             Continue();
         }
+
+        public override string GetSummary()
+        {
+            return shuffleMode.ToString();
+        }
+
+        public override Color GetButtonColor()
+        {
+            return new Color32(184, 210, 235, 255);
+        }
     }
 }
