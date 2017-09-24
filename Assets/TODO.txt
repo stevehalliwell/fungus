@@ -28,23 +28,16 @@ fungus messages need a param send
 -want msg channels like falcon does, so we can easily replicate something like global events entirely within fungus
 -clearer distinction between fungus flowchart msg and unity SendMessage
 
+
 Optimisation pass
 -need to get the tests working first so we can profile and automate test
 -theres a bunch of string shit
 -there's a bunch of iTween shit
 -EDITOR- on scripts did load generate static list of all commands and events instead of as they are needed
 
+
 Conversation should be able to do EVERYTHING that say and portrait can
 -after that it should be able to do menu too
-
-Menu should be able to shuffle
--ok current problem is we need a way to know all the menu items that aren't being used
---make the menu dialogue support a hiden item itself
---make menu send them through with a hideen status
--REQ menudialogue is using active to determine if it is used or not so would have to start using somthing else or track index
---tracking index makes sense (or dup lists and remove etc.) 
---or making it more of a builder but that would require more commands and would break existing functionality
-DONE - Randomise menu order #267
 
 
 Global filter out commands
