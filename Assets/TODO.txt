@@ -44,7 +44,7 @@ Menu should be able to shuffle
 -REQ menudialogue is using active to determine if it is used or not so would have to start using somthing else or track index
 --tracking index makes sense (or dup lists and remove etc.) 
 --or making it more of a builder but that would require more commands and would break existing functionality
-DONE
+DONE - Randomise menu order #267
 
 
 Global filter out commands
@@ -58,5 +58,12 @@ Global command priority
 -allow custom weight
 -scan an existing project to determine weight?
 
-mutliplecommandinfos should be able to choose which is the visible one so legacy tuts are not disrupted
+
+
+OpenURL command needs to be renamed correctly 
+#554
+
+
+Wait for Voiceover option with Say dialog #572
+-say should pass down the time for the vo to complete to the writter
 
