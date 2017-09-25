@@ -52,11 +52,7 @@ Global command priority
 -scan an existing project to determine weight?
 
 
-
-OpenURL command needs to be renamed correctly 
-#554
-
-
 Wait for Voiceover option with Say dialog #572
--say should pass down the time for the vo to complete to the writter
+-say should pass down the time for the vo to complete to the writer
+--presently writeraudio and writer and not connexted
 
