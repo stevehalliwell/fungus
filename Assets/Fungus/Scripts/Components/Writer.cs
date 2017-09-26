@@ -93,6 +93,7 @@ namespace Fungus
         protected string hiddenColorClose = "";
 
         protected int visibleCharacterCount = 0;
+        public WriterAudio AttachedWriterAudio { get; set; }
 
         protected virtual void Awake()
         {
@@ -652,6 +653,18 @@ namespace Fungus
             }
 
             yield return StartCoroutine( DoWait(duration) );
+        }
+
+        protected virtual IEnumerator DoWaitVO()
+        {
+            float duration = 0f;
+
+            if (AttachedWriterAudio != null)
+            {
+                duration = AttachedWriterAudio.GetSecondsRemaining();
+            }
+
+            yield return StartCoroutine(DoWait(duration));
         }
 
         protected virtual IEnumerator DoWait(float duration)

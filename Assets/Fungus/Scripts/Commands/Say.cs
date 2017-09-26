@@ -48,6 +48,8 @@ namespace Fungus
         [Tooltip("Stop playing voiceover when text finishes writing.")]
         [SerializeField] protected bool stopVoiceover = true;
 
+        //add wait for vo that overrides stopvo
+
         [Tooltip("Sets the active Say dialog with a reference to a Say Dialog object in the scene. All story text will now display using this Say Dialog.")]
         [SerializeField] protected SayDialog setSayDialog;
 

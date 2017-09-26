@@ -483,6 +483,8 @@ namespace Fungus
                 soundEffectClip = speakingCharacter.SoundEffect;
             }
 
+            writer.AttachedWriterAudio = writerAudio;
+
             yield return StartCoroutine(writer.Write(text, clearPrevious, waitForInput, stopVoiceover, soundEffectClip, onComplete));
         }
 
