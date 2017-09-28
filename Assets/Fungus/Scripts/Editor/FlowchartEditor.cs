@@ -91,7 +91,7 @@ namespace Fungus.EditorUtils
 
             serializedObject.ApplyModifiedProperties();
 
-            if (varInspectorProp.boolValue)
+            if (varInspectorProp.boolValue && !FungusEditorPreferences.hideVariableInFlowchartInspector)
             {
                 GUILayout.Space(20);
 

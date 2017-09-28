@@ -60,6 +60,4 @@ Wait for Voiceover option with Say dialog #572
 
 
 optionally show variables in flowchart
--don't show the varaible hide show bar in the inspector
--toggle in flowchart
--config in editor settings
+-done, PR

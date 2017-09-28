@@ -14,8 +14,9 @@ namespace Fungus
         {
             // Have we loaded the prefs yet
             private static bool prefsLoaded = false;
-            
-            public static bool hideMushroomInHierarchy = false;
+
+            public static bool hideMushroomInHierarchy = false,
+                               hideVariableInFlowchartInspector = false;
 
             // Add preferences section named "My Preferences" to the Preferences Window
             [PreferenceItem("Fungus")]
@@ -26,16 +27,19 @@ namespace Fungus
                 if (!prefsLoaded)
                 {
                     hideMushroomInHierarchy = EditorPrefs.GetBool("hideMushroomInHierarchy", false);
+                    hideVariableInFlowchartInspector = EditorPrefs.GetBool("hideMushroomInHierarchy", false);
                     prefsLoaded = true;
                 }
 
                 // Preferences GUI
                 hideMushroomInHierarchy = EditorGUILayout.Toggle("Hide Mushroom Flowchart Icon", hideMushroomInHierarchy);
+                hideVariableInFlowchartInspector = EditorGUILayout.Toggle("Hide Variables in Flowchart Inspector", hideVariableInFlowchartInspector);
 
                 // Save the preferences
                 if (GUI.changed)
                 {
                     EditorPrefs.SetBool("hideMushroomInHierarchy", hideMushroomInHierarchy);
+                    EditorPrefs.SetBool("hideVariableInFlowchartInspector", hideVariableInFlowchartInspector);
                 }
             }
         }
