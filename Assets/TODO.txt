@@ -55,4 +55,11 @@ Global command priority
 Wait for Voiceover option with Say dialog #572
 -say should pass down the time for the vo to complete to the writer
 --presently writeraudio and writer and not connexted
+--need to add wvo to tokens and handle it the same way as a wc
+--need to be able to actually test it
 
+
+optionally show variables in flowchart
+-don't show the varaible hide show bar in the inspector
+-toggle in flowchart
+-config in editor settings
