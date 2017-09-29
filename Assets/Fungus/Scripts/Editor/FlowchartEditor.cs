@@ -72,7 +72,11 @@ namespace Fungus.EditorUtils
             EditorGUILayout.PropertyField(showLineNumbersProp);
             EditorGUILayout.PropertyField(luaEnvironmentProp);
             EditorGUILayout.PropertyField(luaBindingNameProp);
-            EditorGUILayout.PropertyField(varInspectorProp);
+
+            if (!FungusEditorPreferences.hideVariableInFlowchartInspector)
+            {
+                EditorGUILayout.PropertyField(varInspectorProp);
+            }
 
             // Show list of commands to hide in Add Command menu
             ReorderableListGUI.Title(new GUIContent(hideCommandsProp.displayName, hideCommandsProp.tooltip));

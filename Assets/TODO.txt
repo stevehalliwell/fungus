@@ -61,3 +61,4 @@ Wait for Voiceover option with Say dialog #572
 
 optionally show variables in flowchart
 -done, PR
+--default it to off?
