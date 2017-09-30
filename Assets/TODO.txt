@@ -60,4 +60,9 @@ Wait for Voiceover option with Say dialog #572
 
 
 optionally show variables in flowchart
--done, PR
+-done, PR-done, PR
+
+
+global varaiables
+-needed so you can hook up references within other flowcharts
+
