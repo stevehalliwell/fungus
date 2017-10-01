@@ -2,12 +2,15 @@ Move GetButtonColor out of the Command, it is ALWAYS static data
 -move it to static data that is controlled by theme in the EditorSettings
 --means people can customise them if they want, that we can ship themes etc.
 
+
 Simplify the use of BaseVariable, currently the VariableProperty allows us to filter by types
 -but then at run time we need to baby it, this feels bad, do we add converters to baseclass that nulls or throws on errors?
 --Don't think that's a good solution, but not sure what a better one is atm
 
+
 Event on Block text entry list
 -needs to have a text based search like command now does, prob needs more complicated drop down menu replacement
+
 
 Commands and potential flowchart/ui changes to support HFSM in Fungus
 -a command that overrides the getconnectedblocks and use that on an update event to run
@@ -22,6 +25,7 @@ behaviour tree
 -blocks need
 --long running state
 --return values
+
 
 fungus messages need a param send
 -doesn't need to send a message to the same flowchart, it's kinda just a call. But legacy so leave it
@@ -45,6 +49,7 @@ Global filter out commands
 -hide categories
 -hide commands
 
+
 Global command priority 
 -default search sorting is alphabetical, that is not the most useful
 -track command usage and sort by that?
@@ -53,10 +58,7 @@ Global command priority
 
 
 Wait for Voiceover option with Say dialog #572
--say should pass down the time for the vo to complete to the writer
---presently writeraudio and writer and not connexted
---need to add wvo to tokens and handle it the same way as a wc
---need to be able to actually test it
+-need to be able to actually test it
 
 
 global varaiables
