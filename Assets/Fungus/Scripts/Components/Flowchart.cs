@@ -90,14 +90,6 @@ namespace Fungus
         protected StringSubstituter stringSubstituer;
 
         #if UNITY_5_4_OR_NEWER
-        protected virtual void Awake()
-        {
-            CheckEventSystem();
-
-            UnityEngine.SceneManagement.SceneManager.activeSceneChanged += (A, B) => {
-                LevelWasLoaded();
-            };
-        }
         #else
         protected virtual void OnLevelWasLoaded(int level) 
         {
@@ -140,11 +132,20 @@ namespace Fungus
             eventSystemPresent = true;
         }
 
+        private void SceneManager_activeSceneChanged(UnityEngine.SceneManagement.Scene arg0, UnityEngine.SceneManagement.Scene arg1)
+        {
+            LevelWasLoaded();
+        }
+
         protected virtual void OnEnable()
         {
             if (!cachedFlowcharts.Contains(this))
             {
                 cachedFlowcharts.Add(this);
+                //TODO these pairs could be replaced by something static that manages all active flowcharts
+                #if UNITY_5_4_OR_NEWER
+                UnityEngine.SceneManagement.SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
+                #endif
             }
 
             CheckItemIds();
@@ -157,6 +158,10 @@ namespace Fungus
         protected virtual void OnDisable()
         {
             cachedFlowcharts.Remove(this);
+
+            #if UNITY_5_4_OR_NEWER
+            UnityEngine.SceneManagement.SceneManager.activeSceneChanged -= SceneManager_activeSceneChanged;
+            #endif
 
             StringSubstituter.UnregisterHandler(this);   
         }
