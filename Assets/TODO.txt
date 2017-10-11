@@ -62,4 +62,8 @@ Wait for Voiceover option with Say dialog #572
 
 
 global varaiables
--needed so you can hook up references within other flowcharts
+-if they both exist in the scene then it works just fine VariableEditor:108
+--but if it is a prefab it has no one of doing this
+--perhaps a new type, global static? so there is only one of them and they are refernce linked when the flowchart starts
+---would look for the var in a global vars dont destroy on load object, if not found adds it
+--globalvars would be a thing we add to the FungusManager

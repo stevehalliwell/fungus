@@ -33,7 +33,9 @@ namespace Fungus
         /// <summary> Can only be accessed by commands in the same Flowchart. </summary>
         Private,
         /// <summary> Can be accessed from any command in any Flowchart. </summary>
-        Public
+        Public,
+        /// <summary> Creates and/or references a global static variable of that name </summary>
+        GlobalStatic,
     }
 
     /// <summary>
@@ -110,8 +112,27 @@ namespace Fungus
     public abstract class VariableBase<T> : Variable
     {
         [SerializeField] protected T value;
-        public virtual T Value { get { return this.value; } set { this.value = value; } }
-        
+        public virtual T Value
+        {
+            get
+            {
+                if (scope == VariableScope.GlobalStatic)
+                {
+                    //FungusManager.Instance.gameObject.active = true;
+                }
+
+                return this.value;
+            }
+            set
+            {
+                if (scope == VariableScope.GlobalStatic)
+                {
+                }
+
+                this.value = value;
+            }
+        }
+
         protected T startValue;
 
         public override void OnReset()
