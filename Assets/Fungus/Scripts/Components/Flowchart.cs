@@ -1217,7 +1217,7 @@ namespace Fungus
                     var variable = variables[j];
                     if (variable == null)
                         continue;
-                    if (variable.Scope != VariableScope.Public && variable.Key == key)
+                    if (variable.Scope == VariableScope.Private && variable.Key == key)
                     {
                         string value = variable.ToString();
                         sb.Replace(match.Value, value);

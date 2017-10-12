@@ -12,13 +12,13 @@ namespace Fungus
     /// </summary>
     public class GlobalVariables : MonoBehaviour
     {
-        private GameObject holder;
+        private Flowchart holder;
 
         Dictionary<string, Variable> variables = new Dictionary<string, Variable>();
 
         void Awake()
         {
-            holder = new GameObject("GlobalVariables");
+            holder = new GameObject("GlobalVariables").AddComponent<Flowchart>();
             holder.transform.parent = transform;
         }
 
@@ -44,11 +44,12 @@ namespace Fungus
             else
             {
                 //create the variable
-                vAsT = holder.AddComponent(type) as VariableBase<T>;
+                vAsT = holder.gameObject.AddComponent(type) as VariableBase<T>;
                 vAsT.Value = defaultvalue;
                 vAsT.Key = variableKey;
                 vAsT.Scope = VariableScope.Public;
                 variables[variableKey] = vAsT;
+                holder.Variables.Add(vAsT);
             }
 
             return vAsT;
