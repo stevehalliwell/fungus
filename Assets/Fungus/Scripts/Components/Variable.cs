@@ -118,6 +118,7 @@ namespace Fungus
             {
                 if (scope == VariableScope.GlobalStatic)
                 {
+                    //We could try to cache these
                     return FungusManager.Instance.GlobalVariables.GetOrAddVariable(Key, value, this.GetType()).Value;
                 }
 
