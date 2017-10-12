@@ -91,7 +91,7 @@ namespace Fungus
         /// <summary>
         /// Visibility scope for the variable.
         /// </summary>
-        public virtual VariableScope Scope { get { return scope; } }
+        public virtual VariableScope Scope { get { return scope; } set { scope = value; } }
 
         /// <summary>
         /// String identifier for the variable.
@@ -118,7 +118,7 @@ namespace Fungus
             {
                 if (scope == VariableScope.GlobalStatic)
                 {
-                    //FungusManager.Instance.gameObject.active = true;
+                    return FungusManager.Instance.GlobalVariables.GetOrAddVariable(Key, value, this.GetType()).Value;
                 }
 
                 return this.value;
@@ -127,9 +127,12 @@ namespace Fungus
             {
                 if (scope == VariableScope.GlobalStatic)
                 {
+                    FungusManager.Instance.GlobalVariables.GetOrAddVariable(Key, this.value, this.GetType()).Value = value;
                 }
-
-                this.value = value;
+                else
+                {
+                    this.value = value;
+                }
             }
         }
 
