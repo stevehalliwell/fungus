@@ -63,3 +63,4 @@ Wait for Voiceover option with Say dialog #572
 
 global varaiables
 -variable.cs:120 does it need to be more optimal
+-showing initial value inspector when game not running, showing global when it is
