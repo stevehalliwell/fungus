@@ -21,17 +21,12 @@ behaviour tree
 --return values
 
 
-fungus messages need a param send
--doesn't need to send a message to the same flowchart, it's kinda just a call. But legacy so leave it
--want msg channels like falcon does, so we can easily replicate something like global events entirely within fungus
--clearer distinction between fungus flowchart msg and unity SendMessage
-
-
 Optimisation pass
 -need to get the tests working first so we can profile and automate test
 -theres a bunch of string shit
 -there's a bunch of iTween shit
 -EDITOR- on scripts did load generate static list of all commands and events instead of as they are needed
+-fungus messages, they could use the event distrib instead of the present method, that might be faster
 
 
 Conversation should be able to do EVERYTHING that say and portrait can
