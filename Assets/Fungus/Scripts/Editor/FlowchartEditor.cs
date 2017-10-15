@@ -30,7 +30,6 @@ namespace Fungus.EditorUtils
         protected SerializedProperty hideCommandsProp;
         protected SerializedProperty luaEnvironmentProp;
         protected SerializedProperty luaBindingNameProp;
-        protected SerializedProperty varInspectorProp;
 
         protected Texture2D addTexture;
                 
@@ -50,7 +49,6 @@ namespace Fungus.EditorUtils
             hideCommandsProp = serializedObject.FindProperty("hideCommands");
             luaEnvironmentProp = serializedObject.FindProperty("luaEnvironment");
             luaBindingNameProp = serializedObject.FindProperty("luaBindingName");
-            varInspectorProp = serializedObject.FindProperty("showVariablesInInspector"); 
 
             addTexture = FungusEditorResources.AddSmall;
         }
@@ -73,11 +71,6 @@ namespace Fungus.EditorUtils
             EditorGUILayout.PropertyField(luaEnvironmentProp);
             EditorGUILayout.PropertyField(luaBindingNameProp);
 
-            if (!FungusEditorPreferences.hideVariableInFlowchartInspector)
-            {
-                EditorGUILayout.PropertyField(varInspectorProp);
-            }
-
             // Show list of commands to hide in Add Command menu
             ReorderableListGUI.Title(new GUIContent(hideCommandsProp.displayName, hideCommandsProp.tooltip));
             ReorderableListGUI.ListField(hideCommandsProp);
@@ -95,15 +88,13 @@ namespace Fungus.EditorUtils
 
             serializedObject.ApplyModifiedProperties();
 
-            if (varInspectorProp.boolValue && !FungusEditorPreferences.hideVariableInFlowchartInspector)
-            {
-                GUILayout.Space(20);
+            //Show the variables in the flowchart inspector
+            GUILayout.Space(20);
 
-                DrawVariablesGUI(false, Screen.width - 70);
-            }
+            DrawVariablesGUI(false, Screen.width - 70);
 
         }
-        
+
         public virtual void DrawVariablesGUI(bool showVariableToggleButton, int w)
         {
             serializedObject.Update();
@@ -113,6 +104,7 @@ namespace Fungus.EditorUtils
             if (t.Variables.Count == 0)
             {
                 t.VariablesExpanded = true;
+                //showVariableToggleButton = true;
             }
 
             if (showVariableToggleButton && !t.VariablesExpanded)
@@ -131,35 +123,26 @@ namespace Fungus.EditorUtils
             else
             {
                 Rect listRect = new Rect();
-
-                if (t.Variables.Count > 0)
+                
+                // Remove any null variables from the list
+                // Can sometimes happen when upgrading to a new version of Fungus (if .meta GUID changes for a variable class)
+                for (int i = t.Variables.Count - 1; i >= 0; i--)
                 {
-                    // Remove any null variables from the list
-                    // Can sometimes happen when upgrading to a new version of Fungus (if .meta GUID changes for a variable class)
-                    for (int i = t.Variables.Count - 1; i >= 0; i--)
+                    if (t.Variables[i] == null)
                     {
-                        if (t.Variables[i] == null)
-                        {
-                            t.Variables.RemoveAt(i);
-                        }
+                        t.Variables.RemoveAt(i);
                     }
-
-                    ReorderableListGUI.Title("Variables");
-                    VariableListAdaptor adaptor = new VariableListAdaptor(variablesProp, 0, w == 0 ? VariableListAdaptor.DefaultWidth : w);
-
-                    ReorderableListFlags flags = ReorderableListFlags.DisableContextMenu | ReorderableListFlags.HideAddButton;
-
-                    ReorderableListControl.DrawControlFromState(adaptor, null, flags);
-
-                    listRect = GUILayoutUtility.GetLastRect();
-                }
-                else
-                {
-                    GUILayoutUtility.GetRect(300, 24);
-                    listRect = GUILayoutUtility.GetLastRect();
-                    listRect.y += 20;
                 }
 
+                ReorderableListGUI.Title("Variables");
+                VariableListAdaptor adaptor = new VariableListAdaptor(variablesProp, 0, w == 0 ? VariableListAdaptor.DefaultWidth : w);
+
+                ReorderableListFlags flags = ReorderableListFlags.DisableContextMenu | ReorderableListFlags.HideAddButton;
+
+                ReorderableListControl.DrawControlFromState(adaptor, null, flags);
+
+                listRect = GUILayoutUtility.GetLastRect();
+                
                 float plusWidth = 32;
                 float plusHeight = 24;
 
