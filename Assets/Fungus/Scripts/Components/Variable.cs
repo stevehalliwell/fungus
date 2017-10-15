@@ -34,7 +34,7 @@ namespace Fungus
         Private,
         /// <summary> Can be accessed from any command in any Flowchart. </summary>
         Public,
-        /// <summary> Creates and/or references a global static variable of that name </summary>
+        /// <summary> Creates and/or references a global static variable of that name, all variables of this name and scope share the same underlying fungus variable and exist for the duration of the instance of Unity.</summary>
         GlobalStatic,
     }
 
@@ -111,6 +111,19 @@ namespace Fungus
     /// </summary>
     public abstract class VariableBase<T> : Variable
     {
+        //caching mechanism for global static variables
+        private VariableBase<T> _globalStaicRef;
+        private VariableBase<T> globalStaicRef
+        {
+            get
+            {
+                if(_globalStaicRef == null)
+                    _globalStaicRef = FungusManager.Instance.GlobalVariables.GetOrAddVariable(Key, value, this.GetType());
+
+                return _globalStaicRef;
+            }
+        }
+
         [SerializeField] protected T value;
         public virtual T Value
         {
@@ -118,8 +131,7 @@ namespace Fungus
             {
                 if (scope == VariableScope.GlobalStatic)
                 {
-                    //We could try to cache these
-                    return FungusManager.Instance.GlobalVariables.GetOrAddVariable(Key, value, this.GetType()).Value;
+                    return globalStaicRef.value;
                 }
 
                 return this.value;
@@ -128,7 +140,7 @@ namespace Fungus
             {
                 if (scope == VariableScope.GlobalStatic)
                 {
-                    FungusManager.Instance.GlobalVariables.GetOrAddVariable(Key, this.value, this.GetType()).Value = value;
+                    globalStaicRef.Value = value;
                 }
                 else
                 {

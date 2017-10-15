@@ -2,12 +2,6 @@ Move GetButtonColor out of the Command, it is ALWAYS static data
 -move it to static data that is controlled by theme in the EditorSettings
 --means people can customise them if they want, that we can ship themes etc.
 
-
-Simplify the use of BaseVariable, currently the VariableProperty allows us to filter by types
--but then at run time we need to baby it, this feels bad, do we add converters to baseclass that nulls or throws on errors?
---Don't think that's a good solution, but not sure what a better one is atm
-
-
 Event on Block text entry list
 -needs to have a text based search like command now does, prob needs more complicated drop down menu replacement
 
@@ -57,10 +51,5 @@ Global command priority
 -scan an existing project to determine weight?
 
 
-Wait for Voiceover option with Say dialog #572
--need to be able to actually test it
-
-
 global varaiables
--variable.cs:120 does it need to be more optimal
 -showing initial value inspector when game not running, showing global when it is
