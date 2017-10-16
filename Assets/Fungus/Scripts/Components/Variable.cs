@@ -117,10 +117,14 @@ namespace Fungus
         {
             get
             {
-                if(_globalStaicRef == null)
-                    _globalStaicRef = FungusManager.Instance.GlobalVariables.GetOrAddVariable(Key, value, this.GetType());
-
-                return _globalStaicRef;
+                if (_globalStaicRef != null)
+                {
+                    return _globalStaicRef;
+                }
+                else
+                {
+                    return _globalStaicRef = FungusManager.Instance.GlobalVariables.GetOrAddVariable(Key, value, this.GetType());
+                }
             }
         }
 
@@ -129,22 +133,25 @@ namespace Fungus
         {
             get
             {
-                if (scope == VariableScope.GlobalStatic)
+                if (scope != VariableScope.GlobalStatic)
                 {
+                    return this.value;
+                }
+                else
+                { 
                     return globalStaicRef.value;
                 }
 
-                return this.value;
             }
             set
             {
-                if (scope == VariableScope.GlobalStatic)
+                if (scope != VariableScope.GlobalStatic)
                 {
-                    globalStaicRef.Value = value;
+                    this.value = value;
                 }
                 else
                 {
-                    this.value = value;
+                    globalStaicRef.Value = value;
                 }
             }
         }

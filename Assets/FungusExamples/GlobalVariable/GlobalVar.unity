@@ -215,8 +215,9 @@ GameObject:
   - component: {fileID: 526655834}
   - component: {fileID: 526655832}
   - component: {fileID: 526655833}
+  - component: {fileID: 526655838}
   m_Layer: 0
-  m_Name: GlobalVarInc
+  m_Name: GlobalVarIncx2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,6 +288,7 @@ MonoBehaviour:
   eventHandler: {fileID: 526655833}
   commandList:
   - {fileID: 526655832}
+  - {fileID: 526655838}
 --- !u!114 &526655835
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -326,7 +328,8 @@ MonoBehaviour:
     height: 0
   selectedBlocks:
   - {fileID: 526655834}
-  selectedCommands: []
+  selectedCommands:
+  - {fileID: 526655832}
   variables:
   - {fileID: 526655835}
   description: 
@@ -339,7 +342,6 @@ MonoBehaviour:
   hideCommands: []
   luaEnvironment: {fileID: 0}
   luaBindingName: flowchart
-  showVariablesInInspector: 1
 --- !u!4 &526655837
 Transform:
   m_ObjectHideFlags: 0
@@ -353,6 +355,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &526655838
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 526655831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb77d0ce495044f6e9feb91b31798e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 2
+  indentLevel: 0
+  variable: {fileID: 526655835}
+  setOperator: 2
+  booleanData:
+    booleanRef: {fileID: 0}
+    booleanVal: 0
+  integerData:
+    integerRef: {fileID: 0}
+    integerVal: 1
+  floatData:
+    floatRef: {fileID: 0}
+    floatVal: 0
+  stringData:
+    stringRef: {fileID: 0}
+    stringVal: 
 --- !u!1 &539926219
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +512,6 @@ MonoBehaviour:
   hideCommands: []
   luaEnvironment: {fileID: 0}
   luaBindingName: flowchart
-  showVariablesInInspector: 1
 --- !u!4 &539926225
 Transform:
   m_ObjectHideFlags: 0
@@ -546,7 +574,7 @@ MonoBehaviour:
     stringVal: 
 --- !u!114 &543800377
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 543800375}
@@ -634,7 +662,6 @@ MonoBehaviour:
   hideCommands: []
   luaEnvironment: {fileID: 0}
   luaBindingName: flowchart
-  showVariablesInInspector: 1
 --- !u!4 &543800381
 Transform:
   m_ObjectHideFlags: 0
@@ -950,7 +977,6 @@ MonoBehaviour:
   hideCommands: []
   luaEnvironment: {fileID: 0}
   luaBindingName: flowchart
-  showVariablesInInspector: 1
 --- !u!4 &908098429
 Transform:
   m_ObjectHideFlags: 0

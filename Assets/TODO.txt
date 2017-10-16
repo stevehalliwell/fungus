@@ -2,6 +2,7 @@ Move GetButtonColor out of the Command, it is ALWAYS static data
 -move it to static data that is controlled by theme in the EditorSettings
 --means people can customise them if they want, that we can ship themes etc.
 
+
 Event on Block text entry list
 -needs to have a text based search like command now does, prob needs more complicated drop down menu replacement
 
@@ -48,3 +49,4 @@ Global command priority
 
 global varaiables
 -showing initial value inspector when game not running, showing global when it is
+-test that vars exist after a reload of scene
