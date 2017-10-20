@@ -22,6 +22,13 @@ namespace Fungus
             holder.transform.parent = transform;
         }
 
+		public Variable GetVariable(string variableKey)
+		{
+			Variable v = null;
+			var res = variables.TryGetValue(variableKey, out v);
+			return v;
+		}
+
         public VariableBase<T> GetOrAddVariable<T>(string variableKey, T defaultvalue, Type type)
         {
             Variable v = null;
