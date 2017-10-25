@@ -25,7 +25,7 @@ namespace Fungus
 		public Variable GetVariable(string variableKey)
 		{
 			Variable v = null;
-			var res = variables.TryGetValue(variableKey, out v);
+			variables.TryGetValue(variableKey, out v);
 			return v;
 		}
 

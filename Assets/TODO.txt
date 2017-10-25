@@ -48,5 +48,19 @@ Global command priority
 
 
 global varaiables
--showing initial value inspector when game not running, showing global when it is
 -test that vars exist after a reload of scene
+
+
+flappy bird
+-'modes'
+--tap to flap
+--game
+--gameover
+-scrolling layers
+-pipe obstacle
+--spawn despawn
+--colliders on top and bottom and trigger on other side
+-bird
+--physics for up down
+--anim rotation based on y velocity
+--tap to add force up + wing anim + gust particles
