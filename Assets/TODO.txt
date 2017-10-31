@@ -54,13 +54,16 @@ global varaiables
 flappy bird
 -'modes'
 --tap to flap
---game
 --gameover
 -scrolling layers
 -pipe obstacle
---spawn despawn
---colliders on top and bottom and trigger on other side
+--prob should have art...
+--prob shouldnt move when hit
 -bird
---physics for up down
 --anim rotation based on y velocity
---tap to add force up + wing anim + gust particles
+--wing anim + gust particles
+
+
+auto generate field and property get set fungus commmand
+-test case is transform
+-then make it do rbs
