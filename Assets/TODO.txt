@@ -49,6 +49,7 @@ Global command priority
 
 global varaiables
 -test that vars exist after a reload of scene
+-currently there is no way of knowing if a global exists until runtime, is this tolerable?
 
 
 flappy bird
