@@ -51,6 +51,9 @@ global varaiables
 -test that vars exist after a reload of scene
 -currently there is no way of knowing if a global exists until runtime, is this tolerable?
 
+Arrays
+-want em, don't have em
+
 
 flappy bird
 -'modes'
