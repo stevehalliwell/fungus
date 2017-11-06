@@ -58,7 +58,6 @@ Arrays
 flappy bird
 -'modes'
 --tap to flap
---gameover
 -scrolling layers
 -pipe obstacle
 --prob should have art...
@@ -66,6 +65,7 @@ flappy bird
 -bird
 --anim rotation based on y velocity
 --wing anim + gust particles
+-physics or rb command
 
 
 auto generate field and property get set fungus commmand

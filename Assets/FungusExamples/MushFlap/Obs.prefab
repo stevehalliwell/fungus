@@ -153,7 +153,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -239,7 +239,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!114 &114175475948719382
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307634448502438}
@@ -266,7 +266,7 @@ MonoBehaviour:
     vector2Val: {x: 0, y: 0}
 --- !u!114 &114194095325162578
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307634448502438}
@@ -291,7 +291,7 @@ MonoBehaviour:
   - {fileID: 114987681880450178}
 --- !u!114 &114290878791155376
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307634448502438}
@@ -311,7 +311,7 @@ MonoBehaviour:
   targetGameObjectOLD: {fileID: 0}
 --- !u!114 &114680862679749288
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307634448502438}
@@ -324,7 +324,7 @@ MonoBehaviour:
   waitForFrames: 0
 --- !u!114 &114686414283744122
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307634448502438}
@@ -350,7 +350,7 @@ MonoBehaviour:
   - {fileID: 114290878791155376}
 --- !u!114 &114699169354441166
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307634448502438}
@@ -364,7 +364,7 @@ MonoBehaviour:
   value: 8
 --- !u!114 &114728753837062300
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307634448502438}
@@ -375,10 +375,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scope: 0
   key: initForce
-  value: {x: -5, y: 0}
+  value: {x: -50, y: 0}
 --- !u!114 &114886557140914284
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307634448502438}
@@ -415,9 +415,9 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 114194095325162578}
+  - {fileID: 114686414283744122}
   selectedCommands:
-  - {fileID: 114987681880450178}
+  - {fileID: 114175475948719382}
   variables:
   - {fileID: 114728753837062300}
   - {fileID: 114699169354441166}
@@ -433,7 +433,7 @@ MonoBehaviour:
   luaBindingName: flowchart
 --- !u!114 &114987681880450178
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1307634448502438}
