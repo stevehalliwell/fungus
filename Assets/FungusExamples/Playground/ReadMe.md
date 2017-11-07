@@ -32,9 +32,9 @@ Football
 A 1v1 football / air hockey setup. 1 player uses W,A,S,D to move, the other, the arrow keys. Get the red ball through your opponents goal to score a point.
 
 ### Elements
-**{Name}Goal** Simply a Box2D Trigger that does a SendMessage command when the ball enters.
+**<Name>Goal** Simply a Box2D Trigger that does a SendMessage command when the ball enters.
 
-**P{Number}** Gathers input via GetAxis command, combines and scales them into a vector to be passed into an AddForce2D.
+**P<Number>** Gathers input via GetAxis command, combines and scales them into a vector to be passed into an AddForce2D.
 
 Lander
 ======
