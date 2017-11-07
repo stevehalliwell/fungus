@@ -4,17 +4,41 @@ using UnityEngine;
 
 namespace Fungus
 {
+    public abstract class Vector3BinaryCommand : Command
+    {
+        [SerializeField]
+        protected Vector3Data lhs, rhs, output;
+
+        public override string GetSummary()
+        {
+            if (output.vector3Ref == null)
+            {
+                return "Error: no output set";
+            }
+
+            return GetInnerSummary() + " stored in " + output.vector3Ref.Key;;
+        }
+
+        public abstract string GetInnerSummary();
+
+        public override Color GetButtonColor()
+        {
+            return new Color32(235, 191, 217, 255);
+        }
+    }
+                 
+
+	
+
     /// <summary>
-    /// Vector3 add, sub, mul, div arithmetic
+	/// Vector3 add, sub, mul, div arithmetic
     /// </summary>
     [CommandInfo("Vector3",
                  "Arithmetic",
                  "Vector3 add, sub, mul, div arithmetic")]
     [AddComponentMenu("")]
-    public class Vector3Arithmetic : Command
+    public class Vector3Arithmetic : Vector3BinaryCommand
     {
-        [SerializeField]
-        protected Vector3Data lhs, rhs, output;
 
         public enum Operation
         {
@@ -56,27 +80,9 @@ namespace Fungus
             Continue();
         }
 
-        public override string GetSummary()
+        public override string GetInnerSummary()
         {
-            if (output.vector3Ref == null)
-            {
-                return "Error: no output set";
-            }
-
             return operation.ToString() + ": stored in " + output.vector3Ref.Key;
-        }
-
-        public override Color GetButtonColor()
-        {
-            return new Color32(235, 191, 217, 255);
-        }
-
-        public override bool HasReference(Variable variable)
-        {
-            if (lhs.vector3Ref == variable || rhs.vector3Ref == variable || output.vector3Ref == variable)
-                return true;
-
-            return false;
         }
     }
 }
