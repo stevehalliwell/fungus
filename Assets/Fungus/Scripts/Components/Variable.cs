@@ -141,7 +141,6 @@ namespace Fungus
                 { 
                     return globalStaicRef.value;
                 }
-
             }
             set
             {

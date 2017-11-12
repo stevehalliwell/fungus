@@ -71,3 +71,7 @@ flappy bird
 auto generate field and property get set fungus commmand
 -test case is transform
 -then make it do rbs
+
+auto generate variable type
+-editor window
+-add to existing script that contains the property
