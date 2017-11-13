@@ -150,24 +150,23 @@ namespace Fungus
             //don't allow dups
             var genClassName = (ClassName + "Variable");
             Type resGeneratedClass = types.Find(x => x.Name == genClassName);
-
-            if (resGeneratedClass != null)
-                throw new Exception("Class "+ genClassName + " already exists. Generation aborted");
-
             Type resGeneratedDrawerClass = types.Find(x => x.Name == (ClassName + "VariableDrawer"));
-            if (resGeneratedDrawerClass != null)
-                throw new Exception("Class " + ClassName + "VariableDrawer" + " already exists. Generation aborted");
 
 
             try
             {
                 var lowerClassName = Char.ToLowerInvariant(ClassName[0]) + ClassName.Substring(1);
-                var scriptContents = string.Format(ScriptTemplate, ClassName, NamespaceOfClass, lowerClassName, Category);
-                System.IO.File.WriteAllText(VaraibleScriptLocation + ClassName + "Variable.cs", scriptContents);
+                if (resGeneratedClass == null && !resTargetClass.IsAbstract)
+                {
+                    var scriptContents = string.Format(ScriptTemplate, ClassName, NamespaceOfClass, lowerClassName, Category);
+                    System.IO.File.WriteAllText(VaraibleScriptLocation + ClassName + "Variable.cs", scriptContents);
+                }
 
-                var editorScriptContents = string.Format(EditorScriptTemplate, ClassName, NamespaceOfClass, lowerClassName, Category);
-                System.IO.File.WriteAllText(EditorScriptLocation + ClassName + "VariableDrawer.cs", editorScriptContents);
-                
+                if (resGeneratedDrawerClass == null && !resTargetClass.IsAbstract)
+                {
+                    var editorScriptContents = string.Format(EditorScriptTemplate, ClassName, NamespaceOfClass, lowerClassName, Category);
+                    System.IO.File.WriteAllText(EditorScriptLocation + ClassName + "VariableDrawer.cs", editorScriptContents);
+                }
             }
             catch (Exception e)
             {
