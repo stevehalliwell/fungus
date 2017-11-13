@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -18,21 +17,6 @@ namespace Fungus.EditorUtils
 
         private void DrawMenuPanel()
         {
-            //EditorGUILayout.BeginHorizontal(EditorStyles.toolbar);
-            //EditorGUILayout.LabelField("Group by:", Styles.toolbarLabel, GUILayout.MaxWidth(60));
-            //m_GroupBy = (GroupByType)EditorGUILayout.EnumPopup(m_GroupBy, EditorStyles.toolbarPopup, GUILayout.MaxWidth(150));
-
-            //GUILayout.FlexibleSpace();
-
-            //m_ShowType = (ShowType)EditorGUILayout.EnumPopup(m_ShowType, EditorStyles.toolbarPopup, GUILayout.MaxWidth(100));
-
-            //EditorGUILayout.LabelField("Filter by:", Styles.toolbarLabel, GUILayout.MaxWidth(50));
-            //m_FilterType = (FilterType)EditorGUILayout.EnumPopup(m_FilterType, EditorStyles.toolbarPopup, GUILayout.MaxWidth(100));
-            //m_FilterText = GUILayout.TextField(m_FilterText, "ToolbarSeachTextField", GUILayout.MaxWidth(100));
-            //if (GUILayout.Button(GUIContent.none, string.IsNullOrEmpty(m_FilterText) ? "ToolbarSeachCancelButtonEmpty" : "ToolbarSeachCancelButton", GUILayout.ExpandWidth(false)))
-            //    m_FilterText = "";
-            //EditorGUILayout.EndHorizontal();
-
             generator.NamespaceOfClass = EditorGUILayout.TextField("NamespaceOfClass", generator.NamespaceOfClass);
             generator.ClassName = EditorGUILayout.TextField("ClassName", generator.ClassName);
             generator.Category = EditorGUILayout.TextField("Category", generator.Category);
@@ -48,6 +32,7 @@ namespace Fungus.EditorUtils
                 catch (Exception e)
                 {
                     Debug.LogWarning(e.Message);
+                    //throw e;
                 }
             }
         }
@@ -154,15 +139,26 @@ namespace Fungus
             if (ClassName.Length == 0)
                 throw new Exception("No Class name provided.");
 
-            //must be a valid class
-            Type res = AppDomain.CurrentDomain.GetAssemblies()
-                                   .SelectMany(x => x.GetTypes())
-                                   .First(x => x.Name == ClassName);
+            var types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).ToList();
 
-            if (res == null)
+            //must be a valid class
+            Type resTargetClass = types.Find(x => x.Name == ClassName);
+
+            if (resTargetClass == null)
                 throw new Exception("No Type of name "+ClassName+" exists.");
 
             //don't allow dups
+            var genClassName = (ClassName + "Variable");
+            Type resGeneratedClass = types.Find(x => x.Name == genClassName);
+
+            if (resGeneratedClass != null)
+                throw new Exception("Class "+ genClassName + " already exists. Generation aborted");
+
+            Type resGeneratedDrawerClass = types.Find(x => x.Name == (ClassName + "VariableDrawer"));
+            if (resGeneratedDrawerClass != null)
+                throw new Exception("Class " + ClassName + "VariableDrawer" + " already exists. Generation aborted");
+
+
             try
             {
                 var lowerClassName = Char.ToLowerInvariant(ClassName[0]) + ClassName.Substring(1);
