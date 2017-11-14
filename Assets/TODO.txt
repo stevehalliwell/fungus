@@ -71,7 +71,4 @@ flappy bird
 auto generate field and property get set fungus commmand
 -test case is transform
 -then make it do rbs
-
-auto generate variable type
--editor window
--add to existing script that contains the property
+--cannot rely on static class as unity isn't doing that for Physics, but we can then test for static vs instance methods, see AID-Console
