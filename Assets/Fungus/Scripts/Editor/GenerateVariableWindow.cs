@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 
@@ -58,6 +59,8 @@ namespace Fungus.EditorUtils
         public string ClassName { get; set; }
         private string _category = "Other";
         public string Category { get { return _category; } set { _category = value; } }
+
+        StringBuilder enumBuilder = new StringBuilder("public enum FieldOrProperty { "), getBuilder = new StringBuilder(), setBuilder = new StringBuilder();
 
         #region consts
         const string VaraibleScriptLocation = "./Assets/Fungus/Scripts/VariableTypes/";
@@ -151,6 +154,7 @@ namespace Fungus
             var genClassName = (ClassName + "Variable");
             Type resGeneratedClass = types.Find(x => x.Name == genClassName);
             Type resGeneratedDrawerClass = types.Find(x => x.Name == (ClassName + "VariableDrawer"));
+            Type resGeneratedPropCommandClass = types.Find(x => x.Name == (ClassName + "Property"));
 
 
             try
@@ -169,11 +173,74 @@ namespace Fungus
                     System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(EditorScriptLocation));
                     System.IO.File.WriteAllText(EditorScriptLocation + ClassName + "VariableDrawer.cs", editorScriptContents);
                 }
+
+                if(resGeneratedPropCommandClass == null)
+                {
+                    
+                    var fields = resTargetClass.GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
+                    for (int i = 0; i < fields.Length; i++)
+                    {
+                        if (IsHandledType(fields[i].FieldType))
+                        {
+                            //add it to the enum
+                            AddToEnum(fields[i].Name);
+
+                            //add it to the get
+                            AddToGet(fields[i].FieldType, fields[i].Name);
+
+                            //add it to the set
+                            AddToSet(fields[i].FieldType, fields[i].Name);
+                        }
+                    }
+                    var props = resTargetClass.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
+                    for (int i = 0; i < props.Length; i++)
+                    {
+                        if (IsHandledType(props[i].PropertyType))
+                        {
+                            //add it to the enum
+                            AddToEnum(props[i].Name);
+
+                            if (props[i].CanRead)
+                            {
+                                //add it to the get
+                            }
+                            if (props[i].CanWrite)
+                            {
+                                //add it to the set
+                            }
+                        }
+                    }
+
+                    //finalise buidlers
+
+                    //insert into template script
+                }
             }
             catch (Exception e)
             {
                 Debug.LogError(e.Message);
             }
+        }
+
+        private void AddToSet(Type fieldType, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AddToGet(Type fieldType, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AddToEnum(string name)
+        {
+            enumBuilder.Append(name);
+            enumBuilder.Append(", ");
+        }
+
+        private bool IsHandledType(Type fieldType)
+        {
+            throw new NotImplementedException();
         }
     }
 }
