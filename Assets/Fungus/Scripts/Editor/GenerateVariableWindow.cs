@@ -159,12 +159,14 @@ namespace Fungus
                 if (resGeneratedClass == null && !resTargetClass.IsAbstract)
                 {
                     var scriptContents = string.Format(ScriptTemplate, ClassName, NamespaceOfClass, lowerClassName, Category);
+                    System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(VaraibleScriptLocation));
                     System.IO.File.WriteAllText(VaraibleScriptLocation + ClassName + "Variable.cs", scriptContents);
                 }
 
                 if (resGeneratedDrawerClass == null && !resTargetClass.IsAbstract)
                 {
                     var editorScriptContents = string.Format(EditorScriptTemplate, ClassName, NamespaceOfClass, lowerClassName, Category);
+                    System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(EditorScriptLocation));
                     System.IO.File.WriteAllText(EditorScriptLocation + ClassName + "VariableDrawer.cs", editorScriptContents);
                 }
             }
