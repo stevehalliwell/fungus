@@ -150,6 +150,7 @@ namespace Fungus
                             TextItem textItem = new TextItem();
                             textItem.standardText = localizable.GetStandardText();
                             textItem.description = localizable.GetDescription();
+                            //TODO we should not allow dups here
                             textItems[localizable.GetStringId()] = textItem;
                         }
                     }

@@ -24,8 +24,8 @@ behaviour tree
 
 Optimisation pass
 -need to get the tests working first so we can profile and automate test
--theres a bunch of string shit
--there's a bunch of iTween shit
+-theres a bunch of string stuff
+-there's a bunch of iTween stuff
 -EDITOR- on scripts did load generate static list of all commands and events instead of as they are needed
 -fungus messages, they could use the event distrib instead of the present method, that might be faster
 
@@ -50,6 +50,8 @@ Global command priority
 global varaiables
 -test that vars exist after a reload of scene
 -currently there is no way of knowing if a global exists until runtime, is this tolerable?
+--we could have a single global resource for this and expose that to all, the workflow of adding vars to that that are global and not being able to see that those in your var list seems worse than not knowing your globals
+
 
 Arrays
 -want em, don't have em
@@ -72,3 +74,4 @@ auto generate field and property get set fungus commmand
 -test case is transform
 -then make it do rbs
 --cannot rely on static class as unity isn't doing that for Physics, but we can then test for static vs instance methods, see AID-Console
+-
