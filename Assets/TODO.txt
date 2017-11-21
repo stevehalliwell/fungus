@@ -74,4 +74,5 @@ auto generate field and property get set fungus commmand
 -test case is transform
 -then make it do rbs
 --cannot rely on static class as unity isn't doing that for Physics, but we can then test for static vs instance methods, see AID-Console
--
+-we need to make the generator actually test it is using the correct types
+-need to capitalise the first letter in the enum it is going to drive me crazy

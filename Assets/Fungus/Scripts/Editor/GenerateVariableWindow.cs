@@ -4,6 +4,7 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
+
 namespace Fungus.EditorUtils
 {
     [Serializable]
@@ -60,10 +61,11 @@ namespace Fungus.EditorUtils
         private string _category = "Other";
         public string Category { get { return _category; } set { _category = value; } }
 
-        StringBuilder enumBuilder = new StringBuilder("public enum FieldOrProperty { "), getBuilder = new StringBuilder(), setBuilder = new StringBuilder();
+        StringBuilder enumBuilder = new StringBuilder("public enum Property { "), getBuilder = new StringBuilder("switch (property)\n{"), setBuilder = new StringBuilder("switch (property)\n{");
 
         #region consts
-        const string VaraibleScriptLocation = "./Assets/Fungus/Scripts/VariableTypes/";
+        const string ScriptLocation = "./Assets/Fungus/Scripts/";
+        const string VaraibleScriptLocation = ScriptLocation + "VariableTypes/";
         const string EditorScriptLocation = VaraibleScriptLocation + "Editor/";
         const string EditorScriptTemplate = @"using UnityEditor;
 using UnityEngine;
@@ -131,6 +133,101 @@ namespace Fungus
 		}}
 	}}
 }}";
+        const string PropertyScriptTemplate = @"using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+//0 typeo
+//1 prop enum
+//2 lower class name
+//3 get generated
+//4 set generated
+
+namespace Fungus
+{{
+    // <summary>
+    /// Get or Set a property of a {0} component
+    /// </summary>
+    [CommandInfo(""{0}"",
+                 ""Property"",
+                 ""Get or Set a property of a {0} component"")]
+    [AddComponentMenu("""")]
+    public class {0}Property : BaseVariableProperty
+    {{
+		//generated property
+        {1}
+		
+        [SerializeField]
+        protected Property property;
+		
+        [SerializeField]
+        protected {0}Data {2}Data;
+
+        [SerializeField]
+        [VariableProperty(typeof(FloatVariable))]
+		
+        protected Variable inOutVar;
+
+        public override void OnEnter()
+        {{
+            var iof = inOutVar as FloatVariable;
+
+            var target = {2}Data.Value;
+
+            switch (getOrSet)
+            {{
+                case GetSet.Get:
+                    {3}
+                    break;
+                case GetSet.Set:
+                    {4}
+                    break;
+                default:
+                    break;
+            }}
+
+            Continue();
+        }}
+
+        public override string GetSummary()
+        {{
+            if ({2}Data.Value == null)
+            {{
+                return ""Error: no {2} set"";
+            }}
+
+            var iof = inOutVar as FloatVariable;
+
+            if (iof == null)
+            {{
+                return ""Error: no variable set to push or pull data to or from"";
+            }}
+
+            //We could do further checks here, eg, you have selected childcount but set a vec3variable
+
+            return getOrSet.ToString() + "" "" + property.ToString();
+        }}
+
+        public override Color GetButtonColor()
+        {{
+            return new Color32(235, 191, 217, 255);
+        }}
+
+        public override bool HasReference(Variable variable)
+        {{
+            if ({2}Data.{2}Ref == variable || inOutVar == variable)
+                return true;
+
+            return false;
+        }}
+
+    }}
+}}";
+        const string DefaultCaseFailure = @" default:
+                                Debug.Log(""Unsupported get or set attempted"");
+                            break;
+                    }";
+
 
 #endregion
         public VariableScriptGenerator()
@@ -176,42 +273,60 @@ namespace Fungus
 
                 if(resGeneratedPropCommandClass == null)
                 {
-                    
-                    var fields = resTargetClass.GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
-                    for (int i = 0; i < fields.Length; i++)
                     {
-                        if (IsHandledType(fields[i].FieldType))
+                        var fields = resTargetClass.GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
+                        for (int i = 0; i < fields.Length; i++)
                         {
-                            //add it to the enum
-                            AddToEnum(fields[i].Name);
+                            if (IsHandledType(fields[i].FieldType))
+                            {
+                                //add it to the enum
+                                AddToEnum(fields[i].Name);
 
-                            //add it to the get
-                            AddToGet(fields[i].FieldType, fields[i].Name);
+                                //add it to the get
+                                AddToGet(fields[i].FieldType, fields[i].Name);
 
-                            //add it to the set
-                            AddToSet(fields[i].FieldType, fields[i].Name);
+                                //add it to the set
+                                AddToSet(fields[i].FieldType, fields[i].Name);
+                            }
                         }
                     }
-                    var props = resTargetClass.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
-                    for (int i = 0; i < props.Length; i++)
                     {
-                        if (IsHandledType(props[i].PropertyType))
+                        var props = resTargetClass.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
+                        for (int i = 0; i < props.Length; i++)
                         {
-                            //add it to the enum
-                            AddToEnum(props[i].Name);
+                            if (IsHandledType(props[i].PropertyType) && ! IsObsolete(props[i].GetCustomAttributes(false)))
+                            {
+                                //add it to the enum
+                                AddToEnum(props[i].Name);
 
-                            if (props[i].CanRead)
-                            {
-                                //add it to the get
-                            }
-                            if (props[i].CanWrite)
-                            {
-                                //add it to the set
+                                if (props[i].CanRead)
+                                {
+                                    //add it to the get
+                                    AddToGet(props[i].PropertyType, props[i].Name);
+                                }
+                                if (props[i].CanWrite)
+                                {
+                                    //add it to the set
+                                    AddToSet(props[i].PropertyType, props[i].Name);
+                                }
                             }
                         }
                     }
 
                     //finalise buidlers
+                    setBuilder.AppendLine(DefaultCaseFailure);
+                    var setcontents = setBuilder.ToString();
+
+                    getBuilder.AppendLine(DefaultCaseFailure);
+                    var getcontents = getBuilder.ToString();
+
+                    enumBuilder.AppendLine("}");
+                    var enumgen = enumBuilder.ToString();
+
+
+                    var propScriptContents = string.Format(PropertyScriptTemplate, ClassName, enumgen, lowerClassName, getcontents, setcontents);
+                    System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(ScriptLocation));
+                    System.IO.File.WriteAllText(ScriptLocation + ClassName + "Property.cs", propScriptContents);
 
                     //insert into template script
                 }
@@ -224,23 +339,40 @@ namespace Fungus
 
         private void AddToSet(Type fieldType, string name)
         {
-            throw new NotImplementedException();
+            setBuilder.Append("case Property.");
+            setBuilder.Append(name);
+            setBuilder.AppendLine(":");
+            setBuilder.Append("iof.Value = target.");
+            setBuilder.Append(name);
+            setBuilder.Append(";\nbreak;\n");
         }
 
         private void AddToGet(Type fieldType, string name)
         {
-            throw new NotImplementedException();
+            getBuilder.Append("case Property.");
+            getBuilder.Append(name);
+            getBuilder.AppendLine(":");
+            getBuilder.Append("iof.Value = target.");
+            getBuilder.Append(name);
+            getBuilder.Append(";\nbreak;\n");
         }
 
         private void AddToEnum(string name)
         {
             enumBuilder.Append(name);
-            enumBuilder.Append(", ");
+            enumBuilder.AppendLine(", ");
         }
 
-        private bool IsHandledType(Type fieldType)
+        private bool IsHandledType(Type t)
         {
-            throw new NotImplementedException();
+            return t == typeof(Single);
+        }
+
+        private bool IsObsolete(object [] attrs)
+        {
+            if(attrs.Length > 0)
+                return attrs.First(x => x.GetType() == typeof(ObsoleteAttribute)) != null;
+            return false;
         }
     }
 }
