@@ -164,13 +164,19 @@ namespace Fungus
         protected {0}Data {2}Data;
 
         [SerializeField]
-        [VariableProperty(typeof(FloatVariable))]
+        [VariableProperty(typeof(FloatVariable),
+                          typeof(IntegerVariable) )]
 		
         protected Variable inOutVar;
 
         public override void OnEnter()
         {{
             var iof = inOutVar as FloatVariable;
+            var iob = inOutVar as BooleanVariable;
+            var ioi = inOutVar as IntegerVariable;
+            var ios = inOutVar as StringVariable;
+            var iov = inOutVar as Vector3Variable;
+            var iot = inOutVar as TransformVariable;
 
             var target = {2}Data.Value;
 
@@ -197,8 +203,13 @@ namespace Fungus
             }}
 
             var iof = inOutVar as FloatVariable;
+            var iob = inOutVar as BooleanVariable;
+            var ioi = inOutVar as IntegerVariable;
+            var ios = inOutVar as StringVariable;
+            var iov = inOutVar as Vector3Variable;
+            var iot = inOutVar as TransformVariable;
 
-            if (iof == null)
+            if (iob == null && ioi == null && iov == null && iot == null && iof != null && ios != null)
             {{
                 return ""Error: no variable set to push or pull data to or from"";
             }}
@@ -279,14 +290,17 @@ namespace Fungus
                         {
                             if (IsHandledType(fields[i].FieldType))
                             {
+
+                                var actualName = fields[i].Name;
+                                var upperCaseName = Char.ToUpperInvariant(actualName[0]) + actualName.Substring(1);
                                 //add it to the enum
-                                AddToEnum(fields[i].Name);
+                                AddToEnum(upperCaseName);
 
                                 //add it to the get
-                                AddToGet(fields[i].FieldType, fields[i].Name);
+                                AddToGet(fields[i].FieldType, upperCaseName, actualName);
 
                                 //add it to the set
-                                AddToSet(fields[i].FieldType, fields[i].Name);
+                                AddToSet(fields[i].FieldType, upperCaseName, actualName);
                             }
                         }
                     }
@@ -296,18 +310,20 @@ namespace Fungus
                         {
                             if (IsHandledType(props[i].PropertyType) && ! IsObsolete(props[i].GetCustomAttributes(false)))
                             {
+                                var actualName = props[i].Name;
+                                var upperCaseName = Char.ToUpperInvariant(actualName[0]) + actualName.Substring(1);
                                 //add it to the enum
-                                AddToEnum(props[i].Name);
+                                AddToEnum(upperCaseName);
 
                                 if (props[i].CanRead)
                                 {
                                     //add it to the get
-                                    AddToGet(props[i].PropertyType, props[i].Name);
+                                    AddToGet(props[i].PropertyType, upperCaseName, actualName);
                                 }
                                 if (props[i].CanWrite)
                                 {
                                     //add it to the set
-                                    AddToSet(props[i].PropertyType, props[i].Name);
+                                    AddToSet(props[i].PropertyType, upperCaseName, actualName);
                                 }
                             }
                         }
@@ -337,23 +353,55 @@ namespace Fungus
             }
         }
 
-        private void AddToSet(Type fieldType, string name)
+        private void AddToSet(Type fieldType, string nameEnum, string nameVariable)
         {
             setBuilder.Append("case Property.");
-            setBuilder.Append(name);
+            setBuilder.Append(nameEnum);
             setBuilder.AppendLine(":");
-            setBuilder.Append("iof.Value = target.");
-            setBuilder.Append(name);
+            setBuilder.Append("target.");
+            setBuilder.Append(nameVariable);
+            setBuilder.Append(" = ");
+            setBuilder.Append(GetSpecificVariableVarientFromType(fieldType));
             setBuilder.Append(";\nbreak;\n");
         }
 
-        private void AddToGet(Type fieldType, string name)
+        private string GetSpecificVariableVarientFromType(Type fieldType)
+        {
+            if(fieldType == typeof(Single))
+            {
+                return "iof.Value";
+            }
+            else if(fieldType == typeof(int))
+            {
+                return "ioi.Value";
+            }
+            else if (fieldType == typeof(Boolean))
+            {
+                return "iob.Value";
+            }
+            else if (fieldType == typeof(string))
+            {
+                return "ios.Value";
+            }
+            else if (fieldType == typeof(Transform))
+            {
+                return "iot.Value";
+            }
+            else if (fieldType == typeof(Vector3))
+            {
+                return "iov.Value";
+            }
+            return "ERROR - Unsupprted type requested";
+        }
+
+        private void AddToGet(Type fieldType, string nameEnum, string nameVariable)
         {
             getBuilder.Append("case Property.");
-            getBuilder.Append(name);
+            getBuilder.Append(nameEnum);
             getBuilder.AppendLine(":");
-            getBuilder.Append("iof.Value = target.");
-            getBuilder.Append(name);
+            getBuilder.Append(GetSpecificVariableVarientFromType(fieldType));
+            getBuilder.Append(" = target.");
+            getBuilder.Append(nameVariable);
             getBuilder.Append(";\nbreak;\n");
         }
 
@@ -365,7 +413,7 @@ namespace Fungus
 
         private bool IsHandledType(Type t)
         {
-            return t == typeof(Single);
+            return t == typeof(Single) || t == typeof(int) || t == typeof(string) || t == typeof(Boolean) || t == typeof(Vector3) || t == typeof(Transform);
         }
 
         private bool IsObsolete(object [] attrs)
