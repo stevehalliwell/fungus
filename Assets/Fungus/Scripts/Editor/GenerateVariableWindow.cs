@@ -43,7 +43,7 @@ namespace Fungus.EditorUtils
         [MenuItem("Tools/Fungus/Utilities/Generate Fungus Varaible")]
         public static GenerateVariableWindow ShowWindow()
         {
-            var w = GetWindow(typeof(GenerateVariableWindow),true, "Generate Fungus Varaible",true);
+            var w = GetWindow(typeof(GenerateVariableWindow), true, "Generate Fungus Varaible", true);
             w.Show();
             return w as GenerateVariableWindow;
         }
@@ -62,9 +62,82 @@ namespace Fungus.EditorUtils
         private string _category = "Other";
         public string Category { get { return _category; } set { _category = value; } }
 
-        private HashSet<Type> usedTypes = new HashSet<Type>();
 
         StringBuilder enumBuilder = new StringBuilder("public enum Property { "), getBuilder = new StringBuilder("switch (property)\n{"), setBuilder = new StringBuilder("switch (property)\n{");
+
+        //data and helper for a single native to single fungus type
+        public class FungusVariableTypeHelper
+        {
+
+            private HashSet<Type> usedTypes = new HashSet<Type>();
+            private List<TypeHandler> handlers = new List<TypeHandler>();
+
+            public class TypeHandler
+            {
+                public TypeHandler(Type native, Type fungusType, string localName, string nativeAsString = null, string fungusTypeAsString = null)
+                {
+                    NativeType = native;
+                    NativeTypeString = string.IsNullOrEmpty(nativeAsString) ? native.Name : nativeAsString;
+                    FungusType = fungusType;
+                    FungusTypeString = string.IsNullOrEmpty(fungusTypeAsString) ? fungusType.Name : fungusTypeAsString;
+                    LocalVariableName = localName;
+                }
+
+                public Type NativeType { get; set; }
+                public Type FungusType { get; set; }
+                public string NativeTypeString { get; set; }
+                public string FungusTypeString { get; set; }
+                public string LocalVariableName { get; set; }
+                public string GetLocalVariableNameWithDeclaration()
+                {
+                    return "var " + LocalVariableName + " = inOutVar as " + FungusTypeString + ';';
+                }
+            }
+
+            public void AddHandler(TypeHandler t)
+            {
+                handlers.Add(t);
+            }
+
+            public bool IsTypeHandled(Type t)
+            {
+                return handlers.Find(x => x.NativeType == t) != null;
+            }
+
+            public string GetSpecificVariableVarientFromType(Type t)
+            {
+                usedTypes.Add(t);
+
+                var loc = handlers.Find(x => x.NativeType == t);
+                if (loc != null)
+                {
+                    return loc.LocalVariableName;
+                }
+                else
+                {
+                    return "ERROR - Unsupprted type requested";
+                }
+            }
+
+            public string GetUsedTypeVars()
+            {
+
+                StringBuilder sb = new StringBuilder();
+
+                foreach (Type t in usedTypes)
+                {
+                    var loc = handlers.Find(x => x.NativeType == t);
+                    if (loc != null)
+                    {
+                        sb.AppendLine(loc.GetLocalVariableNameWithDeclaration());
+                    }
+                }
+
+                return sb.ToString();
+            }
+        }
+
+        private FungusVariableTypeHelper helper = new FungusVariableTypeHelper();
 
         #region consts
         const string ScriptLocation = "./Assets/Fungus/Scripts/";
@@ -230,9 +303,25 @@ namespace Fungus
                     }";
 
 
-#endregion
+        #endregion
         public VariableScriptGenerator()
         {
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(bool), typeof(BooleanVariable), "iob"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(float), typeof(FloatVariable), "iof"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(int), typeof(IntegerVariable), "ioi"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(string), typeof(StringVariable), "ios"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Animator), typeof(AnimatorVariable), "ioani"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(AudioSource), typeof(AudioSourceVariable), "ioaud"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Color), typeof(ColorVariable), "iocol"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(GameObject), typeof(GameObjectVariable), "iogo"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Material), typeof(MaterialVariable), "iomat"));
+            //we skip object
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Rigidbody2D), typeof(Rigidbody2DVariable), "iorb2d"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Sprite), typeof(SpriteVariable), "iospr"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Texture), typeof(TextureVariable), "iotex"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Transform), typeof(TransformVariable), "iot"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Vector2), typeof(Vector3Variable), "iov2"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Vector3), typeof(Vector3Variable), "iov"));
         }
 
         public void Generate()
@@ -246,7 +335,7 @@ namespace Fungus
             Type resTargetClass = types.Find(x => x.Name == ClassName);
 
             if (resTargetClass == null)
-                throw new Exception("No Type of name "+ClassName+" exists.");
+                throw new Exception("No Type of name " + ClassName + " exists.");
 
             //don't allow dups
             var genClassName = (ClassName + "Variable");
@@ -272,13 +361,13 @@ namespace Fungus
                     System.IO.File.WriteAllText(EditorScriptLocation + ClassName + "VariableDrawer.cs", editorScriptContents);
                 }
 
-                if(resGeneratedPropCommandClass == null)
+                if (resGeneratedPropCommandClass == null)
                 {
                     {
                         var fields = resTargetClass.GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
                         for (int i = 0; i < fields.Length; i++)
                         {
-                            if (IsHandledType(fields[i].FieldType))
+                            if (helper.IsTypeHandled(fields[i].FieldType))
                             {
 
                                 var actualName = fields[i].Name;
@@ -298,7 +387,7 @@ namespace Fungus
                         var props = resTargetClass.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
                         for (int i = 0; i < props.Length; i++)
                         {
-                            if (IsHandledType(props[i].PropertyType) && ! IsObsolete(props[i].GetCustomAttributes(false)))
+                            if (helper.IsTypeHandled(props[i].PropertyType) && !IsObsolete(props[i].GetCustomAttributes(false)))
                             {
                                 var actualName = props[i].Name;
                                 var upperCaseName = Char.ToUpperInvariant(actualName[0]) + actualName.Substring(1);
@@ -329,7 +418,7 @@ namespace Fungus
                     enumBuilder.AppendLine("}");
                     var enumgen = enumBuilder.ToString();
 
-                    var typeVars = GetUsedTypeVars();
+                    var typeVars = helper.GetUsedTypeVars();
 
 
                     var propScriptContents = string.Format(PropertyScriptTemplate, ClassName, enumgen, lowerClassName, getcontents, setcontents, typeVars);
@@ -345,100 +434,6 @@ namespace Fungus
             }
         }
 
-        private string GetUsedTypeVars()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            /*
-            
-            var iof = inOutVar as FloatVariable;
-            var iob = inOutVar as BooleanVariable;
-            var ioi = inOutVar as IntegerVariable;
-            var ios = inOutVar as StringVariable;
-            var iov = inOutVar as Vector3Variable;
-            var iot = inOutVar as TransformVariable;
-            var iov2 = inOutVar as Vector2Variable;
-            var iogo = inOutVar as GameObjectVariable;
-            */
-
-            foreach(Type fieldType in usedTypes)
-            {
-                if (fieldType == typeof(Single))
-                {
-                    sb.AppendLine("var iof = inOutVar as FloatVariable;");
-                }
-                else if (fieldType == typeof(int))
-                {
-                    sb.AppendLine("var ioi = inOutVar as IntegerVariable;");
-                }
-                else if (fieldType == typeof(Boolean))
-                {
-                    sb.AppendLine("var iob = inOutVar as BooleanVariable;");
-                }
-                else if (fieldType == typeof(string))
-                {
-                    sb.AppendLine("var ios = inOutVar as StringVariable;");
-                }
-                else if (fieldType == typeof(Transform))
-                {
-                    sb.AppendLine("var iot = inOutVar as TransformVariable;");
-                }
-                else if (fieldType == typeof(Vector3))
-                {
-                    sb.AppendLine("var iov = inOutVar as Vector3Variable;");
-                }
-                else if (fieldType == typeof(Vector2))
-                {
-                    sb.AppendLine("var iov2 = inOutVar as Vector2Variable;");
-                }
-                else if (fieldType == typeof(GameObject))
-                {
-                    sb.AppendLine("var iogo = inOutVar as GameObjectVariable;");
-                }
-            }
-
-            return sb.ToString();
-        }
-
-        private string GetSpecificVariableVarientFromType(Type fieldType)
-        {
-            usedTypes.Add(fieldType);
-
-            if (fieldType == typeof(Single))
-            {
-                return "iof.Value";
-            }
-            else if(fieldType == typeof(int))
-            {
-                return "ioi.Value";
-            }
-            else if (fieldType == typeof(Boolean))
-            {
-                return "iob.Value";
-            }
-            else if (fieldType == typeof(string))
-            {
-                return "ios.Value";
-            }
-            else if (fieldType == typeof(Transform))
-            {
-                return "iot.Value";
-            }
-            else if (fieldType == typeof(Vector3))
-            {
-                return "iov.Value";
-            }
-            else if (fieldType == typeof(Vector2))
-            {
-                return "iov2.Value";
-            }
-            else if (fieldType == typeof(GameObject))
-            {
-                return "iogo.Value";
-            }
-            return "ERROR - Unsupprted type requested";
-        }
-
         private void AddToSet(Type fieldType, string nameEnum, string nameVariable)
         {
             setBuilder.Append("case Property.");
@@ -447,8 +442,8 @@ namespace Fungus
             setBuilder.Append("target.");
             setBuilder.Append(nameVariable);
             setBuilder.Append(" = ");
-            setBuilder.Append(GetSpecificVariableVarientFromType(fieldType));
-            setBuilder.Append(";\nbreak;\n");
+            setBuilder.Append(helper.GetSpecificVariableVarientFromType(fieldType));
+            setBuilder.Append(".Value;\nbreak;\n");
         }
 
         private void AddToGet(Type fieldType, string nameEnum, string nameVariable)
@@ -456,8 +451,8 @@ namespace Fungus
             getBuilder.Append("case Property.");
             getBuilder.Append(nameEnum);
             getBuilder.AppendLine(":");
-            getBuilder.Append(GetSpecificVariableVarientFromType(fieldType));
-            getBuilder.Append(" = target.");
+            getBuilder.Append(helper.GetSpecificVariableVarientFromType(fieldType));
+            getBuilder.Append(".Value = target.");
             getBuilder.Append(nameVariable);
             getBuilder.Append(";\nbreak;\n");
         }
@@ -468,15 +463,9 @@ namespace Fungus
             enumBuilder.AppendLine(", ");
         }
 
-        private bool IsHandledType(Type t)
+        private bool IsObsolete(object[] attrs)
         {
-            return t == typeof(Single) || t == typeof(int) || t == typeof(string) || t == typeof(Boolean)
-                || t == typeof(Vector3) || t == typeof(Vector2) || t == typeof(GameObject);
-        }
-
-        private bool IsObsolete(object [] attrs)
-        {
-            if(attrs.Length > 0)
+            if (attrs.Length > 0)
                 return attrs.First(x => x.GetType() == typeof(ObsoleteAttribute)) != null;
             return false;
         }
