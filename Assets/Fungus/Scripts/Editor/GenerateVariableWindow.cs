@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEditor;
@@ -60,6 +61,8 @@ namespace Fungus.EditorUtils
         public string ClassName { get; set; }
         private string _category = "Other";
         public string Category { get { return _category; } set { _category = value; } }
+
+        private HashSet<Type> usedTypes = new HashSet<Type>();
 
         StringBuilder enumBuilder = new StringBuilder("public enum Property { "), getBuilder = new StringBuilder("switch (property)\n{"), setBuilder = new StringBuilder("switch (property)\n{");
 
@@ -142,6 +145,7 @@ using UnityEngine;
 //2 lower class name
 //3 get generated
 //4 set generated
+//used vars
 
 namespace Fungus
 {{
@@ -171,12 +175,7 @@ namespace Fungus
 
         public override void OnEnter()
         {{
-            var iof = inOutVar as FloatVariable;
-            var iob = inOutVar as BooleanVariable;
-            var ioi = inOutVar as IntegerVariable;
-            var ios = inOutVar as StringVariable;
-            var iov = inOutVar as Vector3Variable;
-            var iot = inOutVar as TransformVariable;
+            {5}
 
             var target = {2}Data.Value;
 
@@ -202,19 +201,10 @@ namespace Fungus
                 return ""Error: no {2} set"";
             }}
 
-            var iof = inOutVar as FloatVariable;
-            var iob = inOutVar as BooleanVariable;
-            var ioi = inOutVar as IntegerVariable;
-            var ios = inOutVar as StringVariable;
-            var iov = inOutVar as Vector3Variable;
-            var iot = inOutVar as TransformVariable;
-
-            if (iob == null && ioi == null && iov == null && iot == null && iof != null && ios != null)
+            if (inOutVar == null)
             {{
                 return ""Error: no variable set to push or pull data to or from"";
             }}
-
-            //We could do further checks here, eg, you have selected childcount but set a vec3variable
 
             return getOrSet.ToString() + "" "" + property.ToString();
         }}
@@ -339,8 +329,10 @@ namespace Fungus
                     enumBuilder.AppendLine("}");
                     var enumgen = enumBuilder.ToString();
 
+                    var typeVars = GetUsedTypeVars();
 
-                    var propScriptContents = string.Format(PropertyScriptTemplate, ClassName, enumgen, lowerClassName, getcontents, setcontents);
+
+                    var propScriptContents = string.Format(PropertyScriptTemplate, ClassName, enumgen, lowerClassName, getcontents, setcontents, typeVars);
                     System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(ScriptLocation));
                     System.IO.File.WriteAllText(ScriptLocation + ClassName + "Property.cs", propScriptContents);
 
@@ -353,21 +345,66 @@ namespace Fungus
             }
         }
 
-        private void AddToSet(Type fieldType, string nameEnum, string nameVariable)
+        private string GetUsedTypeVars()
         {
-            setBuilder.Append("case Property.");
-            setBuilder.Append(nameEnum);
-            setBuilder.AppendLine(":");
-            setBuilder.Append("target.");
-            setBuilder.Append(nameVariable);
-            setBuilder.Append(" = ");
-            setBuilder.Append(GetSpecificVariableVarientFromType(fieldType));
-            setBuilder.Append(";\nbreak;\n");
+            StringBuilder sb = new StringBuilder();
+
+            /*
+            
+            var iof = inOutVar as FloatVariable;
+            var iob = inOutVar as BooleanVariable;
+            var ioi = inOutVar as IntegerVariable;
+            var ios = inOutVar as StringVariable;
+            var iov = inOutVar as Vector3Variable;
+            var iot = inOutVar as TransformVariable;
+            var iov2 = inOutVar as Vector2Variable;
+            var iogo = inOutVar as GameObjectVariable;
+            */
+
+            foreach(Type fieldType in usedTypes)
+            {
+                if (fieldType == typeof(Single))
+                {
+                    sb.AppendLine("var iof = inOutVar as FloatVariable;");
+                }
+                else if (fieldType == typeof(int))
+                {
+                    sb.AppendLine("var ioi = inOutVar as IntegerVariable;");
+                }
+                else if (fieldType == typeof(Boolean))
+                {
+                    sb.AppendLine("var iob = inOutVar as BooleanVariable;");
+                }
+                else if (fieldType == typeof(string))
+                {
+                    sb.AppendLine("var ios = inOutVar as StringVariable;");
+                }
+                else if (fieldType == typeof(Transform))
+                {
+                    sb.AppendLine("var iot = inOutVar as TransformVariable;");
+                }
+                else if (fieldType == typeof(Vector3))
+                {
+                    sb.AppendLine("var iov = inOutVar as Vector3Variable;");
+                }
+                else if (fieldType == typeof(Vector2))
+                {
+                    sb.AppendLine("var iov2 = inOutVar as Vector2Variable;");
+                }
+                else if (fieldType == typeof(GameObject))
+                {
+                    sb.AppendLine("var iogo = inOutVar as GameObjectVariable;");
+                }
+            }
+
+            return sb.ToString();
         }
 
         private string GetSpecificVariableVarientFromType(Type fieldType)
         {
-            if(fieldType == typeof(Single))
+            usedTypes.Add(fieldType);
+
+            if (fieldType == typeof(Single))
             {
                 return "iof.Value";
             }
@@ -391,7 +428,27 @@ namespace Fungus
             {
                 return "iov.Value";
             }
+            else if (fieldType == typeof(Vector2))
+            {
+                return "iov2.Value";
+            }
+            else if (fieldType == typeof(GameObject))
+            {
+                return "iogo.Value";
+            }
             return "ERROR - Unsupprted type requested";
+        }
+
+        private void AddToSet(Type fieldType, string nameEnum, string nameVariable)
+        {
+            setBuilder.Append("case Property.");
+            setBuilder.Append(nameEnum);
+            setBuilder.AppendLine(":");
+            setBuilder.Append("target.");
+            setBuilder.Append(nameVariable);
+            setBuilder.Append(" = ");
+            setBuilder.Append(GetSpecificVariableVarientFromType(fieldType));
+            setBuilder.Append(";\nbreak;\n");
         }
 
         private void AddToGet(Type fieldType, string nameEnum, string nameVariable)
@@ -413,7 +470,8 @@ namespace Fungus
 
         private bool IsHandledType(Type t)
         {
-            return t == typeof(Single) || t == typeof(int) || t == typeof(string) || t == typeof(Boolean) || t == typeof(Vector3) || t == typeof(Transform);
+            return t == typeof(Single) || t == typeof(int) || t == typeof(string) || t == typeof(Boolean)
+                || t == typeof(Vector3) || t == typeof(Vector2) || t == typeof(GameObject);
         }
 
         private bool IsObsolete(object [] attrs)
