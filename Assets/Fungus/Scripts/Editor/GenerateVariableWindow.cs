@@ -24,19 +24,24 @@ namespace Fungus.EditorUtils
             generator.ClassName = EditorGUILayout.TextField("ClassName", generator.ClassName);
             generator.Category = EditorGUILayout.TextField("Category", generator.Category);
 
+            generator.generateVariableClass = EditorGUILayout.Toggle("Generate Variable", generator.generateVariableClass);
+            generator.generatePropertyCommand = EditorGUILayout.Toggle("Generate Property Command", generator.generatePropertyCommand);
+
             if (GUILayout.Button("Generate Now"))
             {
                 try
                 {
                     generator.Generate();
-                    generator = new VariableScriptGenerator();
+                    EditorUtility.DisplayProgressBar("Generating " + generator.ClassName, "Importing Scripts", 0);
                     AssetDatabase.Refresh();
+                    generator = new VariableScriptGenerator();
                 }
                 catch (Exception e)
                 {
                     Debug.LogWarning(e.Message);
                     //throw e;
                 }
+                EditorUtility.ClearProgressBar();
             }
         }
 
@@ -61,6 +66,7 @@ namespace Fungus.EditorUtils
         public string ClassName { get; set; }
         private string _category = "Other";
         public string Category { get { return _category; } set { _category = value; } }
+        public bool generateVariableClass = true, generatePropertyCommand = true;
 
 
         StringBuilder enumBuilder = new StringBuilder("public enum Property { "), getBuilder = new StringBuilder("switch (property)\n{"), setBuilder = new StringBuilder("switch (property)\n{");
@@ -322,6 +328,8 @@ namespace Fungus
             helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Transform), typeof(TransformVariable), "iot"));
             helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Vector2), typeof(Vector3Variable), "iov2"));
             helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Vector3), typeof(Vector3Variable), "iov"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Quaternion), typeof(QuaternionVariable), "ioq"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Matrix4x4), typeof(Matrix4x4Variable), "iom4"));
         }
 
         public void Generate()
@@ -343,27 +351,37 @@ namespace Fungus
             Type resGeneratedDrawerClass = types.Find(x => x.Name == (ClassName + "VariableDrawer"));
             Type resGeneratedPropCommandClass = types.Find(x => x.Name == (ClassName + "Property"));
 
+            EditorUtility.DisplayProgressBar("Generating " + ClassName, "Starting", 0);
+
 
             try
             {
                 var lowerClassName = Char.ToLowerInvariant(ClassName[0]) + ClassName.Substring(1);
-                if (resGeneratedClass == null && !resTargetClass.IsAbstract)
+                if (resGeneratedClass == null && !resTargetClass.IsAbstract && generateVariableClass)
                 {
+                    EditorUtility.DisplayProgressBar("Generating " + ClassName, "Variable", 0);
                     var scriptContents = string.Format(ScriptTemplate, ClassName, NamespaceOfClass, lowerClassName, Category);
                     System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(VaraibleScriptLocation));
-                    System.IO.File.WriteAllText(VaraibleScriptLocation + ClassName + "Variable.cs", scriptContents);
+                    var fileName = VaraibleScriptLocation + ClassName + "Variable.cs";
+                    System.IO.File.WriteAllText(fileName, scriptContents);
+                    Debug.Log("Created " + fileName);
                 }
 
-                if (resGeneratedDrawerClass == null && !resTargetClass.IsAbstract)
+                if (resGeneratedDrawerClass == null && !resTargetClass.IsAbstract && generateVariableClass)
                 {
+                    EditorUtility.DisplayProgressBar("Generating " + ClassName, "VariableDrawer", 0);
                     var editorScriptContents = string.Format(EditorScriptTemplate, ClassName, NamespaceOfClass, lowerClassName, Category);
                     System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(EditorScriptLocation));
-                    System.IO.File.WriteAllText(EditorScriptLocation + ClassName + "VariableDrawer.cs", editorScriptContents);
+                    var fileName = EditorScriptLocation + ClassName + "VariableDrawer.cs";
+                    System.IO.File.WriteAllText(fileName, editorScriptContents);
+                    Debug.Log("Created " + fileName);
                 }
 
-                if (resGeneratedPropCommandClass == null)
+                if (resGeneratedPropCommandClass == null && generatePropertyCommand)
                 {
+                    EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property", 0);
                     {
+                        EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Scanning Fields", 0);
                         var fields = resTargetClass.GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
                         for (int i = 0; i < fields.Length; i++)
                         {
@@ -384,6 +402,7 @@ namespace Fungus
                         }
                     }
                     {
+                        EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Scanning Props", 0);
                         var props = resTargetClass.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
                         for (int i = 0; i < props.Length; i++)
                         {
@@ -408,6 +427,9 @@ namespace Fungus
                         }
                     }
 
+
+                    EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Building", 0);
+                    
                     //finalise buidlers
                     setBuilder.AppendLine(DefaultCaseFailure);
                     var setcontents = setBuilder.ToString();
@@ -421,17 +443,21 @@ namespace Fungus
                     var typeVars = helper.GetUsedTypeVars();
 
 
+                    //write to file
+                    EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Writing", 0);
                     var propScriptContents = string.Format(PropertyScriptTemplate, ClassName, enumgen, lowerClassName, getcontents, setcontents, typeVars);
                     System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(ScriptLocation));
-                    System.IO.File.WriteAllText(ScriptLocation + ClassName + "Property.cs", propScriptContents);
-
-                    //insert into template script
+                    var fileName = ScriptLocation + ClassName + "Property.cs";
+                    System.IO.File.WriteAllText(fileName, propScriptContents);
+                    Debug.Log("Created " + fileName);
                 }
             }
             catch (Exception e)
             {
                 Debug.LogError(e.Message);
             }
+
+            EditorUtility.ClearProgressBar();
         }
 
         private void AddToSet(Type fieldType, string nameEnum, string nameVariable)

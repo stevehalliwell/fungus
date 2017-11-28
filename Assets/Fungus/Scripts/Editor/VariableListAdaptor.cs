@@ -193,7 +193,10 @@ namespace Fungus.EditorUtils
             
 			keyProp.stringValue = flowchart.GetUniqueVariableKey(key, variable);
 
-			if(scopeProp.enumValueIndex == (int)VariableScope.GlobalStatic && Application.isPlaying)
+            bool isGlobal = scopeProp.enumValueIndex == (int)VariableScope.GlobalStatic;
+
+
+            if (isGlobal && Application.isPlaying)
 			{
 				var res = FungusManager.Instance.GlobalVariables.GetVariable(keyProp.stringValue);
 				if(res != null)
@@ -203,14 +206,21 @@ namespace Fungus.EditorUtils
 
 					var prevEnabled = GUI.enabled;
 					GUI.enabled = false;
-					EditorGUI.PropertyField(rects[2], globalValProp, new GUIContent(""));
-					GUI.enabled = prevEnabled;
+
+                    if (!variableInfo.IsPreviewedOnly)
+                        EditorGUI.PropertyField(rects[2], globalValProp, new GUIContent(""));
+
+                    GUI.enabled = prevEnabled;
 				}
 			}
 			else
-			{
-				EditorGUI.PropertyField(rects[2], defaultProp, new GUIContent(""));
-			}
+            {
+                if (!variableInfo.IsPreviewedOnly)
+                    EditorGUI.PropertyField(rects[2], defaultProp, new GUIContent(""));
+                else if(!isGlobal)
+                    EditorGUI.LabelField(rects[2], this[index].objectReferenceValue.ToString());
+
+            }
 
 
             scope = (VariableScope)EditorGUI.EnumPopup(rects[3], variable.Scope);
