@@ -98,6 +98,10 @@ namespace Fungus.EditorUtils
                 {
                     return "var " + LocalVariableName + " = inOutVar as " + FungusTypeString + ';';
                 }
+                public string GetVarPropText()
+                {
+                    return "typeof(" + FungusTypeString + ")";
+                }
             }
 
             public void AddHandler(TypeHandler t)
@@ -136,6 +140,25 @@ namespace Fungus.EditorUtils
                     if (loc != null)
                     {
                         sb.AppendLine(loc.GetLocalVariableNameWithDeclaration());
+                    }
+                }
+
+                return sb.ToString();
+            }
+
+            public string GetVariablePropertyTypeOfs()
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (Type t in usedTypes)
+                {
+                    var loc = handlers.Find(x => x.NativeType == t);
+                    if (loc != null)
+                    {
+                        if (sb.Length > 0)
+                            sb.AppendLine(",");
+
+                        sb.Append(loc.GetVarPropText());
                     }
                 }
 
@@ -224,7 +247,8 @@ using UnityEngine;
 //2 lower class name
 //3 get generated
 //4 set generated
-//used vars
+//5 used vars
+//6 variableProperty Type of
 
 namespace Fungus
 {{
@@ -247,8 +271,7 @@ namespace Fungus
         protected {0}Data {2}Data;
 
         [SerializeField]
-        [VariableProperty(typeof(FloatVariable),
-                          typeof(IntegerVariable) )]
+        [VariableProperty({6})]
 		
         protected Variable inOutVar;
 
@@ -326,7 +349,7 @@ namespace Fungus
             helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Sprite), typeof(SpriteVariable), "iospr"));
             helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Texture), typeof(TextureVariable), "iotex"));
             helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Transform), typeof(TransformVariable), "iot"));
-            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Vector2), typeof(Vector3Variable), "iov2"));
+            helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Vector2), typeof(Vector2Variable), "iov2"));
             helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Vector3), typeof(Vector3Variable), "iov"));
             helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Quaternion), typeof(QuaternionVariable), "ioq"));
             helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Matrix4x4), typeof(Matrix4x4Variable), "iom4"));
@@ -441,11 +464,12 @@ namespace Fungus
                     var enumgen = enumBuilder.ToString();
 
                     var typeVars = helper.GetUsedTypeVars();
+                    var variablePropertyTypes = helper.GetVariablePropertyTypeOfs();
 
 
                     //write to file
                     EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Writing", 0);
-                    var propScriptContents = string.Format(PropertyScriptTemplate, ClassName, enumgen, lowerClassName, getcontents, setcontents, typeVars);
+                    var propScriptContents = string.Format(PropertyScriptTemplate, ClassName, enumgen, lowerClassName, getcontents, setcontents, typeVars, variablePropertyTypes);
                     System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(ScriptLocation));
                     var fileName = ScriptLocation + ClassName + "Property.cs";
                     System.IO.File.WriteAllText(fileName, propScriptContents);
