@@ -14,12 +14,22 @@ Commands and potential flowchart/ui changes to support HFSM in Fungus
 -do we have a way of notifying a block that they are no longer being run?
 --they have an on exit but that has no return or obvious means of delay
 -http://fungusgames.com/forum#!/fungus-development:choosing-a-character-based/extending-conversation-seem
+a state machine command has an int or enum that links to a block to tick, see call for wait and continue behaviour
+-each 'state' has an enter, exit, tick
+state machine can transition, force transition
+*look into setting property on command such that it is not hidden in inspector
 
 
-behaviour tree
--blocks need
---long running state
---return values
+behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
+-requires us to be able to return a value from a block / a new block type
+--running, stopped, success, fail
+-behaviour
+--selector, sequence, condition, action, decorators, parallel(response to child success or failure)
+-sub tree
+--if these are defined elsewhere how do they know the shared vars and targets etc.?
+*do we need a context object that we pass to them?
+*do the fungus commands actually just enable and disable the updates of these objects
+
 
 
 Optimisation pass
@@ -48,10 +58,7 @@ Global command priority
 
 
 global varaiables
--test that vars exist after a reload of scene
--currently there is no way of knowing if a global exists until runtime, is this tolerable?
---we could have a single global resource for this and expose that to all, the workflow of adding vars to that that are global and not being able to see that those in your var list seems worse than not knowing your globals
-
+-move to own branch and PR
 
 Arrays
 -want em, don't have em
