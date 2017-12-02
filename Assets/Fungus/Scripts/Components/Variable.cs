@@ -34,8 +34,8 @@ namespace Fungus
         Private,
         /// <summary> Can be accessed from any command in any Flowchart. </summary>
         Public,
-        /// <summary> Creates and/or references a global static variable of that name, all variables of this name and scope share the same underlying fungus variable and exist for the duration of the instance of Unity.</summary>
-        GlobalStatic,
+        /// <summary> Creates and/or references a global variable of that name, all variables of this name and scope share the same underlying fungus variable and exist for the duration of the instance of Unity.</summary>
+        Global,
     }
 
     /// <summary>
@@ -135,7 +135,7 @@ namespace Fungus
         {
             get
             {
-                if (scope != VariableScope.GlobalStatic)
+                if (scope != VariableScope.Global)
                 {
                     return this.value;
                 }
@@ -146,7 +146,7 @@ namespace Fungus
             }
             set
             {
-                if (scope != VariableScope.GlobalStatic)
+                if (scope != VariableScope.Global)
                 {
                     this.value = value;
                 }

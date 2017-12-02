@@ -193,7 +193,7 @@ namespace Fungus.EditorUtils
             
 			keyProp.stringValue = flowchart.GetUniqueVariableKey(key, variable);
 
-            bool isGlobal = scopeProp.enumValueIndex == (int)VariableScope.GlobalStatic;
+            bool isGlobal = scopeProp.enumValueIndex == (int)VariableScope.Global;
 
 
             if (isGlobal && Application.isPlaying)
