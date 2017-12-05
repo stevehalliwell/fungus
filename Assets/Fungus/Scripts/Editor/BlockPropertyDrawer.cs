@@ -40,7 +40,7 @@ namespace Fungus
             }
             else
             {
-                base.OnGUI(position, property, label);
+				EditorGUI.PropertyField(position, property);
             }
         }
     }

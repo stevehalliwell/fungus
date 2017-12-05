@@ -30,6 +30,8 @@ behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
 *do we need a context object that we pass to them?
 *do the fungus commands actually just enable and disable the updates of these objects
 - we end up making a specialised behaviour tree version of call that does most of the heavy lifting
+revert changes to indent, make it indent arrays and lists instead
+
 
 
 
@@ -57,9 +59,6 @@ Global command priority
 -allow custom weight
 -scan an existing project to determine weight?
 
-
-global varaiables
--move to own branch and PR
 
 Arrays
 -want em, don't have em

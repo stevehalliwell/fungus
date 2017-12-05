@@ -323,7 +323,6 @@ GameObject:
   - component: {fileID: 971981419}
   - component: {fileID: 971981406}
   - component: {fileID: 971981407}
-  - component: {fileID: 971981408}
   - component: {fileID: 971981415}
   - component: {fileID: 971981417}
   - component: {fileID: 971981416}
@@ -334,6 +333,7 @@ GameObject:
   - component: {fileID: 971981411}
   - component: {fileID: 971981410}
   - component: {fileID: 971981418}
+  - component: {fileID: 971981408}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -365,7 +365,7 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 971981407}
+  - {fileID: 971981415}
   selectedCommands: []
   variables: []
   description: 
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a13a17561f70ea14791d426391123cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 1
+  itemId: 14
   indentLevel: 0
   targetBlock:
   - {fileID: 971981415}
@@ -435,7 +435,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 439
     y: 265.5
-    width: 167
+    width: 156
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -504,7 +504,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 203
     y: 252.5
-    width: 160
+    width: 149
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -629,7 +629,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &971981418
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 971981405}

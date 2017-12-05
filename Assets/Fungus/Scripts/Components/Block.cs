@@ -17,7 +17,9 @@ namespace Fungus
         /// <summary> No command executing </summary>
         Idle,       
         /// <summary> Executing a command </summary>
-        Executing,
+        Executing, //running
+		Failed,
+		Succeeded,
     }
 
     /// <summary>
