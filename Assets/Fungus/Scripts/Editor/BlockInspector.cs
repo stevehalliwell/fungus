@@ -185,7 +185,9 @@ namespace Fungus.EditorUtils
                 }
                 if (activeCommandEditor != null)
                 {
+                    EditorGUI.indentLevel++;
                     activeCommandEditor.DrawCommandInspectorGUI();
+                    EditorGUI.indentLevel--;
                 }
             }
 

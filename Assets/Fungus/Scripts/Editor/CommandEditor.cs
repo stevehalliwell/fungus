@@ -114,7 +114,10 @@ namespace Fungus.EditorUtils
             CommandInfoAttribute infoAttr = CommandEditor.GetCommandInfo(t.GetType());
             if (infoAttr != null)
             {
+                var prevIndent = EditorGUI.indentLevel;
+                EditorGUI.indentLevel = 0;
                 EditorGUILayout.HelpBox(infoAttr.HelpText, MessageType.Info, true);
+                EditorGUI.indentLevel = prevIndent;
             }
         }
 

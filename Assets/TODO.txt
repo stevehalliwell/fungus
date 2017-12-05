@@ -29,6 +29,7 @@ behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
 --if these are defined elsewhere how do they know the shared vars and targets etc.?
 *do we need a context object that we pass to them?
 *do the fungus commands actually just enable and disable the updates of these objects
+- we end up making a specialised behaviour tree version of call that does most of the heavy lifting
 
 
 
