@@ -27,20 +27,25 @@ namespace Fungus
         private void OnBlockCompleted()
         {
             //if success next
-            curIndex++;
-
-            //if next doesn't exist, set success and continue
-            if(curIndex < targetBlock.Count)
+            if (targetBlock[curIndex].State == ExecutionState.Succeeded)
             {
-                KickOffBlock();
+                curIndex++;
+
+                //if next doesn't exist, set success and continue
+                if (curIndex < targetBlock.Count)
+                {
+                    KickOffBlock();
+                }
+                else
+                {
+                    Continue();
+                }
             }
+            //if fail set fail state and stop
             else
             {
-                Continue();
+                ParentBlock.Fail();
             }
-
-            //if fail set fail state and stop
-
         }
 
         private void KickOffBlock()

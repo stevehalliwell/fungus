@@ -121,6 +121,17 @@ namespace Fungus
         public virtual ExecutionState State { get { return executionState; } }
 
         /// <summary>
+        /// Return the execution state to idle
+        /// </summary>
+        public virtual void ResetExecutionState() { executionState = ExecutionState.Idle; }
+
+        public virtual void Fail()
+        {
+            executionState = ExecutionState.Failed;
+            Stop();
+        }
+
+        /// <summary>
         /// Unique identifier for the Block.
         /// </summary>
         public virtual int ItemId { get { return itemId; } set { itemId = value; } }
@@ -299,13 +310,17 @@ namespace Fungus
                 command.IsExecuting = false;
             }
 
+            bool didFail = executionState == ExecutionState.Failed;
+
             executionState = ExecutionState.Idle;
             activeCommand = null;
             BlockSignals.DoBlockEnd(this);
 
             if (onComplete != null)
             {
+                executionState = didFail ? ExecutionState.Failed : ExecutionState.Succeeded;
                 onComplete();
+                executionState = ExecutionState.Idle;
             }
         }
 
