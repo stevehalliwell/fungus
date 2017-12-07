@@ -21,10 +21,19 @@ state machine can transition, force transition
 
 
 behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
+move the call and get notified of completion stuff to block?
+decorator base class
+sequence base class
 -requires us to be able to return a value from a block / a new block type
 --running, stopped, success, fail
 -behaviour
---selector, sequence, condition, action, decorators, parallel(response to child success or failure)
+--selector, shuffle? next until a success
+--sequence, shuffle? next until fail
+--parallel, kickoff all, fail on x fails, success on x success
+--repeat, until ____ and return _____
+--invert, make fail success, make success fail
+--timer, return previous result for x ticks
+--condition, takes a bool if empty uses success
 -sub tree
 --if these are defined elsewhere how do they know the shared vars and targets etc.?
 *do we need a context object that we pass to them?
