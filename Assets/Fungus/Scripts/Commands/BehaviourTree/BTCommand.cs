@@ -47,12 +47,12 @@ namespace Fungus
             }
         }
 
-        protected void KickOffBlockDelayed(Block target, IEnumerator waitOn)
+		protected void KickOffBlockDelayed(Block target, YieldInstruction waitOn)
         {
             StartCoroutine(_KickOffBlockDelayed(target, waitOn));
         }
 
-        private IEnumerator _KickOffBlockDelayed(Block target, IEnumerator waitOn)
+		private IEnumerator _KickOffBlockDelayed(Block target, YieldInstruction waitOn)
         {
             yield return waitOn;
             KickOffBlock(target);

@@ -20,19 +20,16 @@ state machine can transition, force transition
 *look into setting property on command such that it is not hidden in inspector
 
 
+
 behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
-move the call and get notified of completion stuff to block?
--requires us to be able to return a value from a block / a new block type
---running, stopped, success, fail
 -behaviour
 --parallel, kickoff all, fail on x fails, success on x success
---timer, return previous result for x ticks
+--timer, return success or fail or previous result for x ticks
 --condition, takes a bool if empty uses success
 -sub tree
 --if these are defined elsewhere how do they know the shared vars and targets etc.?
 *do we need a context object that we pass to them?
 *do the fungus commands actually just enable and disable the updates of these objects
-- we end up making a specialised behaviour tree version of call that does most of the heavy lifting
 revert changes to indent, make it indent arrays and lists instead
 
 

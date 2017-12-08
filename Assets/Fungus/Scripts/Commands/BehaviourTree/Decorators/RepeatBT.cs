@@ -16,12 +16,15 @@ namespace Fungus
         [SerializeField]
         protected ExecutionState repeatUntil = ExecutionState.Succeeded;
 
+		[SerializeField]
+		protected float timeBetweenRepeats = 0;
+
         protected override void OnBlockCompleted()
         {
             if (block.State != repeatUntil)
             {
                 //wait 1 frame then repeat
-                KickOffBlockDelayed(block, null);
+				KickOffBlockDelayed(block, timeBetweenRepeats == 0 ? null : new WaitForSeconds(timeBetweenRepeats));
             }
             else
             {
