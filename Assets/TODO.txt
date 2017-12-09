@@ -23,7 +23,6 @@ state machine can transition, force transition
 
 behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
 -behaviour
---parallel, kickoff all, fail on x fails, success on x success
 --timer, return success or fail or previous result for x ticks
 --condition, takes a bool if empty uses success
 -sub tree

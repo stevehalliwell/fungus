@@ -17,7 +17,7 @@ namespace Fungus
     [AddComponentMenu("")]
     public class Sequence : BTComposite
     {
-        protected override void OnBlockCompleted()
+        protected override void OnBlockCompleted(Block compBlock)
         {
             //if success next
             if (targetBlocks[curIndex].State == ExecutionState.Succeeded)

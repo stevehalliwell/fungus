@@ -19,7 +19,7 @@ namespace Fungus
 		[SerializeField]
 		protected float timeBetweenRepeats = 0;
 
-        protected override void OnBlockCompleted()
+        protected override void OnBlockCompleted(Block compBlock)
         {
             if (block.State != repeatUntil)
             {

@@ -15,19 +15,19 @@ namespace Fungus
     [AddComponentMenu("")]
     public abstract class BTCommand : Command
     {
-        protected abstract void OnBlockCompleted();
+        protected abstract void OnBlockCompleted(Block target);
 
-        protected void KickOffBlock(Block target)
+        protected void KickOffBlock(Block compBlock)
         {
             var flowchart = GetFlowchart();
 
-            if (target != null)
+            if (compBlock != null)
             {
                 // Callback action for Wait Until Finished mode
                 System.Action onComplete = delegate
                 {
                     flowchart.SelectedBlock = ParentBlock;
-                    OnBlockCompleted();
+                    OnBlockCompleted(compBlock);
                 };
 
 
@@ -35,10 +35,10 @@ namespace Fungus
                 // onto the next block in the inspector.
                 if (flowchart.SelectedBlock == ParentBlock)
                 {
-                    flowchart.SelectedBlock = target;
+                    flowchart.SelectedBlock = compBlock;
                 }
 
-                StartCoroutine(target.Execute(onComplete: onComplete));
+                StartCoroutine(compBlock.Execute(onComplete: onComplete));
             }
             else
             {

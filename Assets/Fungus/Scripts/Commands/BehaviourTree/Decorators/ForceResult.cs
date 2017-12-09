@@ -17,7 +17,7 @@ namespace Fungus
 		[SerializeField]
 		protected bool isForcingSuccess = true;
 		
-		protected override void OnBlockCompleted()
+		protected override void OnBlockCompleted(Block compBlock)
 		{
 			//if success next
 			if (isForcingSuccess)

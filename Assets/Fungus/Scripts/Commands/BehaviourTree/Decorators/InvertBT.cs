@@ -14,7 +14,7 @@ namespace Fungus
     [AddComponentMenu("")]
     public class InvertBT : BTDecorator
     {
-        protected override void OnBlockCompleted()
+        protected override void OnBlockCompleted(Block compBlock)
         {
             //if success next
             if (block.State == ExecutionState.Succeeded)
