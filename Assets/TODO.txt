@@ -23,7 +23,7 @@ state machine can transition, force transition
 
 behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
 -behaviour
---timer, return success or fail or previous result for x ticks
+--timer, return success or fail or previous result for x ticks or real time
 --condition, takes a bool if empty uses success
 -sub tree
 --if these are defined elsewhere how do they know the shared vars and targets etc.?
