@@ -30,7 +30,7 @@ behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
 *do we need a context object that we pass to them?
 *do the fungus commands actually just enable and disable the updates of these objects
 revert changes to indent, make it indent arrays and lists instead
-
+*currently menu prevents BT from functioning in its current state as the menu has no idea what it started, but this may not be a problem as if a bt gets to the point where it needs a menu, it has probably found an action worth persuing 
 
 
 
