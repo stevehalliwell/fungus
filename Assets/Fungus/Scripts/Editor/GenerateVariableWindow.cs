@@ -20,9 +20,9 @@ namespace Fungus.EditorUtils
 
         private void DrawMenuPanel()
         {
-            generator.NamespaceOfClass = EditorGUILayout.TextField("NamespaceOfClass", generator.NamespaceOfClass);
             generator.ClassName = EditorGUILayout.TextField("ClassName", generator.ClassName);
             generator.Category = EditorGUILayout.TextField("Category", generator.Category);
+            generator.NamespaceOfClass = EditorGUILayout.TextField("NamespaceOfClass", generator.NamespaceOfClass);
 
             generator.generateVariableClass = EditorGUILayout.Toggle("Generate Variable", generator.generateVariableClass);
             generator.generatePropertyCommand = EditorGUILayout.Toggle("Generate Property Command", generator.generatePropertyCommand);
@@ -34,13 +34,13 @@ namespace Fungus.EditorUtils
                     generator.Generate();
                     EditorUtility.DisplayProgressBar("Generating " + generator.ClassName, "Importing Scripts", 0);
                     AssetDatabase.Refresh();
-                    generator = new VariableScriptGenerator();
                 }
                 catch (Exception e)
                 {
                     Debug.LogWarning(e.Message);
                     //throw e;
                 }
+                generator = new VariableScriptGenerator();
                 EditorUtility.ClearProgressBar();
             }
         }
@@ -170,6 +170,7 @@ namespace Fungus.EditorUtils
 
         #region consts
         const string ScriptLocation = "./Assets/Fungus/Scripts/";
+        const string PropertyScriptLocation = ScriptLocation + "Commands/Property/";
         const string VaraibleScriptLocation = ScriptLocation + "VariableTypes/";
         const string EditorScriptLocation = VaraibleScriptLocation + "Editor/";
         const string EditorScriptTemplate = @"using UnityEditor;
@@ -405,7 +406,7 @@ namespace Fungus
                     Debug.Log("Created " + fileName);
                 }
 
-                fileName = ScriptLocation + ClassName + "Property.cs";
+                fileName = PropertyScriptLocation + ClassName + "Property.cs";
                 if ((resGeneratedPropCommandClass == null || System.IO.File.Exists(fileName))
                     && generatePropertyCommand)
                 {
@@ -477,8 +478,7 @@ namespace Fungus
                     //write to file
                     EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Writing", 0);
                     var propScriptContents = string.Format(PropertyScriptTemplate, ClassName, enumgen, lowerClassName, getcontents, setcontents, typeVars, variablePropertyTypes);
-                    System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(ScriptLocation));
-                    fileName = ScriptLocation + ClassName + "Property.cs";
+                    System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(PropertyScriptLocation));
                     System.IO.File.WriteAllText(fileName, propScriptContents);
                     Debug.Log("Created " + fileName);
                 }
