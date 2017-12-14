@@ -17,9 +17,15 @@ namespace Fungus
         /// <summary> No command executing </summary>
         Idle,       
         /// <summary> Executing a command </summary>
-        Executing, //running
-		Failed,
-		Succeeded,
+        Executing, 
+    }
+
+    public enum BehaviourState
+    {
+        Idle,
+        Running,
+        Failed,
+        Succeeded,
     }
 
     /// <summary>
@@ -46,6 +52,23 @@ namespace Fungus
         [SerializeField] protected List<Command> commandList = new List<Command>();
 
         protected ExecutionState executionState;
+
+        private BehaviourState behState;
+
+        public BehaviourState BehaviourState
+        {
+            get
+            {
+                if (executionState == ExecutionState.Executing)
+                    return BehaviourState.Running;
+                else
+                    return behState;
+            }
+            set
+            {
+                behState = value;
+            }
+        }
 
         protected Command activeCommand;
 
@@ -127,7 +150,7 @@ namespace Fungus
 
         public virtual void Fail()
         {
-            executionState = ExecutionState.Failed;
+            behState = BehaviourState.Failed;
             Stop();
         }
 
@@ -225,6 +248,7 @@ namespace Fungus
 
             var flowchart = GetFlowchart();
             executionState = ExecutionState.Executing;
+            BehaviourState = BehaviourState.Running;
             BlockSignals.DoBlockStart(this);
 
             #if UNITY_EDITOR
@@ -310,17 +334,20 @@ namespace Fungus
                 command.IsExecuting = false;
             }
 
-            bool didFail = executionState == ExecutionState.Failed;
 
             executionState = ExecutionState.Idle;
             activeCommand = null;
+
+            if (BehaviourState != BehaviourState.Failed)
+            {
+                BehaviourState = BehaviourState.Succeeded;
+            }
+
             BlockSignals.DoBlockEnd(this);
 
             if (onComplete != null)
             {
-                executionState = didFail ? ExecutionState.Failed : ExecutionState.Succeeded;
                 onComplete();
-                executionState = ExecutionState.Idle;
             }
         }
 

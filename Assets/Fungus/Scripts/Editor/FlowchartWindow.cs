@@ -912,6 +912,7 @@ namespace Fungus.EditorUtils
                 DrawGrid();
 
                 // Draw connections
+                //TODO: not sure why these are done this way, not a big deal but redundant loops possibly
                 foreach (var block in blocks)
                 {
                     DrawConnections(block, false);

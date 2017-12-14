@@ -19,6 +19,7 @@ namespace Fungus
 
         public override void OnEnter()
         {
+            block.BehaviourState = BehaviourState.Idle;
             KickOffBlock(block);
         }
 
