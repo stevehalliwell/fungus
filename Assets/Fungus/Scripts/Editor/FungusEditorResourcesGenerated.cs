@@ -21,10 +21,16 @@ namespace Fungus.EditorUtils
         [SerializeField] private EditorTexture connection_point;
         [SerializeField] private EditorTexture event_node_off;
         [SerializeField] private EditorTexture event_node_on;
+        [SerializeField] private EditorTexture parallel_node_off;
+        [SerializeField] private EditorTexture parallel_node_on;
         [SerializeField] private EditorTexture play_big;
         [SerializeField] private EditorTexture play_small;
         [SerializeField] private EditorTexture process_node_off;
         [SerializeField] private EditorTexture process_node_on;
+        [SerializeField] private EditorTexture selector_node_off;
+        [SerializeField] private EditorTexture selector_node_on;
+        [SerializeField] private EditorTexture sequence_node_off;
+        [SerializeField] private EditorTexture sequence_node_on;
 
         public static Texture2D Add { get { return Instance.add.Texture2D; } }
         public static Texture2D AddSmall { get { return Instance.add_small.Texture2D; } }
@@ -40,9 +46,15 @@ namespace Fungus.EditorUtils
         public static Texture2D ConnectionPoint { get { return Instance.connection_point.Texture2D; } }
         public static Texture2D EventNodeOff { get { return Instance.event_node_off.Texture2D; } }
         public static Texture2D EventNodeOn { get { return Instance.event_node_on.Texture2D; } }
+        public static Texture2D ParallelNodeOff { get { return Instance.parallel_node_off.Texture2D; } }
+        public static Texture2D ParallelNodeOn { get { return Instance.parallel_node_on.Texture2D; } }
         public static Texture2D PlayBig { get { return Instance.play_big.Texture2D; } }
         public static Texture2D PlaySmall { get { return Instance.play_small.Texture2D; } }
         public static Texture2D ProcessNodeOff { get { return Instance.process_node_off.Texture2D; } }
         public static Texture2D ProcessNodeOn { get { return Instance.process_node_on.Texture2D; } }
+        public static Texture2D SelectorNodeOff { get { return Instance.selector_node_off.Texture2D; } }
+        public static Texture2D SelectorNodeOn { get { return Instance.selector_node_on.Texture2D; } }
+        public static Texture2D SequenceNodeOff { get { return Instance.sequence_node_off.Texture2D; } }
+        public static Texture2D SequenceNodeOn { get { return Instance.sequence_node_on.Texture2D; } }
     }
 }
