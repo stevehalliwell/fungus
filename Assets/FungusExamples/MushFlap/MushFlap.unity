@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 32821586}
   - component: {fileID: 32821592}
   - component: {fileID: 32821593}
+  - component: {fileID: 32821594}
   m_Layer: 0
   m_Name: PlayerMush
   m_TagString: Player
@@ -179,9 +180,9 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 32821583}
+  - {fileID: 32821579}
   selectedCommands:
-  - {fileID: 32821581}
+  - {fileID: 32821594}
   variables:
   - {fileID: 32821584}
   - {fileID: 32821585}
@@ -267,6 +268,7 @@ MonoBehaviour:
   eventHandler: {fileID: 32821580}
   commandList:
   - {fileID: 32821591}
+  - {fileID: 32821594}
   - {fileID: 32821578}
   - {fileID: 32821590}
 --- !u!114 &32821580
@@ -297,7 +299,7 @@ MonoBehaviour:
   itemId: 3
   indentLevel: 1
   targetFlowchart: {fileID: 2049938751}
-  targetBlock: {fileID: 2049938770}
+  targetBlock: {fileID: 0}
   startLabel:
     stringRef: {fileID: 0}
     stringVal: 
@@ -548,6 +550,21 @@ MonoBehaviour:
     stringVal: 
   startIndex: 0
   callMode: 1
+--- !u!114 &32821594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 32821574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6e8f632db87477eb750446b28d73a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 12
+  indentLevel: 1
+  commenterName: 
+  commentText: Needs rigidbody2d property so we can set simulated on and off
 --- !u!1 &200509839
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,6 +931,7 @@ GameObject:
   - component: {fileID: 590890492}
   - component: {fileID: 590890491}
   - component: {fileID: 590890478}
+  - component: {fileID: 590890495}
   m_Layer: 0
   m_Name: GameRules
   m_TagString: Untagged
@@ -958,9 +976,8 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 590890489}
-  selectedCommands:
-  - {fileID: 590890478}
+  - {fileID: 590890468}
+  selectedCommands: []
   variables:
   - {fileID: 590890479}
   - {fileID: 590890471}
@@ -1120,7 +1137,7 @@ MonoBehaviour:
   itemId: 2
   blockName: Spawn
   description: 
-  eventHandler: {fileID: 0}
+  eventHandler: {fileID: 590890495}
   commandList:
   - {fileID: 590890477}
   - {fileID: 590890476}
@@ -1201,7 +1218,7 @@ MonoBehaviour:
   key: start
 --- !u!114 &590890478
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 590890464}
@@ -1427,7 +1444,7 @@ MonoBehaviour:
   - {fileID: 590890478}
 --- !u!114 &590890490
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 590890464}
@@ -1447,7 +1464,7 @@ MonoBehaviour:
   targetGameObjectOLD: {fileID: 0}
 --- !u!114 &590890491
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 590890464}
@@ -1479,7 +1496,7 @@ MonoBehaviour:
     vector3Val: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!114 &590890492
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 590890464}
@@ -1493,7 +1510,7 @@ MonoBehaviour:
   duration: -1
 --- !u!114 &590890493
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 590890464}
@@ -1536,6 +1553,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentBlock: {fileID: 590890489}
   waitForFrames: 0
+--- !u!114 &590890495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 590890464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f6487d21a03404cb21b245f0242e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBlock: {fileID: 590890473}
+  waitForFrames: 1
 --- !u!1 &624464632
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,13 +10,13 @@ Event on Block text entry list
 Commands and potential flowchart/ui changes to support HFSM in Fungus
 -a command that overrides the getconnectedblocks and use that on an update event to run
 -do we 'define an enum' in the codebase?
+--no fancy inspector can do the job
 -we look up things like monster love does
--do we have a way of notifying a block that they are no longer being run?
---they have an on exit but that has no return or obvious means of delay
+--no but we do use an on enter on exit update, and any of those can be multi frame
 -http://fungusgames.com/forum#!/fungus-development:choosing-a-character-based/extending-conversation-seem
 a state machine command has an int or enum that links to a block to tick, see call for wait and continue behaviour
--each 'state' has an enter, exit, tick
-state machine can transition, force transition
+-can we have a non fungus version for general use
+-define a state machine name, a state name and blocks to run on enter, update and exit
 *look into setting property on command such that it is not hidden in inspector
 
 
@@ -31,8 +31,6 @@ behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
 *do the fungus commands actually just enable and disable the updates of these objects
 revert changes to indent, make it indent arrays and lists instead
 *currently menu prevents BT from functioning in its current state as the menu has no idea what it started, but this may not be a problem as if a bt gets to the point where it needs a menu, it has probably found an action worth persuing 
-numbering connections? could just need to pass the index to the draw index to the drawrectconnection and do a guilabel
-icons on nodes that have BT commands to show their status
 
 
 
