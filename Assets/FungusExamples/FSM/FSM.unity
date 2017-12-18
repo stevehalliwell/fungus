@@ -281,6 +281,8 @@ GameObject:
   m_Component:
   - component: {fileID: 533072485}
   - component: {fileID: 533072484}
+  - component: {fileID: 533072487}
+  - component: {fileID: 533072486}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -311,7 +313,8 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
-  selectedBlocks: []
+  selectedBlocks:
+  - {fileID: 533072487}
   selectedCommands: []
   variables: []
   description: 
@@ -337,6 +340,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &533072486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533072483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f44ee58664a41459f42352bd32d012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  states:
+  - Name: 
+    Enter: {fileID: 533072487}
+    Update: {fileID: 0}
+    Exit: {fileID: 0}
+  - Name: 
+    Enter: {fileID: 0}
+    Update: {fileID: 0}
+    Exit: {fileID: 0}
+  currentState: 0
+--- !u!114 &533072487
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533072483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 461
+    y: 345
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 0
+  blockName: New Block
+  description: 
+  eventHandler: {fileID: 0}
+  commandList: []
 --- !u!1 &1181040150
 GameObject:
   m_ObjectHideFlags: 1
