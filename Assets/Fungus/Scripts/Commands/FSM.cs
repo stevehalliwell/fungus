@@ -15,8 +15,19 @@ namespace Fungus
             public string Name;
             public Block Enter, Update, Exit;
         }
-
+        
         public List<State> states;
         public int currentState;
+        public new string name;
+
+        public void Update()
+        {
+            var curState = states[currentState];
+
+            if(curState.Update != null)
+            {
+                curState.Update.StartExecution();
+            }
+        }
     }
 }
