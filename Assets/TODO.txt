@@ -7,9 +7,14 @@ Event on Block text entry list
 -needs to have a text based search like command now does, prob needs more complicated drop down menu replacement
 
 
-Commands and potential flowchart/ui changes to support HFSM in Fungus
+FSM in Fungus
 -http://fungusgames.com/forum#!/fungus-development:choosing-a-character-based/extending-conversation-seem
--any block should be able to be multi frame and the next update should not be called during a transtion
+-what happens when you try to change during an existing transition?
+-do we want to support state stacks or HFSM
+-need commands to get current state index or name 
+-need command to change state by name or index
+-need a callback/event and block for a state change 
+-need command to check if it is transitioning
 
 
 

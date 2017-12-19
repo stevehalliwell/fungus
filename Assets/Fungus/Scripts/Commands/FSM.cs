@@ -6,6 +6,7 @@ namespace Fungus
 {
     // <summary>
     /// 
+	/// Note: has a custom inspector to show reorderable list of states with blocks correctly
     /// </summary>
     public class FSM : MonoBehaviour
     {
@@ -22,6 +23,9 @@ namespace Fungus
         public new string name;
         public bool startOnStart = true;
         public int startingState = 0;
+		public bool IsTransitioningState {get {return isTransitioningState;}}
+
+		private bool isTransitioningState = false;
 
         private void Start()
         {
@@ -29,10 +33,11 @@ namespace Fungus
                 ChangeState(startingState);
         }
 
-        private bool isTransitioningState = false;
-
         public void ChangeState(int newIndex)
         {
+			if(IsTransitioningState)
+				return;
+			
             //is it actually different and valid
             if (newIndex == currentState || (newIndex < 0 || newIndex >= states.Count))
                 return;
@@ -67,8 +72,7 @@ namespace Fungus
             {
                 if(curState.Enter != null)
                 {
-                    isTransitioningState = true;
-                    curState.Enter.StartExecution(onComplete:TransitionComplete);
+                    curState.Enter.StartExecution();
                 }
                 curState.HasEntered = true;
             }
