@@ -12,7 +12,7 @@ namespace Fungus.EditorUtils
     {
         protected SerializedProperty statesProp;
         protected SerializedProperty currentStateProp;
-        protected SerializedProperty nameProp;
+        protected SerializedProperty nameProp, startOnStartProp, startingStateProp;
         protected ReorderableList statesList;
 
         private int selectedItem = -1;
@@ -22,6 +22,8 @@ namespace Fungus.EditorUtils
             statesProp = serializedObject.FindProperty("states");
             currentStateProp = serializedObject.FindProperty("currentState");
             nameProp = serializedObject.FindProperty("name");
+            startOnStartProp = serializedObject.FindProperty("startOnStart");
+            startingStateProp = serializedObject.FindProperty("startingState");
 
             statesList = new ReorderableList(serializedObject, statesProp);
             statesList.drawHeaderCallback = (Rect rect) =>
@@ -80,6 +82,8 @@ namespace Fungus.EditorUtils
 
             EditorGUILayout.PropertyField(nameProp);
             EditorGUILayout.PropertyField(currentStateProp);
+            EditorGUILayout.PropertyField(startOnStartProp);
+            EditorGUILayout.PropertyField(startingStateProp);
             statesList.DoLayoutList();
 
             serializedObject.ApplyModifiedProperties();

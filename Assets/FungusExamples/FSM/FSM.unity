@@ -361,8 +361,10 @@ MonoBehaviour:
     Enter: {fileID: 0}
     Update: {fileID: 0}
     Exit: {fileID: 0}
-  currentState: 0
+  currentState: -1
   name: 
+  startOnStart: 1
+  startingState: 0
 --- !u!114 &533072487
 MonoBehaviour:
   m_ObjectHideFlags: 2

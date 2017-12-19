@@ -226,6 +226,10 @@ namespace Fungus
         {
             StartCoroutine(Execute());
         }
+        public virtual void StartExecution(int commandIndex = 0, Action onComplete = null)
+        {
+            StartCoroutine(Execute(commandIndex, onComplete));
+        }
 
         /// <summary>
         /// A coroutine method that executes all commands in the Block. Only one running instance of each Block is permitted.
