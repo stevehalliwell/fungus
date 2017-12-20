@@ -365,6 +365,7 @@ MonoBehaviour:
   name: 
   startOnStart: 1
   startingState: 0
+  tickInUpdate: 1
 --- !u!114 &533072487
 MonoBehaviour:
   m_ObjectHideFlags: 2

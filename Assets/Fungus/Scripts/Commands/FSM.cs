@@ -24,8 +24,10 @@ namespace Fungus
         public bool startOnStart = true;
         public int startingState = 0;
 		public bool IsTransitioningState {get {return isTransitioningState;}}
+        public bool tickInUpdate = true;
 
-		private bool isTransitioningState = false;
+
+        private bool isTransitioningState = false;
 
         private void Start()
         {
@@ -63,16 +65,25 @@ namespace Fungus
 
         public void Update()
         {
+            if(tickInUpdate)
+            {
+                Tick();
+            }
+        }
+
+        public void Tick()
+        {
             if (isTransitioningState || (currentState < 0 && currentState >= states.Count))
                 return;
 
             var curState = states[currentState];
 
-            if(!curState.HasEntered)
+            if (!curState.HasEntered)
             {
-                if(curState.Enter != null)
+                if (curState.Enter != null)
                 {
-                    curState.Enter.StartExecution();
+                    isTransitioningState = true;
+                    curState.Enter.StartExecution(onComplete: TransitionComplete);
                 }
                 curState.HasEntered = true;
             }
