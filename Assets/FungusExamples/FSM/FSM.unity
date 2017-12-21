@@ -284,6 +284,10 @@ GameObject:
   - component: {fileID: 533072487}
   - component: {fileID: 533072486}
   - component: {fileID: 533072488}
+  - component: {fileID: 533072492}
+  - component: {fileID: 533072491}
+  - component: {fileID: 533072490}
+  - component: {fileID: 533072489}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -314,8 +318,7 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
-  selectedBlocks:
-  - {fileID: 533072487}
+  selectedBlocks: []
   selectedCommands: []
   variables: []
   description: 
@@ -354,9 +357,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   states:
   - Name: 
-    Enter: {fileID: 0}
+    Enter: {fileID: 533072492}
     Update: {fileID: 533072487}
-    Exit: {fileID: 0}
+    Exit: {fileID: 533072490}
   - Name: 
     Enter: {fileID: 0}
     Update: {fileID: 0}
@@ -408,6 +411,90 @@ MonoBehaviour:
   logMessage:
     stringRef: {fileID: 0}
     stringVal: Updated
+--- !u!114 &533072489
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533072483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fab8abf0343545abbfebd9a7b7b34bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 5
+  indentLevel: 0
+  logType: 0
+  logMessage:
+    stringRef: {fileID: 0}
+    stringVal: Exit
+--- !u!114 &533072490
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533072483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 644.5
+    y: 333.5
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 7
+  blockName: Log Exit
+  description: 
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 533072489}
+--- !u!114 &533072491
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533072483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fab8abf0343545abbfebd9a7b7b34bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 3
+  indentLevel: 0
+  logType: 0
+  logMessage:
+    stringRef: {fileID: 0}
+    stringVal: Enter
+--- !u!114 &533072492
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533072483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 229.5
+    y: 333.5
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 6
+  blockName: Log Enter
+  description: 
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 533072491}
 --- !u!1 &1181040150
 GameObject:
   m_ObjectHideFlags: 1

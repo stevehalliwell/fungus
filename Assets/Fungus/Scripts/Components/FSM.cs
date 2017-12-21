@@ -5,11 +5,17 @@ using UnityEngine;
 namespace Fungus
 {
     // <summary>
+    /// A simple state machine for use with Fungus Blocks. Define a list of states that can have a blocked 
+    /// when the state machine is ticked or updated and also when the state is entered or exited. All blocks
+    /// can be multi frame and the state machine will wait for them to complete before moving on. 
     /// 
 	/// Note: has a custom inspector to show reorderable list of states with blocks correctly
     /// </summary>
     public class FSM : MonoBehaviour
     {
+        /// <summary>
+        /// Data used by 1 state. All Block references are optional.
+        /// </summary>
         [System.Serializable]
         public class State
         {
@@ -35,6 +41,28 @@ namespace Fungus
                 ChangeState(startingState);
         }
 
+        public int GetIndexFromStateName(string name)
+        {
+            for (int i = 0; i < states.Count; i++)
+            {
+                if (states[i].Name == name)
+                    return i;
+            }
+            return -1;
+        }
+
+        public void ChangeState(string statename)
+        {
+            ChangeState(GetIndexFromStateName(statename));
+        }
+
+        /// <summary>
+        /// Will change the currently active state to that of the given index. Will cause the current state to have it's Exit
+        /// Block called if one has been set and once that is complete the Enter block will be called on the new state.
+        /// 
+        /// Calls made with invalid index or when the state machine is already transitioning between states will be ignored
+        /// </summary>
+        /// <param name="newIndex"></param>
         public void ChangeState(int newIndex)
         {
 			if(IsTransitioningState)
@@ -51,16 +79,24 @@ namespace Fungus
                 curState = states[currentState];
             }
 
-            if(curState != null && curState.Exit != null)
+            //chace previous
+            Block prevExit = null;
+            if(curState != null)
             {
-                isTransitioningState = true;
-                curState.Exit.StartExecution(onComplete: TransitionComplete);
+                prevExit = curState.Exit;
             }
 
             //prep new cur
             currentState = newIndex;
             curState = states[currentState];
             curState.HasEntered = false;
+
+            //kick off the exit
+            if(prevExit != null)
+            {
+                isTransitioningState = true;
+                prevExit.StartExecution(onComplete: TransitionComplete);
+            }
         }
 
         public void Update()
@@ -76,18 +112,9 @@ namespace Fungus
             if (isTransitioningState || (currentState < 0 && currentState >= states.Count))
                 return;
 
+            EnterCurState();
+            
             var curState = states[currentState];
-
-            if (!curState.HasEntered)
-            {
-                if (curState.Enter != null)
-                {
-                    isTransitioningState = true;
-                    curState.Enter.StartExecution(onComplete: TransitionComplete);
-                }
-                curState.HasEntered = true;
-            }
-
             //allow things with no enter to update immediately
             if (!isTransitioningState && curState.Update != null)
             {
@@ -98,6 +125,23 @@ namespace Fungus
         private void TransitionComplete()
         {
             isTransitioningState = false;
+
+            EnterCurState();
+        }
+
+        private void EnterCurState()
+        {
+            var curState = states[currentState];
+            if (!curState.HasEntered)
+            {
+                //set this first so we don't have to deal with infinite loop of self entering states
+                curState.HasEntered = true;
+                if (curState.Enter != null)
+                {
+                    isTransitioningState = true;
+                    curState.Enter.StartExecution(onComplete: TransitionComplete);
+                }
+            }
         }
     }
 }
