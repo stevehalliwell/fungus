@@ -20,9 +20,9 @@ namespace Fungus.EditorUtils
 
         private void DrawMenuPanel()
         {
-            generator.NamespaceOfClass = EditorGUILayout.TextField("NamespaceOfClass", generator.NamespaceOfClass);
             generator.ClassName = EditorGUILayout.TextField("ClassName", generator.ClassName);
             generator.Category = EditorGUILayout.TextField("Category", generator.Category);
+            generator.NamespaceOfClass = EditorGUILayout.TextField("NamespaceOfClass", generator.NamespaceOfClass);
 
             generator.generateVariableClass = EditorGUILayout.Toggle("Generate Variable", generator.generateVariableClass);
             generator.generatePropertyCommand = EditorGUILayout.Toggle("Generate Property Command", generator.generatePropertyCommand);
@@ -34,13 +34,13 @@ namespace Fungus.EditorUtils
                     generator.Generate();
                     EditorUtility.DisplayProgressBar("Generating " + generator.ClassName, "Importing Scripts", 0);
                     AssetDatabase.Refresh();
-                    generator = new VariableScriptGenerator();
                 }
                 catch (Exception e)
                 {
                     Debug.LogWarning(e.Message);
                     //throw e;
                 }
+                generator = new VariableScriptGenerator();
                 EditorUtility.ClearProgressBar();
             }
         }
@@ -61,7 +61,7 @@ namespace Fungus.EditorUtils
     /// </summary>
     public class VariableScriptGenerator
     {
-        private string _namespaceOfClass = "UnityEngine";
+        private string _namespaceOfClass = "";
         public string NamespaceOfClass { get { return _namespaceOfClass; } set { _namespaceOfClass = value; } }
         public string ClassName { get; set; }
         private string _category = "Other";
@@ -170,6 +170,7 @@ namespace Fungus.EditorUtils
 
         #region consts
         const string ScriptLocation = "./Assets/Fungus/Scripts/";
+        const string PropertyScriptLocation = ScriptLocation + "Commands/Property/";
         const string VaraibleScriptLocation = ScriptLocation + "VariableTypes/";
         const string EditorScriptLocation = VaraibleScriptLocation + "Editor/";
         const string EditorScriptTemplate = @"using UnityEditor;
@@ -182,7 +183,9 @@ namespace Fungus.EditorUtils
     {{ }}
 }}";
 
-        const string ScriptTemplate = @"using {1};
+        
+        const string ScriptTemplate = @"using UnityEngine;
+{1}
 
 namespace Fungus
 {{
@@ -380,27 +383,32 @@ namespace Fungus
             try
             {
                 var lowerClassName = Char.ToLowerInvariant(ClassName[0]) + ClassName.Substring(1);
-                if (resGeneratedClass == null && !resTargetClass.IsAbstract && generateVariableClass)
+                var fileName = VaraibleScriptLocation + ClassName + "Variable.cs";
+                if ((resGeneratedClass == null || System.IO.File.Exists(fileName))
+                    && !resTargetClass.IsAbstract && generateVariableClass)
                 {
+                    NamespaceOfClass = NamespaceOfClass.Length > 0 ? ("using " + NamespaceOfClass + ";") : string.Empty;
                     EditorUtility.DisplayProgressBar("Generating " + ClassName, "Variable", 0);
                     var scriptContents = string.Format(ScriptTemplate, ClassName, NamespaceOfClass, lowerClassName, Category);
                     System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(VaraibleScriptLocation));
-                    var fileName = VaraibleScriptLocation + ClassName + "Variable.cs";
                     System.IO.File.WriteAllText(fileName, scriptContents);
                     Debug.Log("Created " + fileName);
                 }
 
-                if (resGeneratedDrawerClass == null && !resTargetClass.IsAbstract && generateVariableClass)
+                fileName = EditorScriptLocation + ClassName + "VariableDrawer.cs";
+                if ((resGeneratedDrawerClass == null || System.IO.File.Exists(fileName))
+                    && !resTargetClass.IsAbstract && generateVariableClass)
                 {
                     EditorUtility.DisplayProgressBar("Generating " + ClassName, "VariableDrawer", 0);
-                    var editorScriptContents = string.Format(EditorScriptTemplate, ClassName, NamespaceOfClass, lowerClassName, Category);
+                    var editorScriptContents = string.Format(EditorScriptTemplate, ClassName);
                     System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(EditorScriptLocation));
-                    var fileName = EditorScriptLocation + ClassName + "VariableDrawer.cs";
                     System.IO.File.WriteAllText(fileName, editorScriptContents);
                     Debug.Log("Created " + fileName);
                 }
 
-                if (resGeneratedPropCommandClass == null && generatePropertyCommand)
+                fileName = PropertyScriptLocation + ClassName + "Property.cs";
+                if ((resGeneratedPropCommandClass == null || System.IO.File.Exists(fileName))
+                    && generatePropertyCommand)
                 {
                     EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property", 0);
                     {
@@ -429,7 +437,7 @@ namespace Fungus
                         var props = resTargetClass.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
                         for (int i = 0; i < props.Length; i++)
                         {
-                            if (helper.IsTypeHandled(props[i].PropertyType) && !IsObsolete(props[i].GetCustomAttributes(false)))
+                            if (helper.IsTypeHandled(props[i].PropertyType) && props[i].GetIndexParameters().Length == 0 && !IsObsolete(props[i].GetCustomAttributes(false)))
                             {
                                 var actualName = props[i].Name;
                                 var upperCaseName = Char.ToUpperInvariant(actualName[0]) + actualName.Substring(1);
@@ -470,8 +478,7 @@ namespace Fungus
                     //write to file
                     EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Writing", 0);
                     var propScriptContents = string.Format(PropertyScriptTemplate, ClassName, enumgen, lowerClassName, getcontents, setcontents, typeVars, variablePropertyTypes);
-                    System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(ScriptLocation));
-                    var fileName = ScriptLocation + ClassName + "Property.cs";
+                    System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(PropertyScriptLocation));
                     System.IO.File.WriteAllText(fileName, propScriptContents);
                     Debug.Log("Created " + fileName);
                 }

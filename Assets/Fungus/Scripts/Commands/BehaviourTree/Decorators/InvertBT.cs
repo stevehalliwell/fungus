@@ -17,7 +17,7 @@ namespace Fungus
         protected override void OnBlockCompleted(Block compBlock)
         {
             //if success next
-            if (block.State == ExecutionState.Succeeded)
+            if (block.BehaviourState == BehaviourState.Succeeded)
             {
                 ParentBlock.Fail();
             }

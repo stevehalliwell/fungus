@@ -14,14 +14,14 @@ namespace Fungus
     public class RepeatBT : BTDecorator
     {
         [SerializeField]
-        protected ExecutionState repeatUntil = ExecutionState.Succeeded;
+        protected BehaviourState repeatUntil = BehaviourState.Succeeded;
 
 		[SerializeField]
 		protected float timeBetweenRepeats = 0;
 
         protected override void OnBlockCompleted(Block compBlock)
         {
-            if (block.State != repeatUntil)
+            if (block.BehaviourState != repeatUntil)
             {
                 //wait 1 frame then repeat
 				KickOffBlockDelayed(block, timeBetweenRepeats == 0 ? null : new WaitForSeconds(timeBetweenRepeats));

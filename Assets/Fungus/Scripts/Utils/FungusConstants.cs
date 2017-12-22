@@ -43,6 +43,11 @@ namespace Fungus
         public static Color DefaultProcessBlockTint = new Color(1.0f, 0.882f, 0.0f, 1.0f);
 
         /// <summary>
+        /// The default Behaviour Composite node block color.
+        /// </summary>
+        public static Color DefaultBTBlockTint = new Color(0.7f,1.0f,0.2f);
+
+        /// <summary>
         /// The default key used for storing save game data in PlayerPrefs.
         /// </summary>
         public const string DefaultSaveDataKey = "save_data";

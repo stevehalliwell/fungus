@@ -33,6 +33,9 @@ MonoBehaviour:
   up:
     free: {fileID: 2800000, guid: 8f1242ad894201f43b2b6d52fd990f77, type: 3}
     pro: {fileID: 2800000, guid: 2a76a781db2994b33b83cd84b8835da7, type: 3}
+  bt_node_off:
+    free: {fileID: 2800000, guid: b635d77a9132def48a5e155f8c33890f, type: 3}
+    pro: {fileID: 0}
   bullet_point:
     free: {fileID: 2800000, guid: 4ef739c68bb234717a60a2bb83ff8602, type: 3}
     pro: {fileID: 0}
@@ -54,6 +57,15 @@ MonoBehaviour:
   event_node_on:
     free: {fileID: 2800000, guid: 9434488a4efb54da5986eba5d5619baf, type: 3}
     pro: {fileID: 0}
+  green_point:
+    free: {fileID: 2800000, guid: 9d9de622877f3114b8eacb87796a9626, type: 3}
+    pro: {fileID: 0}
+  parallel_node_off:
+    free: {fileID: 2800000, guid: 824cab12c36fa584ebfe99d8a24448f1, type: 3}
+    pro: {fileID: 0}
+  parallel_node_on:
+    free: {fileID: 2800000, guid: c1b46d91fa760af4881fd39f3af764a9, type: 3}
+    pro: {fileID: 0}
   play_big:
     free: {fileID: 2800000, guid: bff2ba39f5f4448589e80522ebfcd0a0, type: 3}
     pro: {fileID: 0}
@@ -65,4 +77,19 @@ MonoBehaviour:
     pro: {fileID: 0}
   process_node_on:
     free: {fileID: 2800000, guid: c2dceb780784240ccbe8d3cde89f7671, type: 3}
+    pro: {fileID: 0}
+  red_point:
+    free: {fileID: 2800000, guid: 0457bf24bf868f243aa1afa248203b45, type: 3}
+    pro: {fileID: 0}
+  selector_node_off:
+    free: {fileID: 2800000, guid: ad5309dbee2f6a04da5a42014468cf0d, type: 3}
+    pro: {fileID: 0}
+  selector_node_on:
+    free: {fileID: 2800000, guid: 4b8b994bba9bad140926dd395ba791bf, type: 3}
+    pro: {fileID: 0}
+  sequence_node_off:
+    free: {fileID: 2800000, guid: 526f76e272194a24393ddd16fb9cc002, type: 3}
+    pro: {fileID: 0}
+  sequence_node_on:
+    free: {fileID: 2800000, guid: 5c58f6c5a23533b45ad1ed0c6f0ab226, type: 3}
     pro: {fileID: 0}

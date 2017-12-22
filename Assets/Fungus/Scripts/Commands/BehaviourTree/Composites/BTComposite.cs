@@ -25,7 +25,12 @@ namespace Fungus
 
         public override void OnEnter()
         {
-            if(shuffleCommands)
+            for (int i = 0; i < targetBlocks.Count; i++)
+            {
+                targetBlocks[i].BehaviourState = BehaviourState.Idle;
+            }
+
+            if (shuffleCommands)
             {
                 ShuffleCommandBlockOrder();
             }

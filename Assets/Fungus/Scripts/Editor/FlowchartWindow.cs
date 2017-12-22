@@ -912,6 +912,7 @@ namespace Fungus.EditorUtils
                 DrawGrid();
 
                 // Draw connections
+                //TODO: not sure why these are done this way, not a big deal but redundant loops possibly
                 foreach (var block in blocks)
                 {
                     DrawConnections(block, false);
@@ -1024,6 +1025,36 @@ namespace Fungus.EditorUtils
                         b.ExecutingIconTimer = Time.realtimeSinceStartup + FungusConstants.ExecutingIconFadeTime;
                         b.ActiveCommand.ExecutingIconTimer = Time.realtimeSinceStartup + FungusConstants.ExecutingIconFadeTime;
                         forceRepaintCount = 1;
+                    }
+
+                    bool showBTStatus = false;
+                    Texture btStatusTexture = null;
+
+                    switch (b.BehaviourState)
+                    {
+                        case BehaviourState.Idle:
+                            break;
+                        case BehaviourState.Running:
+                            break;
+                        case BehaviourState.Failed:
+                            btStatusTexture = FungusEditorResources.RedPoint;
+                            showBTStatus = true;
+                            break;
+                        case BehaviourState.Succeeded:
+                            btStatusTexture = FungusEditorResources.GreenPoint;
+                            showBTStatus = true;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if(showBTStatus)
+                    {
+                        Rect rect = new Rect(b._NodeRect.TopRight(), Vector2.one*16);
+
+                        rect.x += flowchart.ScrollPos.x - 12;
+                        rect.y += flowchart.ScrollPos.y - 4;
+                        GUI.DrawTexture(rect, btStatusTexture, ScaleMode.ScaleToFit);
                     }
 
                     if (b.ExecutingIconTimer > Time.realtimeSinceStartup)
@@ -1198,8 +1229,10 @@ namespace Fungus.EditorUtils
                 connectedBlocks.Clear();
                 command.GetConnectedBlocks(ref connectedBlocks);
 
+                int index = 0;
                 foreach (var blockB in connectedBlocks)
                 {
+                    index++;
                     if (blockB == null ||
                         block == blockB ||
                         !blockB.GetFlowchart().Equals(flowchart))
@@ -1214,13 +1247,14 @@ namespace Fungus.EditorUtils
                     Rect endRect = new Rect(blockB._NodeRect);
                     endRect.x += flowchart.ScrollPos.x;
                     endRect.y += flowchart.ScrollPos.y;
+                    
 
-                    DrawRectConnection(startRect, endRect, highlight);
+                    DrawRectConnection(startRect, endRect, highlight, index);
                 }
             }
         }
 
-        protected virtual void DrawRectConnection(Rect rectA, Rect rectB, bool highlight)
+        protected virtual void DrawRectConnection(Rect rectA, Rect rectB, bool highlight, int index)
         {
             Vector2[] pointsA = new Vector2[] {
                 new Vector2(rectA.xMin, rectA.center.y),
@@ -1285,6 +1319,18 @@ namespace Fungus.EditorUtils
             Handles.DrawAAConvexPolygon(
                 point, point + direction * 10 + perp * 5, point + direction * 10 - perp * 5
             );
+
+            if (index >= 0 && highlight)
+            {
+                //put number on that arrow
+                var labelRect = new Rect(point - Vector2.one * 50 + direction * 20 + new Vector2(-direction.y, direction.x) * 10, Vector2.one * 100);
+                var labelStyle = new GUIStyle();
+                labelStyle.alignment = TextAnchor.MiddleCenter;
+                labelStyle.fontSize = 12;
+                labelStyle.fontStyle = FontStyle.Bold;
+                //labelStyle.normal.textColor = FungusConstants.DefaultBTBlockTint;
+                GUI.Label(labelRect, index.ToString(), labelStyle);
+            }
 
             var connectionPointA = pointA + directionA * 4f;
             var connectionRectA = new Rect(connectionPointA.x - 4f, connectionPointA.y - 4f, 8f, 8f);
@@ -1532,42 +1578,76 @@ namespace Fungus.EditorUtils
         {
             var graphics = new BlockGraphics();
 
-            Color defaultTint;
-            if (block._EventHandler != null)
-            {
-                graphics.offTexture = FungusEditorResources.EventNodeOff;
-                graphics.onTexture = FungusEditorResources.EventNodeOn;
-                defaultTint = FungusConstants.DefaultEventBlockTint;
-            }
-            else
-            {
-                // Count the number of unique connections (excluding self references)
-                var uniqueList = new List<Block>();
-                var connectedBlocks = block.GetConnectedBlocks();
-                foreach (var connectedBlock in connectedBlocks)
-                {
-                    if (connectedBlock == block ||
-                        uniqueList.Contains(connectedBlock))
-                    {
-                        continue;
-                    }
-                    uniqueList.Add(connectedBlock);
-                }
+            Color defaultTint = FungusConstants.DefaultProcessBlockTint;
 
-                if (uniqueList.Count > 1)
+            bool hasBTComp = false;
+            var cmds = block.CommandList;
+
+            for (int i = 0; i < cmds.Count; i++)
+            {
+                var asBTComp = cmds[i] as BTComposite;
+
+                if (asBTComp != null)
                 {
-                    graphics.offTexture = FungusEditorResources.ChoiceNodeOff;
-                    graphics.onTexture = FungusEditorResources.ChoiceNodeOn;
-                    defaultTint = FungusConstants.DefaultChoiceBlockTint;
+                    hasBTComp = true;
+                    defaultTint = FungusConstants.DefaultBTBlockTint;
+
+                    if (asBTComp as Parallel != null)
+                    {
+                        graphics.offTexture = FungusEditorResources.ParallelNodeOff;
+                        graphics.onTexture = FungusEditorResources.ParallelNodeOn;
+                    }
+                    else if (asBTComp as Sequence != null)
+                    {
+                        graphics.offTexture = FungusEditorResources.SequenceNodeOff;
+                        graphics.onTexture = FungusEditorResources.SequenceNodeOn;
+                    }
+                    else if (asBTComp as Selector != null)
+                    {
+                        graphics.offTexture = FungusEditorResources.SelectorNodeOff;
+                        graphics.onTexture = FungusEditorResources.SelectorNodeOn;
+                    }
+
+                    break;
+                }
+            }
+
+            if (!hasBTComp)
+            {
+                if (block._EventHandler != null)
+                {
+                    graphics.offTexture = FungusEditorResources.EventNodeOff;
+                    graphics.onTexture = FungusEditorResources.EventNodeOn;
+                    defaultTint = FungusConstants.DefaultEventBlockTint;
                 }
                 else
                 {
-                    graphics.offTexture = FungusEditorResources.ProcessNodeOff;
-                    graphics.onTexture = FungusEditorResources.ProcessNodeOn;
-                    defaultTint = FungusConstants.DefaultProcessBlockTint;
+                    // Count the number of unique connections (excluding self references)
+                    var uniqueList = new List<Block>();
+                    var connectedBlocks = block.GetConnectedBlocks();
+                    foreach (var connectedBlock in connectedBlocks)
+                    {
+                        if (connectedBlock == block ||
+                            uniqueList.Contains(connectedBlock))
+                        {
+                            continue;
+                        }
+                        uniqueList.Add(connectedBlock);
+                    }
+
+                    if (uniqueList.Count > 1)
+                    {
+                        graphics.offTexture = FungusEditorResources.ChoiceNodeOff;
+                        graphics.onTexture = FungusEditorResources.ChoiceNodeOn;
+                        defaultTint = FungusConstants.DefaultChoiceBlockTint;
+                    }
+                    else
+                    {
+                        graphics.offTexture = FungusEditorResources.ProcessNodeOff;
+                        graphics.onTexture = FungusEditorResources.ProcessNodeOn;
+                    }
                 }
             }
-
             graphics.tint = block.UseCustomTint ? block.Tint : defaultTint;
 
             return graphics;
