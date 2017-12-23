@@ -24,14 +24,15 @@ namespace Fungus
             public bool HasEntered { get; set; }
         }
         
-        public List<State> states;
-        public int currentState = -1;
-        public new string name;
-        public bool startOnStart = true;
-        public int startingState = 0;
-		public bool IsTransitioningState {get {return isTransitioningState;}}
-        public bool tickInUpdate = true;
+		[HideInInspector][SerializeField]protected List<State> states;
+		[SerializeField]protected int currentState = -1;
+		[SerializeField]protected new string name;
+		[SerializeField]protected bool startOnStart = true;
+		[SerializeField]protected int startingState = 0;
+		[SerializeField]protected bool IsTransitioningState {get {return isTransitioningState;}}
+		[SerializeField]protected bool tickInUpdate = true;
 
+		public List<State> States {get {return states;}}
 
         private bool isTransitioningState = false;
 

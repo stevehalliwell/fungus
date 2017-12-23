@@ -288,6 +288,9 @@ GameObject:
   - component: {fileID: 533072491}
   - component: {fileID: 533072490}
   - component: {fileID: 533072489}
+  - component: {fileID: 533072495}
+  - component: {fileID: 533072494}
+  - component: {fileID: 533072493}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -307,11 +310,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 0, y: 0}
+  scrollPos: {x: 205.63455, y: 53.563137}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 400
-  zoom: 1
+  zoom: 0.9899903
   scrollViewRect:
     serializedVersion: 2
     x: 0
@@ -356,14 +359,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   states:
-  - Name: 
+  - Name: Log
     Enter: {fileID: 533072492}
     Update: {fileID: 533072487}
     Exit: {fileID: 533072490}
-  - Name: 
-    Enter: {fileID: 0}
-    Update: {fileID: 0}
-    Exit: {fileID: 0}
+  - Name: State
+    Enter: {fileID: 533072495}
+    Update: {fileID: 533072494}
+    Exit: {fileID: 533072493}
   currentState: -1
   name: 
   startOnStart: 1
@@ -382,8 +385,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 461
-    y: 345
+    x: 452.9191
+    y: 351.06064
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -441,8 +444,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 644.5
-    y: 333.5
+    x: 645.51013
+    y: 287.03485
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -483,8 +486,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 229.5
-    y: 333.5
+    x: 236.5708
+    y: 310.26746
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -495,6 +498,78 @@ MonoBehaviour:
   eventHandler: {fileID: 0}
   commandList:
   - {fileID: 533072491}
+--- !u!114 &533072493
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533072483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 383.84213
+    y: 218.18396
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 10
+  blockName: State Exit
+  description: 
+  eventHandler: {fileID: 0}
+  commandList: []
+--- !u!114 &533072494
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533072483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 368.69046
+    y: 262.62885
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 9
+  blockName: State Update
+  description: 
+  eventHandler: {fileID: 0}
+  commandList: []
+--- !u!114 &533072495
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533072483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 384.8522
+    y: 165.65817
+    width: 120
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 8
+  blockName: State Enter
+  description: 
+  eventHandler: {fileID: 0}
+  commandList: []
 --- !u!1 &1181040150
 GameObject:
   m_ObjectHideFlags: 1

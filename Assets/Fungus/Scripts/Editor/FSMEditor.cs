@@ -11,8 +11,6 @@ namespace Fungus.EditorUtils
     public class FSMEditor : Editor
     {
         protected SerializedProperty statesProp;
-        protected SerializedProperty currentStateProp;
-        protected SerializedProperty nameProp, startOnStartProp, startingStateProp, tickInUpdateProp;
         protected ReorderableList statesList;
 
         private int selectedItem = -1;
@@ -20,11 +18,6 @@ namespace Fungus.EditorUtils
         protected virtual void OnEnable()
         {
             statesProp = serializedObject.FindProperty("states");
-            currentStateProp = serializedObject.FindProperty("currentState");
-            nameProp = serializedObject.FindProperty("name");
-            startOnStartProp = serializedObject.FindProperty("startOnStart");
-            startingStateProp = serializedObject.FindProperty("startingState");
-            tickInUpdateProp = serializedObject.FindProperty("tickInUpdate");
 
             statesList = new ReorderableList(serializedObject, statesProp);
             statesList.drawHeaderCallback = (Rect rect) =>
@@ -79,16 +72,18 @@ namespace Fungus.EditorUtils
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+			DrawDefaultInspector();
+            
+			serializedObject.Update();
+			statesList.DoLayoutList();
 
-            EditorGUILayout.PropertyField(nameProp);
-            EditorGUILayout.PropertyField(currentStateProp);
-            EditorGUILayout.PropertyField(startOnStartProp);
-            EditorGUILayout.PropertyField(startingStateProp);
-            EditorGUILayout.PropertyField(tickInUpdateProp);
-            statesList.DoLayoutList();
+			if(GUILayout.Button(new GUIContent("Generate Blocks","Auto create blocks for all unassgined elements of states.")))
+			{
+				CreateAndAssignBlocks();
+				EditorUtility.SetDirty(target);
+			}
 
-            serializedObject.ApplyModifiedProperties();
+			serializedObject.ApplyModifiedProperties();
         }
 
         private static void DrawBlockElement(int index, Rect rect, SerializedProperty element, string propName, Flowchart chart)
@@ -100,5 +95,40 @@ namespace Fungus.EditorUtils
             var prop = element.FindPropertyRelative(propName);
             prop.objectReferenceValue = BlockEditor.BlockField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), new GUIContent(BlockEditor.NullName), chart, prop.objectReferenceValue as Block);
         }
+
+		private void CreateAndAssignBlocks()
+		{
+			FSM fsm = target as FSM;
+			var states = fsm.States;
+			var flow = fsm.GetComponent<Flowchart>();
+
+			for (int i = 0; i < states.Count; i++)
+			{
+				var curState = states[i];
+				if(curState != null)
+				{
+					if(curState.Enter == null)
+						curState.Enter = FindOrCreateBlock(flow, curState.Name + " " + "Enter");
+					if(curState.Update == null)
+						curState.Update = FindOrCreateBlock(flow, curState.Name + " " + "Update");
+					if(curState.Exit == null)
+						curState.Exit = FindOrCreateBlock(flow, curState.Name + " " + "Exit");
+				}
+			}
+		}
+
+		//todo this should move to flowchart or at least flowchart edit util etc.
+		static private Block FindOrCreateBlock(Flowchart flow, string blockName)
+		{
+			//does a block of matching name exist
+			var block = flow.FindBlock(blockName);
+			if(block == null)
+			{
+				block = flow.CreateBlock(Vector2.zero);
+				block.BlockName = blockName;
+			}
+
+			return block;
+		}
     }
 }

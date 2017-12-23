@@ -13,6 +13,8 @@ FSM in Fungus
 -need command to change state by name or index 
 -need command to check if it is transitioning
 -need a callback/event and block for a state change
+-fsm inspector needs to gen state names that are safe
+-flowchart auto seperate / arrange blocks, prevent overlaps and order for directional flow
 
 
 behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
