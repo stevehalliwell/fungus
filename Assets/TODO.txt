@@ -18,15 +18,26 @@ FSM in Fungus
 
 
 behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
+<<<<<<< HEAD
+--timer, return success or fail or previous result for x ticks
+=======
 -behaviour
 --timer, return success or fail or previous result for x ticks or real time
+>>>>>>> 21d141d30f3f322e740fdcb80f217c9f6c227025
 --condition, takes a bool if empty uses success
 -sub tree
 --if these are defined elsewhere how do they know the shared vars and targets etc.?
 *do we need a context object that we pass to them?
 *do the fungus commands actually just enable and disable the updates of these objects
 revert changes to indent, make it indent arrays and lists instead
+<<<<<<< HEAD
+*consolidate all places that call a block to run so we can better control those from a BT
+**some use flowchart execute, some block execute
+**so the problem then is menus don't track where they are called from or when they are complete. But how would they
+
+=======
 *currently menu prevents BT from functioning in its current state as the menu has no idea what it started, but this may not be a problem as if a bt gets to the point where it needs a menu, it has probably found an action worth persuing 
+>>>>>>> 21d141d30f3f322e740fdcb80f217c9f6c227025
 
 
 
@@ -77,3 +88,4 @@ auto generate field and property get set fungus commmand
 -then make it do rbs
 --cannot rely on static class as unity isn't doing that for Physics, but we can then test for static vs instance methods, see AID-Console
 -we need to make the generator actually test it is using the correct types
+-need to test it on custom types
