@@ -24,7 +24,7 @@ namespace Fungus.EditorUtils
             {
                 EditorGUI.LabelField(rect, "States");
             };
-
+			
             statesList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
                 selectedItem = isFocused ? index : selectedItem;
@@ -41,7 +41,7 @@ namespace Fungus.EditorUtils
                     rect.x += 50;
                     rect.width -= 50;
                     rect.width /= 2;
-                    rect.width -= 20;
+                    rect.width -= 10;
                     EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("Name"), GUIContent.none);
                     rect.x += rect.width;
                     rect.x += 5;

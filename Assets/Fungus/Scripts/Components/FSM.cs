@@ -144,5 +144,25 @@ namespace Fungus
                 }
             }
         }
+
+		private void OnValidate()
+		{
+			string suffix = " Copy";
+			List<string> names = new List<string>();
+
+			for (int i = 0; i < states.Count; i++)
+			{
+				var curstate = states[i];
+				var curName = curstate.Name;
+
+				while(names.IndexOf(curName) != -1)
+				{
+					curName += suffix;
+				}
+
+				names.Add(curName);
+				curstate.Name = curName;
+			}
+		}
     }
 }
