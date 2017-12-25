@@ -29,12 +29,15 @@ namespace Fungus
 		[SerializeField]protected new string name;
 		[SerializeField]protected bool startOnStart = true;
 		[SerializeField]protected int startingState = 0;
-		[SerializeField]protected bool IsTransitioningState {get {return isTransitioningState;}}
 		[SerializeField]protected bool tickInUpdate = true;
 
 		public List<State> States {get {return states;}}
 
         private bool isTransitioningState = false;
+        public bool IsTransitioningState {get {return isTransitioningState;}}
+
+        public int CurrentState {get {return currentState;}}
+        public string CurrentStateName {get {return states[CurrentState].Name;}}
 
         private void Start()
         {

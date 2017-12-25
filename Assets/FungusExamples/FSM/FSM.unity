@@ -291,6 +291,9 @@ GameObject:
   - component: {fileID: 533072495}
   - component: {fileID: 533072494}
   - component: {fileID: 533072493}
+  - component: {fileID: 533072496}
+  - component: {fileID: 533072498}
+  - component: {fileID: 533072497}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -321,8 +324,10 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
-  selectedBlocks: []
-  selectedCommands: []
+  selectedBlocks:
+  - {fileID: 533072495}
+  selectedCommands:
+  - {fileID: 533072497}
   variables: []
   description: 
   stepPause: 0
@@ -573,7 +578,57 @@ MonoBehaviour:
   blockName: State Enter
   description: 
   eventHandler: {fileID: 0}
-  commandList: []
+  commandList:
+  - {fileID: 533072496}
+  - {fileID: 533072498}
+  - {fileID: 533072497}
+--- !u!114 &533072496
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533072483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1754e8438222d404a9c97fb2fc4c9ece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 11
+  indentLevel: 0
+  fsm: {fileID: 533072486}
+  output:
+    booleanRef: {fileID: 0}
+    booleanVal: 0
+--- !u!114 &533072497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533072483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfa74177fab945dbb182181ab25ad0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 13
+  indentLevel: 0
+  fsm: {fileID: 533072486}
+  stateToChangeTo: {fileID: 0}
+--- !u!114 &533072498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533072483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2302e504d30604838ad0f92dc9f1e96b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 12
+  indentLevel: 0
+  fsm: {fileID: 533072486}
+  output: {fileID: 0}
 --- !u!1 &1181040150
 GameObject:
   m_ObjectHideFlags: 1

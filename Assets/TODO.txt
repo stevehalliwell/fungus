@@ -9,9 +9,8 @@ Event on Block text entry list
 
 FSM in Fungus
 -http://fungusgames.com/forum#!/fungus-development:choosing-a-character-based/extending-conversation-seem
--need commands to get current state index or name 
--need command to change state by name or index 
--need command to check if it is transitioning
+-should fsm commands be variableprop or an int and a string so you can more easily hard code them
+-command to get number of states?
 -need a callback/event and block for a state change
 -flowchart auto seperate / arrange blocks, prevent overlaps and order for directional flow
 
