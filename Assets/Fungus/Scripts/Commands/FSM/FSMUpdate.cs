@@ -5,6 +5,9 @@ using System;
 
 namespace Fungus
 {
+    /// <summary>
+    /// Calls the tick/update on the target FSM.
+    /// </summary>
     [CommandInfo("FSM",
                  "Tick",
                  "Calls the tick/update on the target FSM.")]
@@ -15,12 +18,22 @@ namespace Fungus
 
         public override void OnEnter()
         {
-			fsm.Tick();
+            fsm.Tick();
         }
 
         // public override Color GetButtonColor()
         // {
         //     return new Color32(235, 191, 217, 255);
         // }
+
+        public override string GetSummary()
+        {
+            if (fsm == null)
+            {
+                return "Error: no FSM provided.";
+            }
+
+            return "";
+        }
     }
 }

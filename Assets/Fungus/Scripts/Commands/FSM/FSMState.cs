@@ -5,9 +5,12 @@ using System;
 
 namespace Fungus
 {
+    /// <summary>
+    /// Stores the current state of the target FSM.
+    /// </summary>
     [CommandInfo("FSM",
                  "Current State",
-                 "Stores if the target FSM is currently transitioning between states.")]
+                 "Stores the current state of the target FSM.")]
     [AddComponentMenu("")]
     public class FSMState : Command
     {
@@ -34,6 +37,20 @@ namespace Fungus
             {
                 Debug.LogWarning("Calling FSMState with no valid output variable");
             }
+        }
+
+        public override string GetSummary()
+        {
+            if (fsm == null)
+            {
+                return "Error: no FSM provided.";
+            }
+            else if(output == null)
+            {
+                return "Error: no output variable set.";
+            }
+
+            return output.Key;
         }
 
         // public override Color GetButtonColor()

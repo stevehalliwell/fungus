@@ -5,6 +5,9 @@ using System;
 
 namespace Fungus
 {
+    /// <summary>
+    /// Stores if the target FSM is currently transitioning between states.
+    /// </summary>
     [CommandInfo("FSM",
                  "Is Transitioning",
                  "Stores if the target FSM is currently transitioning between states.")]
@@ -13,13 +16,27 @@ namespace Fungus
     {
 		[SerializeField] protected FSM fsm;
 
-		[SerializeField] protected BooleanData output;
+		[SerializeField] protected BooleanVariable output;
 
         public override void OnEnter()
         {
             output.Value = fsm.IsTransitioningState;
         }
-        
+
+        public override string GetSummary()
+        {
+            if (fsm == null)
+            {
+                return "Error: no FSM provided.";
+            }
+            else if(output == null)
+            {
+                return "Error: no output set.";
+            }
+
+            return output.Key;
+        }
+
         // public override Color GetButtonColor()
         // {
         //     return new Color32(235, 191, 217, 255);
@@ -27,7 +44,7 @@ namespace Fungus
 
         public override bool HasReference(Variable variable)
         {
-            return output.booleanRef == variable;
+            return output == variable;
         }
     }
 }

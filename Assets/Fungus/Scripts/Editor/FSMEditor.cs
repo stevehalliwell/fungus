@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
 
-//http://va.lent.in/unity-make-your-lists-functional-with-reorderablelist/
 namespace Fungus.EditorUtils
 {
+    /// <summary>
+    /// Custom inspector for Fungus.FSM, draws default but uses a reorderable list to show the state list
+    /// with a custom element layout to to only show detailed infor for the selected item.
+    /// </summary>
     [CustomEditor(typeof(FSM))]
     public class FSMEditor : Editor
     {
@@ -19,6 +22,7 @@ namespace Fungus.EditorUtils
         {
             statesProp = serializedObject.FindProperty("states");
 
+            //http://va.lent.in/unity-make-your-lists-functional-with-reorderablelist/
             statesList = new ReorderableList(serializedObject, statesProp);
             statesList.drawHeaderCallback = (Rect rect) =>
             {

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Fungus
 {
     // <summary>
-    /// A simple state machine for use with Fungus Blocks. Define a list of states that can have a blocked 
+    /// A simple state machine for use with Fungus Blocks. Define a list of states that can have a block called
     /// when the state machine is ticked or updated and also when the state is entered or exited. All blocks
     /// can be multi frame and the state machine will wait for them to complete before moving on. 
     /// 

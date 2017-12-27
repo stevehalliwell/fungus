@@ -5,6 +5,9 @@ using System;
 
 namespace Fungus
 {
+    /// <summary>
+    /// Calls change state on the target FSM.
+    /// </summary>
     [CommandInfo("FSM",
                  "Change State",
                  "Calls change state on the target FSM.")]
@@ -30,6 +33,25 @@ namespace Fungus
             {
                 fsm.ChangeState(stateIndexToChangeTo.Value);
             }
+        }
+
+        public override string GetSummary()
+        {
+            if (fsm == null)
+            {
+                return "Error: no FSM provided.";
+            }
+            else if(fsm.GetIndexFromStateName(stateNameToChangeTo.Value) == -1 &&
+                    (stateIndexToChangeTo.Value < 0 ||
+                    stateIndexToChangeTo.Value >= fsm.States.Count))
+            {
+                return "Error: Invalid state name or index";
+            }
+
+            if (fsm.GetIndexFromStateName(stateNameToChangeTo.Value) == -1)
+                return fsm.States[stateIndexToChangeTo.Value].Name;
+
+            return stateNameToChangeTo.Value;
         }
 
         // public override Color GetButtonColor()
