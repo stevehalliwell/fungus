@@ -13,26 +13,22 @@ namespace Fungus
     {
         [SerializeField] protected FSM fsm;
 
-        [VariableProperty(typeof(IntegerVariable), typeof(StringVariable))]
         [SerializeField]
-        protected Variable stateToChangeTo;
+        protected StringData stateNameToChangeTo;
+
+        [Tooltip("If Name is empty, this index will be used instead.")]
+        [SerializeField] protected IntegerData stateIndexToChangeTo = new IntegerData(-1);
 
         public override void OnEnter()
         {
-            var asInt = stateToChangeTo as IntegerVariable;
-            var asString = stateToChangeTo as StringVariable;
 
-            if (asInt != null)
+            if (!string.IsNullOrEmpty(stateNameToChangeTo.Value))
             {
-                fsm.ChangeState(asInt.Value);
+                fsm.ChangeState(stateNameToChangeTo.Value);
             }
-            else if (asString != null)
+            else 
             {
-                fsm.ChangeState(asString.Value);
-            }
-            else
-            {
-                Debug.LogWarning("Calling FSMChangeState with no valid output variable");
+                fsm.ChangeState(stateIndexToChangeTo.Value);
             }
         }
 
@@ -43,7 +39,7 @@ namespace Fungus
 
         public override bool HasReference(Variable variable)
         {
-            return stateToChangeTo == variable;
+            return stateNameToChangeTo.stringRef == variable || stateIndexToChangeTo.integerRef == variable;
         }
     }
 }
