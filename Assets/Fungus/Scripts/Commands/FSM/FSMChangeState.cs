@@ -20,7 +20,8 @@ namespace Fungus
         protected StringData stateNameToChangeTo;
 
         [Tooltip("If Name is empty, this index will be used instead.")]
-        [SerializeField] protected IntegerData stateIndexToChangeTo = new IntegerData(-1);
+        [SerializeField]
+        protected IntegerData stateIndexToChangeTo = new IntegerData(-1);
 
         public override void OnEnter()
         {
@@ -29,7 +30,7 @@ namespace Fungus
             {
                 fsm.ChangeState(stateNameToChangeTo.Value);
             }
-            else 
+            else
             {
                 fsm.ChangeState(stateIndexToChangeTo.Value);
             }
@@ -41,7 +42,7 @@ namespace Fungus
             {
                 return "Error: no FSM provided.";
             }
-            else if(fsm.GetIndexFromStateName(stateNameToChangeTo.Value) == -1 &&
+            else if (fsm.GetIndexFromStateName(stateNameToChangeTo.Value) == -1 &&
                     (stateIndexToChangeTo.Value < 0 ||
                     stateIndexToChangeTo.Value >= fsm.States.Count))
             {
@@ -51,7 +52,7 @@ namespace Fungus
             if (fsm.GetIndexFromStateName(stateNameToChangeTo.Value) == -1)
                 return fsm.States[stateIndexToChangeTo.Value].Name;
 
-            return stateNameToChangeTo.Value;
+            return fsm.Name + " to " + stateNameToChangeTo.Value;
         }
 
         // public override Color GetButtonColor()

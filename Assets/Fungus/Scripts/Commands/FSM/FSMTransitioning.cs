@@ -14,9 +14,9 @@ namespace Fungus
     [AddComponentMenu("")]
     public class FSMTransitioning : Command
     {
-		[SerializeField] protected FSM fsm;
+        [SerializeField] protected FSM fsm;
 
-		[SerializeField] protected BooleanVariable output;
+        [SerializeField] protected BooleanVariable output;
 
         public override void OnEnter()
         {
@@ -29,12 +29,12 @@ namespace Fungus
             {
                 return "Error: no FSM provided.";
             }
-            else if(output == null)
+            else if (output == null)
             {
                 return "Error: no output set.";
             }
 
-            return output.Key;
+            return fsm.Name + " in " + output.Key;
         }
 
         // public override Color GetButtonColor()

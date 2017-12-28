@@ -313,18 +313,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 189.47273, y: 19.21937}
+  scrollPos: {x: -6.5404663, y: 182.6406}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 400
-  zoom: 0.9899903
+  zoom: 1
   scrollViewRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 0
     height: 0
-  selectedBlocks: []
+  selectedBlocks:
+  - {fileID: 533072490}
   selectedCommands: []
   variables: []
   description: 
@@ -370,12 +371,8 @@ MonoBehaviour:
     Enter: {fileID: 533072495}
     Update: {fileID: 533072494}
     Exit: {fileID: 533072493}
-  - Name: State Copy
-    Enter: {fileID: 533072495}
-    Update: {fileID: 533072494}
-    Exit: {fileID: 533072493}
   currentState: -1
-  name: 
+  name: StateMachine
   startOnStart: 1
   startingState: 0
   tickInUpdate: 1
@@ -544,7 +541,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 368.69046
     y: 262.62885
-    width: 120
+    width: 124
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -594,9 +591,7 @@ MonoBehaviour:
   itemId: 11
   indentLevel: 0
   fsm: {fileID: 533072486}
-  output:
-    booleanRef: {fileID: 0}
-    booleanVal: 0
+  output: {fileID: 0}
 --- !u!114 &533072497
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -613,7 +608,7 @@ MonoBehaviour:
   fsm: {fileID: 533072486}
   stateNameToChangeTo:
     stringRef: {fileID: 0}
-    stringVal: 
+    stringVal: Log
   stateIndexToChangeTo:
     integerRef: {fileID: 0}
     integerVal: -1

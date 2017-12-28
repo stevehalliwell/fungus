@@ -23,21 +23,23 @@ namespace Fungus
             public Block Enter, Update, Exit;
             public bool HasEntered { get; set; }
         }
-        
-		[HideInInspector][SerializeField]protected List<State> states;
-		[SerializeField]protected int currentState = -1;
-		[SerializeField]protected new string name;
-		[SerializeField]protected bool startOnStart = true;
-		[SerializeField]protected int startingState = 0;
-		[SerializeField]protected bool tickInUpdate = true;
 
-		public List<State> States {get {return states;}}
+        [HideInInspector] [SerializeField] protected List<State> states;
+        [SerializeField] protected int currentState = -1;
+        [SerializeField] protected new string name;
+        [SerializeField] protected bool startOnStart = true;
+        [SerializeField] protected int startingState = 0;
+        [SerializeField] protected bool tickInUpdate = true;
+
+        public List<State> States { get { return states; } }
+
+        public string Name { get { return name; } }
 
         private bool isTransitioningState = false;
-        public bool IsTransitioningState {get {return isTransitioningState;}}
+        public bool IsTransitioningState { get { return isTransitioningState; } }
 
-        public int CurrentState {get {return currentState;}}
-        public string CurrentStateName {get {return states[CurrentState].Name;}}
+        public int CurrentState { get { return currentState; } }
+        public string CurrentStateName { get { return states[CurrentState].Name; } }
 
         private void Start()
         {
@@ -69,9 +71,9 @@ namespace Fungus
         /// <param name="newIndex"></param>
         public void ChangeState(int newIndex)
         {
-			if(IsTransitioningState)
-				return;
-			
+            if (IsTransitioningState)
+                return;
+
             //is it actually different and valid
             if (newIndex == currentState || (newIndex < 0 || newIndex >= states.Count))
                 return;
@@ -85,7 +87,7 @@ namespace Fungus
 
             //chace previous
             Block prevExit = null;
-            if(curState != null)
+            if (curState != null)
             {
                 prevExit = curState.Exit;
             }
@@ -96,7 +98,7 @@ namespace Fungus
             curState.HasEntered = false;
 
             //kick off the exit
-            if(prevExit != null)
+            if (prevExit != null)
             {
                 isTransitioningState = true;
                 prevExit.StartExecution(onComplete: TransitionComplete);
@@ -105,7 +107,7 @@ namespace Fungus
 
         public void Update()
         {
-            if(tickInUpdate)
+            if (tickInUpdate)
             {
                 Tick();
             }
@@ -117,7 +119,7 @@ namespace Fungus
                 return;
 
             EnterCurState();
-            
+
             var curState = states[currentState];
             //allow things with no enter to update immediately
             if (!isTransitioningState && curState.Update != null)
@@ -148,24 +150,24 @@ namespace Fungus
             }
         }
 
-		private void OnValidate()
-		{
-			string suffix = " Copy";
-			List<string> names = new List<string>();
+        private void OnValidate()
+        {
+            string suffix = " Copy";
+            List<string> names = new List<string>();
 
-			for (int i = 0; i < states.Count; i++)
-			{
-				var curstate = states[i];
-				var curName = curstate.Name;
+            for (int i = 0; i < states.Count; i++)
+            {
+                var curstate = states[i];
+                var curName = curstate.Name;
 
-				while(names.IndexOf(curName) != -1)
-				{
-					curName += suffix;
-				}
+                while (names.IndexOf(curName) != -1)
+                {
+                    curName += suffix;
+                }
 
-				names.Add(curName);
-				curstate.Name = curName;
-			}
-		}
+                names.Add(curName);
+                curstate.Name = curName;
+            }
+        }
     }
 }

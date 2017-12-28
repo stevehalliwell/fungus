@@ -33,7 +33,7 @@ namespace Fungus
                 return "Error: no FSM provided.";
             }
 
-            return "";
+            return fsm.Name;
         }
     }
 }

@@ -45,12 +45,12 @@ namespace Fungus
             {
                 return "Error: no FSM provided.";
             }
-            else if(output == null)
+            else if (output == null)
             {
                 return "Error: no output variable set.";
             }
 
-            return output.Key;
+            return fsm.Name + " in " + output.Key;
         }
 
         // public override Color GetButtonColor()
