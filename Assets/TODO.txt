@@ -24,13 +24,13 @@ behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
 -sub tree
 --if these are defined elsewhere how do they know the shared vars and targets etc.?
 *do we need a context object that we pass to them?
-*do the fungus commands actually just enable and disable the updates of these objects
 revert changes to indent, make it indent arrays and lists instead
 *consolidate all places that call a block to run so we can better control those from a BT
 **some use flowchart execute, some block execute
 **so the problem then is menus don't track where they are called from or when they are complete. But how would they
 *currently menu prevents BT from functioning in its current state as the menu has no idea what it started, but this may not be a problem as if a bt gets to the point where it needs a menu, it has probably found an action worth persuing 
--if you select a block and it has only 1 command in it, just select that
+
+
 
 Optimisation pass
 -need to get the tests working first so we can profile and automate test
