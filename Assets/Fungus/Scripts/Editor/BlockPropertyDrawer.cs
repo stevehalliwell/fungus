@@ -16,14 +16,18 @@ namespace Fungus
             {
                 return cmd.GetFlowchart();
             }
+            else if (CommandEditor.currentlyDrawingCommand != null)
+            {
+                return CommandEditor.currentlyDrawingCommand.GetFlowchart();
+            }
             return null;
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            if (GetRelatedFlowchart(property) != null)
-                return 0;
-            else
+            //if (GetRelatedFlowchart(property) != null)
+            //    return 0;
+            //else
                 return base.GetPropertyHeight(property, label);
         }
 
@@ -33,10 +37,18 @@ namespace Fungus
 
             if (flowchart != null)
             {
-                BlockEditor.BlockField(property,
-                                      new GUIContent("Target Block", "Block to call"),
-                                      new GUIContent("<None>"),
-                                      flowchart);
+                //try to handle the label for arrays and lists
+                if (!label.text.StartsWith("Element ") && !string.IsNullOrEmpty(label.text))
+                {
+                    const float labelWidth = 50;
+                    EditorGUI.LabelField(new Rect(position.x, position.y, labelWidth, position.height), label);
+                    position.x += labelWidth;
+                    position.width -= labelWidth;
+                }
+                property.objectReferenceValue = BlockEditor.BlockField(position,
+                                                                       new GUIContent("<None>"),
+                                                                       flowchart,
+                                                                       property.objectReferenceValue as Block);
             }
             else
             {

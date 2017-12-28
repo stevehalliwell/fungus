@@ -71,5 +71,10 @@ namespace Fungus
         {
             return new Color32(235, 191, 217, 255);
         }
+
+        public override bool IsReorderableArray(string propertyName)
+        {
+            return propertyName == "targetBlocks";
+        }
     }
 }

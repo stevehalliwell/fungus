@@ -13,6 +13,7 @@ namespace Fungus.EditorUtils
     public class CommandEditor : Editor 
     {
         public static Command selectedCommand;
+        public static Command currentlyDrawingCommand;
 
         public static CommandInfoAttribute GetCommandInfo(System.Type commandType)
         {
@@ -41,6 +42,7 @@ namespace Fungus.EditorUtils
             {
                 return;
             }
+            currentlyDrawingCommand = t;
 
             var flowchart = (Flowchart)t.GetFlowchart();
             if (flowchart == null)
@@ -119,6 +121,7 @@ namespace Fungus.EditorUtils
                 EditorGUILayout.HelpBox(infoAttr.HelpText, MessageType.Info, true);
                 EditorGUI.indentLevel = prevIndent;
             }
+            currentlyDrawingCommand = null;
         }
 
         public virtual void DrawCommandGUI()
