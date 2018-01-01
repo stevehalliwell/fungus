@@ -40,7 +40,7 @@ namespace Fungus
                 //try to handle the label for arrays and lists
                 if (!label.text.StartsWith("Element ") && !string.IsNullOrEmpty(label.text))
                 {
-                    const float labelWidth = 50;
+                    float labelWidth = EditorGUIUtility.labelWidth;
                     EditorGUI.LabelField(new Rect(position.x, position.y, labelWidth, position.height), label);
                     position.x += labelWidth;
                     position.width -= labelWidth;

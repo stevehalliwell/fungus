@@ -38,7 +38,7 @@ namespace Fungus
                     flowchart.SelectedBlock = compBlock;
                 }
 
-                StartCoroutine(compBlock.Execute(onComplete: onComplete));
+                compBlock.StartExecution(onComplete: onComplete);
             }
             else
             {

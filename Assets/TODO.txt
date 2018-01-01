@@ -12,24 +12,17 @@ FSM in Fungus
 -demo tour, including update fsm and updated by command
 --
 -command to get number of states?
--need a callback/event and block for a state change
+-need a callback/event and block for a state change?
 
 
 flowchart auto seperate / arrange blocks, prevent overlaps and order for directional flow
 
 
 behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
---timer, return success or fail or previous result for x ticks or real time
---condition, takes a bool if empty uses success
--sub tree
---if these are defined elsewhere how do they know the shared vars and targets etc.?
-*do we need a context object that we pass to them?
-revert changes to indent, make it indent arrays and lists instead
-*consolidate all places that call a block to run so we can better control those from a BT
-**some use flowchart execute, some block execute
-**so the problem then is menus don't track where they are called from or when they are complete. But how would they
-*currently menu prevents BT from functioning in its current state as the menu has no idea what it started, but this may not be a problem as if a bt gets to the point where it needs a menu, it has probably found an action worth persuing 
+-should be considered experiemental and breaking changes may occur
+**so the problem then is menus don't track where they are called from or when they are complete. But how would they, we eat that
 
+refactor and consolidate how blocks are called
 
 
 Optimisation pass
@@ -80,3 +73,17 @@ auto generate field and property get set fungus commmand
 --cannot rely on static class as unity isn't doing that for Physics, but we can then test for static vs instance methods, see AID-Console
 -we need to make the generator actually test it is using the correct types
 -need to test it on custom types
+
+allow players to choose their pronoun
+-localisation?
+-becomes custom tag that is replaced? or just global var?
+-maybe redundant, if creator wanted to they could already use var replacement for it
+
+
+Say & menu to support similar optional words/phrases as Ink
+
+
+Dynamic Say
+-better name
+-choose from 1 of many lines to say
+-localisation and VO
