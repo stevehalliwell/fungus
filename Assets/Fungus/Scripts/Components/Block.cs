@@ -17,7 +17,15 @@ namespace Fungus
         /// <summary> No command executing </summary>
         Idle,       
         /// <summary> Executing a command </summary>
-        Executing,
+        Executing, 
+    }
+
+    public enum BehaviourState
+    {
+        Idle,
+        Running,
+        Failed,
+        Succeeded,
     }
 
     /// <summary>
@@ -44,6 +52,23 @@ namespace Fungus
         [SerializeField] protected List<Command> commandList = new List<Command>();
 
         protected ExecutionState executionState;
+
+        private BehaviourState behState;
+
+        public BehaviourState BehaviourState
+        {
+            get
+            {
+                if (executionState == ExecutionState.Executing)
+                    return BehaviourState.Running;
+                else
+                    return behState;
+            }
+            set
+            {
+                behState = value;
+            }
+        }
 
         protected Command activeCommand;
 
@@ -119,6 +144,17 @@ namespace Fungus
         public virtual ExecutionState State { get { return executionState; } }
 
         /// <summary>
+        /// Return the execution state to idle
+        /// </summary>
+        public virtual void ResetExecutionState() { executionState = ExecutionState.Idle; }
+
+        public virtual void Fail()
+        {
+            behState = BehaviourState.Failed;
+            Stop();
+        }
+
+        /// <summary>
         /// Unique identifier for the Block.
         /// </summary>
         public virtual int ItemId { get { return itemId; } set { itemId = value; } }
@@ -190,6 +226,10 @@ namespace Fungus
         {
             StartCoroutine(Execute());
         }
+        public virtual void StartExecution(int commandIndex = 0, Action onComplete = null)
+        {
+            StartCoroutine(Execute(commandIndex, onComplete));
+        }
 
         /// <summary>
         /// A coroutine method that executes all commands in the Block. Only one running instance of each Block is permitted.
@@ -212,6 +252,7 @@ namespace Fungus
 
             var flowchart = GetFlowchart();
             executionState = ExecutionState.Executing;
+            BehaviourState = BehaviourState.Running;
             BlockSignals.DoBlockStart(this);
 
             #if UNITY_EDITOR
@@ -297,8 +338,15 @@ namespace Fungus
                 command.IsExecuting = false;
             }
 
+
             executionState = ExecutionState.Idle;
             activeCommand = null;
+
+            if (BehaviourState != BehaviourState.Failed)
+            {
+                BehaviourState = BehaviourState.Succeeded;
+            }
+
             BlockSignals.DoBlockEnd(this);
 
             if (onComplete != null)

@@ -14,6 +14,10 @@ namespace Fungus.EditorUtils
         {
             return new Vector2(rect.xMin, rect.yMin);
         }
+        public static Vector2 TopRight(this Rect rect)
+        {
+            return new Vector2(rect.xMax, rect.yMin);
+        }
 
         public static Rect ScaleSizeBy(this Rect rect, float scale)
         {
