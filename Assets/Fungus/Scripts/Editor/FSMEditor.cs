@@ -8,7 +8,7 @@ namespace Fungus.EditorUtils
 {
     /// <summary>
     /// Custom inspector for Fungus.FSM, draws default but uses a reorderable list to show the state list
-    /// with a custom element layout to to only show detailed infor for the selected item.
+    /// with a custom element layout to to only show detailed info for the selected item.
     /// </summary>
     [CustomEditor(typeof(FSM))]
     public class FSMEditor : Editor

@@ -13,6 +13,7 @@ FSM in Fungus
 --
 -command to get number of states?
 -need a callback/event and block for a state change?
+*perhaps a readme.md
 
 
 flowchart auto seperate / arrange blocks, prevent overlaps and order for directional flow
@@ -21,6 +22,7 @@ flowchart auto seperate / arrange blocks, prevent overlaps and order for directi
 behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
 -should be considered experiemental and breaking changes may occur
 **so the problem then is menus don't track where they are called from or when they are complete. But how would they, we eat that
+*perhaps a readme.md
 
 refactor and consolidate how blocks are called
 
