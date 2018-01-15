@@ -89,3 +89,5 @@ Dynamic Say
 -better name
 -choose from 1 of many lines to say
 -localisation and VO
+
+remove rotorz use unityinternal
