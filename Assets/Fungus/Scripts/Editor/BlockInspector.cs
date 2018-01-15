@@ -185,9 +185,7 @@ namespace Fungus.EditorUtils
                 }
                 if (activeCommandEditor != null)
                 {
-                    EditorGUI.indentLevel++;
                     activeCommandEditor.DrawCommandInspectorGUI();
-                    EditorGUI.indentLevel--;
                 }
             }
 
@@ -216,7 +214,7 @@ namespace Fungus.EditorUtils
 
             EditorGUIUtility.AddCursorRect(cursorChangeRect, MouseCursor.ResizeVertical);
             
-            if (Event.current.type == EventType.mouseDown && cursorChangeRect.Contains(Event.current.mousePosition))
+            if (Event.current.type == EventType.MouseDown && cursorChangeRect.Contains(Event.current.mousePosition))
             {
                 resize = true;
             }
@@ -231,7 +229,7 @@ namespace Fungus.EditorUtils
             
             // Stop resizing if mouse is outside inspector window.
             // This isn't standard Unity UI behavior but it is robust and safe.
-            if (resize && Event.current.type == EventType.mouseDrag)
+            if (resize && Event.current.type == EventType.MouseDrag)
             {
                 Rect windowRect = new Rect(0, 0, Screen.width, Screen.height);
                 if (!windowRect.Contains(Event.current.mousePosition))

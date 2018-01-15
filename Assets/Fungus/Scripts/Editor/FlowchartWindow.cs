@@ -1416,6 +1416,15 @@ namespace Fungus.EditorUtils
             {
                 flowchart.AddSelectedCommand(block.ActiveCommand);
             }
+            else
+            {
+                //it makes sense to at least show command zero fo this block if one exists
+                Command cmd = block.CommandList.Count > 0 ? block.CommandList[0] : null;
+                if(cmd != null)
+                {
+                    flowchart.AddSelectedCommand(cmd);
+                }
+            }
         }
 
         /// <summary>

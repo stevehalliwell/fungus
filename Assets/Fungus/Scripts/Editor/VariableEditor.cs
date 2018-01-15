@@ -224,16 +224,12 @@ namespace Fungus.EditorUtils
         protected virtual void DrawSingleLineProperty(Rect rect, GUIContent label, SerializedProperty referenceProp, SerializedProperty valueProp, Flowchart flowchart)
         {
             const int popupWidth = 17;
-
+            
             Rect controlRect = EditorGUI.PrefixLabel(rect, label);
             Rect valueRect = controlRect;
             valueRect.width = controlRect.width - popupWidth - 5;
             Rect popupRect = controlRect;
-
-            var prevIndent = EditorGUI.indentLevel;
-            EditorGUI.indentLevel = 0;
-
-
+            
             if (referenceProp.objectReferenceValue == null)
             {
                 EditorGUI.PropertyField(valueRect, valueProp, new GUIContent(""));
@@ -241,9 +237,7 @@ namespace Fungus.EditorUtils
                 popupRect.width = popupWidth;
             }
 
-
             EditorGUI.PropertyField(popupRect, referenceProp, new GUIContent(""));
-            EditorGUI.indentLevel = prevIndent;
         }
 
         protected virtual void DrawMultiLineProperty(Rect rect, GUIContent label, SerializedProperty referenceProp, SerializedProperty valueProp, Flowchart flowchart)

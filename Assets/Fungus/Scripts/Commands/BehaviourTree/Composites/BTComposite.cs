@@ -13,7 +13,7 @@ namespace Fungus
     [AddComponentMenu("")]
     public abstract class BTComposite : BTCommand
     {
-        [Tooltip("Block to start executing")]
+        [Tooltip("Blocks to executing, order is important.")]
         [SerializeField]
         protected List<Block> targetBlocks = new List<Block>();
 
@@ -70,6 +70,11 @@ namespace Fungus
         public override Color GetButtonColor()
         {
             return new Color32(235, 191, 217, 255);
+        }
+
+        public override bool IsReorderableArray(string propertyName)
+        {
+            return propertyName == "targetBlocks";
         }
     }
 }
