@@ -14,6 +14,7 @@ namespace Fungus
 	[AddComponentMenu("")]
 	public class ForceResult : BTDecorator
 	{
+        [Tooltip("Force result to success, if false forces failure.")]
 		[SerializeField]
 		protected bool isForcingSuccess = true;
 		

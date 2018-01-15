@@ -14,6 +14,7 @@ namespace Fungus
     [AddComponentMenu("")]
     public abstract class BTDecorator : BTCommand
     {
+        [Tooltip("Block to call.")]
         [SerializeField]
         protected Block block;
 

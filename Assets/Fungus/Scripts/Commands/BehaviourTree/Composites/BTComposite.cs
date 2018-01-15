@@ -13,7 +13,7 @@ namespace Fungus
     [AddComponentMenu("")]
     public abstract class BTComposite : BTCommand
     {
-        [Tooltip("Block to start executing")]
+        [Tooltip("Blocks to executing, order is important.")]
         [SerializeField]
         protected List<Block> targetBlocks = new List<Block>();
 

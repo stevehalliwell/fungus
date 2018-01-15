@@ -13,10 +13,13 @@ namespace Fungus
     [AddComponentMenu("")]
     public class RepeatBT : BTDecorator
     {
+        [Tooltip("Continue to call the target block until it returns this state.")]
         [SerializeField]
         protected BehaviourState repeatUntil = BehaviourState.Succeeded;
 
-		[SerializeField]
+
+        [Tooltip("Seconds to wait before next call, after a return does not meet termination state.")]
+        [SerializeField]
 		protected float timeBetweenRepeats = 0;
 
         protected override void OnBlockCompleted(Block compBlock)
