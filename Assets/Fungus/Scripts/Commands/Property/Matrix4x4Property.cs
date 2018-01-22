@@ -34,8 +34,7 @@ namespace Fungus
             M13, 
             M23, 
             M33, 
-            Inverse, 
-            Transpose, 
+            LossyScale, 
             IsIdentity, 
             Determinant, 
         }
@@ -49,14 +48,14 @@ namespace Fungus
 
         [SerializeField]
         [VariableProperty(typeof(FloatVariable),
-                          typeof(Matrix4x4Variable),
+                          typeof(Vector3Variable),
                           typeof(BooleanVariable))]
         protected Variable inOutVar;
 
         public override void OnEnter()
         {
             var iof = inOutVar as FloatVariable;
-            var iom4 = inOutVar as Matrix4x4Variable;
+            var iov = inOutVar as Vector3Variable;
             var iob = inOutVar as BooleanVariable;
 
 
@@ -115,11 +114,8 @@ namespace Fungus
                         case Property.M33:
                             iof.Value = target.m33;
                             break;
-                        case Property.Inverse:
-                            iom4.Value = target.inverse;
-                            break;
-                        case Property.Transpose:
-                            iom4.Value = target.transpose;
+                        case Property.LossyScale:
+                            iov.Value = target.lossyScale;
                             break;
                         case Property.IsIdentity:
                             iob.Value = target.isIdentity;

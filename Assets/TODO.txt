@@ -91,3 +91,9 @@ Dynamic Say
 -localisation and VO
 
 remove rotorz use unityinternal
+
+
+genvar
+-why is quaternion not working, but Rect and quaternion wrapper is
+-need to ask if you want to overwrite an existing file if it is at the auto gen location
+-need to support static class properties generation

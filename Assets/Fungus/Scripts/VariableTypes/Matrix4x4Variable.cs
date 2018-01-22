@@ -7,7 +7,7 @@ namespace Fungus
     /// <summary>
     /// Matrix4x4 variable type.
     /// </summary>
-    [VariableInfo("Other", "Matrix4x4", isPreviewedOnly:true)]
+    [VariableInfo("Other", "Matrix4x4")]
     [AddComponentMenu("")]
 	[System.Serializable]
 	public class Matrix4x4Variable : VariableBase<Matrix4x4>
