@@ -170,7 +170,10 @@ namespace Fungus
         
         public override string ToString()
         {
-            return Value.ToString();
+            if (Value != null)
+                return Value.ToString();
+            else
+                return string.Empty;
         }
         
         protected virtual void Start()

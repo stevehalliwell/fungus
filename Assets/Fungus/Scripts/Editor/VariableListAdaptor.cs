@@ -215,7 +215,7 @@ namespace Fungus.EditorUtils
 			}
 			else
             {
-                if (!variableInfo.IsPreviewedOnly)
+                if (!variableInfo.IsPreviewedOnly && defaultProp != null)
                     EditorGUI.PropertyField(rects[2], defaultProp, new GUIContent(""));
                 else if(!isGlobal)
                     EditorGUI.LabelField(rects[2], this[index].objectReferenceValue.ToString());
