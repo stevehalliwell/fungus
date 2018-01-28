@@ -208,7 +208,7 @@ namespace Fungus.EditorUtils
 					GUI.enabled = false;
 
                     if (!variableInfo.IsPreviewedOnly)
-                        EditorGUI.PropertyField(rects[2], globalValProp, new GUIContent(""));
+                        variable.DrawProperty(rects[2], globalValProp);
 
                     GUI.enabled = prevEnabled;
 				}
@@ -216,8 +216,9 @@ namespace Fungus.EditorUtils
 			else
             {
                 if (!variableInfo.IsPreviewedOnly && defaultProp != null)
-                    EditorGUI.PropertyField(rects[2], defaultProp, new GUIContent(""));
-                else if(!isGlobal)
+                    variable.DrawProperty(rects[2], defaultProp);
+                //EditorGUI.PropertyField(rects[2], defaultProp, new GUIContent(""));
+                else if (!isGlobal)
                     EditorGUI.LabelField(rects[2], this[index].objectReferenceValue.ToString());
 
             }

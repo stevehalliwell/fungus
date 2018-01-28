@@ -37,13 +37,14 @@ namespace Fungus.EditorUtils
 
             if (EditorGUI.EndChangeCheck())
             {
+                generator.TargetType = null;
+
                 try
                 {
                     typeList = generator.types.Where(x => x.Name == userInputClassName).ToList();
                 }
                 catch (Exception)
                 {
-                    generator.TargetType = null;
                 }
             }
 

@@ -2,6 +2,9 @@
 // It is released for free under the MIT open source license (https://github.com/snozbot/fungus/blob/master/LICENSE)
 
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif//UNITY_EDITOR
 using System;
 
 namespace Fungus
@@ -104,6 +107,13 @@ namespace Fungus
         /// Callback to reset the variable if the Flowchart is reset.
         /// </summary>
         public abstract void OnReset();
+
+#if UNITY_EDITOR
+        public virtual void DrawProperty(Rect rect, SerializedProperty valueProp)
+        {
+            EditorGUI.PropertyField(rect, valueProp, new GUIContent(""));
+        }
+#endif//UNITY_EDITOR
 
         #endregion
     }
