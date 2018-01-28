@@ -85,11 +85,11 @@ namespace Fungus.EditorUtils
                 {
                     if (generator.ExistingGeneratedClass != null)
                     {
-                        EditorGUILayout.HelpBox("Variable Appears to already exist. Overwritting or errors may occur.", MessageType.Warning);
+                        EditorGUILayout.HelpBox("Variable Appears to already exist. Overwriting or errors may occur.", MessageType.Warning);
                     }
                     if (generator.ExistingGeneratedDrawerClass != null)
                     {
-                        EditorGUILayout.HelpBox("Variable Drawer Appears to already exist. Overwritting or errors may occur.", MessageType.Warning);
+                        EditorGUILayout.HelpBox("Variable Drawer Appears to already exist. Overwriting or errors may occur.", MessageType.Warning);
                     }
 
                     generator.Category = EditorGUILayout.TextField("Category", generator.Category);
@@ -102,7 +102,7 @@ namespace Fungus.EditorUtils
                 {
                     if (generator.ExistingGeneratedPropCommandClass != null)
                     {
-                        EditorGUILayout.HelpBox("Variable Appears to already exist. Overwritting or errors may occur.", MessageType.Warning);
+                        EditorGUILayout.HelpBox("Variable Appears to already exist. Overwriting or errors may occur.", MessageType.Warning);
                     }
 
                     generator.PreviewOnly = EditorGUILayout.Toggle("Variable List preview only", generator.PreviewOnly);
