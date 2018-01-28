@@ -22,6 +22,8 @@ namespace Fungus.EditorUtils
     public class GenerateVariableWindow : EditorWindow
     {
         private VariableScriptGenerator generator = new VariableScriptGenerator();
+        private string userInputClassName = "";
+        private List<Type> typeList = new List<Type>();
 
         public void OnGUI()
         {
@@ -30,48 +32,99 @@ namespace Fungus.EditorUtils
 
         private void DrawMenuPanel()
         {
-            generator.ClassName = EditorGUILayout.TextField("ClassName", generator.ClassName);
-            
+            EditorGUI.BeginChangeCheck();
+            userInputClassName = EditorGUILayout.TextField("ClassName", userInputClassName);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                try
+                {
+                    typeList = generator.types.Where(x => x.Name == userInputClassName).ToList();
+                }
+                catch (Exception)
+                {
+                    generator.TargetType = null;
+                }
+            }
+
             try
             {
-                var typeList = generator.types.Where(x => x.Name == generator.ClassName).ToList();
-
-                int index = typeList.IndexOf(generator.targetType);
-
+                int index = typeList.IndexOf(generator.TargetType);
+                EditorGUI.BeginChangeCheck();
                 index = GUILayout.SelectionGrid(index, typeList.Select(x => x.FullName).ToArray(), 1);
 
                 if (index < 0 || index > typeList.Count)
                     index = 0;
 
-                generator.targetType = typeList[index];
+                if (EditorGUI.EndChangeCheck() || generator.TargetType == null)
+                    generator.TargetType = typeList[index];
             }
             catch (Exception)
             {
-                
+                generator.TargetType = null;
             }
+            
 
-            generator.Category = EditorGUILayout.TextField("Category", generator.Category);
-            generator.NamespaceUsingDeclare = EditorGUILayout.TextField("NamespaceUsingDeclare", generator.NamespaceUsingDeclare);
+            EditorGUILayout.Space();
 
-            generator.generateVariableClass = EditorGUILayout.Toggle("Generate Variable", generator.generateVariableClass);
-            generator.PreviewOnly = EditorGUILayout.Toggle("Variable List preview only", generator.PreviewOnly);
-            generator.generatePropertyCommand = EditorGUILayout.Toggle("Generate Property Command", generator.generatePropertyCommand);
-
-            if (GUILayout.Button("Generate Now"))
+            if (generator.TargetType == null)
             {
-                try
+                EditorGUILayout.HelpBox("Must select a type first", MessageType.Info);
+            }
+            else
+            {
+                generator.generateVariableClass = EditorGUILayout.Toggle("Generate Variable", generator.generateVariableClass);
+
+                if (generator.TargetType.IsAbstract)
                 {
-                    generator.Generate();
-                    EditorUtility.DisplayProgressBar("Generating " + generator.ClassName, "Importing Scripts", 0);
-                    AssetDatabase.Refresh();
+                    EditorGUILayout.HelpBox(generator.TargetType.FullName + " is abstract. No Variable will be generated", MessageType.Error);
+                    generator.generateVariableClass = false;
                 }
-                catch (Exception e)
+
+                if (generator.generateVariableClass)
                 {
-                    Debug.LogWarning(e.Message);
-                    //throw e;
+                    if (generator.ExistingGeneratedClass != null)
+                    {
+                        EditorGUILayout.HelpBox("Variable Appears to already exist. Overwritting or errors may occur.", MessageType.Warning);
+                    }
+                    if (generator.ExistingGeneratedDrawerClass != null)
+                    {
+                        EditorGUILayout.HelpBox("Variable Drawer Appears to already exist. Overwritting or errors may occur.", MessageType.Warning);
+                    }
+
+                    generator.Category = EditorGUILayout.TextField("Category", generator.Category);
+                    generator.NamespaceUsingDeclare = EditorGUILayout.TextField("NamespaceUsingDeclare", generator.NamespaceUsingDeclare);
                 }
-                generator = new VariableScriptGenerator();
-                EditorUtility.ClearProgressBar();
+
+                EditorGUILayout.Space();
+                generator.generatePropertyCommand = EditorGUILayout.Toggle("Generate Property Command", generator.generatePropertyCommand);
+                if (generator.generatePropertyCommand)
+                {
+                    if (generator.ExistingGeneratedPropCommandClass != null)
+                    {
+                        EditorGUILayout.HelpBox("Variable Appears to already exist. Overwritting or errors may occur.", MessageType.Warning);
+                    }
+
+                    generator.PreviewOnly = EditorGUILayout.Toggle("Variable List preview only", generator.PreviewOnly);
+                }
+
+                EditorGUILayout.Space();
+                if (GUILayout.Button("Generate Now"))
+                {
+                    try
+                    {
+                        generator.Generate();
+                        EditorUtility.DisplayProgressBar("Generating " + userInputClassName, "Importing Scripts", 0);
+                        AssetDatabase.Refresh();
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogWarning(e.Message);
+                        //throw e;
+                    }
+                    generator = new VariableScriptGenerator();
+                    EditorUtility.ClearProgressBar();
+                }
             }
         }
 
@@ -91,9 +144,8 @@ namespace Fungus.EditorUtils
     /// </summary>
     public class VariableScriptGenerator
     {
-        private string _namespaceOfClass = "";
-        public string NamespaceUsingDeclare { get { return _namespaceOfClass; } set { _namespaceOfClass = value; } }
-        public string ClassName { get; set; }
+        public string NamespaceUsingDeclare { get; set; }
+        
         public bool PreviewOnly { get; set; }
         private string _category = "Other";
         public string Category { get { return _category; } set { _category = value; } }
@@ -101,8 +153,42 @@ namespace Fungus.EditorUtils
         public List<Type> types { get; private set; }
 
         public bool generateVariableClass = true, generatePropertyCommand = true;
-        public Type targetType;
 
+        public string ClassName { get { return TargetType.Name; } }
+        public string CamelCaseClassName { get { return Char.ToLowerInvariant(ClassName[0]) + ClassName.Substring(1);}}
+
+        public string GenClassName { get { return ClassName + "Variable"; } }
+
+        public string VariableFileName { get { return VaraibleScriptLocation + ClassName + "Variable.cs"; } }
+        public string VariableEditorFileName { get { return EditorScriptLocation + ClassName + "VariableDrawer.cs"; } }
+        public string PropertyFileName { get { return PropertyScriptLocation + ClassName + "Property.cs"; } }
+
+        private Type _targetType;
+        public Type TargetType
+        {
+            get
+            {
+                return _targetType;
+            }
+            set
+            {
+                _targetType = value;
+                ExistingGeneratedClass = null;
+                ExistingGeneratedDrawerClass = null;
+                ExistingGeneratedPropCommandClass = null;
+
+                if (_targetType != null)
+                {
+                    ExistingGeneratedClass = types.Find(x => x.Name == GenClassName);
+                    ExistingGeneratedDrawerClass = types.Find(x => x.Name == (ClassName + "VariableDrawer"));
+                    ExistingGeneratedPropCommandClass = types.Find(x => x.Name == (ClassName + "Property"));
+                }
+            }
+        }
+
+        public Type ExistingGeneratedClass { get; private set; }
+        public Type ExistingGeneratedDrawerClass { get; private set; }
+        public Type ExistingGeneratedPropCommandClass { get; private set; }
 
         StringBuilder enumBuilder, getBuilder, setBuilder;// = new StringBuilder("switch (property)\n{");
 
@@ -412,106 +498,38 @@ namespace Fungus
         }
 
         public void Generate()
-        {
-            if (ClassName.Length == 0)
-                throw new Exception("No Class name provided.");
-
-            var types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).ToList();
+        {    
+            if (TargetType == null)
+                throw new Exception("No type given");
             
 
-            if (targetType == null)
-                throw new Exception("No Type of name " + ClassName + " exists.");
-
-            //don't allow dups
-            var genClassName = (ClassName + "Variable");
-            Type resGeneratedClass = types.Find(x => x.Name == genClassName);
-            Type resGeneratedDrawerClass = types.Find(x => x.Name == (ClassName + "VariableDrawer"));
-            Type resGeneratedPropCommandClass = types.Find(x => x.Name == (ClassName + "Property"));
-
             EditorUtility.DisplayProgressBar("Generating " + ClassName, "Starting", 0);
-
-
             try
             {
-                var lowerClassName = Char.ToLowerInvariant(ClassName[0]) + ClassName.Substring(1);
-                var fileName = VaraibleScriptLocation + ClassName + "Variable.cs";
-                if ((resGeneratedClass == null || System.IO.File.Exists(fileName))
-                    && !targetType.IsAbstract && generateVariableClass)
+                if (generateVariableClass)
                 {
-                    NamespaceUsingDeclare = NamespaceUsingDeclare.Length > 0 ? ("using " + NamespaceUsingDeclare + ";") : string.Empty;
-                    EditorUtility.DisplayProgressBar("Generating " + ClassName, "Variable", 0);
-                    var scriptContents = string.Format(VariableScriptTemplate, ClassName, NamespaceUsingDeclare, lowerClassName, Category, PreviewOnly ? ", isPreviewedOnly:true" : "", targetType.FullName);
-                    System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(VaraibleScriptLocation));
-                    System.IO.File.WriteAllText(fileName, scriptContents);
-                    Debug.Log("Created " + fileName);
+                    Func<string> lam = () => {
+                        var usingDec = NamespaceUsingDeclare.Length > 0 ? ("using " + NamespaceUsingDeclare + ";") : string.Empty;
+                        return string.Format(VariableScriptTemplate, ClassName, usingDec, CamelCaseClassName, Category, PreviewOnly ? ", isPreviewedOnly:true" : "", TargetType.FullName);
+                    };
+                    FileSaveHelper("Variable", VaraibleScriptLocation, VariableFileName, lam);
                 }
-
-                fileName = EditorScriptLocation + ClassName + "VariableDrawer.cs";
-                if ((resGeneratedDrawerClass == null || System.IO.File.Exists(fileName))
-                    && !targetType.IsAbstract && generateVariableClass)
+                
+                if (generateVariableClass)
                 {
-                    EditorUtility.DisplayProgressBar("Generating " + ClassName, "VariableDrawer", 0);
-                    var editorScriptContents = string.Format(EditorScriptTemplate, ClassName);
-                    System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(EditorScriptLocation));
-                    System.IO.File.WriteAllText(fileName, editorScriptContents);
-                    Debug.Log("Created " + fileName);
+                    Func<string> lam = () => { return string.Format(EditorScriptTemplate, ClassName); };
+                    FileSaveHelper("VariableDrawer", EditorScriptLocation, VariableEditorFileName, lam);
                 }
-
-                fileName = PropertyScriptLocation + ClassName + "Property.cs";
-                if ((resGeneratedPropCommandClass == null || System.IO.File.Exists(fileName))
-                    && generatePropertyCommand)
+                
+                if (generatePropertyCommand)
                 {
                     enumBuilder = new StringBuilder("public enum Property \n        { \n".Replace("\n", System.Environment.NewLine));
                     getBuilder = new StringBuilder("switch (property)\n                    {\n".Replace("\n", System.Environment.NewLine));
                     setBuilder = new StringBuilder("switch (property)\n                    {\n".Replace("\n", System.Environment.NewLine));
 
                     EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property", 0);
-                    {
-                        EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Scanning Fields", 0);
-                        var fields = targetType.GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
-                        for (int i = 0; i < fields.Length; i++)
-                        {
-                            if (helper.IsTypeHandled(fields[i].FieldType))
-                            {
-
-                                var actualName = fields[i].Name;
-                                var upperCaseName = Char.ToUpperInvariant(actualName[0]) + actualName.Substring(1);
-                                //add it to the enum
-                                AddToEnum(upperCaseName);
-
-                                //add it to the get
-                                AddToGet(fields[i].FieldType, upperCaseName, actualName);
-
-                                //add it to the set
-                                AddToSet(fields[i].FieldType, upperCaseName, actualName);
-                            }
-                        }
-                    }
-                    {
-                        EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Scanning Props", 0);
-                        var props = targetType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
-                        for (int i = 0; i < props.Length; i++)
-                        {
-                            if (helper.IsTypeHandled(props[i].PropertyType) && props[i].GetIndexParameters().Length == 0 && !IsObsolete(props[i].GetCustomAttributes(false)))
-                            {
-                                var actualName = props[i].Name;
-                                var upperCaseName = Char.ToUpperInvariant(actualName[0]) + actualName.Substring(1);
-                                //add it to the enum
-                                AddToEnum(upperCaseName);
-
-                                if (props[i].CanRead)
-                                {
-                                    //add it to the get
-                                    AddToGet(props[i].PropertyType, upperCaseName, actualName);
-                                }
-                                if (props[i].CanWrite)
-                                {
-                                    //add it to the set
-                                    AddToSet(props[i].PropertyType, upperCaseName, actualName);
-                                }
-                            }
-                        }
-                    }
+                    PropertyFieldLogic();
+                    PropertyPropLogic();
 
 
                     EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Building", 0);
@@ -531,18 +549,15 @@ namespace Fungus
 
                     string nullCheck = "";
 
-                    if (targetType.IsClass)
+                    if (TargetType.IsClass)
                     {
-                        nullCheck = string.Format(NullCheckSummary, lowerClassName);
+                        nullCheck = string.Format(NullCheckSummary, CamelCaseClassName);
                     }
 
 
                     //write to file
-                    EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Writing", 0);
-                    var propScriptContents = string.Format(PropertyScriptTemplate, ClassName, enumgen, lowerClassName, getcontents, setcontents, typeVars, variablePropertyTypes, nullCheck);
-                    System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(PropertyScriptLocation));
-                    System.IO.File.WriteAllText(fileName, propScriptContents);
-                    Debug.Log("Created " + fileName);
+                    Func<string> propContentOp = () => { return string.Format(PropertyScriptTemplate, ClassName, enumgen, CamelCaseClassName, getcontents, setcontents, typeVars, variablePropertyTypes, nullCheck); };
+                    FileSaveHelper("Property", PropertyScriptLocation, PropertyFileName, propContentOp);
                 }
             }
             catch (Exception e)
@@ -551,6 +566,56 @@ namespace Fungus
             }
 
             EditorUtility.ClearProgressBar();
+        }
+
+        private void PropertyFieldLogic()
+        {
+            EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Scanning Fields", 0);
+            var fields = TargetType.GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
+            for (int i = 0; i < fields.Length; i++)
+            {
+                if (helper.IsTypeHandled(fields[i].FieldType))
+                {
+
+                    var actualName = fields[i].Name;
+                    var upperCaseName = Char.ToUpperInvariant(actualName[0]) + actualName.Substring(1);
+                    //add it to the enum
+                    AddToEnum(upperCaseName);
+
+                    //add it to the get
+                    AddToGet(fields[i].FieldType, upperCaseName, actualName);
+
+                    //add it to the set
+                    AddToSet(fields[i].FieldType, upperCaseName, actualName);
+                }
+            }
+        }
+
+        private void PropertyPropLogic()
+        {
+            EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Scanning Props", 0);
+            var props = TargetType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
+            for (int i = 0; i < props.Length; i++)
+            {
+                if (helper.IsTypeHandled(props[i].PropertyType) && props[i].GetIndexParameters().Length == 0 && !IsObsolete(props[i].GetCustomAttributes(false)))
+                {
+                    var actualName = props[i].Name;
+                    var upperCaseName = Char.ToUpperInvariant(actualName[0]) + actualName.Substring(1);
+                    //add it to the enum
+                    AddToEnum(upperCaseName);
+
+                    if (props[i].CanRead)
+                    {
+                        //add it to the get
+                        AddToGet(props[i].PropertyType, upperCaseName, actualName);
+                    }
+                    if (props[i].CanWrite)
+                    {
+                        //add it to the set
+                        AddToSet(props[i].PropertyType, upperCaseName, actualName);
+                    }
+                }
+            }
         }
 
         private void AddToSet(Type fieldType, string nameEnum, string nameVariable)
@@ -590,6 +655,15 @@ namespace Fungus
             if (attrs.Length > 0)
                 return attrs.First(x => x.GetType() == typeof(ObsoleteAttribute)) != null;
             return false;
+        }
+
+        private void FileSaveHelper(string op, string loc, string filename, Func<string> opLambda)
+        {
+            EditorUtility.DisplayProgressBar("Generating " + ClassName, op, 0);
+            var scriptContents = opLambda();
+            System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(loc));
+            System.IO.File.WriteAllText(filename, scriptContents);
+            Debug.Log("Created " + filename);
         }
     }
 }
