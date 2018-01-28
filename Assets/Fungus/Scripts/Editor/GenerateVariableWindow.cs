@@ -509,7 +509,7 @@ namespace Fungus
                 if (generateVariableClass)
                 {
                     Func<string> lam = () => {
-                        var usingDec = NamespaceUsingDeclare.Length > 0 ? ("using " + NamespaceUsingDeclare + ";") : string.Empty;
+                        var usingDec = !string.IsNullOrEmpty(NamespaceUsingDeclare) ? ("using " + NamespaceUsingDeclare + ";") : string.Empty;
                         return string.Format(VariableScriptTemplate, ClassName, usingDec, CamelCaseClassName, Category, PreviewOnly ? ", isPreviewedOnly:true" : "", TargetType.FullName);
                     };
                     FileSaveHelper("Variable", VaraibleScriptLocation, VariableFileName, lam);
