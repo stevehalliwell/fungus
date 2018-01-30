@@ -94,11 +94,8 @@ remove rotorz use unityinternal
 
 
 genvar
--why is quaternion not working, but Rect and quaternion wrapper is
--need to ask if you want to overwrite an existing file if it is at the auto gen location
 -need to support static class properties generation
--collider variable
--vec4 and quater singleline
 -Variable needs to be able to notify or inject into VariableListAdapter that its value needs a custom drawer
+-global that is preview only doesn't display at all
 
 var list needs to be collapsable in the inspector too, gets too long

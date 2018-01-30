@@ -46,6 +46,7 @@ namespace Fungus
     /// </summary>
     public class VariableInfoAttribute : Attribute
     {
+        //Note do not use "isPreviewedOnly:true", it causes the script to fail to load without errors shown
         public VariableInfoAttribute(string category, string variableType, int order = 0, bool isPreviewedOnly = false)
         {
             this.Category = category;
@@ -109,7 +110,34 @@ namespace Fungus
         public abstract void OnReset();
 
 #if UNITY_EDITOR
-        public virtual void DrawProperty(Rect rect, SerializedProperty valueProp)
+        /// <summary>
+        /// Called by the VariableListAdapter to handle the drawing of the variable in the ReOrderable List
+        /// </summary>
+        /// <param name="rect"></param>
+        /// <param name="valueProp"></param>
+        /// <param name="info"></param>
+        public void DrawProperty(Rect rect, SerializedProperty valueProp, VariableInfoAttribute info)
+        {
+            if (valueProp == null)
+            {
+                EditorGUI.LabelField(rect, "N/A");
+            }
+            else if (info.IsPreviewedOnly)
+            {
+                EditorGUI.LabelField(rect, this.ToString());
+            }
+            else
+            {
+                InternalDrawProperty(rect, valueProp);
+            }
+        }
+
+        /// <summary>
+        /// Method to be overloaded in child classes to alter how a variable type draws itself
+        /// </summary>
+        /// <param name="rect"></param>
+        /// <param name="valueProp"></param>
+        public virtual void InternalDrawProperty(Rect rect, SerializedProperty valueProp)
         {
             EditorGUI.PropertyField(rect, valueProp, new GUIContent(""));
         }

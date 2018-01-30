@@ -511,7 +511,7 @@ namespace Fungus
                 {
                     Func<string> lam = () => {
                         var usingDec = !string.IsNullOrEmpty(NamespaceUsingDeclare) ? ("using " + NamespaceUsingDeclare + ";") : string.Empty;
-                        return string.Format(VariableScriptTemplate, ClassName, usingDec, CamelCaseClassName, Category, PreviewOnly ? ", isPreviewedOnly:true" : "", TargetType.FullName);
+                        return string.Format(VariableScriptTemplate, ClassName, usingDec, CamelCaseClassName, Category, PreviewOnly ? ", IsPreviewedOnly = true" : "", TargetType.FullName);
                     };
                     FileSaveHelper("Variable", VaraibleScriptLocation, VariableFileName, lam);
                 }
