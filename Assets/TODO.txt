@@ -99,3 +99,7 @@ genvar
 -global that is preview only doesn't display at all
 
 var list needs to be collapsable in the inspector too, gets too long
+
+BT menu to BehaviourTree 
+bt node icons more visible
+better BT example
