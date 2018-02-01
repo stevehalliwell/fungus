@@ -91,11 +91,11 @@ namespace Fungus.EditorUtils
             //Show the variables in the flowchart inspector
             GUILayout.Space(20);
 
-            DrawVariablesGUI(false, Mathf.FloorToInt(EditorGUIUtility.currentViewWidth) - VariableListAdaptor.ReorderListSkirts);
+            DrawVariablesGUI(Mathf.FloorToInt(EditorGUIUtility.currentViewWidth) - VariableListAdaptor.ReorderListSkirts);
 
         }
 
-        public virtual void DrawVariablesGUI(bool showVariableToggleButton, int w)
+        public virtual void DrawVariablesGUI(int w)
         {
             serializedObject.Update();
 
@@ -107,7 +107,7 @@ namespace Fungus.EditorUtils
                 //showVariableToggleButton = true;
             }
 
-            if (showVariableToggleButton && !t.VariablesExpanded)
+            if (!t.VariablesExpanded)
             {
                 if (GUILayout.Button ("Variables (" + t.Variables.Count + ")", GUILayout.Height(24)))
                 {
@@ -145,18 +145,20 @@ namespace Fungus.EditorUtils
                 
                 float plusWidth = 32;
                 float plusHeight = 24;
+                float buttonRectWidthCompensate = 4;
 
                 Rect buttonRect = listRect;
                 float buttonHeight = 24;
-                buttonRect.x = 4;
+                //buttonRect.x = 4;
                 buttonRect.y -= buttonHeight - 1;
                 buttonRect.height = buttonHeight;
+                buttonRect.width -= buttonRectWidthCompensate;
                 if (!Application.isPlaying)
                 {
                     buttonRect.width -= 30;
                 }
 
-                if (showVariableToggleButton && GUI.Button(buttonRect, "Variables"))
+                if (GUI.Button(buttonRect, "Variables"))
                 {
                     t.VariablesExpanded = false;
                 }
@@ -167,8 +169,7 @@ namespace Fungus.EditorUtils
                 lastRect.y += 5;
                 
                 //this is not required, seems to be legacy that is hidden in the normal reorderable
-                if(showVariableToggleButton)
-                    EditorGUI.Foldout(lastRect, true, "");
+                EditorGUI.Foldout(lastRect, true, "");
 
                 Rect plusRect = listRect;
                 plusRect.x += plusRect.width - plusWidth;
