@@ -123,9 +123,13 @@ namespace Fungus
                 {
                     return _globalStaicRef;
                 }
-                else
+                else if(Application.isPlaying)
                 {
                     return _globalStaicRef = FungusManager.Instance.GlobalVariables.GetOrAddVariable(Key, value, this.GetType());
+                }
+                else
+                {
+                    return null;
                 }
             }
         }
@@ -135,7 +139,7 @@ namespace Fungus
         {
             get
             {
-                if (scope != VariableScope.Global)
+                if (scope != VariableScope.Global || !Application.isPlaying)
                 {
                     return this.value;
                 }
@@ -146,7 +150,7 @@ namespace Fungus
             }
             set
             {
-                if (scope != VariableScope.Global)
+                if (scope != VariableScope.Global || !Application.isPlaying)
                 {
                     this.value = value;
                 }
