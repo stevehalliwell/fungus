@@ -7,16 +7,24 @@ namespace Fungus
     /// <summary>
     /// Quaternion variable type.
     /// </summary>
-    [VariableInfo("Other", "Quaternion", isPreviewedOnly:true)]
+    [VariableInfo("Other", "Quaternion")]
     [AddComponentMenu("")]
 	[System.Serializable]
-	public class QuaternionVariable : VariableBase<Quaternion>
-	{ }
+	public class QuaternionVariable : VariableBase<UnityEngine.Quaternion>
+    {
+#if UNITY_EDITOR
+        public override void InternalDrawProperty(Rect rect, UnityEditor.SerializedProperty valueProp)
+        {
+            //show it as euler angles.
+            valueProp.quaternionValue = Quaternion.Euler(UnityEditor.EditorGUI.Vector3Field(rect, new GUIContent(""), valueProp.quaternionValue.eulerAngles));
+        }
+#endif//UNITY_EDITOR
+    }
 
-	/// <summary>
-	/// Container for a Quaternion variable reference or constant value.
-	/// </summary>
-	[System.Serializable]
+        /// <summary>
+        /// Container for a Quaternion variable reference or constant value.
+        /// </summary>
+        [System.Serializable]
 	public struct QuaternionData
 	{
 		[SerializeField]
@@ -24,20 +32,20 @@ namespace Fungus
 		public QuaternionVariable quaternionRef;
 
 		[SerializeField]
-		public Quaternion quaternionVal;
+		public UnityEngine.Quaternion quaternionVal;
 
-		public static implicit operator Quaternion(QuaternionData QuaternionData)
+		public static implicit operator UnityEngine.Quaternion(QuaternionData QuaternionData)
 		{
 			return QuaternionData.Value;
 		}
 
-		public QuaternionData(Quaternion v)
+		public QuaternionData(UnityEngine.Quaternion v)
 		{
 			quaternionVal = v;
 			quaternionRef = null;
 		}
 
-		public Quaternion Value
+		public UnityEngine.Quaternion Value
 		{
 			get { return (quaternionRef == null) ? quaternionVal : quaternionRef.Value; }
 			set { if (quaternionRef == null) { quaternionVal = value; } else { quaternionRef.Value = value; } }
@@ -54,5 +62,5 @@ namespace Fungus
 				return quaternionRef.Key;
 			}
 		}
-	}
+    }
 }

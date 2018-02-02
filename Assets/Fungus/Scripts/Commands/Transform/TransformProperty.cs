@@ -11,15 +11,8 @@ namespace Fungus
                  "Property",
                  "Get or Set a property of a transform component")]
     [AddComponentMenu("")]
-    public class TransformProperty : Command
+    public class TransformProperty : BaseVariableProperty
     {
-        public enum GetSet
-        {
-            Get,
-            Set,
-        }
-        public GetSet getOrSet = GetSet.Get;
-
         public enum Property
         {
             ChildCount,

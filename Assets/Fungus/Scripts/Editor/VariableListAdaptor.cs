@@ -210,7 +210,7 @@ namespace Fungus.EditorUtils
 
             bool isGlobal = scopeProp.enumValueIndex == (int)VariableScope.Global;
 
-
+            var prevEnabled = GUI.enabled;
             if (isGlobal && Application.isPlaying)
 			{
 				var res = FungusManager.Instance.GlobalVariables.GetVariable(keyProp.stringValue);
@@ -219,24 +219,17 @@ namespace Fungus.EditorUtils
 					SerializedObject globalValue = new SerializedObject(res);
 					var globalValProp = globalValue.FindProperty("value");
 
-					var prevEnabled = GUI.enabled;
+					
 					GUI.enabled = false;
-
-                    if (!variableInfo.IsPreviewedOnly)
-                        EditorGUI.PropertyField(rects[2], globalValProp, new GUIContent(""));
-
-                    GUI.enabled = prevEnabled;
-				}
+                    defaultProp = globalValProp;
+                }
 			}
-			else
-            {
-                if (!variableInfo.IsPreviewedOnly)
-                    EditorGUI.PropertyField(rects[2], defaultProp, new GUIContent(""));
-                else if(!isGlobal)
-                    EditorGUI.LabelField(rects[2], this[index].objectReferenceValue.ToString());
 
-            }
+            
+            //delegate actual drawing to the variable
+            variable.DrawProperty(rects[2], defaultProp, variableInfo);
 
+            GUI.enabled = prevEnabled;
 
             scope = (VariableScope)EditorGUI.EnumPopup(rects[3], variable.Scope);
             scopeProp.enumValueIndex = (int)scope;
