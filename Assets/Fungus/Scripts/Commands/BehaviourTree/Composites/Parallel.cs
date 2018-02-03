@@ -11,7 +11,7 @@ namespace Fungus
     /// <summary>
     /// Execute all blocks simultaneously, fails if any fail, success on all 
     /// </summary>
-    [CommandInfo("BT",
+    [CommandInfo("BehaviourTree",
                  "Parallel",
                  "Execute blocks until one succeeds, return fail if all fail")]
     [AddComponentMenu("")]
