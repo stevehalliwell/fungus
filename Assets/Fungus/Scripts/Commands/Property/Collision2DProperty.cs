@@ -5,22 +5,23 @@ using UnityEngine;
 namespace Fungus
 {
     // <summary>
-    /// Get or Set a property of a Quaternion component
+    /// Get or Set a property of a Collision2D component
     /// </summary>
-    [CommandInfo("Quaternion",
+    [CommandInfo("Collision2D",
                  "Property",
-                 "Get or Set a property of a Quaternion component")]
+                 "Get or Set a property of a Collision2D component")]
     [AddComponentMenu("")]
-    public class QuaternionProperty : BaseVariableProperty
+    public class Collision2DProperty : BaseVariableProperty
     {
 		//generated property
         public enum Property 
         { 
-            X, 
-            Y, 
-            Z, 
-            W, 
-            EulerAngles, 
+            Rigidbody, 
+            OtherRigidbody, 
+            Transform, 
+            GameObject, 
+            RelativeVelocity, 
+            Enabled, 
         }
 
 		
@@ -28,40 +29,49 @@ namespace Fungus
         protected Property property;
 		
         [SerializeField]
-        protected QuaternionData quaternionData;
+        protected Collision2DData collision2DData;
 
         [SerializeField]
-        [VariableProperty(typeof(FloatVariable),
-                          typeof(Vector3Variable))]
+        [VariableProperty(typeof(Rigidbody2DVariable),
+                          typeof(TransformVariable),
+                          typeof(GameObjectVariable),
+                          typeof(Vector2Variable),
+                          typeof(BooleanVariable))]
         protected Variable inOutVar;
 
         public override void OnEnter()
         {
-            var iof = inOutVar as FloatVariable;
-            var iov = inOutVar as Vector3Variable;
+            var iorb2d = inOutVar as Rigidbody2DVariable;
+            var iot = inOutVar as TransformVariable;
+            var iogo = inOutVar as GameObjectVariable;
+            var iov2 = inOutVar as Vector2Variable;
+            var iob = inOutVar as BooleanVariable;
 
 
-            var target = quaternionData.Value;
+            var target = collision2DData.Value;
 
             switch (getOrSet)
             {
                 case GetSet.Get:
                     switch (property)
                     {
-                        case Property.X:
-                            iof.Value = target.x;
+                        case Property.Rigidbody:
+                            iorb2d.Value = target.rigidbody;
                             break;
-                        case Property.Y:
-                            iof.Value = target.y;
+                        case Property.OtherRigidbody:
+                            iorb2d.Value = target.otherRigidbody;
                             break;
-                        case Property.Z:
-                            iof.Value = target.z;
+                        case Property.Transform:
+                            iot.Value = target.transform;
                             break;
-                        case Property.W:
-                            iof.Value = target.w;
+                        case Property.GameObject:
+                            iogo.Value = target.gameObject;
                             break;
-                        case Property.EulerAngles:
-                            iov.Value = target.eulerAngles;
+                        case Property.RelativeVelocity:
+                            iov2.Value = target.relativeVelocity;
+                            break;
+                        case Property.Enabled:
+                            iob.Value = target.enabled;
                             break;
                         default:
                             Debug.Log("Unsupported get or set attempted");
@@ -72,21 +82,6 @@ namespace Fungus
                 case GetSet.Set:
                     switch (property)
                     {
-                        case Property.X:
-                            target.x = iof.Value;
-                            break;
-                        case Property.Y:
-                            target.y = iof.Value;
-                            break;
-                        case Property.Z:
-                            target.z = iof.Value;
-                            break;
-                        case Property.W:
-                            target.w = iof.Value;
-                            break;
-                        case Property.EulerAngles:
-                            target.eulerAngles = iov.Value;
-                            break;
                         default:
                             Debug.Log("Unsupported get or set attempted");
                             break;
@@ -102,6 +97,10 @@ namespace Fungus
 
         public override string GetSummary()
         {
+            if (collision2DData.Value == null)
+            {
+                return "Error: no collision2D set";
+            }
             if (inOutVar == null)
             {
                 return "Error: no variable set to push or pull data to or from";
@@ -117,7 +116,7 @@ namespace Fungus
 
         public override bool HasReference(Variable variable)
         {
-            if (quaternionData.quaternionRef == variable || inOutVar == variable)
+            if (collision2DData.collision2DRef == variable || inOutVar == variable)
                 return true;
 
             return false;

@@ -5,22 +5,21 @@ using UnityEngine;
 namespace Fungus
 {
     // <summary>
-    /// Get or Set a property of a Quaternion component
+    /// Get or Set a property of a Collider component
     /// </summary>
-    [CommandInfo("Quaternion",
+    [CommandInfo("Collider",
                  "Property",
-                 "Get or Set a property of a Quaternion component")]
+                 "Get or Set a property of a Collider component")]
     [AddComponentMenu("")]
-    public class QuaternionProperty : BaseVariableProperty
+    public class ColliderProperty : BaseVariableProperty
     {
 		//generated property
         public enum Property 
         { 
-            X, 
-            Y, 
-            Z, 
-            W, 
-            EulerAngles, 
+            Enabled, 
+            AttachedRigidbody, 
+            IsTrigger, 
+            ContactOffset, 
         }
 
 		
@@ -28,40 +27,39 @@ namespace Fungus
         protected Property property;
 		
         [SerializeField]
-        protected QuaternionData quaternionData;
+        protected ColliderData colliderData;
 
         [SerializeField]
-        [VariableProperty(typeof(FloatVariable),
-                          typeof(Vector3Variable))]
+        [VariableProperty(typeof(BooleanVariable),
+                          typeof(RigidbodyVariable),
+                          typeof(FloatVariable))]
         protected Variable inOutVar;
 
         public override void OnEnter()
         {
+            var iob = inOutVar as BooleanVariable;
+            var iorb = inOutVar as RigidbodyVariable;
             var iof = inOutVar as FloatVariable;
-            var iov = inOutVar as Vector3Variable;
 
 
-            var target = quaternionData.Value;
+            var target = colliderData.Value;
 
             switch (getOrSet)
             {
                 case GetSet.Get:
                     switch (property)
                     {
-                        case Property.X:
-                            iof.Value = target.x;
+                        case Property.Enabled:
+                            iob.Value = target.enabled;
                             break;
-                        case Property.Y:
-                            iof.Value = target.y;
+                        case Property.AttachedRigidbody:
+                            iorb.Value = target.attachedRigidbody;
                             break;
-                        case Property.Z:
-                            iof.Value = target.z;
+                        case Property.IsTrigger:
+                            iob.Value = target.isTrigger;
                             break;
-                        case Property.W:
-                            iof.Value = target.w;
-                            break;
-                        case Property.EulerAngles:
-                            iov.Value = target.eulerAngles;
+                        case Property.ContactOffset:
+                            iof.Value = target.contactOffset;
                             break;
                         default:
                             Debug.Log("Unsupported get or set attempted");
@@ -72,20 +70,14 @@ namespace Fungus
                 case GetSet.Set:
                     switch (property)
                     {
-                        case Property.X:
-                            target.x = iof.Value;
+                        case Property.Enabled:
+                            target.enabled = iob.Value;
                             break;
-                        case Property.Y:
-                            target.y = iof.Value;
+                        case Property.IsTrigger:
+                            target.isTrigger = iob.Value;
                             break;
-                        case Property.Z:
-                            target.z = iof.Value;
-                            break;
-                        case Property.W:
-                            target.w = iof.Value;
-                            break;
-                        case Property.EulerAngles:
-                            target.eulerAngles = iov.Value;
+                        case Property.ContactOffset:
+                            target.contactOffset = iof.Value;
                             break;
                         default:
                             Debug.Log("Unsupported get or set attempted");
@@ -102,6 +94,10 @@ namespace Fungus
 
         public override string GetSummary()
         {
+            if (colliderData.Value == null)
+            {
+                return "Error: no collider set";
+            }
             if (inOutVar == null)
             {
                 return "Error: no variable set to push or pull data to or from";
@@ -117,7 +113,7 @@ namespace Fungus
 
         public override bool HasReference(Variable variable)
         {
-            if (quaternionData.quaternionRef == variable || inOutVar == variable)
+            if (colliderData.colliderRef == variable || inOutVar == variable)
                 return true;
 
             return false;

@@ -7,10 +7,10 @@ namespace Fungus
     /// <summary>
     /// Matrix4x4 variable type.
     /// </summary>
-    [VariableInfo("Other", "Matrix4x4", isPreviewedOnly:true)]
+    [VariableInfo("Other", "Matrix4x4", IsPreviewedOnly = true)]
     [AddComponentMenu("")]
 	[System.Serializable]
-	public class Matrix4x4Variable : VariableBase<Matrix4x4>
+	public class Matrix4x4Variable : VariableBase<UnityEngine.Matrix4x4>
 	{ }
 
 	/// <summary>
@@ -24,20 +24,20 @@ namespace Fungus
 		public Matrix4x4Variable matrix4x4Ref;
 
 		[SerializeField]
-		public Matrix4x4 matrix4x4Val;
+		public UnityEngine.Matrix4x4 matrix4x4Val;
 
-		public static implicit operator Matrix4x4(Matrix4x4Data Matrix4x4Data)
+		public static implicit operator UnityEngine.Matrix4x4(Matrix4x4Data Matrix4x4Data)
 		{
 			return Matrix4x4Data.Value;
 		}
 
-		public Matrix4x4Data(Matrix4x4 v)
+		public Matrix4x4Data(UnityEngine.Matrix4x4 v)
 		{
 			matrix4x4Val = v;
 			matrix4x4Ref = null;
 		}
 
-		public Matrix4x4 Value
+		public UnityEngine.Matrix4x4 Value
 		{
 			get { return (matrix4x4Ref == null) ? matrix4x4Val : matrix4x4Ref.Value; }
 			set { if (matrix4x4Ref == null) { matrix4x4Val = value; } else { matrix4x4Ref.Value = value; } }

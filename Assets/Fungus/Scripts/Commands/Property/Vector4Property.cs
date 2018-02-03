@@ -5,13 +5,13 @@ using UnityEngine;
 namespace Fungus
 {
     // <summary>
-    /// Get or Set a property of a Quaternion component
+    /// Get or Set a property of a Vector4 component
     /// </summary>
-    [CommandInfo("Quaternion",
+    [CommandInfo("Vector4",
                  "Property",
-                 "Get or Set a property of a Quaternion component")]
+                 "Get or Set a property of a Vector4 component")]
     [AddComponentMenu("")]
-    public class QuaternionProperty : BaseVariableProperty
+    public class Vector4Property : BaseVariableProperty
     {
 		//generated property
         public enum Property 
@@ -20,7 +20,8 @@ namespace Fungus
             Y, 
             Z, 
             W, 
-            EulerAngles, 
+            Magnitude, 
+            SqrMagnitude, 
         }
 
 		
@@ -28,20 +29,18 @@ namespace Fungus
         protected Property property;
 		
         [SerializeField]
-        protected QuaternionData quaternionData;
+        protected Vector4Data vector4Data;
 
         [SerializeField]
-        [VariableProperty(typeof(FloatVariable),
-                          typeof(Vector3Variable))]
+        [VariableProperty(typeof(FloatVariable))]
         protected Variable inOutVar;
 
         public override void OnEnter()
         {
             var iof = inOutVar as FloatVariable;
-            var iov = inOutVar as Vector3Variable;
 
 
-            var target = quaternionData.Value;
+            var target = vector4Data.Value;
 
             switch (getOrSet)
             {
@@ -60,8 +59,11 @@ namespace Fungus
                         case Property.W:
                             iof.Value = target.w;
                             break;
-                        case Property.EulerAngles:
-                            iov.Value = target.eulerAngles;
+                        case Property.Magnitude:
+                            iof.Value = target.magnitude;
+                            break;
+                        case Property.SqrMagnitude:
+                            iof.Value = target.sqrMagnitude;
                             break;
                         default:
                             Debug.Log("Unsupported get or set attempted");
@@ -83,9 +85,6 @@ namespace Fungus
                             break;
                         case Property.W:
                             target.w = iof.Value;
-                            break;
-                        case Property.EulerAngles:
-                            target.eulerAngles = iov.Value;
                             break;
                         default:
                             Debug.Log("Unsupported get or set attempted");
@@ -117,7 +116,7 @@ namespace Fungus
 
         public override bool HasReference(Variable variable)
         {
-            if (quaternionData.quaternionRef == variable || inOutVar == variable)
+            if (vector4Data.vector4Ref == variable || inOutVar == variable)
                 return true;
 
             return false;
