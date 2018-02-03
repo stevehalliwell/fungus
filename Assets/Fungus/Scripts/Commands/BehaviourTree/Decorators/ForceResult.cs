@@ -8,7 +8,7 @@ using System;
 
 namespace Fungus
 {
-	[CommandInfo("BT",
+	[CommandInfo("BehaviourTree",
 		"ForceResult",
 		"Returns the specified result regardless of the target block's status.")]
 	[AddComponentMenu("")]

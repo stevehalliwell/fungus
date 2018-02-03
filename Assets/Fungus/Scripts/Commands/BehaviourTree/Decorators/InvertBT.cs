@@ -8,7 +8,7 @@ using System;
 
 namespace Fungus
 {
-    [CommandInfo("BT",
+    [CommandInfo("BehaviourTree",
         "Invert",
         "Inverts the success or failure of the called block")]
     [AddComponentMenu("")]

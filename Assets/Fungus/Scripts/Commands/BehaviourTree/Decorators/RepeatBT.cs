@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Fungus
 {
-    [CommandInfo("BT",
+    [CommandInfo("BehaviourTree",
         "Repeat",
         "Repeats the sub block until a certain condition is met.")]
     [AddComponentMenu("")]
