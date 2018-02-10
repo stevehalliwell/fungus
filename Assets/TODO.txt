@@ -19,12 +19,6 @@ FSM in Fungus
 flowchart auto seperate / arrange blocks, prevent overlaps and order for directional flow
 
 
-behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
--should be considered experiemental and breaking changes may occur
-**so the problem then is menus don't track where they are called from or when they are complete. But how would they, we eat that
-*perhaps a readme.md
-
-refactor and consolidate how blocks are called
 
 
 Optimisation pass
@@ -69,13 +63,6 @@ flappy bird
 -physics or rb command
 
 
-auto generate field and property get set fungus commmand
--test case is transform
--then make it do rbs
---cannot rely on static class as unity isn't doing that for Physics, but we can then test for static vs instance methods, see AID-Console
--we need to make the generator actually test it is using the correct types
--need to test it on custom types
-
 allow players to choose their pronoun
 -localisation?
 -becomes custom tag that is replaced? or just global var?
@@ -95,11 +82,12 @@ remove rotorz use unityinternal
 
 genvar
 -need to support static class properties generation
--Variable needs to be able to notify or inject into VariableListAdapter that its value needs a custom drawer
--global that is preview only doesn't display at all
+-for an existing generated class, grab the enum and inject that to start with so we don't change index of existing variables
+--handle use of deprecated vars
 
-var list needs to be collapsable in the inspector too, gets too long
 
-BT menu to BehaviourTree 
-bt node icons more visible
+behaviour tree //http://aigamedev.com/open/article/behavior-trees-part1/
+-should be considered experiemental and breaking changes may occur
+**so the problem then is menus don't track where they are called from or when they are complete. But how would they, we eat that
+*perhaps a readme.md
 better BT example
