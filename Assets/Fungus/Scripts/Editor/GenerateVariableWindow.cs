@@ -75,6 +75,7 @@ namespace Fungus.EditorUtils
             else
             {
                 generator.generateVariableClass = EditorGUILayout.Toggle("Generate Variable", generator.generateVariableClass);
+                generator.PreviewOnly = EditorGUILayout.Toggle("Variable List preview only", generator.PreviewOnly);
 
                 if (generator.TargetType.IsAbstract)
                 {
@@ -105,8 +106,6 @@ namespace Fungus.EditorUtils
                     {
                         EditorGUILayout.HelpBox("Variable Appears to already exist. Overwriting or errors may occur.", MessageType.Warning);
                     }
-
-                    generator.PreviewOnly = EditorGUILayout.Toggle("Variable List preview only", generator.PreviewOnly);
                 }
 
                 EditorGUILayout.Space();
@@ -183,6 +182,11 @@ namespace Fungus.EditorUtils
                     ExistingGeneratedClass = types.Find(x => x.Name == GenClassName);
                     ExistingGeneratedDrawerClass = types.Find(x => x.Name == (ClassName + "VariableDrawer"));
                     ExistingGeneratedPropCommandClass = types.Find(x => x.Name == (ClassName + "Property"));
+                    if(ExistingGeneratedPropCommandClass != null)
+                    {
+                        var nested = ExistingGeneratedPropCommandClass.GetNestedTypes().ToList();
+                        ExistingGeneratedPropEnumClass = nested.Find(x => x.Name == "Property");
+                    }
                 }
             }
         }
@@ -190,8 +194,10 @@ namespace Fungus.EditorUtils
         public Type ExistingGeneratedClass { get; private set; }
         public Type ExistingGeneratedDrawerClass { get; private set; }
         public Type ExistingGeneratedPropCommandClass { get; private set; }
+        public Type ExistingGeneratedPropEnumClass { get; private set; }
 
-        StringBuilder enumBuilder, getBuilder, setBuilder;// = new StringBuilder("switch (property)\n{");
+        StringBuilder getBuilder, setBuilder;// = new StringBuilder("switch (property)\n{");
+        List<string> enumBuilder = new List<string>();
 
         //data and helper for a single native to single fungus type
         public class FungusVariableTypeHelper
@@ -533,9 +539,11 @@ namespace Fungus
                 
                 if (generatePropertyCommand)
                 {
-                    enumBuilder = new StringBuilder("public enum Property \n        { \n".Replace("\n", System.Environment.NewLine));
+                    enumBuilder.Add("public enum Property \n        { \n");
                     getBuilder = new StringBuilder("switch (property)\n                    {\n".Replace("\n", System.Environment.NewLine));
                     setBuilder = new StringBuilder("switch (property)\n                    {\n".Replace("\n", System.Environment.NewLine));
+
+                    AddAllExistingEnumNames();
 
                     EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property", 0);
                     PropertyFieldLogic();
@@ -551,8 +559,9 @@ namespace Fungus
                     getBuilder.AppendLine(DefaultCaseFailure);
                     var getcontents = getBuilder.ToString();
 
-                    enumBuilder.AppendLine("        }");
-                    var enumgen = enumBuilder.ToString();
+                    enumBuilder.Add("        }\n");
+                    var enumgen = String.Join(null, enumBuilder.ToArray());
+                    enumgen = enumgen.Replace("\n", System.Environment.NewLine);
 
                     var typeVars = helper.GetUsedTypeVars();
                     var variablePropertyTypes = helper.GetVariablePropertyTypeOfs();
@@ -576,6 +585,21 @@ namespace Fungus
             }
 
             EditorUtility.ClearProgressBar();
+        }
+
+        private void AddAllExistingEnumNames()
+        {
+            if(ExistingGeneratedPropEnumClass != null)
+            {
+                if(ExistingGeneratedPropEnumClass.IsEnum)
+                {
+                    var res = Enum.GetNames(ExistingGeneratedPropEnumClass);
+                    for (int i = 0; i < res.Length; i++)
+                    {
+                        AddToEnum(res[i]);
+                    }
+                }
+            }
         }
 
         private void PropertyFieldLogic()
@@ -655,9 +679,12 @@ namespace Fungus
 
         private void AddToEnum(string name)
         {
-            enumBuilder.Append("            ");
-            enumBuilder.Append(name);
-            enumBuilder.AppendLine(", ");
+            if (enumBuilder.IndexOf(name) == -1)
+            {
+                enumBuilder.Add("            ");
+                enumBuilder.Add(name);
+                enumBuilder.Add(", \n");
+            }
         }
 
         private bool IsObsolete(object[] attrs)
