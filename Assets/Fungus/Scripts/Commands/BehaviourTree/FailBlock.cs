@@ -8,7 +8,7 @@ using System;
 
 namespace Fungus
 {
-    [CommandInfo("BT",
+    [CommandInfo("BehaviourTree",
                  "Fail",
                  "Sets this block's execution state / status to failed and stops the block")]
     [AddComponentMenu("")]

@@ -14,8 +14,16 @@ namespace Fungus.EditorUtils
     {
         protected virtual void OnEnable()
         {
-            Variable t = target as Variable;
-            t.hideFlags = HideFlags.HideInInspector;
+            try
+            {
+
+                Variable t = target as Variable;
+                t.hideFlags = HideFlags.HideInInspector;
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
         public static VariableInfoAttribute GetVariableInfo(System.Type variableType)

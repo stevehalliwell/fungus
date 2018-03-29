@@ -11,7 +11,7 @@ namespace Fungus
     /// <summary>
     /// Execute sub behaviour tree commands until one fails, return success if all are successful
     /// </summary>
-    [CommandInfo("BT",
+    [CommandInfo("BehaviourTree",
                  "Sequence",
                  "Execute blocks until one fails, return success if all are successful")]
     [AddComponentMenu("")]
