@@ -7,7 +7,7 @@ namespace Fungus
     /// <summary>
     /// Quaternion variable type.
     /// </summary>
-    [VariableInfo("Other", "Quaternion")]
+    [VariableInfo("Other", "Quaternion", HasCustomDraw = true)]
     [AddComponentMenu("")]
 	[System.Serializable]
 	public class QuaternionVariable : VariableBase<UnityEngine.Quaternion>

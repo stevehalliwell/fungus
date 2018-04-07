@@ -225,9 +225,9 @@ namespace Fungus.EditorUtils
                 }
 			}
 
-            
-            //delegate actual drawing to the variable
-            variable.DrawProperty(rects[2], defaultProp, variableInfo);
+
+            //variable.DrawProperty(rects[2], defaultProp, variableInfo);
+            VariableDrawProperty(variable, rects[2], defaultProp, variableInfo);
 
             GUI.enabled = prevEnabled;
 
@@ -245,6 +245,27 @@ namespace Fungus.EditorUtils
                 ? fixedItemHeight
                     : EditorGUI.GetPropertyHeight(this[index], GUIContent.none, false)
                     ;
+        }
+
+        public void VariableDrawProperty(Variable variable,Rect rect, SerializedProperty valueProp, VariableInfoAttribute info)
+        {
+            if (valueProp == null)
+            {
+                EditorGUI.LabelField(rect, "N/A");
+            }
+            else if (info.IsPreviewedOnly)
+            {
+                EditorGUI.LabelField(rect, variable.ToString());
+            }
+            else if (info.HasCustomDraw)
+            {
+                //delegate actual drawing to the variable
+                variable.InternalDrawProperty(rect, valueProp);
+            }
+            else
+            {
+                EditorGUI.PropertyField(rect, valueProp, new GUIContent(""));
+            }
         }
     }
 }

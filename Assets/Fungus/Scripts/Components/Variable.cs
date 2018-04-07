@@ -66,18 +66,20 @@ namespace Fungus
     public class VariableInfoAttribute : Attribute
     {
         //Note do not use "isPreviewedOnly:true", it causes the script to fail to load without errors shown
-        public VariableInfoAttribute(string category, string variableType, int order = 0, bool isPreviewedOnly = false)
+        public VariableInfoAttribute(string category, string variableType, int order = 0, bool isPreviewedOnly = false, bool hasCustomDraw = false)
         {
             this.Category = category;
             this.VariableType = variableType;
             this.Order = order;
             this.IsPreviewedOnly = isPreviewedOnly;
+            this.HasCustomDraw = hasCustomDraw;
         }
         
         public string Category { get; set; }
         public string VariableType { get; set; }
         public int Order { get; set; }
         public bool IsPreviewedOnly { get; set; }
+        public bool HasCustomDraw { get; set; }
     }
 
     /// <summary>
@@ -130,35 +132,13 @@ namespace Fungus
 
 #if UNITY_EDITOR
         /// <summary>
-        /// Called by the VariableListAdapter to handle the drawing of the variable in the ReOrderable List
-        /// </summary>
-        /// <param name="rect"></param>
-        /// <param name="valueProp"></param>
-        /// <param name="info"></param>
-        public void DrawProperty(Rect rect, SerializedProperty valueProp, VariableInfoAttribute info)
-        {
-            if (valueProp == null)
-            {
-                EditorGUI.LabelField(rect, "N/A");
-            }
-            else if (info.IsPreviewedOnly)
-            {
-                EditorGUI.LabelField(rect, this.ToString());
-            }
-            else
-            {
-                InternalDrawProperty(rect, valueProp);
-            }
-        }
-
-        /// <summary>
         /// Method to be overloaded in child classes to alter how a variable type draws itself
         /// </summary>
         /// <param name="rect"></param>
         /// <param name="valueProp"></param>
         public virtual void InternalDrawProperty(Rect rect, SerializedProperty valueProp)
         {
-            EditorGUI.PropertyField(rect, valueProp, new GUIContent(""));
+            Debug.LogError("Internal Draw Property called when no specialisation is provided:" + this.ToString());
         }
 #endif//UNITY_EDITOR
 
