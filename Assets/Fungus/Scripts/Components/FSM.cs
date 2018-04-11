@@ -24,27 +24,36 @@ namespace Fungus
             public bool HasEntered { get; set; }
         }
 
+        //custom inspector handles drawing this manually, all others are done with default draw
         [HideInInspector] [SerializeField] protected List<State> states;
         [SerializeField] protected int currentState = -1;
         [SerializeField] protected new string name;
         [SerializeField] protected bool startOnStart = true;
-        [SerializeField] protected int startingState = 0;
         [SerializeField] protected bool tickInUpdate = true;
 
         public List<State> States { get { return states; } }
 
         public string Name { get { return name; } }
-
         private bool isTransitioningState = false;
         public bool IsTransitioningState { get { return isTransitioningState; } }
+        private bool isWaitingOnUpdateToComplete = false;
+        public bool IsWaitingOnUpdateToComplete { get { return isWaitingOnUpdateToComplete; } }
 
-        public int CurrentState { get { return currentState; } }
-        public string CurrentStateName { get { return states[CurrentState].Name; } }
+        public int CurrentStateIndex { get { return currentState; } }
+        public string CurrentStateName
+        {
+            get
+            {
+                if (CurrentStateIndex < states.Count && CurrentStateIndex >= 0)
+                    return states[CurrentStateIndex].Name;
+                return null;
+            }
+        }
 
         private void Start()
         {
             if (startOnStart)
-                ChangeState(startingState);
+                ChangeState(0);
         }
 
         public int GetIndexFromStateName(string name)
@@ -72,24 +81,33 @@ namespace Fungus
         public void ChangeState(int newIndex)
         {
             if (IsTransitioningState)
+            {
+                Debug.LogWarning("Attempted to change state while in the middle of a transition, this is not supported " +
+                    "and the call is being ignored.");
                 return;
+            }
 
             //is it actually different and valid
             if (newIndex == currentState || (newIndex < 0 || newIndex >= states.Count))
                 return;
 
-            //if cur state exit it
+            //if cur be able to exit it
             State curState = null;
+            Block prevExit = null;
             if (currentState >= 0 && currentState < states.Count)
             {
                 curState = states[currentState];
+                if (curState != null)
+                {
+                    prevExit = curState.Exit;
+                }
             }
 
-            //chace previous
-            Block prevExit = null;
-            if (curState != null)
+            //if the cur state is still updating, stop it
+            if(isWaitingOnUpdateToComplete && curState != null && curState.Update != null)
             {
-                prevExit = curState.Exit;
+                curState.Update.Stop();
+                UpdateComplete();
             }
 
             //prep new cur
@@ -102,6 +120,10 @@ namespace Fungus
             {
                 isTransitioningState = true;
                 prevExit.StartExecution(onComplete: TransitionComplete);
+            }
+            else
+            {
+                EnterCurState();
             }
         }
 
@@ -118,13 +140,12 @@ namespace Fungus
             if (isTransitioningState || (currentState < 0 && currentState >= states.Count))
                 return;
 
-            EnterCurState();
-
             var curState = states[currentState];
             //allow things with no enter to update immediately
-            if (!isTransitioningState && curState.Update != null)
+            if (!isTransitioningState && curState.Update != null && !isWaitingOnUpdateToComplete)
             {
-                curState.Update.StartExecution();
+                isWaitingOnUpdateToComplete = true;
+                curState.Update.StartExecution(onComplete : UpdateComplete);
             }
         }
 
@@ -132,7 +153,13 @@ namespace Fungus
         {
             isTransitioningState = false;
 
+            //we call this here so we know that enter is called even if tick isn't
             EnterCurState();
+        }
+
+        private void UpdateComplete()
+        {
+            isWaitingOnUpdateToComplete = false;
         }
 
         private void EnterCurState()

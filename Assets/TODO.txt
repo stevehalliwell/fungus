@@ -10,9 +10,6 @@ Event on Block text entry list
 FSM in Fungus
 -http://fungusgames.com/forum#!/fungus-development:choosing-a-character-based/extending-conversation-seem
 -demo tour, including update fsm and updated by command
---
--command to get number of states?
--need a callback/event and block for a state change?
 *perhaps a readme.md
 
 
@@ -30,7 +27,6 @@ Optimisation pass
 
 
 Conversation should be able to do EVERYTHING that say and portrait can
--after that it should be able to do menu too
 
 
 Global filter out commands
@@ -48,25 +44,6 @@ Global command priority
 
 Arrays
 -want em, don't have em
-
-
-flappy bird
--'modes'
---tap to flap
--scrolling layers
--pipe obstacle
---prob should have art...
---prob shouldnt move when hit
--bird
---anim rotation based on y velocity
---wing anim + gust particles
--physics or rb command
-
-
-allow players to choose their pronoun
--localisation?
--becomes custom tag that is replaced? or just global var?
--maybe redundant, if creator wanted to they could already use var replacement for it
 
 
 Say & menu to support similar optional words/phrases as Ink
