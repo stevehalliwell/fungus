@@ -13,6 +13,7 @@ namespace Fungus.EditorUtils
     public class CommandEditor : Editor 
     {
         public static Command selectedCommand;
+        public static Command currentlyDrawingCommand;
 
         public static CommandInfoAttribute GetCommandInfo(System.Type commandType)
         {
@@ -41,6 +42,7 @@ namespace Fungus.EditorUtils
             {
                 return;
             }
+            currentlyDrawingCommand = t;
 
             var flowchart = (Flowchart)t.GetFlowchart();
             if (flowchart == null)
@@ -116,6 +118,7 @@ namespace Fungus.EditorUtils
             {
                 EditorGUILayout.HelpBox(infoAttr.HelpText, MessageType.Info, true);
             }
+            currentlyDrawingCommand = null;
         }
 
         public virtual void DrawCommandGUI()
@@ -145,11 +148,19 @@ namespace Fungus.EditorUtils
                     continue;
                 }
 
-                if (iterator.isArray &&
-                    t.IsReorderableArray(iterator.name))
+                if (iterator.isArray)
                 {
-                    ReorderableListGUI.Title(new GUIContent(iterator.displayName, iterator.tooltip));
-                    ReorderableListGUI.ListField(iterator);
+                    if (t.IsReorderableArray(iterator.name))
+                    {
+                        ReorderableListGUI.Title(new GUIContent(iterator.displayName, iterator.tooltip));
+                        ReorderableListGUI.ListField(iterator);
+                    }
+                    else
+                    {
+                        EditorGUI.indentLevel++;
+                        EditorGUILayout.PropertyField(iterator, true, new GUILayoutOption[0]);
+                        EditorGUI.indentLevel--;
+                    }
                 }
                 else
                 {

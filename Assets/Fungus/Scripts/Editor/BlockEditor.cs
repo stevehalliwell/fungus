@@ -18,6 +18,8 @@ namespace Fungus.EditorUtils
     [CustomEditor(typeof(Block))]
     public class BlockEditor : Editor
     {
+        public const string NullName = "< None >";
+
         protected class SetEventHandlerOperation
         {
             public Block block;
