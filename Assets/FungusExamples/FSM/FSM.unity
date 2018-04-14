@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 533072501}
   - component: {fileID: 533072497}
   - component: {fileID: 533072502}
+  - component: {fileID: 533072503}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -398,8 +399,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 517.91907
-    y: 211.06064
+    x: 515.91907
+    y: 170.06064
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -457,8 +458,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 513.51013
-    y: 170.03485
+    x: 514.51013
+    y: 212.03485
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -524,8 +525,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 259.84213
-    y: 171.18396
+    x: 262.84213
+    y: 211.18396
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -549,8 +550,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 255.69046
-    y: 214.62885
+    x: 261.69046
+    y: 171.62885
     width: 124
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -560,6 +561,7 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 0}
   commandList:
+  - {fileID: 533072503}
   - {fileID: 533072502}
   - {fileID: 533072497}
 --- !u!114 &533072495
@@ -700,6 +702,23 @@ MonoBehaviour:
     floatRef: {fileID: 0}
     floatVal: 1
   durationOLD: 0
+--- !u!114 &533072503
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533072483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fab8abf0343545abbfebd9a7b7b34bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 17
+  indentLevel: 0
+  logType: 0
+  logMessage:
+    stringRef: {fileID: 0}
+    stringVal: state update
 --- !u!1 &1181040150
 GameObject:
   m_ObjectHideFlags: 1
