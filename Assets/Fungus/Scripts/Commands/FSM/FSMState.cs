@@ -52,7 +52,7 @@ namespace Fungus
                 return "Error: no output variable set.";
             }
 
-            return fsm.Name + " in " + output.Key;
+            return fsm.gameObject.name + " in " + output.Key;
         }
 
         // public override Color GetButtonColor()

@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 533072502}
   - component: {fileID: 533072503}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Flowchart + FSM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,8 +382,7 @@ MonoBehaviour:
     Enter: {fileID: 533072492}
     Update: {fileID: 533072487}
     Exit: {fileID: 533072490}
-  currentState: -1
-  name: StateMachine
+  blocksLiveOn: {fileID: 533072484}
   startOnStart: 1
   tickInUpdate: 1
 --- !u!114 &533072487

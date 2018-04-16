@@ -26,14 +26,16 @@ namespace Fungus
 
         //custom inspector handles drawing this manually, all others are done with default draw
         [HideInInspector] [SerializeField] protected List<State> states = new List<State>();
-        [SerializeField] protected int currentState = -1;
-        [SerializeField] protected new string name;
+        protected int currentState = -1;
+        [Tooltip("The flowchart that contains all the blocks the FSM will refer to. If the FSM is on the same GO as a flowchart it will default there.")]
+        [SerializeField] public Flowchart blocksLiveOn;
+        [Tooltip("Does this FSM Enter the top state in its Start?")]
         [SerializeField] protected bool startOnStart = true;
+        [Tooltip("Does this FSM tick the current state's Update in its Update")]
         [SerializeField] protected bool tickInUpdate = true;
 
         public List<State> States { get { return states; } }
-
-        public string Name { get { return name; } }
+        
         private bool isTransitioningState = false;
         public bool IsTransitioningState { get { return isTransitioningState; } }
         private bool isWaitingOnUpdateToComplete = false;
@@ -44,9 +46,7 @@ namespace Fungus
         {
             get
             {
-                if (CurrentStateIndex < states.Count && CurrentStateIndex >= 0)
-                    return states[CurrentStateIndex].Name;
-                return null;
+                return (CurrentStateIndex < states.Count && CurrentStateIndex >= 0) ? states[CurrentStateIndex].Name : string.Empty;
             }
         }
 

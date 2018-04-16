@@ -35,7 +35,7 @@ namespace Fungus
                 return "Error: no FSM provided.";
             }
 
-            return fsm.Name;
+            return fsm.gameObject.name;
         }
     }
 }

@@ -29,6 +29,18 @@ namespace Fungus.EditorUtils
                 EditorGUI.LabelField(rect, "States");
             };
 
+
+            //if we are on an flowchart then default to it
+            FSM fsm = target as FSM;
+            if (fsm != null)
+            {
+                if (fsm.blocksLiveOn == null)
+                {
+                    fsm.blocksLiveOn = fsm.gameObject.GetComponent<Flowchart>();
+                    EditorUtility.SetDirty(fsm);
+                }
+            }
+
             statesList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
                 selectedItem = isFocused ? index : selectedItem;
@@ -50,7 +62,7 @@ namespace Fungus.EditorUtils
                     rect.x += rect.width;
                     rect.x += 5;
                     rect.width += 15;
-                    var flow = (serializedObject.targetObject as MonoBehaviour).gameObject.GetComponent<Flowchart>();
+                    var flow = fsm.blocksLiveOn;
                     DrawBlockElement(index, rect, element, "Update", flow);
 
                     if (selectedItem == index)
@@ -72,6 +84,7 @@ namespace Fungus.EditorUtils
             {
                 return (selectedItem == index ? (EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing * 2) * 2 : EditorGUIUtility.singleLineHeight) + EditorGUIUtility.standardVerticalSpacing;
             };
+
         }
 
         public override void OnInspectorGUI()
@@ -104,7 +117,7 @@ namespace Fungus.EditorUtils
         {
             FSM fsm = target as FSM;
             var states = fsm.States;
-            var flow = fsm.GetComponent<Flowchart>();
+            var flow = fsm.blocksLiveOn;
 
             for (int i = 0; i < states.Count; i++)
             {
