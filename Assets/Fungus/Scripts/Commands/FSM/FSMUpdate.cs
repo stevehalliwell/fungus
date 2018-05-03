@@ -19,6 +19,8 @@ namespace Fungus
         public override void OnEnter()
         {
             fsm.Tick();
+
+            Continue();
         }
 
         // public override Color GetButtonColor()

@@ -35,6 +35,7 @@ Boolean Data | Fungus.BooleanData | Boolean value to compare against
 Integer Data | Fungus.IntegerData | Integer value to compare against
 Float Data | Fungus.FloatData | Float value to compare against
 String Data | Fungus.StringDataMulti | String value to compare against
+Game Object Data | Fungus.GameObjectData | GameObject value to compare against
 
 # End # {#End}
 Marks the end of a conditional block.
@@ -53,6 +54,7 @@ Boolean Data | Fungus.BooleanData | Boolean value to compare against
 Integer Data | Fungus.IntegerData | Integer value to compare against
 Float Data | Fungus.FloatData | Float value to compare against
 String Data | Fungus.StringDataMulti | String value to compare against
+Game Object Data | Fungus.GameObjectData | GameObject value to compare against
 
 # Jump # {#Jump}
 Move execution to a specific Label command in the same block
@@ -174,15 +176,6 @@ Property | Type | Description
  --- | --- | ---
 Frame Count | Fungus.IntegerData | Number of frames to wait for
 
-# WaitInput # {#WaitInput}
-Waits for a period of time or for player input before executing the next command in the block.
-
-Defined in WaitInput
-
-Property | Type | Description
- --- | --- | ---
-Duration | System.Single | Duration to wait for. If negative will wait until player input occurs.
-
 # While # {#While}
 Continuously loop through a block of commands while the condition is true. Use the Break command to force the loop to terminate immediately.
 
@@ -196,4 +189,5 @@ Boolean Data | Fungus.BooleanData | Boolean value to compare against
 Integer Data | Fungus.IntegerData | Integer value to compare against
 Float Data | Fungus.FloatData | Float value to compare against
 String Data | Fungus.StringDataMulti | String value to compare against
+Game Object Data | Fungus.GameObjectData | GameObject value to compare against
 

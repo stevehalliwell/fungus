@@ -6,22 +6,23 @@ using System;
 namespace Fungus
 {
     /// <summary>
-    /// Stores if the target FSM is currently transitioning between states.
+    /// Stores if the target FSM is currently waiting on the current state update block to complete.
     /// </summary>
     [CommandInfo("FSM",
-                 "Is Transitioning",
-                 "Stores if the target FSM is currently transitioning between states.")]
+                 "Is Update Running",
+                 "Stores if the target FSM is currently waiting on the current state update block to complete")]
     [AddComponentMenu("")]
-    public class FSMTransitioning : Command
+    public class FSMUpdateRunning : Command
     {
         [SerializeField] protected FSM fsm;
 
         [VariableProperty(typeof(BooleanVariable))]
-        [SerializeField] protected BooleanVariable output;
+        [SerializeField]
+        protected BooleanVariable output;
 
         public override void OnEnter()
         {
-            output.Value = fsm.IsTransitioningState;
+            output.Value = fsm.IsWaitingOnUpdateToComplete;
 
             Continue();
         }

@@ -25,7 +25,6 @@ namespace Fungus
 
         public override void OnEnter()
         {
-
             if (!string.IsNullOrEmpty(stateNameToChangeTo.Value))
             {
                 fsm.ChangeState(stateNameToChangeTo.Value);
@@ -34,6 +33,8 @@ namespace Fungus
             {
                 fsm.ChangeState(stateIndexToChangeTo.Value);
             }
+
+            Continue();
         }
 
         public override string GetSummary()
@@ -42,9 +43,14 @@ namespace Fungus
             {
                 return "Error: no FSM provided.";
             }
-            else if (fsm.GetIndexFromStateName(stateNameToChangeTo.Value) == -1 &&
-                    (stateIndexToChangeTo.Value < 0 ||
-                    stateIndexToChangeTo.Value >= fsm.States.Count))
+            else if (!string.IsNullOrEmpty(stateNameToChangeTo.Value))
+            {
+                if (fsm.GetIndexFromStateName(stateNameToChangeTo.Value) == -1)
+                {
+                    return "Error: Invalid state name";
+                }
+            }
+            else if(stateIndexToChangeTo.Value < 0 || stateIndexToChangeTo.Value >= fsm.States.Count)
             {
                 return "Error: Invalid state name or index";
             }
@@ -52,7 +58,7 @@ namespace Fungus
             if (fsm.GetIndexFromStateName(stateNameToChangeTo.Value) == -1)
                 return fsm.States[stateIndexToChangeTo.Value].Name;
 
-            return fsm.Name + " to " + stateNameToChangeTo.Value;
+            return fsm.name + " to " + stateNameToChangeTo.Value;
         }
 
         // public override Color GetButtonColor()

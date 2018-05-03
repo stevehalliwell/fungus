@@ -27,7 +27,7 @@ namespace Fungus
 
             if (asInt != null)
             {
-                asInt.Value = fsm.CurrentState;
+                asInt.Value = fsm.CurrentStateIndex;
             }
             else if (asString != null)
             {
@@ -37,6 +37,8 @@ namespace Fungus
             {
                 Debug.LogWarning("Calling FSMState with no valid output variable");
             }
+
+            Continue();
         }
 
         public override string GetSummary()
