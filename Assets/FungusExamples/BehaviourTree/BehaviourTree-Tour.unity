@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 8
+  serializedVersion: 9
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -39,6 +39,7 @@ RenderSettings:
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
   m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -54,11 +55,10 @@ LightmapSettings:
     m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 9
+    serializedVersion: 10
     m_Resolution: 2
     m_BakeResolution: 40
-    m_TextureWidth: 1024
-    m_TextureHeight: 1024
+    m_AtlasSize: 1024
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
@@ -393,7 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 251.46973, y: 224.53793}
+  scrollPos: {x: 115.32562, y: 172.77159}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 400
@@ -482,8 +482,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 659.5224
-    y: 240.13239
+    x: 526.5224
+    y: 129.13239
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -551,8 +551,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 530.3799
-    y: 343.12527
+    x: 499.37988
+    y: 243.12527
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -621,8 +621,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 74
-    y: 239
+    x: 207
+    y: 146
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -747,8 +747,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 789.3458
-    y: 237.94778
+    x: 656.3458
+    y: 126.947784
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -805,8 +805,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 633.5303
-    y: -58.537933
+    x: 464.53027
+    y: 3.4620667
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -925,8 +925,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 376.1728
-    y: 413.63544
+    x: 328.1728
+    y: 297.63544
     width: 132
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -995,8 +995,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 239.1402
-    y: 412.5
+    x: 191.1402
+    y: 296.5
     width: 132
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -1040,8 +1040,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 234.6402
-    y: 247
+    x: 332.6402
+    y: 145
     width: 125
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -1065,8 +1065,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 380.8322
-    y: 341.46918
+    x: 332.8322
+    y: 225.4692
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -1131,6 +1131,42 @@ MonoBehaviour:
   stringData:
     stringRef: {fileID: 0}
     stringVal: 
+  animatorData:
+    animatorRef: {fileID: 0}
+    animatorVal: {fileID: 0}
+  audioSourceData:
+    audioSourceRef: {fileID: 0}
+    audioSourceVal: {fileID: 0}
+  colorData:
+    colorRef: {fileID: 0}
+    colorVal: {r: 0, g: 0, b: 0, a: 0}
+  gameObjectData:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 0}
+  materialData:
+    materialRef: {fileID: 0}
+    materialVal: {fileID: 0}
+  objectData:
+    objectRef: {fileID: 0}
+    objectVal: {fileID: 0}
+  rigidbody2DData:
+    rigidbody2DRef: {fileID: 0}
+    rigidbody2DVal: {fileID: 0}
+  spriteData:
+    spriteRef: {fileID: 0}
+    spriteVal: {fileID: 0}
+  textureData:
+    textureRef: {fileID: 0}
+    textureVal: {fileID: 0}
+  transformData:
+    transformRef: {fileID: 0}
+    transformVal: {fileID: 0}
+  vector2Data:
+    vector2Ref: {fileID: 0}
+    vector2Val: {x: 0, y: 0}
+  vector3Data:
+    vector3Ref: {fileID: 0}
+    vector3Val: {x: 0, y: 0, z: 0}
 --- !u!114 &971981443
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1158,6 +1194,42 @@ MonoBehaviour:
   stringData:
     stringRef: {fileID: 0}
     stringVal: 
+  animatorData:
+    animatorRef: {fileID: 0}
+    animatorVal: {fileID: 0}
+  audioSourceData:
+    audioSourceRef: {fileID: 0}
+    audioSourceVal: {fileID: 0}
+  colorData:
+    colorRef: {fileID: 0}
+    colorVal: {r: 0, g: 0, b: 0, a: 0}
+  gameObjectData:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 0}
+  materialData:
+    materialRef: {fileID: 0}
+    materialVal: {fileID: 0}
+  objectData:
+    objectRef: {fileID: 0}
+    objectVal: {fileID: 0}
+  rigidbody2DData:
+    rigidbody2DRef: {fileID: 0}
+    rigidbody2DVal: {fileID: 0}
+  spriteData:
+    spriteRef: {fileID: 0}
+    spriteVal: {fileID: 0}
+  textureData:
+    textureRef: {fileID: 0}
+    textureVal: {fileID: 0}
+  transformData:
+    transformRef: {fileID: 0}
+    transformVal: {fileID: 0}
+  vector2Data:
+    vector2Ref: {fileID: 0}
+    vector2Val: {x: 0, y: 0}
+  vector3Data:
+    vector3Ref: {fileID: 0}
+    vector3Val: {x: 0, y: 0, z: 0}
 --- !u!114 &971981444
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1187,8 +1259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 484.4258
-    y: 240.45702
+    x: 493.4258
+    y: 189.45702
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -1232,8 +1304,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -99.068054
-    y: 236.2063
+    x: 85.931946
+    y: 119.2063
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -1300,8 +1372,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -55.08963
-    y: 391.0238
+    x: 148.91037
+    y: 249.0238
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -1369,8 +1441,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -189.64764
-    y: 393.06247
+    x: 14.352356
+    y: 251.06247
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -1438,8 +1510,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -321.28522
-    y: 388.10773
+    x: -117.28522
+    y: 246.10773
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
