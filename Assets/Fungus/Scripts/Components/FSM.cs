@@ -36,10 +36,8 @@ namespace Fungus
 
         public List<State> States { get { return states; } }
         
-        private bool isTransitioningState = false;
-        public bool IsTransitioningState { get { return isTransitioningState; } }
-        private bool isWaitingOnUpdateToComplete = false;
-        public bool IsWaitingOnUpdateToComplete { get { return isWaitingOnUpdateToComplete; } }
+        public bool IsTransitioningState { get; private set; }
+        public bool IsWaitingOnUpdateToComplete { get; private set; }
 
         public int CurrentStateIndex { get { return currentState; } }
         public string CurrentStateName
@@ -104,7 +102,7 @@ namespace Fungus
             }
 
             //if the cur state is still updating, stop it
-            if(isWaitingOnUpdateToComplete && curState != null && curState.Update != null)
+            if(IsWaitingOnUpdateToComplete && curState != null && curState.Update != null)
             {
                 curState.Update.Stop();
                 UpdateComplete();
@@ -118,7 +116,7 @@ namespace Fungus
             //kick off the exit
             if (prevExit != null)
             {
-                isTransitioningState = true;
+                IsTransitioningState = true;
                 prevExit.StartExecution(onComplete: TransitionComplete);
             }
             else
@@ -137,21 +135,21 @@ namespace Fungus
 
         public void Tick()
         {
-            if (isTransitioningState || (currentState < 0 && currentState >= states.Count))
+            if (IsTransitioningState || (currentState < 0 && currentState >= states.Count))
                 return;
 
             var curState = states[currentState];
             //allow things with no enter to update immediately
-            if (!isTransitioningState && curState.Update != null && !isWaitingOnUpdateToComplete)
+            if (!IsTransitioningState && curState.Update != null && !IsWaitingOnUpdateToComplete)
             {
-                isWaitingOnUpdateToComplete = true;
+                IsWaitingOnUpdateToComplete = true;
                 curState.Update.StartExecution(onComplete : UpdateComplete);
             }
         }
 
         private void TransitionComplete()
         {
-            isTransitioningState = false;
+            IsTransitioningState = false;
 
             //we call this here so we know that enter is called even if tick isn't
             EnterCurState();
@@ -159,7 +157,7 @@ namespace Fungus
 
         private void UpdateComplete()
         {
-            isWaitingOnUpdateToComplete = false;
+            IsWaitingOnUpdateToComplete = false;
         }
 
         private void EnterCurState()
@@ -171,7 +169,7 @@ namespace Fungus
                 curState.HasEntered = true;
                 if (curState.Enter != null)
                 {
-                    isTransitioningState = true;
+                    IsTransitioningState = true;
                     curState.Enter.StartExecution(onComplete: TransitionComplete);
                 }
             }
