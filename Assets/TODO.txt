@@ -11,7 +11,7 @@ FSM in Fungus
 -http://fungusgames.com/forum#!/fungus-development:choosing-a-character-based/extending-conversation-seem
 -demo tour, including update fsm and updated by command
 *perhaps a readme.md
-
+-better example
 
 flowchart auto seperate / arrange blocks, prevent overlaps and order for directional flow
 
@@ -27,6 +27,8 @@ Optimisation pass
 
 
 Conversation should be able to do EVERYTHING that say and portrait can
+-audio is a problem
+-would be nice to be able to do menus too
 
 
 Global filter out commands
@@ -46,15 +48,19 @@ Arrays
 -want em, don't have em
 
 
-Say & menu to support similar optional words/phrases as Ink
+writer to support similar optional words/phrases as Ink
+-https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md#6-variable-text
+-use [|] https://stackoverflow.com/questions/2403122/regular-expression-to-extract-text-between-square-brackets
+-needs to track variation history VariationHistory
+--variation only gets the line, can use hashes but might result in collisions due to duplication of lines
+---do i care?
+-menus should also do that
 
 
 Dynamic Say
 -better name
 -choose from 1 of many lines to say
 -localisation and VO
-
-remove rotorz use unityinternal
 
 
 genvar
