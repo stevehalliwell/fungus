@@ -403,6 +403,17 @@ namespace Fungus
             return null;
         }
 
+        public virtual int GetPreviousActiveCommandIndent()
+        {
+            if (previousActiveCommandIndex >= 0 &&
+                previousActiveCommandIndex < commandList.Count)
+            {
+                return commandList[previousActiveCommandIndex].IndentLevel;
+            }
+
+            return -1;
+        }
+
         /// <summary>
         /// Recalculate the indent levels for all commands in the list.
         /// </summary>
