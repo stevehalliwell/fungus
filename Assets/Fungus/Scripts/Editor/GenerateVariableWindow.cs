@@ -103,7 +103,7 @@ namespace Fungus.EditorUtils
                 {
                     if (generator.ExistingGeneratedPropCommandClass != null)
                     {
-                        EditorGUILayout.HelpBox("Variable Appears to already exist. Overwriting or errors may occur.", MessageType.Warning);
+                        EditorGUILayout.HelpBox("Property Appears to already exist. Overwriting or errors may occur.", MessageType.Warning);
                     }
                 }
 
@@ -123,6 +123,7 @@ namespace Fungus.EditorUtils
                     }
                     generator = new VariableScriptGenerator();
                     EditorUtility.ClearProgressBar();
+                    userInputClassName = "";
                 }
             }
         }

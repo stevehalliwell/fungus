@@ -217,13 +217,15 @@ namespace Fungus.EditorUtils
                 return;
             }
 
+            var origLabel = new GUIContent(label);
+
             if (EditorGUI.GetPropertyHeight(valueProp, label) > EditorGUIUtility.singleLineHeight)
             {
-                DrawMultiLineProperty(position, label, referenceProp, valueProp, flowchart);
+                DrawMultiLineProperty(position, origLabel, referenceProp, valueProp, flowchart);
             }
             else
             {
-                DrawSingleLineProperty(position, label, referenceProp, valueProp, flowchart);
+                DrawSingleLineProperty(position, origLabel, referenceProp, valueProp, flowchart);
             }
 
             EditorGUI.EndProperty();
@@ -283,13 +285,13 @@ namespace Fungus.EditorUtils
             propNameBase = Char.ToLowerInvariant(propNameBase[0]) + propNameBase.Substring(1);
 
             SerializedProperty referenceProp = property.FindPropertyRelative(propNameBase + "Ref");
+            SerializedProperty valueProp = property.FindPropertyRelative(propNameBase + "Val");
 
-            if (referenceProp.objectReferenceValue != null)
+            if (referenceProp.objectReferenceValue != null || valueProp == null)
             {
                 return EditorGUIUtility.singleLineHeight;
             }
 
-            SerializedProperty valueProp = property.FindPropertyRelative(propNameBase + "Val");
             return EditorGUI.GetPropertyHeight(valueProp, label);
         }
     }
