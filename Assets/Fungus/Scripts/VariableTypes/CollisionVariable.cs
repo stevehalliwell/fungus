@@ -7,7 +7,7 @@ namespace Fungus
     /// <summary>
     /// Collision variable type.
     /// </summary>
-    [VariableInfo("Other", "Collision")]
+    [VariableInfo("Other", "Collision", IsPreviewedOnly = true)]
     [AddComponentMenu("")]
 	[System.Serializable]
 	public class CollisionVariable : VariableBase<UnityEngine.Collision>
