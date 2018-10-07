@@ -28,8 +28,8 @@ namespace Fungus
         [SerializeField]
         protected Property property;
 		
-        [SerializeField]
-        protected CollisionData collisionData;
+        [VariableProperty(typeof(CollisionVariable))]
+        protected CollisionVariable collisionVar;
 
         [SerializeField]
         [VariableProperty(typeof(Vector3Variable),
@@ -48,7 +48,7 @@ namespace Fungus
             var iogo = inOutVar as GameObjectVariable;
 
 
-            var target = collisionData.Value;
+            var target = collisionVar.Value;
 
             switch (getOrSet)
             {
@@ -97,9 +97,9 @@ namespace Fungus
 
         public override string GetSummary()
         {
-            if (collisionData.Value == null)
+            if (collisionVar == null)
             {
-                return "Error: no collision set";
+                return "Error: no collisionVar set";
             }
             if (inOutVar == null)
             {
@@ -116,7 +116,7 @@ namespace Fungus
 
         public override bool HasReference(Variable variable)
         {
-            if (collisionData.collisionRef == variable || inOutVar == variable)
+            if (collisionVar == variable || inOutVar == variable)
                 return true;
 
             return false;

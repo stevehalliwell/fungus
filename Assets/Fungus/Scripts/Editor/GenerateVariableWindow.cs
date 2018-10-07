@@ -74,6 +74,7 @@ namespace Fungus.EditorUtils
             else
             {
                 generator.generateVariableClass = EditorGUILayout.Toggle("Generate Variable", generator.generateVariableClass);
+                generator.generateVariableDataClass = EditorGUILayout.Toggle("Generate Variable Data", generator.generateVariableDataClass);
                 generator.PreviewOnly = EditorGUILayout.Toggle("Variable List preview only", generator.PreviewOnly);
 
                 if (generator.TargetType.IsAbstract)

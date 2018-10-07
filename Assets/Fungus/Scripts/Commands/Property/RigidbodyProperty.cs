@@ -120,14 +120,14 @@ namespace Fungus
                         case Property.SolverIterations:
                             ioi.Value = target.solverIterations;
                             break;
-                        case Property.SolverVelocityIterations:
-                            ioi.Value = target.solverVelocityIterations;
-                            break;
                         case Property.SleepThreshold:
                             iof.Value = target.sleepThreshold;
                             break;
                         case Property.MaxAngularVelocity:
                             iof.Value = target.maxAngularVelocity;
+                            break;
+                        case Property.SolverVelocityIterations:
+                            ioi.Value = target.solverVelocityIterations;
                             break;
                         default:
                             Debug.Log("Unsupported get or set attempted");
@@ -186,14 +186,14 @@ namespace Fungus
                         case Property.SolverIterations:
                             target.solverIterations = ioi.Value;
                             break;
-                        case Property.SolverVelocityIterations:
-                            target.solverVelocityIterations = ioi.Value;
-                            break;
                         case Property.SleepThreshold:
                             target.sleepThreshold = iof.Value;
                             break;
                         case Property.MaxAngularVelocity:
                             target.maxAngularVelocity = iof.Value;
+                            break;
+                        case Property.SolverVelocityIterations:
+                            target.solverVelocityIterations = ioi.Value;
                             break;
                         default:
                             Debug.Log("Unsupported get or set attempted");

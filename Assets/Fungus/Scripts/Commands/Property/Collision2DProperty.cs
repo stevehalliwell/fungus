@@ -22,39 +22,52 @@ namespace Fungus
             GameObject, 
             RelativeVelocity, 
             Enabled, 
+            Collider, 
+            OtherCollider, 
+            ContactCount, 
         }
 
 		
         [SerializeField]
         protected Property property;
 		
-        [SerializeField]
-        protected Collision2DData collision2DData;
+        [VariableProperty(typeof(Collision2DVariable))]
+        protected Collision2DVariable collision2DVar;
 
         [SerializeField]
-        [VariableProperty(typeof(Rigidbody2DVariable),
+        [VariableProperty(typeof(Collider2DVariable),
+                          typeof(Rigidbody2DVariable),
                           typeof(TransformVariable),
                           typeof(GameObjectVariable),
                           typeof(Vector2Variable),
-                          typeof(BooleanVariable))]
+                          typeof(BooleanVariable),
+                          typeof(IntegerVariable))]
         protected Variable inOutVar;
 
         public override void OnEnter()
         {
+            var ioc2d = inOutVar as Collider2DVariable;
             var iorb2d = inOutVar as Rigidbody2DVariable;
             var iot = inOutVar as TransformVariable;
             var iogo = inOutVar as GameObjectVariable;
             var iov2 = inOutVar as Vector2Variable;
             var iob = inOutVar as BooleanVariable;
+            var ioi = inOutVar as IntegerVariable;
 
 
-            var target = collision2DData.Value;
+            var target = collision2DVar.Value;
 
             switch (getOrSet)
             {
                 case GetSet.Get:
                     switch (property)
                     {
+                        case Property.Collider:
+                            ioc2d.Value = target.collider;
+                            break;
+                        case Property.OtherCollider:
+                            ioc2d.Value = target.otherCollider;
+                            break;
                         case Property.Rigidbody:
                             iorb2d.Value = target.rigidbody;
                             break;
@@ -72,6 +85,9 @@ namespace Fungus
                             break;
                         case Property.Enabled:
                             iob.Value = target.enabled;
+                            break;
+                        case Property.ContactCount:
+                            ioi.Value = target.contactCount;
                             break;
                         default:
                             Debug.Log("Unsupported get or set attempted");
@@ -97,9 +113,9 @@ namespace Fungus
 
         public override string GetSummary()
         {
-            if (collision2DData.Value == null)
+            if (collision2DVar == null)
             {
-                return "Error: no collision2D set";
+                return "Error: no collision2DVar set";
             }
             if (inOutVar == null)
             {
@@ -116,7 +132,7 @@ namespace Fungus
 
         public override bool HasReference(Variable variable)
         {
-            if (collision2DData.collision2DRef == variable || inOutVar == variable)
+            if (collision2DVar == variable || inOutVar == variable)
                 return true;
 
             return false;
