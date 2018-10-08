@@ -23,7 +23,10 @@ namespace Fungus.EditorUtils
 
         public List<Type> types { get; private set; }
 
-        public bool generateVariableClass = true, generatePropertyCommand = true, generateVariableDataClass = true;
+        public bool generateVariableClass = true,
+            generatePropertyCommand = true,
+            generateVariableDataClass = true,
+            generateOnlyDeclaredMembers = true;
 
         public string ClassName { get { return TargetType.Name; } }
         public string CamelCaseClassName { get { return Char.ToLowerInvariant(ClassName[0]) + ClassName.Substring(1); } }
@@ -395,6 +398,7 @@ namespace Fungus
         [SerializeField]
         protected Property property;
 		
+        [SerializeField]
         [VariableProperty(typeof({0}Variable))]
         protected {0}Variable {2}Var;
 
@@ -490,7 +494,7 @@ namespace Fungus
             helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Vector2), typeof(Vector2Variable), "iov2"));
             helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Vector3), typeof(Vector3Variable), "iov"));
             helper.AddHandler(new FungusVariableTypeHelper.TypeHandler(typeof(Vector4), typeof(Vector4Variable), "iov4"));
-
+            
             types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).ToList();
         }
 
@@ -599,12 +603,19 @@ namespace Fungus
             }
         }
 
+        private System.Reflection.BindingFlags GetBindingFlags()
+        {
+            if (generateOnlyDeclaredMembers)
+                return System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly;
+            return System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance;
+        }
+
         private int PropertyFieldLogic()
         {
             int retval = 0;
 
             EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Scanning Fields", 0);
-            var fields = TargetType.GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
+            var fields = TargetType.GetFields(GetBindingFlags());
             for (int i = 0; i < fields.Length; i++)
             {
                 if (helper.IsTypeHandled(fields[i].FieldType))
@@ -632,7 +643,7 @@ namespace Fungus
             int retval = 0;
 
             EditorUtility.DisplayProgressBar("Generating " + ClassName, "Property Scanning Props", 0);
-            var props = TargetType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
+            var props = TargetType.GetProperties(GetBindingFlags());
             for (int i = 0; i < props.Length; i++)
             {
                 if (helper.IsTypeHandled(props[i].PropertyType) && props[i].GetIndexParameters().Length == 0 && !IsObsolete(props[i].GetCustomAttributes(false)))
@@ -699,7 +710,7 @@ namespace Fungus
         private bool IsObsolete(object[] attrs)
         {
             if (attrs.Length > 0)
-                return attrs.First(x => x.GetType() == typeof(ObsoleteAttribute)) != null;
+                return attrs.FirstOrDefault(x => x.GetType() == typeof(ObsoleteAttribute)) != null;
             return false;
         }
 

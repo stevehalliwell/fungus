@@ -102,6 +102,7 @@ namespace Fungus.EditorUtils
                 generator.generatePropertyCommand = EditorGUILayout.Toggle("Generate Property Command", generator.generatePropertyCommand);
                 if (generator.generatePropertyCommand)
                 {
+                    generator.generateOnlyDeclaredMembers = EditorGUILayout.Toggle("Only declared members", generator.generateOnlyDeclaredMembers);
                     if (generator.ExistingGeneratedPropCommandClass != null)
                     {
                         EditorGUILayout.HelpBox("Property Appears to already exist. Overwriting or errors may occur.", MessageType.Warning);

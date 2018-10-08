@@ -28,6 +28,7 @@ namespace Fungus
         [SerializeField]
         protected Property property;
 		
+        [SerializeField]
         [VariableProperty(typeof(CollisionVariable))]
         protected CollisionVariable collisionVar;
 
