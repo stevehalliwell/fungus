@@ -12,18 +12,12 @@ namespace Fungus.EditorUtils
     [CustomEditor (typeof(Variable), true)]
     public class VariableEditor : CommandEditor
     {
-        protected virtual void OnEnable()
+        public override void OnEnable()
         {
-            try
-            {
+            base.OnEnable();
 
-                Variable t = target as Variable;
-                t.hideFlags = HideFlags.HideInInspector;
-            }
-            catch (Exception)
-            {
-                
-            }
+            Variable t = target as Variable;
+            t.hideFlags = HideFlags.HideInInspector;
         }
 
         public static VariableInfoAttribute GetVariableInfo(System.Type variableType)
@@ -219,7 +213,7 @@ namespace Fungus.EditorUtils
 
             var origLabel = new GUIContent(label);
 
-            if (EditorGUI.GetPropertyHeight(valueProp, label, true) > EditorGUIUtility.singleLineHeight)
+            if (EditorGUI.GetPropertyHeight(valueProp, label) > EditorGUIUtility.singleLineHeight)
             {
                 DrawMultiLineProperty(position, origLabel, referenceProp, valueProp, flowchart);
             }
@@ -242,12 +236,12 @@ namespace Fungus.EditorUtils
 
             if (referenceProp.objectReferenceValue == null)
             {
-                EditorGUI.PropertyField(valueRect, valueProp, new GUIContent(""), true);
+                EditorGUI.PropertyField(valueRect, valueProp, new GUIContent(""));
                 popupRect.x += valueRect.width + 5;
                 popupRect.width = popupWidth;
             }
 
-            EditorGUI.PropertyField(popupRect, referenceProp, new GUIContent(""), true);
+            EditorGUI.PropertyField(popupRect, referenceProp, new GUIContent(""));
         }
 
         protected virtual void DrawMultiLineProperty(Rect rect, GUIContent label, SerializedProperty referenceProp, SerializedProperty valueProp, Flowchart flowchart)
@@ -261,7 +255,7 @@ namespace Fungus.EditorUtils
             
             if (referenceProp.objectReferenceValue == null)
             {
-                EditorGUI.PropertyField(valueRect, valueProp, label, true);
+                EditorGUI.PropertyField(valueRect, valueProp, label);
                 popupRect.x = rect.width - popupWidth + 5;
                 popupRect.width = popupWidth;
             }
@@ -270,7 +264,7 @@ namespace Fungus.EditorUtils
                 popupRect = EditorGUI.PrefixLabel(rect, label);
             }
 
-            EditorGUI.PropertyField(popupRect, referenceProp, new GUIContent(""), true);
+            EditorGUI.PropertyField(popupRect, referenceProp, new GUIContent(""));
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
@@ -285,13 +279,13 @@ namespace Fungus.EditorUtils
             propNameBase = Char.ToLowerInvariant(propNameBase[0]) + propNameBase.Substring(1);
 
             SerializedProperty referenceProp = property.FindPropertyRelative(propNameBase + "Ref");
-            SerializedProperty valueProp = property.FindPropertyRelative(propNameBase + "Val");
 
-            if (referenceProp.objectReferenceValue != null || valueProp == null)
+            if (referenceProp.objectReferenceValue != null)
             {
                 return EditorGUIUtility.singleLineHeight;
             }
 
+            SerializedProperty valueProp = property.FindPropertyRelative(propNameBase + "Val");
             return EditorGUI.GetPropertyHeight(valueProp, label);
         }
     }
