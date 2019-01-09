@@ -18,6 +18,8 @@ namespace Fungus
     [ExecuteInEditMode]
     public class Flowchart : MonoBehaviour, ISubstitutionHandler
     {
+        public const string SubstituteVariableRegexString = "{\\$.*?}";
+
         [HideInInspector]
         [SerializeField] protected int version = 0; // Default to 0 to always trigger an update for older versions of Fungus.
 
@@ -568,6 +570,7 @@ namespace Fungus
             // Can't restart a running block, have to wait until it's idle again
             if (block.IsExecuting())
             {
+                Debug.LogWarning(block.BlockName + " cannot be called/executed, it is already running.");
                 return false;
             }
 
@@ -1223,7 +1226,7 @@ namespace Fungus
             sb.Append(input);
 
             // Instantiate the regular expression object.
-            Regex r = new Regex("{\\$.*?}");
+            Regex r = new Regex(SubstituteVariableRegexString);
 
             bool changed = false;
 
@@ -1274,7 +1277,7 @@ namespace Fungus
         public virtual bool SubstituteStrings(StringBuilder input)
         {
             // Instantiate the regular expression object.
-            Regex r = new Regex("{\\$.*?}");
+            Regex r = new Regex(SubstituteVariableRegexString);
 
             bool modified = false;
 
