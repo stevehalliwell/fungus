@@ -14,27 +14,27 @@ namespace Fungus
     public class TransformProperty : BaseVariableProperty
     {
 		//generated property
-        public enum Property
-        {
-            ChildCount,
-            EulerAngles,
-            Forward,
-            HasChanged,
-            HierarchyCapacity,
-            HierarchyCount,
-            LocalEulerAngles,
-            LocalPosition,
-            LocalScale,
-            LossyScale,
-            Parent,
-            Position,
-            Right,
-            Root,
-            Up,
-            Rotation,
-            LocalRotation,
-            WorldToLocalMatrix,
-            LocalToWorldMatrix,
+        public enum Property 
+        { 
+            ChildCount, 
+            EulerAngles, 
+            Forward, 
+            HasChanged, 
+            HierarchyCapacity, 
+            HierarchyCount, 
+            LocalEulerAngles, 
+            LocalPosition, 
+            LocalScale, 
+            LossyScale, 
+            Parent, 
+            Position, 
+            Right, 
+            Root, 
+            Up, 
+            Rotation, 
+            LocalRotation, 
+            WorldToLocalMatrix, 
+            LocalToWorldMatrix, 
         }
 
 		
@@ -42,7 +42,8 @@ namespace Fungus
         protected Property property;
 		
         [SerializeField]
-        protected TransformData transformData;
+        [VariableProperty(typeof(TransformVariable))]
+        protected TransformVariable transformVar;
 
         [SerializeField]
         [VariableProperty(typeof(Vector3Variable),
@@ -63,7 +64,7 @@ namespace Fungus
             var iob = inOutVar as BooleanVariable;
 
 
-            var target = transformData.Value;
+            var target = transformVar.Value;
 
             switch (getOrSet)
             {
@@ -190,9 +191,9 @@ namespace Fungus
 
         public override string GetSummary()
         {
-            if (transformData.Value == null)
+            if (transformVar == null)
             {
-                return "Error: no transform set";
+                return "Error: no transformVar set";
             }
             if (inOutVar == null)
             {
@@ -209,7 +210,7 @@ namespace Fungus
 
         public override bool HasReference(Variable variable)
         {
-            if (transformData.transformRef == variable || inOutVar == variable)
+            if (transformVar == variable || inOutVar == variable)
                 return true;
 
             return false;

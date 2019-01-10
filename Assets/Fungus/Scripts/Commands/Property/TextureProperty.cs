@@ -5,24 +5,23 @@ using UnityEngine;
 namespace Fungus
 {
     // <summary>
-    /// Get or Set a property of a GameObject component
+    /// Get or Set a property of a Texture component
     /// </summary>
-    [CommandInfo("GameObject",
+    [CommandInfo("Texture",
                  "Property",
-                 "Get or Set a property of a GameObject component")]
+                 "Get or Set a property of a Texture component")]
     [AddComponentMenu("")]
-    public class GameObjectProperty : BaseVariableProperty
+    public class TextureProperty : BaseVariableProperty
     {
 		//generated property
         public enum Property 
         { 
-            Transform, 
-            Layer, 
-            ActiveSelf, 
-            ActiveInHierarchy, 
-            IsStatic, 
-            Tag, 
-            GameObject, 
+            Width, 
+            Height, 
+            IsReadable, 
+            AnisoLevel, 
+            MipMapBias, 
+            TexelSize, 
         }
 
 		
@@ -30,53 +29,48 @@ namespace Fungus
         protected Property property;
 		
         [SerializeField]
-        [VariableProperty(typeof(GameObjectVariable))]
-        protected GameObjectVariable gameObjectVar;
+        [VariableProperty(typeof(TextureVariable))]
+        protected TextureVariable textureVar;
 
         [SerializeField]
-        [VariableProperty(typeof(TransformVariable),
-                          typeof(IntegerVariable),
+        [VariableProperty(typeof(IntegerVariable),
                           typeof(BooleanVariable),
-                          typeof(StringVariable),
-                          typeof(GameObjectVariable))]
+                          typeof(FloatVariable),
+                          typeof(Vector2Variable))]
         protected Variable inOutVar;
 
         public override void OnEnter()
         {
-            var iot = inOutVar as TransformVariable;
             var ioi = inOutVar as IntegerVariable;
             var iob = inOutVar as BooleanVariable;
-            var ios = inOutVar as StringVariable;
-            var iogo = inOutVar as GameObjectVariable;
+            var iof = inOutVar as FloatVariable;
+            var iov2 = inOutVar as Vector2Variable;
 
 
-            var target = gameObjectVar.Value;
+            var target = textureVar.Value;
 
             switch (getOrSet)
             {
                 case GetSet.Get:
                     switch (property)
                     {
-                        case Property.Transform:
-                            iot.Value = target.transform;
+                        case Property.Width:
+                            ioi.Value = target.width;
                             break;
-                        case Property.Layer:
-                            ioi.Value = target.layer;
+                        case Property.Height:
+                            ioi.Value = target.height;
                             break;
-                        case Property.ActiveSelf:
-                            iob.Value = target.activeSelf;
+                        case Property.IsReadable:
+                            iob.Value = target.isReadable;
                             break;
-                        case Property.ActiveInHierarchy:
-                            iob.Value = target.activeInHierarchy;
+                        case Property.AnisoLevel:
+                            ioi.Value = target.anisoLevel;
                             break;
-                        case Property.IsStatic:
-                            iob.Value = target.isStatic;
+                        case Property.MipMapBias:
+                            iof.Value = target.mipMapBias;
                             break;
-                        case Property.Tag:
-                            ios.Value = target.tag;
-                            break;
-                        case Property.GameObject:
-                            iogo.Value = target.gameObject;
+                        case Property.TexelSize:
+                            iov2.Value = target.texelSize;
                             break;
                         default:
                             Debug.Log("Unsupported get or set attempted");
@@ -87,14 +81,17 @@ namespace Fungus
                 case GetSet.Set:
                     switch (property)
                     {
-                        case Property.Layer:
-                            target.layer = ioi.Value;
+                        case Property.Width:
+                            target.width = ioi.Value;
                             break;
-                        case Property.IsStatic:
-                            target.isStatic = iob.Value;
+                        case Property.Height:
+                            target.height = ioi.Value;
                             break;
-                        case Property.Tag:
-                            target.tag = ios.Value;
+                        case Property.AnisoLevel:
+                            target.anisoLevel = ioi.Value;
+                            break;
+                        case Property.MipMapBias:
+                            target.mipMapBias = iof.Value;
                             break;
                         default:
                             Debug.Log("Unsupported get or set attempted");
@@ -111,9 +108,9 @@ namespace Fungus
 
         public override string GetSummary()
         {
-            if (gameObjectVar == null)
+            if (textureVar == null)
             {
-                return "Error: no gameObjectVar set";
+                return "Error: no textureVar set";
             }
             if (inOutVar == null)
             {
@@ -130,7 +127,7 @@ namespace Fungus
 
         public override bool HasReference(Variable variable)
         {
-            if (gameObjectVar == variable || inOutVar == variable)
+            if (textureVar == variable || inOutVar == variable)
                 return true;
 
             return false;
