@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Fungus
 {
     /// <summary>
-    /// 
+    /// Excecute block when int game event is fired. Optionally stores the int send via the event.
     /// </summary>
     [EventHandlerInfo("GameEvent",
                       "Int",
@@ -13,6 +13,7 @@ namespace Fungus
     [AddComponentMenu("")]
     public class IntGameEventHandler : BaseGameEventHandler<int, IntGameEvent>
     {
+        [Tooltip("Optional var to store the param passed with the Event")]
         [SerializeField]
         [VariableProperty(typeof(IntegerVariable))]
         protected IntegerVariable intVar;

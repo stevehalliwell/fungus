@@ -244,7 +244,7 @@ MonoBehaviour:
     width: 0
     height: 0
   selectedBlocks:
-  - {fileID: 176959052}
+  - {fileID: 176959050}
   selectedCommands: []
   variables:
   - {fileID: 176959051}
@@ -274,7 +274,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 252
     y: 194
-    width: 188
+    width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -375,7 +375,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 605.5823
     y: 189.75946
-    width: 120
+    width: 152
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 263.5823
     y: 296.75946
-    width: 168
+    width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0

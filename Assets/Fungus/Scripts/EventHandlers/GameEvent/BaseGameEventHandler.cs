@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Fungus
 {
     /// <summary>
-    /// 
+    /// Base class for <TYPE>GameEventHandlers, deals with sub, unsub and summaries
     /// </summary>
     [AddComponentMenu("")]
     public abstract class BaseGameEventHandler<T, GE> : EventHandler, IGameEventListener<T> where GE : GameEventSO<T>

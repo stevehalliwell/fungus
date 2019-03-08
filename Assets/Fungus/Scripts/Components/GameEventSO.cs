@@ -5,6 +5,17 @@ using UnityEngine;
 
 namespace Fungus
 {
+    /// <summary>
+    /// A ScriptableObject (SO) that is an event that can be fired notifying all listeners and invoking all actions.
+    /// 
+    /// Being an SO allow the event to be referenced in scene and in prefabs.
+    /// Events allow the objecing firing and the listener to have no prior knowledge of eachother. Such as
+    /// having c# code Fire an event that is listened to by a Fungus block, a Fungus command firing event without
+    /// haveing to know what the result is.
+    /// 
+    /// See IntGameEvent as an example of how to create your own subtypes.
+    /// </summary>
+    /// <typeparam name="T">type of the param passed with when the event fires</typeparam>
     public class GameEventSO<T> : ScriptableObject, IGameEvent<T>
     {
         protected List<IGameEventListener<T>> subs = new List<IGameEventListener<T>>();

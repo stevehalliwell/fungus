@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Fungus
 {
     /// <summary>
-    /// 
+    /// Fire the given EmptyGameEvent.
     /// </summary>
     [CommandInfo("Event",
                  "Fire (Empty)",

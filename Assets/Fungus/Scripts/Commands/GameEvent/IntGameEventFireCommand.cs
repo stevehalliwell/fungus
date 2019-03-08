@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Fungus
 {
     /// <summary>
-    /// 
+    /// Fire the given IntGameEvent with the value set in intData.
     /// </summary>
     [CommandInfo("Event",
                  "Fire (int)",
@@ -18,6 +18,11 @@ namespace Fungus
         public override void OnEnterInner()
         {
             gameEvent.Fire(intData.Value);
+        }
+
+        public override bool HasReference(Variable variable)
+        {
+            return intData.integerRef == variable || base.HasReference(variable);
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Fungus
 {
     /// <summary>
-    /// 
+    /// Fire the given FloatGameEvent with the value set in floatData.
     /// </summary>
     [CommandInfo("Event",
                  "Fire (float)",
@@ -18,6 +18,11 @@ namespace Fungus
         public override void OnEnterInner()
         {
             gameEvent.Fire(floatData.Value);
+        }
+
+        public override bool HasReference(Variable variable)
+        {
+            return floatData.floatRef == variable || base.HasReference(variable);
         }
     }
 }

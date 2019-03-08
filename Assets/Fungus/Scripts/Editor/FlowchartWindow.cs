@@ -1819,9 +1819,15 @@ namespace Fungus.EditorUtils
         {
             float nodeWidthA = nodeStyle.CalcSize(new GUIContent(block.BlockName)).x + 10;
             float nodeWidthB = 0f;
+            string handlerLabel = "";
             if (block._EventHandler != null)
             {
-                nodeWidthB = nodeStyle.CalcSize(new GUIContent(block._EventHandler.GetSummary())).x + 10;
+                EventHandlerInfoAttribute info = EventHandlerEditor.GetEventHandlerInfo(block._EventHandler.GetType());
+                if (info != null)
+                {
+                    handlerLabel = "<" + info.EventHandlerName + "> ";
+                }
+                nodeWidthB = nodeStyle.CalcSize(new GUIContent(handlerLabel)).x + 10;
             }
 
             Rect tempRect = block._NodeRect;
@@ -1884,13 +1890,6 @@ namespace Fungus.EditorUtils
             // Draw Event Handler labels
             if (block._EventHandler != null)
             {
-                string handlerLabel = "";
-                EventHandlerInfoAttribute info = EventHandlerEditor.GetEventHandlerInfo(block._EventHandler.GetType());
-                if (info != null)
-                {
-                    handlerLabel = "<" + info.EventHandlerName + "> ";
-                }
-
                 GUIStyle handlerStyle = new GUIStyle(EditorStyles.whiteLabel);
                 handlerStyle.wordWrap = true;
                 handlerStyle.margin.top = 0;
