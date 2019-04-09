@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Fungus
 {
     /// <summary>
-    /// Base class for <TYPE>GameEventHandlers, deals with sub, unsub and summaries
+    /// Base class for <TYPE>GameEventHandlers, deals with sub, unsub and summaries. Child classes will
+    /// execute block when the GameEvent they listen to is fired.
     /// </summary>
     [AddComponentMenu("")]
     public abstract class BaseGameEventHandler<T, GE> : EventHandler, IGameEventListener<T> where GE : GameEventSO<T>
@@ -36,6 +35,6 @@ namespace Fungus
 
         public abstract void OnEventFired(T t);
 
-        #endregion
+        #endregion Public members
     }
 }

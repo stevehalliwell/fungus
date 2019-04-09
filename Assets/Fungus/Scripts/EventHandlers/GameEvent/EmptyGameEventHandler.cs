@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Fungus
 {
     /// <summary>
-    /// Excecute block when empy game event is fired. 
+    /// Excecute block when empy game event is fired.
     /// </summary>
     [EventHandlerInfo("GameEvent",
                       "Empty",

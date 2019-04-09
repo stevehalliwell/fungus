@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Fungus
 {
     /// <summary>
-    /// Excecute block when float game event is fired. Optionally stores the float send via the event.
+    /// Excecute block when FloatGameEvent is fired. Optionally stores the float send via the event.
     /// </summary>
     [EventHandlerInfo("GameEvent",
                       "Float",
@@ -20,7 +18,7 @@ namespace Fungus
 
         public override void OnEventFired(float t)
         {
-            if(floatVar != null)
+            if (floatVar != null)
             {
                 floatVar.Value = t;
             }

@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 namespace Fungus
 {
     /// <summary>
-    /// An object to indicate the lack of information. A workaround for c# lack of void as param or generic type
+    /// An object to indicate the lack of information. A workaround for c# lack of void as param for generic type
     /// </summary>
     public struct Empty { }
 
@@ -23,7 +21,7 @@ namespace Fungus
     [CreateAssetMenu(menuName = "Fungus/EmptyEvent")]
     public class EmptyGameEvent : GameEventSO<Empty>
     {
-        static readonly Empty empty = new Empty();
+        private static readonly Empty empty = new Empty();
 
         public void Fire()
         {

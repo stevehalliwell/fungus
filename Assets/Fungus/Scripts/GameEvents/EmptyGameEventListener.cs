@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Fungus
+﻿namespace Fungus
 {
     /// <summary>
     ///  Listen to Fungus.EmptyGameEvent, routes param through a empty UnityEvent configured in the inspector.

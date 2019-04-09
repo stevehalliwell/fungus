@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Fungus
@@ -18,7 +17,7 @@ namespace Fungus
                 StartCoroutine(RunEventAfterDelay());
             }
 
-            IEnumerator RunEventAfterDelay()
+            private IEnumerator RunEventAfterDelay()
             {
                 yield return new WaitForSeconds(delay);
                 emptyGameEvent.Fire();

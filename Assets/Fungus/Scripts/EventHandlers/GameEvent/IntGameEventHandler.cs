@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Fungus
 {
     /// <summary>
-    /// Excecute block when int game event is fired. Optionally stores the int send via the event.
+    /// Excecute block when IntGameEvent is fired. Optionally stores the int send via the event.
     /// </summary>
     [EventHandlerInfo("GameEvent",
                       "Int",
@@ -20,7 +18,7 @@ namespace Fungus
 
         public override void OnEventFired(int t)
         {
-            if(intVar != null)
+            if (intVar != null)
             {
                 intVar.Value = t;
             }
