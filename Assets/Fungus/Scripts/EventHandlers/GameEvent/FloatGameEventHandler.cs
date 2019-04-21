@@ -6,7 +6,7 @@ namespace Fungus
     /// Excecute block when FloatGameEvent is fired. Optionally stores the float send via the event.
     /// </summary>
     [EventHandlerInfo("GameEvent",
-                      "Float",
+                      "FloatEvent",
                       "The block will execute when target game event fires.")]
     [AddComponentMenu("")]
     public class FloatGameEventHandler : BaseGameEventHandler<float, FloatGameEvent>

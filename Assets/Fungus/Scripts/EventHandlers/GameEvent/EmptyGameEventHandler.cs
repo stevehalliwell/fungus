@@ -6,7 +6,7 @@ namespace Fungus
     /// Excecute block when empy game event is fired.
     /// </summary>
     [EventHandlerInfo("GameEvent",
-                      "Empty",
+                      "EmptyEvent",
                       "The block will execute when target game event fires.")]
     [AddComponentMenu("")]
     public class EmptyGameEventHandler : BaseGameEventHandler<Empty, EmptyGameEvent>

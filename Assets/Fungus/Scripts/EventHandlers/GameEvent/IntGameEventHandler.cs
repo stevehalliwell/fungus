@@ -6,7 +6,7 @@ namespace Fungus
     /// Excecute block when IntGameEvent is fired. Optionally stores the int send via the event.
     /// </summary>
     [EventHandlerInfo("GameEvent",
-                      "Int",
+                      "IntEvent",
                       "The block will execute when target game event fires.")]
     [AddComponentMenu("")]
     public class IntGameEventHandler : BaseGameEventHandler<int, IntGameEvent>
