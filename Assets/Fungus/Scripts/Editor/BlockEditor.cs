@@ -19,6 +19,8 @@ namespace Fungus.EditorUtils
     {
         public static List<Action> actionList = new List<Action>();
 
+        public static bool SelectedBlockDataStale { get; set; }
+
         protected Texture2D upIcon;
         protected Texture2D downIcon;
         protected Texture2D addIcon;
@@ -30,6 +32,9 @@ namespace Fungus.EditorUtils
         private SerializedProperty commandListProperty;
 
         private Rect lastEventPopupPos, lastCMDpopupPos;
+
+        private string callersString;
+        private bool callersFoldout;
 
     
         protected virtual void OnEnable()
@@ -54,6 +59,25 @@ namespace Fungus.EditorUtils
             commandListProperty = serializedObject.FindProperty("commandList");
 
             commandListAdaptor = new CommandListAdaptor(target as Block, commandListProperty);
+        }
+
+        protected void CacheCallerString()
+        {
+            if (!string.IsNullOrEmpty(callersString))
+                return;
+
+            var targetBlock = target as Block;
+
+            var callers = FindObjectsOfType<MonoBehaviour>()
+                .Where(x => x is IBlockCaller)
+                .Select(x => x as IBlockCaller)
+                .Where(x => x.MayCallBlock(targetBlock))
+                .Select(x => x.GetLocationIdentifier()).ToArray();
+
+            if (callers != null && callers.Length > 0)
+                callersString = string.Join("\n", callers);
+            else
+                callersString = "None";
 
         }
 
@@ -62,18 +86,27 @@ namespace Fungus.EditorUtils
             serializedObject.Update();
 
             SerializedProperty blockNameProperty = serializedObject.FindProperty("blockName");
-            Rect blockLabelRect = new Rect(45, 5, 120, 16);
-            EditorGUI.LabelField(blockLabelRect, new GUIContent("Block Name"));
-            Rect blockNameRect = new Rect(45, 21, 180, 16);
-            EditorGUI.PropertyField(blockNameRect, blockNameProperty, new GUIContent(""));
-
-            // Ensure block name is unique for this Flowchart
-            var block = target as Block;
-            string uniqueName = flowchart.GetUniqueBlockKey(blockNameProperty.stringValue, block);
-            if (uniqueName != block.BlockName)
+            //calc position as size of what we want to draw pushed up into the top bar of the inspector
+            //Rect blockLabelRect = new Rect(45, -GUI.skin.window.padding.bottom - EditorGUIUtility.singleLineHeight * 2, 120, 16);
+            //EditorGUI.LabelField(blockLabelRect, new GUIContent("Block Name"));
+            //Rect blockNameRect = new Rect(45, blockLabelRect.y + EditorGUIUtility.singleLineHeight, 180, 16);
+            //EditorGUI.PropertyField(blockNameRect, blockNameProperty, new GUIContent(""));
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.PrefixLabel(new GUIContent("Block Name"), EditorStyles.largeLabel);
+            EditorGUI.BeginChangeCheck();
+            blockNameProperty.stringValue = EditorGUILayout.TextField(blockNameProperty.stringValue);
+            if(EditorGUI.EndChangeCheck())
             {
-                blockNameProperty.stringValue = uniqueName;
+                // Ensure block name is unique for this Flowchart
+                var block = target as Block;
+                string uniqueName = flowchart.GetUniqueBlockKey(blockNameProperty.stringValue, block);
+                if (uniqueName != block.BlockName)
+                {
+                    blockNameProperty.stringValue = uniqueName;
+                }
             }
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.Space();
 
             serializedObject.ApplyModifiedProperties();
         }
@@ -101,6 +134,8 @@ namespace Fungus.EditorUtils
             }
 
 
+            EditorGUI.BeginChangeCheck();
+
             if (block == flowchart.SelectedBlock)
             {
                 // Custom tinting
@@ -120,6 +155,22 @@ namespace Fungus.EditorUtils
                 SerializedProperty descriptionProp = serializedObject.FindProperty("description");
                 EditorGUILayout.PropertyField(descriptionProp);
 
+
+                SerializedProperty suppressProp = serializedObject.FindProperty("suppressAllAutoSelections");
+                EditorGUILayout.PropertyField(suppressProp);
+                
+                EditorGUI.indentLevel++;
+                if (callersFoldout = EditorGUILayout.Foldout(callersFoldout, "Callers"))
+                {
+                    CacheCallerString();
+                    GUI.enabled = false;
+                    EditorGUILayout.TextArea(callersString);
+                    GUI.enabled = true;
+                }
+                EditorGUI.indentLevel--;
+                
+                EditorGUILayout.Space();
+                
                 DrawEventHandlerGUI(flowchart);
 
                 block.UpdateIndentLevels();
@@ -251,6 +302,12 @@ namespace Fungus.EditorUtils
                 }
             }
 
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                SelectedBlockDataStale = true;
+            }
+
             serializedObject.ApplyModifiedProperties();
         }
 
@@ -299,9 +356,15 @@ namespace Fungus.EditorUtils
             // Add Button
             if (GUILayout.Button(addIcon))
             {
+                //this may be less reliable for HDPI scaling but previous method using editor window height is now returning 
+                //  null in 2019.2 suspect ongoing ui changes, so default to screen.height and then attempt to get the better result
+                int h = Screen.height;
+                if (EditorWindow.focusedWindow != null) h = (int)EditorWindow.focusedWindow.position.height;
+                else if (EditorWindow.mouseOverWindow != null) h = (int)EditorWindow.mouseOverWindow.position.height;
+
                 CommandSelectorPopupWindowContent.ShowCommandMenu(lastCMDpopupPos, "", target as Block,
                     (int)(EditorGUIUtility.currentViewWidth),
-                    (int)(EditorWindow.focusedWindow.position.height - lastCMDpopupPos.y));
+                    (int)(h - lastCMDpopupPos.y));
             }
 
             // Duplicate Button
@@ -364,7 +427,14 @@ namespace Fungus.EditorUtils
                 EventHandlerEditor eventHandlerEditor = Editor.CreateEditor(block._EventHandler) as EventHandlerEditor;
                 if (eventHandlerEditor != null)
                 {
+                    EditorGUI.BeginChangeCheck();
                     eventHandlerEditor.DrawInspectorGUI();
+
+                    if(EditorGUI.EndChangeCheck())
+                    {
+                        SelectedBlockDataStale = true;
+                    }
+
                     DestroyImmediate(eventHandlerEditor);
                 }
             }

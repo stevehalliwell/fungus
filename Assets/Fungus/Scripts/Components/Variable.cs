@@ -2,9 +2,6 @@
 // It is released for free under the MIT open source license (https://github.com/snozbot/fungus/blob/master/LICENSE)
 
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif//UNITY_EDITOR
 using System;
 
 namespace Fungus
@@ -65,21 +62,16 @@ namespace Fungus
     /// </summary>
     public class VariableInfoAttribute : Attribute
     {
-        //Note do not use "isPreviewedOnly:true", it causes the script to fail to load without errors shown
-        public VariableInfoAttribute(string category, string variableType, int order = 0, bool isPreviewedOnly = false, bool hasCustomDraw = false)
+        public VariableInfoAttribute(string category, string variableType, int order = 0)
         {
             this.Category = category;
             this.VariableType = variableType;
             this.Order = order;
-            this.IsPreviewedOnly = isPreviewedOnly;
-            this.HasCustomDraw = hasCustomDraw;
         }
         
         public string Category { get; set; }
         public string VariableType { get; set; }
         public int Order { get; set; }
-        public bool IsPreviewedOnly { get; set; }
-        public bool HasCustomDraw { get; set; }
     }
 
     /// <summary>
@@ -130,17 +122,11 @@ namespace Fungus
         /// </summary>
         public abstract void OnReset();
 
-#if UNITY_EDITOR
         /// <summary>
-        /// Method to be overloaded in child classes to alter how a variable type draws itself
+        /// Boxed or referenced value of type defined within inherited types.
+        /// Not recommended for direct use, primarily intended for use in editor code.
         /// </summary>
-        /// <param name="rect"></param>
-        /// <param name="valueProp"></param>
-        public virtual void InternalDrawProperty(Rect rect, SerializedProperty valueProp)
-        {
-            Debug.LogError("Internal Draw Property called when no specialisation is provided:" + this.ToString());
-        }
-#endif//UNITY_EDITOR
+        public abstract object GetValue();
 
         #endregion
     }
@@ -198,6 +184,11 @@ namespace Fungus
             }
         }
 
+        public override object GetValue()
+        {
+            return value;
+        }
+
         protected T startValue;
 
         public override void OnReset()
@@ -207,10 +198,7 @@ namespace Fungus
         
         public override string ToString()
         {
-            if (Value != null)
-                return Value.ToString();
-            else
-                return string.Empty;
+            return Value.ToString();
         }
         
         protected virtual void Start()
